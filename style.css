@@ -1,0 +1,44 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+.color1 {
+    color: #00c5d5;
+}
+
+.color2 {
+    color: #8a6ace;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 15px 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #00c5d5;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #8a6ace;
+}
