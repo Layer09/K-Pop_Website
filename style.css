@@ -9,6 +9,7 @@ body {
 
 header {
     padding: 20px;
+    text-align: center;
 }
 
 h1 {
@@ -21,6 +22,11 @@ h1 {
 
 .color2 {
     color: #8a6ace;
+}
+
+nav {
+    text-align: left;
+    padding-left: 20px;
 }
 
 nav ul {
