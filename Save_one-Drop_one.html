@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save one - Drop one</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1><span class="color1">X-Pop</span> <span class="color2">Website</span></h1>
+        <h2 class="subtitle">Save one Drop one</h2>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Save_one-Drop_one.html">Save one - Drop one</a></li>
+            <li><a href="Blind_test.html">Blind test</a></li>
+            <li><a href="Blind_ranking.html">Blind ranking</a></li>
+            <li><a href="Stats.html">Statistiques</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'version1')">Version 1</button>
+            <button class="tab-link" onclick="openTab(event, 'version2')">Version 2</button>
+            <button class="tab-link" onclick="openTab(event, 'version3')">Version 3</button>
+            <button class="tab-link" onclick="openTab(event, 'version4')">Version 4</button>
+            <button class="tab-link" onclick="openTab(event, 'version5')">Version 5</button>
+        </div>
+        
+        <section id="version1" class="tab-content active">
+            <label for="episode-select">Choisissez un épisode :</label>
+            <select id="episode-select" onchange="loadVideo()">
+                <option value="" disabled selected>-- Sélectionnez un épisode --</option>
+                <option value="1">Épisode 1</option>
+                <option value="2">Épisode 2</option>
+                <option value="3">Épisode 3</option>
+            </select>
+            <div id="video-container"></div>
+        </section>
+    </main>
+</body>
+</html>
