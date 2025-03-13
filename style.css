@@ -81,7 +81,7 @@ nav ul li a img:hover {
 .subtitle {
     color: white;
     text-align: center;
-    font-size: 2em;
+    font-size: 3em;
     margin-top: -10px;
 }
 
@@ -112,11 +112,7 @@ nav ul li a img:hover {
 }
 
 h1 {
-    font-size: 5em;
-}
-
-h2 {
-    font-size: 3em;
+    font-size: 4em;
 }
 
 .version-content {
