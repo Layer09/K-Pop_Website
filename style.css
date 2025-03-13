@@ -111,7 +111,11 @@ nav ul li a img:hover {
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 5em;
+}
+
+h2 {
+    font-size: 3em;
 }
 
 .version-content {
