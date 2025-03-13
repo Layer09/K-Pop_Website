@@ -36,11 +36,13 @@ nav ul li a {
 
 /* Style de l'annexe */
 .annexe {
-    background-color: #e8e8e8;
-    padding: 15px;
-    border-left: 5px solid #333;
-    margin: 20px;
     font-style: italic;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 5px solid #ffcc00;
+    padding: 15px;
+    margin: 20px auto;
+    width: 80%;
+    text-align: left;
 }
 
 /* Style du sous-titre */
@@ -74,5 +76,18 @@ nav ul li a {
 /* Contenu des vidéos */
 .video-container {
     text-align: center;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+.version-content {
+    display: none;
+    margin-top: 20px;
+}
+
+#video-container {
     margin-top: 20px;
 }
