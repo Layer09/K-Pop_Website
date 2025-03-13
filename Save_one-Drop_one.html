@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href=" images/icone.png">
+    <link rel="icon" type="image/png" href="images/icone.png">
     <title>Save one Drop one</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,35 +13,15 @@
         <h2 class="subtitle">Save one Drop one</h2>
     </header>
 
-   <nav>
-    <ul>
-        <li>
-            <a href="index.html">
-                <img src="./images/Accueil.png" alt="Accueil">
-            </a>
-        </li>
-        <li>
-            <a href="Save_one-Drop_one.html">
-                <img src="./images/Save_one-Drop_one.png" alt="Save One Drop One">
-            </a>
-        </li>
-        <li>
-            <a href="Blind_ranking.html">
-                <img src="./images/Blind_ranking.png" alt="Blind Ranking">
-            </a>
-        </li>
-        <li>
-            <a href="Blind_test.html">
-                <img src="./images/Blind_test.png" alt="Blind Test">
-            </a>
-        </li>
-        <li>
-            <a href="Statistiques.html">
-                <img src="./images/Statistiques.png" alt="Statistiques">
-            </a>
-        </li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="index.html"><img src="./images/Accueil.png" alt="Accueil"></a></li>
+            <li><a href="Save_one-Drop_one.html"><img src="./images/Save_one-Drop_one.png" alt="Save One Drop One"></a></li>
+            <li><a href="Blind_ranking.html"><img src="./images/Blind_ranking.png" alt="Blind Ranking"></a></li>
+            <li><a href="Blind_test.html"><img src="./images/Blind_test.png" alt="Blind Test"></a></li>
+            <li><a href="Statistiques.html"><img src="./images/Statistiques.png" alt="Statistiques"></a></li>
+        </ul>
+    </nav>
 
     <div class="tabs">
         <button class="tab" onclick="showVersion(1)">Version 1</button>
@@ -52,14 +32,9 @@
     </div>
 
     <div id="version1" class="version-content">
-        <label for="episode-select">Choisissez un épisode :</label>
-        <select id="episode-select" onchange="showVideo(this.value)">
-            <option value="">-- Sélectionnez un épisode --</option>
-            <option value="1">Épisode 1</option>
-            <option value="2">Épisode 2</option>
-            <option value="3">Épisode 3</option>
-        </select>
-        <div id="video-container"></div>
+        <div id="video-container">
+            <iframe src="https://drive.google.com/file/d/1w_PxAO1mvE8JYsUMikcxpCh2szRWGjme/preview" width="640" height="360" allowfullscreen></iframe>
+        </div>
     </div>
 
     <script>
@@ -68,16 +43,6 @@
                 div.style.display = 'none';
             });
             document.getElementById('version' + version).style.display = 'block';
-        }
-
-        function showVideo(ep) {
-            const videos = {
-                "1": "https://drive.google.com/file/d/1osQUtzHvdh0SNRnLs7paxXt4KuJHMxv5/preview",
-                "2": "https://drive.google.com/file/d/16vGSKaVe9B_7qt344hiuTGLxNFengNR9/preview",
-                "3": "https://drive.google.com/file/d/1EeFLFUfxhpHQhHEBduEYWJpNi5SJmpAP/preview"
-            };
-            const videoContainer = document.getElementById("video-container");
-            videoContainer.innerHTML = ep ? `<iframe src="${videos[ep]}" width="640" height="360" allowfullscreen></iframe>` : "";
         }
     </script>
 </body>
