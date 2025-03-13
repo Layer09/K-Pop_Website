@@ -124,8 +124,8 @@ nav ul li a img:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: auto;
     overflow: hidden;
     margin-top: 0;
 }
