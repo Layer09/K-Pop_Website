@@ -81,6 +81,11 @@ nav ul li a img:hover {
     text-align: left;
 }
 
+
+#version1 {
+    display: block;
+}
+
 /* Style du sous-titre */
 .subtitle {
     color: white;
