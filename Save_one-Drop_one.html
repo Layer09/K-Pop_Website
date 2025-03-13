@@ -57,6 +57,26 @@
             document.querySelectorAll('.version-content').forEach(div => {
                 div.style.display = 'none';
             });
+        
+            let selectedVersion = document.getElementById('version' + version);
+            if (selectedVersion) {
+                selectedVersion.style.display = 'block';
+            } else {
+                console.error("Version introuvable : version" + version);
+            }
+        
+            // Changer la couleur du bouton actif
+            document.querySelectorAll('.tab').forEach(button => {
+                button.style.backgroundColor = ""; // Réinitialise tous les boutons
+            });
+            document.querySelector(`.tab:nth-child(${version})`).style.backgroundColor = "#333333";
+        }
+
+        /*
+        function showVersion(version) {
+            document.querySelectorAll('.version-content').forEach(div => {
+                div.style.display = 'none';
+            });
             document.getElementById('version' + version).style.display = 'block';
             
             document.querySelectorAll('.tab').forEach(button => {
@@ -64,6 +84,7 @@
             });
             document.getElementById('tab' + version).style.backgroundColor = '#333333';
         }
+        */
     </script>
 </body>
 </html>
