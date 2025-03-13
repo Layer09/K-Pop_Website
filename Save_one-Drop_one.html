@@ -7,7 +7,7 @@
     <title>Save one Drop one</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="showVersion(1)">
     <header>
         <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
         <h2 class="subtitle">Save one Drop one</h2>
@@ -43,6 +43,11 @@
                 div.style.display = 'none';
             });
             document.getElementById('version' + version).style.display = 'block';
+            
+            document.querySelectorAll('.tab').forEach(button => {
+                button.style.backgroundColor = '';
+            });
+            document.getElementById('tab' + version).style.backgroundColor = '#333333';
         }
     </script>
 </body>
