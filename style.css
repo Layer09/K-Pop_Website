@@ -133,6 +133,7 @@ nav ul li a img:hover {
     height: auto;
     overflow: hidden;
     margin-top: 0;
+    position: absolute;
 }
 
 #video-container iframe {
