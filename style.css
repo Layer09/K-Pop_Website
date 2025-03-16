@@ -199,7 +199,9 @@ nav ul li a img:hover {
     z-index: 1; /* Place-les derrière */
 }
 
-
+.hidden {
+    display: none;
+}
 
 /* Style Menu pour le choix des options */
 .menu-container {
