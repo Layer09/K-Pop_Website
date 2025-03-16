@@ -160,6 +160,7 @@ nav ul li a img:hover {
 
 /* Container des grandes vidéos */
 .single-video, #second-video {
+    margin-top: -10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -171,18 +172,18 @@ nav ul li a img:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10%; /* Espacement de 10% entre les petites vidéos */
+    gap: 5%; /* Espacement de 10% entre les petites vidéos */
     width: 100%;
 }
 
 /* Pour les petites vidéos */
 #choiceA, #choiceB {
-    width: 20%;
+    width: 30%;
     height: auto;
 }
 
 /* Pour les grandes vidéos */
 #videoA, #videoB {
-    width: 50%;
+    width: 90%;
     height: auto;
 }
