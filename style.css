@@ -216,6 +216,12 @@ nav ul li a img:hover {
     line-height: 1.8;
 }
 
+.start-button-container {
+    display: flex;
+    justify-content: center; /* Centrer le bouton dans le conteneur */
+    flex-grow: 1; /* Permet au conteneur de s'étendre pour occuper l'espace disponible */
+}
+
 #start-button {
     display: inline-block; /* Assure que le bouton reste en ligne */
     width: 200px; /* Largeur du bouton */
@@ -227,11 +233,12 @@ nav ul li a img:hover {
     font-size: 1.5em; /* Taille du texte */
     font-weight: bold; /* Texte en gras */
     border-radius: 10px; /* Bord légèrement arrondi */
+    border-color: #000;
     cursor: pointer; /* Curseur en forme de main lors du survol */
     transition: background-color 0.3s ease; /* Transition pour un effet lors du survol */
 }
 
 #start-button:hover {
-    background-color: #333; /* Changer la couleur de fond au survol (gris foncé) */
+    background-color: #0a0a0a; /* Changer la couleur de fond au survol (gris foncé) */
 }
 
