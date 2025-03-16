@@ -71,8 +71,6 @@
     </div>
 
     <script>
-        // Ton code JavaScript actuel reste en dessous
-
         const videoSources = [
             './videos/001-War_of_hormones-BTS.mp4',
             './videos/002-Hellevator-Stray_kids.mp4',
@@ -100,8 +98,6 @@
 
         let firstVideo = '';
         let secondVideo = '';
-
-        // Ton script reste ici...
 
         window.onload = () => {
             // Masquer les vidéos jusqu'à ce que le challenge démarre via le bouton "Commencer !"
@@ -131,6 +127,38 @@
             document.getElementById('menu-container').classList.add('hidden');
             startChallenge();
         });
+
+        document.getElementById('start-button').addEventListener('click', () => {
+    // Masquer le menu avec les options
+    document.getElementById('menu-container').classList.add('hidden');
+    
+    // Montrer les vidéos pour commencer le challenge
+    document.getElementById('single-video').classList.remove('hidden');
+    document.getElementById('second-video').classList.remove('hidden');
+    
+    // Choisir deux vidéos aléatoires pour démarrer
+    startChallenge();
+});
+
+function startChallenge() {
+    // Sélectionner deux vidéos aléatoires
+    const firstVideoIndex = Math.floor(Math.random() * videoSources.length);
+    const secondVideoIndex = Math.floor(Math.random() * videoSources.length);
+    
+    // Assurez-vous que les deux vidéos ne sont pas les mêmes
+    while (firstVideoIndex === secondVideoIndex) {
+        secondVideoIndex = Math.floor(Math.random() * videoSources.length);
+    }
+
+    // Définir les vidéos sources
+    firstVideo = videoSources[firstVideoIndex];
+    secondVideo = videoSources[secondVideoIndex];
+
+    // Assigner les vidéos aux éléments HTML
+    document.getElementById('videoA').src = firstVideo;
+    document.getElementById('videoB').src = secondVideo;
+}
+
     </script>
 
     
