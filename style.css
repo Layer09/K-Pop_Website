@@ -148,6 +148,7 @@ nav ul li a img:hover {
 .tab-separateur {
     background-color: #fff;
     margin: 5px;
-    padding: 10px 15px;
-    border-radius: 1px;
+    padding: 1px;
+    border-radius: 5px;
+    border-color: #fff;
 }
