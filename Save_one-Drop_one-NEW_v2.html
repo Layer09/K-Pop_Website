@@ -30,21 +30,23 @@
         <div class="start-button-container">
             <h2>Configuration du challenge</h2>
         </div>
-        <div id="players-container">
-            <h3>Joueurs :</h3>
-            <div class="player-entry">
-                Joueur 1 : <input type="text" placeholder="Joueur 1">
+        <div id="options-menu">
+            <div id="players-container">
+                <h3>Joueurs :</h3>
+                <div class="player-entry">
+                    Joueur 1 : <input type="text" placeholder="Joueur 1">
+                </div>
             </div>
-        </div>
-        <button id="add-player">+ Ajouter un joueur</button>
-
-        <div>
-            <h3>Nombre de jokers ?</h3>
-            <label><input type="radio" name="joker" value="0" checked> Aucun</label><br>
-            <label><input type="radio" name="joker" value="custom"> Un seul ou plus :</label>
-            <input type="number" id="joker-count" min="1" value="1" disabled>
-            <br>
-            <label><input type="radio" name="joker" value="infinite"> Infinis</label>
+            <button id="add-player">+ Ajouter un joueur</button>
+            <HR>
+            <div>
+                <h3>Nombre de jokers ?</h3>
+                <label><input type="radio" name="joker" value="0" checked> Aucun</label><br>
+                <label><input type="radio" name="joker" value="custom"> Un seul ou plus :</label>
+                <input type="number" id="joker-count" min="1" value="1" disabled>
+                <br>
+                <label><input type="radio" name="joker" value="infinite"> Infinis</label>
+            </div>
         </div>
         <div class="start-button-container">
             <button id="start-button">Commencer !</button>
