@@ -25,12 +25,12 @@
 
     <!-- Mode vidéo 1 -->
     <div id="single-video" class="single-video">
-        <video width="720" height="405" id="videoA" autoplay controls></video>
+        <video width="720" height="405" id="videoA" controls></video>
     </div>
 
     <!-- Mode vidéo 2 -->
     <div id="second-video" class="single-video hidden">
-        <video width="720" height="405" id="videoB" autoplay controls></video>
+        <video width="720" height="405" id="videoB" controls></video>
     </div>
 
     <!-- Mode deux vidéos pour le choix -->
@@ -66,65 +66,72 @@
     ];
 
     let videoA = document.getElementById('videoA');
-    let videoB = document.getElementById('videoB');
-    let choiceA = document.getElementById('choiceA');
-    let choiceB = document.getElementById('choiceB');
+        let videoB = document.getElementById('videoB');
+        let choiceA = document.getElementById('choiceA');
+        let choiceB = document.getElementById('choiceB');
 
-    let firstVideo = '';
-    let secondVideo = '';
+        let firstVideo = '';
+        let secondVideo = '';
 
-    function getRandomVideo(exclude = null) {
-        let available = videoSources.filter(v => v !== exclude);
-        return available[Math.floor(Math.random() * available.length)];
-    }
+        function getRandomVideo(exclude = null) {
+            let available = videoSources.filter(v => v !== exclude);
+            return available[Math.floor(Math.random() * available.length)];
+        }
 
-    function startChallenge() {
-        firstVideo = getRandomVideo();
-        videoA.src = firstVideo;
-        videoA.volume = 0.5;
-        videoA.play();
-    }
+        function startChallenge() {
+            firstVideo = getRandomVideo();
+            videoA.src = firstVideo;
+            videoA.volume = 0.2;
+            videoA.play();
+        }
 
-    videoA.onended = () => {
-        document.getElementById('single-video').classList.add('hidden');
-        document.getElementById('second-video').classList.remove('hidden');
+        videoA.onended = () => {
+            videoA.pause();
+            videoA.src = '';
+            document.getElementById('single-video').classList.add('hidden');
 
-        secondVideo = getRandomVideo(firstVideo);
-        videoB.src = secondVideo;
-        videoB.volume = 0.5;
-        videoB.play();
-    };
+            secondVideo = getRandomVideo(firstVideo);
+            videoB.src = secondVideo;
+            videoB.volume = 0.2;
+            document.getElementById('second-video').classList.remove('hidden');
+            videoB.play();
+        };
 
-    videoB.onended = () => {
-        document.getElementById('second-video').classList.add('hidden');
-        document.getElementById('dual-videos').classList.remove('hidden');
+        videoB.onended = () => {
+            videoB.pause();
+            videoB.src = '';
+            document.getElementById('second-video').classList.add('hidden');
 
-        choiceA.src = firstVideo;
-        choiceB.src = secondVideo;
-        choiceA.play();
-        choiceB.play();
-    };
+            document.getElementById('dual-videos').classList.remove('hidden');
+            choiceA.src = firstVideo;
+            choiceB.src = secondVideo;
+            choiceA.play();
+            choiceB.play();
+        };
 
-    choiceA.onclick = () => {
-        alert('Tu as choisi la première vidéo !');
-        reset();
-    };
+        choiceA.onclick = () => {
+            alert('Tu as choisi la première vidéo !');
+            cleanupChoices();
+        };
 
-    choiceB.onclick = () => {
-        alert('Tu as choisi la deuxième vidéo !');
-        reset();
-    };
+        choiceB.onclick = () => {
+            alert('Tu as choisi la deuxième vidéo !');
+            cleanupChoices();
+        };
 
-    function reset() {
-        document.getElementById('dual-videos').classList.add('hidden');
-        document.getElementById('single-video').classList.remove('hidden');
-        startChallenge();
-    }
+        function cleanupChoices() {
+            choiceA.pause();
+            choiceB.pause();
+            choiceA.src = '';
+            choiceB.src = '';
+            document.getElementById('dual-videos').classList.add('hidden');
 
-    // Pour lancer le tout une fois la page bien chargée
-    window.onload = () => {
-        startChallenge();
-    }
+            startChallenge();
+            document.getElementById('single-video').classList.remove('hidden');
+        }
+
+        // Lancement automatique au chargement
+        window.onload = startChallenge;
 </script>
 
     
