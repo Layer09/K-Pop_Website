@@ -124,16 +124,11 @@
 
     // Démarrer le challenge via le menu
     document.getElementById('start-button').addEventListener('click', () => {
-        // Masquer le menu avec les options
+        console.log('Bouton Commencer cliqué');
         document.getElementById('menu-container').classList.add('hidden');
-
-        // Montrer les vidéos pour commencer le challenge
-        document.getElementById('single-video').classList.remove('hidden');
-        document.getElementById('second-video').classList.remove('hidden');
-        
-        // Choisir deux vidéos aléatoires pour démarrer
         startChallenge();
     });
+
 
     // Fonction pour démarrer le challenge
     function startChallenge() {
