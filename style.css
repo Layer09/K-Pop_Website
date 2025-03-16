@@ -14,6 +14,7 @@ header {
     color: white;
     padding: 15px;
     text-align: center;
+    z-index: 10;
 }
 
 .color1 {
@@ -29,6 +30,7 @@ h1 {
 }
 
 nav {
+    z-index: 10;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -190,10 +192,18 @@ nav ul li a img:hover {
     height: auto;
 }
 
+#video-container,
+#dual-videos,
+#second-video,
+.single-video {
+    z-index: 1; /* Place-les derrière */
+}
+
 
 
 /* Style de l'annexe : Menu pour le choix des options */
 .menu-container {
+    z-index: 10;
     font-style: italic;
     color: #fff;
     background-color: rgba(255, 255, 255, 0.05);
