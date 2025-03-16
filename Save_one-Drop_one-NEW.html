@@ -65,7 +65,7 @@
         './videos/022-That_that-Psy.mp4'
     ];
 
-        let firstVideo = '';
+    let firstVideo = '';
     let secondVideo = '';
 
     function getRandomVideo(exclude = null) {
@@ -126,11 +126,16 @@
     };
 
     function cleanupChoices() {
+        // Arrêter les petites vidéos quand l'utilisateur fait un choix
         choiceA.pause();
         choiceB.pause();
         choiceA.src = '';
         choiceB.src = '';
+
+        // Cacher la section des vidéos duales
         document.getElementById('dual-videos').classList.add('hidden');
+
+        // Démarrer un nouveau challenge (vider les éléments et recharger)
         startChallenge();
     }
 
