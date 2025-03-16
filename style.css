@@ -174,7 +174,7 @@ nav ul li a img:hover {
     align-items: center;
     gap: 5%; /* Espacement de 10% entre les petites vidéos */
     width: 100%;
-    margin-bottom: 30%;
+    padding-bottom: 30%;
 }
 
 /* Pour les petites vidéos */
