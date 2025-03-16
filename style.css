@@ -153,26 +153,24 @@ nav ul li a img:hover {
 }
 
 
-    /* Style pour les vidéos grandes */
+ /* Style pour les vidéos grandes */
     .single-video video {
-        width: 75%;
+        width: 75%;  /* 75% de la largeur de l'écran */
         height: auto;
+        display: block;
+        margin: 0 auto;  /* Centrer horizontalement */
     }
 
     /* Style pour les petites vidéos */
-    #dual-videos video {
-        width: 20%;
-        height: auto;
-    }
-
-    /* Ajouter un espace de 10% entre les vidéos petites */
     #dual-videos {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;  /* Espacement équitable entre les vidéos */
+        gap: 10%;  /* Espacement de 10% entre les vidéos */
         width: 100%;
-        margin-top: 20px;  /* Pour un petit espace au-dessus des petites vidéos */
+        margin-top: 20px;  /* Un petit espace entre les vidéos et les autres éléments */
     }
-    
-    #dual-videos .video-container {
-        margin: 5%;
+
+    #dual-videos video {
+        width: 20%;  /* Chaque petite vidéo occupe 20% de la largeur de l'écran */
+        height: auto;
     }
