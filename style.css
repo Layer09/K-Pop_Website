@@ -146,10 +146,8 @@ nav ul li a img:hover {
 
 /* Séparateur bouton */
 .tab-separateur {
-    width: 1px;              /* Barre verticale */
-    height: 30px;            /* Hauteur du séparateur */
-    background-color: #fff;  /* Couleur de la barre */
-    margin: 5px;          /* Espacement autour du séparateur */
+    background-color: #fff;
+    margin: 5px;
     padding: 10px 15px;
     border-radius: 1px;
 }
