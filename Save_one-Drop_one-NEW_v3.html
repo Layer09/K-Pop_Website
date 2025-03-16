@@ -67,9 +67,14 @@
 
     <!-- Mode deux vidéos pour le choix -->
     <div id="dual-videos" class="video-container hidden">
-        <video id="choiceA" width="320" height="180" muted autoplay loop></video>
-        <video id="choiceB" width="320" height="180" muted autoplay loop></video>
+        <!-- Conteneur pour chaque joueur -->
+        <div class="video-frame" id="player1-frame">
+            <h4 class="player-name" id="player1-name">Joueur 1</h4>
+            <video id="choiceA" width="320" height="180" muted autoplay loop></video>
+            <video id="choiceB" width="320" height="180" muted autoplay loop></video>
+        </div>
     </div>
+
 
 <script>
     const videoSources = [
