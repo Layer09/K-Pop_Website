@@ -22,7 +22,78 @@
         </ul>
     </nav>
 
+
+    <!-- Single video mode -->
+    <div id="single-video" class="single-video">
+        <video id="videoA" autoplay muted></video>
+    </div>
+
+    <!-- Second video mode -->
+    <div id="second-video" class="single-video hidden">
+        <video id="videoB" autoplay muted></video>
+    </div>
+
+    <!-- Both videos mode -->
+    <div id="dual-videos" class="video-container hidden">
+        <video id="choiceA" muted></video>
+        <video id="choiceB" muted></video>
+    </div>
+
     <script>
+        const videoSources = [
+            'videos/video1.mp4',
+            'videos/video2.mp4',
+            'videos/video3.mp4',
+            'videos/video4.mp4'
+            // Ajoute autant de vidéos que nécessaire
+        ];
+
+        function getRandomVideo(exclude = null) {
+            let choices = videoSources.filter(src => src !== exclude);
+            return choices[Math.floor(Math.random() * choices.length)];
+        }
+
+        function startChallenge() {
+            document.getElementById('dual-videos').classList.add('hidden');
+            document.getElementById('second-video').classList.add('hidden');
+            document.getElementById('single-video').classList.remove('hidden');
+
+            let videoA = getRandomVideo();
+            document.getElementById('videoA').src = videoA;
+
+            document.getElementById('videoA').onended = () => {
+                document.getElementById('single-video').classList.add('hidden');
+                document.getElementById('second-video').classList.remove('hidden');
+                let videoB = getRandomVideo(videoA);
+                document.getElementById('videoB').src = videoB;
+
+                document.getElementById('videoB').onended = () => {
+                    document.getElementById('second-video').classList.add('hidden');
+                    document.getElementById('dual-videos').classList.remove('hidden');
+
+                    document.getElementById('choiceA').src = videoA;
+                    document.getElementById('choiceB').src = videoB;
+
+                    // Réactive les vidéos pour rejouer sans son
+                    document.getElementById('choiceA').play();
+                    document.getElementById('choiceB').play();
+                };
+            };
+        }
+
+        document.getElementById('choiceA').onclick = () => {
+            alert('Tu as choisi la vidéo de gauche');
+            startChallenge();
+        };
+
+        document.getElementById('choiceB').onclick = () => {
+            alert('Tu as choisi la vidéo de droite');
+            startChallenge();
+        };
+
+        // Lancer la première boucle
+        startChallenge();
     </script>
+    
 </body>
 </html>
