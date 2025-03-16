@@ -155,7 +155,7 @@ nav ul li a img:hover {
 
     /* Style pour les vidéos grandes */
     .single-video video {
-        width: 50%;
+        width: 75%;
         height: auto;
     }
 
@@ -174,5 +174,5 @@ nav ul li a img:hover {
     }
     
     #dual-videos .video-container {
-        margin-right: 10%;
+        margin: 5%;
     }
