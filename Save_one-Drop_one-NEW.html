@@ -74,6 +74,9 @@
     }
 
     function startChallenge() {
+        // Supprimer les anciennes vidéos avant de commencer une nouvelle
+        cleanupVideos();
+
         // Créer et ajouter le conteneur pour la première vidéo
         firstVideo = getRandomVideo();
         const singleContainer = document.createElement('div');
@@ -120,6 +123,31 @@
         };
     }
 
+    function cleanupVideos() {
+        // Vérifie si un conteneur vidéo existe déjà et le supprime
+        let oldSingleVideo = document.getElementById('single-video');
+        let oldSecondVideo = document.getElementById('second-video');
+        
+        if (oldSingleVideo) oldSingleVideo.remove();
+        if (oldSecondVideo) oldSecondVideo.remove();
+
+        // Supprime aussi les vidéos petites (si elles existent déjà)
+        let choiceA = document.getElementById('choiceA');
+        let choiceB = document.getElementById('choiceB');
+
+        if (choiceA) {
+            choiceA.pause();
+            choiceA.src = '';
+        }
+        if (choiceB) {
+            choiceB.pause();
+            choiceB.src = '';
+        }
+
+        // Masquer la section de choix des petites vidéos
+        document.getElementById('dual-videos').classList.add('hidden');
+    }
+
     choiceA.onclick = () => {
         alert('Tu as choisi la première vidéo !');
         cleanupChoices();
@@ -132,13 +160,7 @@
 
     function cleanupChoices() {
         // Arrêter les petites vidéos quand l'utilisateur fait un choix
-        choiceA.pause();
-        choiceB.pause();
-        choiceA.src = '';
-        choiceB.src = '';
-
-        // Cacher la section des vidéos duales
-        document.getElementById('dual-videos').classList.add('hidden');
+        cleanupVideos();
 
         // Démarrer un nouveau challenge (vider les éléments et recharger)
         startChallenge();
@@ -146,6 +168,7 @@
 
     window.onload = startChallenge;
 
+        
         /*
         let videoA = document.getElementById('videoA');
         let videoB = document.getElementById('videoB');
