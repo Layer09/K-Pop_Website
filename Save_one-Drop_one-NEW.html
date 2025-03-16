@@ -40,87 +40,93 @@
     </div>
 
     <script>
-        const videoSources = [
-            './videos/001-War_of_hormones-BTS.mp4',
-            './videos/002-Hellevator-Stray_kids.mp4',
-            './videos/003-Gidle-Latata.mp4',
-            './videos/004-Monster-Exo.mp4',
-            './videos/005-Crazy_form-Ateez.mp4',
-            './videos/006-Solo-Jennie.mp4',
-            './videos/007-Beautiful-Wanna_one.mp4',
-            './videos/008-Red_lights-Stray_Kids.mp4',
-            './videos/009-Scream-Dreamcatcher.mp4',
-            './videos/010-Save_me-BTS.mp4',
-            './videos/011-Fact_check-NCT_127.mp4',
-            './videos/012-Ddu_du_ddu_du-BlackPink.mp4',
-            './videos/013-Agust_D-Agust_D.mp4',
-            './videos/014-Loser_lover-TXT.mp4',
-            './videos/015-Maria-Hwa_sa.mp4',
-            './videos/016-Run-BTS.mp4',
-            './videos/017-Loco-Itzy.mp4',
-            './videos/018-Fever-Enhypen.mp4',
-            './videos/019-Miroh-Stray_Kids.mp4',
-            './videos/020-One_spark-Twice.mp4',
-            './videos/021-Rock_with_you-Seventeen.mp4',
-            './videos/022-That_that-Psy.mp4'
-        ];
+    const videoSources = [
+        './videos/001-War_of_hormones-BTS.mp4',
+        './videos/002-Hellevator-Stray_kids.mp4',
+        './videos/003-Gidle-Latata.mp4',
+        './videos/004-Monster-Exo.mp4',
+        './videos/005-Crazy_form-Ateez.mp4',
+        './videos/006-Solo-Jennie.mp4',
+        './videos/007-Beautiful-Wanna_one.mp4',
+        './videos/008-Red_lights-Stray_Kids.mp4',
+        './videos/009-Scream-Dreamcatcher.mp4',
+        './videos/010-Save_me-BTS.mp4',
+        './videos/011-Fact_check-NCT_127.mp4',
+        './videos/012-Ddu_du_ddu_du-BlackPink.mp4',
+        './videos/013-Agust_D-Agust_D.mp4',
+        './videos/014-Loser_lover-TXT.mp4',
+        './videos/015-Maria-Hwa_sa.mp4',
+        './videos/016-Run-BTS.mp4',
+        './videos/017-Loco-Itzy.mp4',
+        './videos/018-Fever-Enhypen.mp4',
+        './videos/019-Miroh-Stray_Kids.mp4',
+        './videos/020-One_spark-Twice.mp4',
+        './videos/021-Rock_with_you-Seventeen.mp4',
+        './videos/022-That_that-Psy.mp4'
+    ];
 
-        let videoA = document.getElementById('videoA');
-        let videoB = document.getElementById('videoB');
-        let choiceA = document.getElementById('choiceA');
-        let choiceB = document.getElementById('choiceB');
+    let videoA = document.getElementById('videoA');
+    let videoB = document.getElementById('videoB');
+    let choiceA = document.getElementById('choiceA');
+    let choiceB = document.getElementById('choiceB');
 
-        let firstVideo = '';
-        let secondVideo = '';
+    let firstVideo = '';
+    let secondVideo = '';
 
-        function getRandomVideo(exclude = null) {
-            let available = videoSources.filter(v => v !== exclude);
-            return available[Math.floor(Math.random() * available.length)];
-        }
+    function getRandomVideo(exclude = null) {
+        let available = videoSources.filter(v => v !== exclude);
+        return available[Math.floor(Math.random() * available.length)];
+    }
 
-        function startChallenge() {
-            firstVideo = getRandomVideo();
-            videoA.src = firstVideo;
-            videoA.play();
-        }
+    function startChallenge() {
+        firstVideo = getRandomVideo();
+        videoA.src = firstVideo;
+        videoA.volume = 0.5;
+        videoA.play();
+    }
 
-        videoA.onended = () => {
-            document.getElementById('single-video').classList.add('hidden');
-            document.getElementById('second-video').classList.remove('hidden');
+    videoA.onended = () => {
+        document.getElementById('single-video').classList.add('hidden');
+        document.getElementById('second-video').classList.remove('hidden');
 
-            secondVideo = getRandomVideo(firstVideo);
-            videoB.src = secondVideo;
-            videoB.play();
-        };
+        secondVideo = getRandomVideo(firstVideo);
+        videoB.src = secondVideo;
+        videoB.volume = 0.5;
+        videoB.play();
+    };
 
-        videoB.onended = () => {
-            document.getElementById('second-video').classList.add('hidden');
-            document.getElementById('dual-videos').classList.remove('hidden');
+    videoB.onended = () => {
+        document.getElementById('second-video').classList.add('hidden');
+        document.getElementById('dual-videos').classList.remove('hidden');
 
-            choiceA.src = firstVideo;
-            choiceB.src = secondVideo;
-            choiceA.play();
-            choiceB.play();
-        };
+        choiceA.src = firstVideo;
+        choiceB.src = secondVideo;
+        choiceA.play();
+        choiceB.play();
+    };
 
-        choiceA.onclick = () => {
-            alert('Tu as choisi la première vidéo !');
-            reset();
-        };
+    choiceA.onclick = () => {
+        alert('Tu as choisi la première vidéo !');
+        reset();
+    };
 
-        choiceB.onclick = () => {
-            alert('Tu as choisi la deuxième vidéo !');
-            reset();
-        };
+    choiceB.onclick = () => {
+        alert('Tu as choisi la deuxième vidéo !');
+        reset();
+    };
 
-        function reset() {
-            document.getElementById('dual-videos').classList.add('hidden');
-            document.getElementById('single-video').classList.remove('hidden');
-            startChallenge();
-        }
-
+    function reset() {
+        document.getElementById('dual-videos').classList.add('hidden');
+        document.getElementById('single-video').classList.remove('hidden');
         startChallenge();
-    </script>
+    }
+
+    // Pour lancer le tout une fois la page bien chargée
+    window.onload = () => {
+        startChallenge();
+    }
+</script>
+
     
 </body>
 </html>
