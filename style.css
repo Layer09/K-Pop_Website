@@ -151,3 +151,28 @@ nav ul li a img:hover {
     border-radius: 5px;
     border-color: #fff;
 }
+
+
+    /* Style pour les vidéos grandes */
+    .single-video video {
+        width: 50%;
+        height: auto;
+    }
+
+    /* Style pour les petites vidéos */
+    #dual-videos video {
+        width: 20%;
+        height: auto;
+    }
+
+    /* Ajouter un espace de 10% entre les vidéos petites */
+    #dual-videos {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;  /* Pour un petit espace au-dessus des petites vidéos */
+    }
+    
+    #dual-videos .video-container {
+        margin-right: 10%;
+    }
