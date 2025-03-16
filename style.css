@@ -243,3 +243,6 @@ nav ul li a img:hover {
     background-color: #0a0a0a; /* Changer la couleur de fond au survol (gris foncé) */
 }
 
+#options-menu {
+    margin-left: 5%;
+}
