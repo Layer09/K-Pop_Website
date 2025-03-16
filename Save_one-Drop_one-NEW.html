@@ -65,73 +65,76 @@
         './videos/022-That_that-Psy.mp4'
     ];
 
-        let videoA = document.getElementById('videoA');
-        let videoB = document.getElementById('videoB');
-        let choiceA = document.getElementById('choiceA');
-        let choiceB = document.getElementById('choiceB');
-
         let firstVideo = '';
-        let secondVideo = '';
+    let secondVideo = '';
 
-        function getRandomVideo(exclude = null) {
-            let available = videoSources.filter(v => v !== exclude);
-            return available[Math.floor(Math.random() * available.length)];
-        }
+    function getRandomVideo(exclude = null) {
+        let available = videoSources.filter(v => v !== exclude);
+        return available[Math.floor(Math.random() * available.length)];
+    }
 
-        function startChallenge() {
-            firstVideo = getRandomVideo();
-            videoA.src = firstVideo;
-            videoA.volume = 0.2;
-            videoA.play();
-        }
+    function startChallenge() {
+        firstVideo = getRandomVideo();
+        const singleContainer = document.createElement('div');
+        singleContainer.id = 'single-video';
+        singleContainer.classList.add('single-video');
+        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+        document.body.appendChild(singleContainer);
+
+        let videoA = document.getElementById('videoA');
+        videoA.src = firstVideo;
+        videoA.volume = 0.2;
+        videoA.play();
 
         videoA.onended = () => {
             videoA.pause();
-            videoA.src = '';
-            document.getElementById('single-video').classList.add('hidden');
+            singleContainer.remove();  // Retirer complètement le conteneur et la vidéo A
 
             secondVideo = getRandomVideo(firstVideo);
+            const secondContainer = document.createElement('div');
+            secondContainer.id = 'second-video';
+            secondContainer.classList.add('single-video');
+            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+            document.body.appendChild(secondContainer);
+
+            let videoB = document.getElementById('videoB');
             videoB.src = secondVideo;
             videoB.volume = 0.2;
-            document.getElementById('second-video').classList.remove('hidden');
             videoB.play();
+
+            videoB.onended = () => {
+                videoB.pause();
+                secondContainer.remove();  // Retirer complètement le conteneur et la vidéo B
+
+                document.getElementById('dual-videos').classList.remove('hidden');
+                choiceA.src = firstVideo;
+                choiceB.src = secondVideo;
+                choiceA.play();
+                choiceB.play();
+            };
         };
+    }
 
-        videoB.onended = () => {
-            videoB.pause();
-            videoB.src = '';
-            document.getElementById('second-video').classList.add('hidden');
+    choiceA.onclick = () => {
+        alert('Tu as choisi la première vidéo !');
+        cleanupChoices();
+    };
 
-            document.getElementById('dual-videos').classList.remove('hidden');
-            choiceA.src = firstVideo;
-            choiceB.src = secondVideo;
-            choiceA.play();
-            choiceB.play();
-        };
+    choiceB.onclick = () => {
+        alert('Tu as choisi la deuxième vidéo !');
+        cleanupChoices();
+    };
 
-        choiceA.onclick = () => {
-            alert('Tu as choisi la première vidéo !');
-            cleanupChoices();
-        };
+    function cleanupChoices() {
+        choiceA.pause();
+        choiceB.pause();
+        choiceA.src = '';
+        choiceB.src = '';
+        document.getElementById('dual-videos').classList.add('hidden');
+        startChallenge();
+    }
 
-        choiceB.onclick = () => {
-            alert('Tu as choisi la deuxième vidéo !');
-            cleanupChoices();
-        };
-
-        function cleanupChoices() {
-            choiceA.pause();
-            choiceB.pause();
-            choiceA.src = '';
-            choiceB.src = '';
-            document.getElementById('dual-videos').classList.add('hidden');
-
-            startChallenge();
-            document.getElementById('single-video').classList.remove('hidden');
-        }
-
-        // Lancement automatique au chargement
-        window.onload = startChallenge;
+    window.onload = startChallenge;
 
         /*
         let videoA = document.getElementById('videoA');
