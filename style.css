@@ -181,6 +181,7 @@ nav ul li a img:hover {
 #choiceA, #choiceB {
     width: 30%;
     height: auto;
+    cursor: pointer;
 }
 
 /* Pour les grandes vidéos */
