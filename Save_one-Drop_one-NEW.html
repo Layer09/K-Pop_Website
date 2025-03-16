@@ -74,6 +74,7 @@
     }
 
     function startChallenge() {
+        // Créer et ajouter le conteneur pour la première vidéo
         firstVideo = getRandomVideo();
         const singleContainer = document.createElement('div');
         singleContainer.id = 'single-video';
@@ -87,9 +88,11 @@
         videoA.play();
 
         videoA.onended = () => {
+            // Supprimer complètement le conteneur vidéo A
             videoA.pause();
-            singleContainer.remove();  // Retirer complètement le conteneur et la vidéo A
+            singleContainer.remove();  // Retirer le conteneur et la vidéo
 
+            // Créer et ajouter le conteneur pour la deuxième vidéo
             secondVideo = getRandomVideo(firstVideo);
             const secondContainer = document.createElement('div');
             secondContainer.id = 'second-video';
@@ -103,9 +106,11 @@
             videoB.play();
 
             videoB.onended = () => {
+                // Supprimer complètement le conteneur vidéo B
                 videoB.pause();
-                secondContainer.remove();  // Retirer complètement le conteneur et la vidéo B
+                secondContainer.remove();  // Retirer le conteneur et la vidéo
 
+                // Montrer les petites vidéos
                 document.getElementById('dual-videos').classList.remove('hidden');
                 choiceA.src = firstVideo;
                 choiceB.src = secondVideo;
