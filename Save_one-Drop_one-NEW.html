@@ -65,7 +65,7 @@
         './videos/022-That_that-Psy.mp4'
     ];
 
-    let videoA = document.getElementById('videoA');
+        let videoA = document.getElementById('videoA');
         let videoB = document.getElementById('videoB');
         let choiceA = document.getElementById('choiceA');
         let choiceB = document.getElementById('choiceB');
@@ -132,6 +132,76 @@
 
         // Lancement automatique au chargement
         window.onload = startChallenge;
+
+        /*
+        let videoA = document.getElementById('videoA');
+        let videoB = document.getElementById('videoB');
+        let choiceA = document.getElementById('choiceA');
+        let choiceB = document.getElementById('choiceB');
+
+        let firstVideo = '';
+        let secondVideo = '';
+
+        function getRandomVideo(exclude = null) {
+            let available = videoSources.filter(v => v !== exclude);
+            return available[Math.floor(Math.random() * available.length)];
+        }
+
+        function startChallenge() {
+            firstVideo = getRandomVideo();
+            videoA.src = firstVideo;
+            videoA.volume = 0.2;
+            videoA.play();
+        }
+
+        videoA.onended = () => {
+            videoA.pause();
+            videoA.src = '';
+            document.getElementById('single-video').classList.add('hidden');
+
+            secondVideo = getRandomVideo(firstVideo);
+            videoB.src = secondVideo;
+            videoB.volume = 0.2;
+            document.getElementById('second-video').classList.remove('hidden');
+            videoB.play();
+        };
+
+        videoB.onended = () => {
+            videoB.pause();
+            videoB.src = '';
+            document.getElementById('second-video').classList.add('hidden');
+
+            document.getElementById('dual-videos').classList.remove('hidden');
+            choiceA.src = firstVideo;
+            choiceB.src = secondVideo;
+            choiceA.play();
+            choiceB.play();
+        };
+
+        choiceA.onclick = () => {
+            alert('Tu as choisi la première vidéo !');
+            cleanupChoices();
+        };
+
+        choiceB.onclick = () => {
+            alert('Tu as choisi la deuxième vidéo !');
+            cleanupChoices();
+        };
+
+        function cleanupChoices() {
+            choiceA.pause();
+            choiceB.pause();
+            choiceA.src = '';
+            choiceB.src = '';
+            document.getElementById('dual-videos').classList.add('hidden');
+
+            startChallenge();
+            document.getElementById('single-video').classList.remove('hidden');
+        }
+
+        // Lancement automatique au chargement
+        window.onload = startChallenge;
+        */
 </script>
 
     
