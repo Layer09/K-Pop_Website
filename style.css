@@ -193,7 +193,7 @@ nav ul li a img:hover {
 
 
 /* Style de l'annexe : Menu pour le choix des options */
-.annexe {
+.menu-container {
     font-style: italic;
     background-color: rgba(255, 255, 255, 0.05);
     border-left: 5px solid #ffcc00;
