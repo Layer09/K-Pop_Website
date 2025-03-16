@@ -218,6 +218,14 @@ nav ul li a img:hover {
     line-height: 1.8;
 }
 
+#remove-player {
+    background-color: #FFDFE0;
+}
+
+#add-player {
+    background-color: #DFFFE0;
+}
+
 .start-button-container {
     display: flex;
     justify-content: center; /* Centrer le bouton dans le conteneur */
@@ -247,4 +255,10 @@ nav ul li a img:hover {
 
 #options-menu {
     margin-left: 5%;
+}
+
+/* CSS pour désactiver les boutons */
+.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Empêche les clics */
 }
