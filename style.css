@@ -234,6 +234,7 @@ nav ul li a img:hover {
     font-weight: bold; /* Texte en gras */
     border-radius: 10px; /* Bord légèrement arrondi */
     border-color: #000;
+    border: none;
     cursor: pointer; /* Curseur en forme de main lors du survol */
     transition: background-color 0.3s ease; /* Transition pour un effet lors du survol */
 }
