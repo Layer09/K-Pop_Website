@@ -21,7 +21,21 @@
             <li><a href="Statistiques.html"><img src="./images/Statistiques.png" alt="Statistiques"></a></li>
         </ul>
     </nav>
+    <!-- Mode vidéo 1 -->
+    <div id="single-video" class="single-video">
+        <video width="1440" height="810" id="videoA" controls></video>
+    </div>
 
+    <!-- Mode vidéo 2 -->
+    <div id="second-video" class="single-video hidden">
+        <video width="1440" height="810" id="videoB" controls></video>
+    </div>
+
+    <!-- Mode deux vidéos pour le choix -->
+    <div id="dual-videos" class="video-container hidden">
+        <video id="choiceA" width="320" height="180" muted autoplay loop></video>
+        <video id="choiceB" width="320" height="180" muted autoplay loop></video>
+    </div>
 
     <script>
     const videoSources = [
@@ -155,21 +169,7 @@
 </script>
 
 
-    <!-- Mode vidéo 1 -->
-    <div id="single-video" class="single-video">
-        <video width="720" height="405" id="videoA" controls></video>
-    </div>
 
-    <!-- Mode vidéo 2 -->
-    <div id="second-video" class="single-video hidden">
-        <video width="720" height="405" id="videoB" controls></video>
-    </div>
-
-    <!-- Mode deux vidéos pour le choix -->
-    <div id="dual-videos" class="video-container hidden">
-        <video id="choiceA" width="320" height="180" muted autoplay loop></video>
-        <video id="choiceB" width="320" height="180" muted autoplay loop></video>
-    </div>
     
 </body>
 </html>
