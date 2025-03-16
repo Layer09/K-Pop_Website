@@ -160,7 +160,7 @@ nav ul li a img:hover {
 
 /* Container des grandes vidéos */
 .single-video, #second-video {
-    margin-top: -30%;
+    margin-top: -40%;
     display: flex;
     justify-content: center;
     align-items: center;
