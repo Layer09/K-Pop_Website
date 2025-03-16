@@ -99,10 +99,10 @@
             document.querySelectorAll('.tab').forEach(button => {
                 button.style.backgroundColor = ""; // Réinitialise tous les boutons
             });
-            if (${version} < 5) {
+            if (version < 5) {
                 document.querySelector(`.tab:nth-child(${version})`).style.backgroundColor = "#333333";
             } else {
-                document.querySelector(`.tab:nth-child(${version})+ .tab`).style.backgroundColor = "#333333";
+                document.querySelector(`.tab:nth-child(${version + 1})`).style.backgroundColor = "#333333";
             }
             
         }
