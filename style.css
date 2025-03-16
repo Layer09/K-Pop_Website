@@ -216,7 +216,7 @@ nav ul li a img:hover {
     line-height: 1.8;
 }
 
-.start-button {
+#start-button {
     display: inline-block; /* Assure que le bouton reste en ligne */
     width: 200px; /* Largeur du bouton */
     height: 60px; /* Hauteur du bouton */
@@ -231,7 +231,7 @@ nav ul li a img:hover {
     transition: background-color 0.3s ease; /* Transition pour un effet lors du survol */
 }
 
-.start-button:hover {
+#start-button:hover {
     background-color: #333; /* Changer la couleur de fond au survol (gris foncé) */
 }
 
