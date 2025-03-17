@@ -335,37 +335,3 @@ video {
     border: 2px solid #00c5d5;
 }
 
-.player-entry {
-    width: 95%;
-    margin-bottom: 15px;
-    padding: 10px;
-    position: relative;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.player-entry:nth-child(odd) {
-    background-color: rgba(0, 197, 213, 0.5);
-    border: 2px solid #00c5d5;
-}
-
-.player-entry:nth-child(even) {
-    background-color: rgba(138, 106, 172, 0.5);
-    border: 2px solid #8a6ace;
-}
-
-.player-entry input {
-    margin-left: 10px;
-}
-
-.player-entry h4 {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: black;
-    font-weight: bold;
-    font-size: 18px;
-}
-
