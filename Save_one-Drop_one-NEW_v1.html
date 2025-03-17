@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <title>Save one Drop one</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <header>
+        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
+        <h2 class="subtitle">Save one Drop one</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html"><img src="./images/Accueil.png" alt="Accueil"></a></li>
+            <li><a href="Save_one-Drop_one.html"><img src="./images/Save_one-Drop_one.png" alt="Save One Drop One"></a></li>
+            <li><a href="Blind_ranking.html"><img src="./images/Blind_ranking.png" alt="Blind Ranking"></a></li>
+            <li><a href="Blind_test.html"><img src="./images/Blind_test.png" alt="Blind Test"></a></li>
+            <li><a href="Statistiques.html"><img src="./images/Statistiques.png" alt="Statistiques"></a></li>
+        </ul>
+    </nav>
+    <!-- Mode vidéo 1 -->
+    <div id="single-video" class="single-video">
+        <video width="1440" height="810" id="videoA" controls></video>
+    </div>
+
+    <!-- Mode vidéo 2 -->
+    <div id="second-video" class="single-video hidden">
+        <video width="1440" height="810" id="videoB" controls></video>
+    </div>
+
+    <!-- Mode deux vidéos pour le choix -->
+    <div id="dual-videos" class="video-container hidden">
+        <video id="choiceA" width="320" height="180" muted autoplay loop></video>
+        <video id="choiceB" width="320" height="180" muted autoplay loop></video>
+    </div>
+
+    <script>
+    const videoSources = [
+        './videos/001-War_of_hormones-BTS.mp4',
+        './videos/002-Hellevator-Stray_kids.mp4',
+        './videos/003-Gidle-Latata.mp4',
+        './videos/004-Monster-Exo.mp4',
+        './videos/005-Crazy_form-Ateez.mp4',
+        './videos/006-Solo-Jennie.mp4',
+        './videos/007-Beautiful-Wanna_one.mp4',
+        './videos/008-Red_lights-Stray_Kids.mp4',
+        './videos/009-Scream-Dreamcatcher.mp4',
+        './videos/010-Save_me-BTS.mp4',
+        './videos/011-Fact_check-NCT_127.mp4',
+        './videos/012-Ddu_du_ddu_du-BlackPink.mp4',
+        './videos/013-Agust_D-Agust_D.mp4',
+        './videos/014-Loser_lover-TXT.mp4',
+        './videos/015-Maria-Hwa_sa.mp4',
+        './videos/016-Run-BTS.mp4',
+        './videos/017-Loco-Itzy.mp4',
+        './videos/018-Fever-Enhypen.mp4',
+        './videos/019-Miroh-Stray_Kids.mp4',
+        './videos/020-One_spark-Twice.mp4',
+        './videos/021-Rock_with_you-Seventeen.mp4',
+        './videos/022-That_that-Psy.mp4'
+    ];
+
+    let firstVideo = '';
+    let secondVideo = '';
+
+    function getRandomVideo(exclude = null) {
+        let available = videoSources.filter(v => v !== exclude);
+        return available[Math.floor(Math.random() * available.length)];
+    }
+
+    function startChallenge() {
+        // Supprimer les anciennes vidéos avant de commencer une nouvelle
+        cleanupVideos();
+
+        // Créer et ajouter le conteneur pour la première vidéo
+        firstVideo = getRandomVideo();
+        const singleContainer = document.createElement('div');
+        singleContainer.id = 'single-video';
+        singleContainer.classList.add('single-video');
+        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+        document.body.appendChild(singleContainer);
+
+        let videoA = document.getElementById('videoA');
+        videoA.src = firstVideo;
+        videoA.volume = 0.2;
+        videoA.play();
+
+        videoA.onended = () => {
+            // Supprimer complètement le conteneur vidéo A
+            videoA.pause();
+            singleContainer.remove();  // Retirer le conteneur et la vidéo
+
+            // Créer et ajouter le conteneur pour la deuxième vidéo
+            secondVideo = getRandomVideo(firstVideo);
+            const secondContainer = document.createElement('div');
+            secondContainer.id = 'second-video';
+            secondContainer.classList.add('single-video');
+            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+            document.body.appendChild(secondContainer);
+
+            let videoB = document.getElementById('videoB');
+            videoB.src = secondVideo;
+            videoB.volume = 0.2;
+            videoB.play();
+
+            videoB.onended = () => {
+                // Supprimer complètement le conteneur vidéo B
+                videoB.pause();
+                secondContainer.remove();  // Retirer le conteneur et la vidéo
+
+                // Montrer les petites vidéos
+                document.getElementById('dual-videos').classList.remove('hidden');
+                choiceA.src = firstVideo;
+                choiceB.src = secondVideo;
+                choiceA.play();
+                choiceB.play();
+            };
+        };
+    }
+
+    function cleanupVideos() {
+        // Vérifie si un conteneur vidéo existe déjà et le supprime
+        let oldSingleVideo = document.getElementById('single-video');
+        let oldSecondVideo = document.getElementById('second-video');
+        
+        if (oldSingleVideo) oldSingleVideo.remove();
+        if (oldSecondVideo) oldSecondVideo.remove();
+
+        // Supprime aussi les vidéos petites (si elles existent déjà)
+        let choiceA = document.getElementById('choiceA');
+        let choiceB = document.getElementById('choiceB');
+
+        if (choiceA) {
+            choiceA.pause();
+            choiceA.src = '';
+        }
+        if (choiceB) {
+            choiceB.pause();
+            choiceB.src = '';
+        }
+
+        // Masquer la section de choix des petites vidéos
+        document.getElementById('dual-videos').classList.add('hidden');
+    }
+
+    choiceA.onclick = () => {
+        alert('Tu as choisi la première vidéo !');
+        cleanupChoices();
+    };
+
+    choiceB.onclick = () => {
+        alert('Tu as choisi la deuxième vidéo !');
+        cleanupChoices();
+    };
+
+    function cleanupChoices() {
+        // Arrêter les petites vidéos quand l'utilisateur fait un choix
+        cleanupVideos();
+
+        // Démarrer un nouveau challenge (vider les éléments et recharger)
+        startChallenge();
+    }
+
+    window.onload = startChallenge;
+
+</script>
+    
+</body>
+</html>
