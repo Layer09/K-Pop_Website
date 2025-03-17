@@ -17,10 +17,12 @@ header {
     z-index: 10;
 }
 
-.color1 {
+/* Bleu */
+.color1 { 
     color: #00c5d5;
 }
 
+/* Violet */
 .color2 {
     color: #8a6ace;
 }
