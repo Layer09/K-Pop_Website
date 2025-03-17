@@ -78,266 +78,206 @@
 
 <script>
     const videoSources = [
-        './videos/001-War_of_hormones-BTS.mp4',
-        './videos/002-Hellevator-Stray_kids.mp4',
-        './videos/003-Gidle-Latata.mp4',
-        './videos/004-Monster-Exo.mp4',
-        './videos/005-Crazy_form-Ateez.mp4',
-        './videos/006-Solo-Jennie.mp4',
-        './videos/007-Beautiful-Wanna_one.mp4',
-        './videos/008-Red_lights-Stray_Kids.mp4',
-        './videos/009-Scream-Dreamcatcher.mp4',
-        './videos/010-Save_me-BTS.mp4',
-        './videos/011-Fact_check-NCT_127.mp4',
-        './videos/012-Ddu_du_ddu_du-BlackPink.mp4',
-        './videos/013-Agust_D-Agust_D.mp4',
-        './videos/014-Loser_lover-TXT.mp4',
-        './videos/015-Maria-Hwa_sa.mp4',
-        './videos/016-Run-BTS.mp4',
-        './videos/017-Loco-Itzy.mp4',
-        './videos/018-Fever-Enhypen.mp4',
-        './videos/019-Miroh-Stray_Kids.mp4',
-        './videos/020-One_spark-Twice.mp4',
-        './videos/021-Rock_with_you-Seventeen.mp4',
-        './videos/022-That_that-Psy.mp4'
-    ];
+    './videos/001-War_of_hormones-BTS.mp4',
+    './videos/002-Hellevator-Stray_kids.mp4',
+    './videos/003-Gidle-Latata.mp4',
+    './videos/004-Monster-Exo.mp4',
+    './videos/005-Crazy_form-Ateez.mp4',
+    './videos/006-Solo-Jennie.mp4',
+    './videos/007-Beautiful-Wanna_one.mp4',
+    './videos/008-Red_lights-Stray_Kids.mp4',
+    './videos/009-Scream-Dreamcatcher.mp4',
+    './videos/010-Save_me-BTS.mp4',
+    './videos/011-Fact_check-NCT_127.mp4',
+    './videos/012-Ddu_du_ddu_du-BlackPink.mp4',
+    './videos/013-Agust_D-Agust_D.mp4',
+    './videos/014-Loser_lover-TXT.mp4',
+    './videos/015-Maria-Hwa_sa.mp4',
+    './videos/016-Run-BTS.mp4',
+    './videos/017-Loco-Itzy.mp4',
+    './videos/018-Fever-Enhypen.mp4',
+    './videos/019-Miroh-Stray_Kids.mp4',
+    './videos/020-One_spark-Twice.mp4',
+    './videos/021-Rock_with_you-Seventeen.mp4',
+    './videos/022-That_that-Psy.mp4'
+];
 
-    let firstVideo = '';
-    let secondVideo = '';
+let firstVideo = '';
+let secondVideo = '';
 
-    function getRandomVideo(exclude = null) {
-        let available = videoSources.filter(v => v !== exclude);
-        return available[Math.floor(Math.random() * available.length)];
-    }
-
-    function startChallenge() {
-        // Supprimer les anciennes vidéos avant de commencer une nouvelle
-        cleanupVideos();
-
-        // Créer et ajouter le conteneur pour la première vidéo
-        firstVideo = getRandomVideo();
-        const singleContainer = document.createElement('div');
-        singleContainer.id = 'single-video';
-        singleContainer.classList.add('single-video');
-        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-        document.body.appendChild(singleContainer);
-
-        let videoA = document.getElementById('videoA');
-        videoA.src = firstVideo;
-        videoA.volume = 0.2;
-        videoA.play();
-
-        videoA.onended = () => {
-            // Supprimer complètement le conteneur vidéo A
-            videoA.pause();
-            singleContainer.remove();  // Retirer le conteneur et la vidéo
-
-            // Créer et ajouter le conteneur pour la deuxième vidéo
-            secondVideo = getRandomVideo(firstVideo);
-            const secondContainer = document.createElement('div');
-            secondContainer.id = 'second-video';
-            secondContainer.classList.add('single-video');
-            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-            document.body.appendChild(secondContainer);
-
-            let videoB = document.getElementById('videoB');
-            videoB.src = secondVideo;
-            videoB.volume = 0.2;
-            videoB.play();
-
-            videoB.onended = () => {
-                // Supprimer complètement le conteneur vidéo B
-                videoB.pause();
-                secondContainer.remove();  // Retirer le conteneur et la vidéo
-
-                // Montrer les petites vidéos
-                document.getElementById('dual-videos').classList.remove('hidden');
-                choiceA.src = firstVideo;
-                choiceB.src = secondVideo;
-                choiceA.play();
-                choiceB.play();
-            };
-        };
-    }
-
-    function cleanupVideos() {
-        // Vérifie si un conteneur vidéo existe déjà et le supprime
-        let oldSingleVideo = document.getElementById('single-video');
-        let oldSecondVideo = document.getElementById('second-video');
-        
-        if (oldSingleVideo) oldSingleVideo.remove();
-        if (oldSecondVideo) oldSecondVideo.remove();
-
-        // Supprime aussi les vidéos petites (si elles existent déjà)
-        let choiceA = document.getElementById('choiceA');
-        let choiceB = document.getElementById('choiceB');
-
-        if (choiceA) {
-            choiceA.pause();
-            choiceA.src = '';
-        }
-        if (choiceB) {
-            choiceB.pause();
-            choiceB.src = '';
-        }
-
-        // Masquer la section de choix des petites vidéos
-        document.getElementById('dual-videos').classList.add('hidden');
-    }
-
-    function cleanupChoices() {
-        // Arrêter les petites vidéos quand l'utilisateur fait un choix
-        cleanupVideos();
-
-        // Démarrer un nouveau challenge (vider les éléments et recharger)
-        startChallenge();
-    }
-
-    document.getElementById('start-button').addEventListener('click', () => {
-        console.log('Bouton Commencer cliqué');
-        document.getElementById('menu-container').classList.add('hidden');
-        startChallenge();
-    });
-    
-    // Gestion des jokers input
-    document.querySelectorAll('input[name="joker"]').forEach(radio => {
-        radio.addEventListener('change', function () {
-            document.getElementById('joker-count').disabled = (this.value !== 'custom');
-        });
-    });
-
-    const removeButton = document.getElementById('remove-player');
-    const addButton = document.getElementById('add-player');
-    const playersContainer = document.getElementById('players-container');
-    
-    function updatePlayerButtons() {
-        const playerCount = playersContainer.querySelectorAll('.player-entry').length;
-    
-        // Si il y a un seul joueur, le bouton "Retirer un joueur" est désactivé
-        if (playerCount <= 1) {
-            removeButton.classList.add('disabled');
-        } else {
-            removeButton.classList.remove('disabled');
-        }
-    
-        // Si il y a 9 joueurs, le bouton "Ajouter un joueur" est désactivé
-        if (playerCount >= 9) {
-            addButton.classList.add('disabled');
-        } else {
-            addButton.classList.remove('disabled');
-        }
-    }
-    
-    // Ajouter un joueur
-    addButton.addEventListener('click', () => {
-        const count = playersContainer.querySelectorAll('.player-entry').length;
-        if (count < 9) {
-            const div = document.createElement('div');
-            div.className = 'player-entry';
-            div.innerHTML = `Joueur ${count + 1} : <input type="text" placeholder="Joueur ${count + 1}">`;
-            playersContainer.appendChild(div);
-            updatePlayerButtons(); // Mettre à jour les boutons
-        }
-    });
-    
-    // Retirer un joueur
-    removeButton.addEventListener('click', () => {
-        const players = playersContainer.querySelectorAll('.player-entry');
-        if (players.length > 1) {
-            playersContainer.removeChild(players[players.length - 1]);  // Retirer le dernier joueur
-            updatePlayerButtons(); // Mettre à jour les boutons
-        }
-    });
-
-// Initialiser l'état des boutons
-updatePlayerButtons();
-
-// Modification pour ajouter des encadrés vidéo dynamiques avec couleurs alternées
-function displayVideosForPlayers() {
-    let players = document.querySelectorAll('.player-entry input');
-    let dualVideosContainer = document.getElementById('dual-videos');
-    let videoIndex = 0;  // Indice pour les vidéos affichées
-
-    // Réinitialiser l'affichage des vidéos avant d'ajouter les nouvelles
-    dualVideosContainer.innerHTML = '';
-
-    players.forEach((player, index) => {
-        // Créer un nouvel encadré vidéo pour chaque joueur
-        let frame = document.createElement('div');
-        frame.classList.add('video-frame');
-        frame.id = `player${index + 1}-frame`;
-
-        // Déterminer la couleur en fonction du numéro du joueur (pair ou impair)
-        if ((index + 1) % 2 === 0) {
-            frame.style.backgroundColor = 'rgba(138, 106, 206, 0.5)';
-            frame.style.borderColor = '#8a6ace';
-        } else {
-            frame.style.backgroundColor = 'rgba(0, 197, 213, 0.5)';
-            frame.style.borderColor = '#00c5d5';
-        }
-
-        // Créer le nom du joueur
-        let playerName = document.createElement('h4');
-        playerName.classList.add('player-name');
-        playerName.textContent = player.value || `Joueur ${index + 1}`;  // Si le champ est vide, afficher "Joueur X"
-        frame.appendChild(playerName);
-
-        // Créer les vidéos pour chaque joueur
-        let videoA = document.createElement('video');
-        videoA.width = 320;
-        videoA.height = 180;
-        videoA.muted = true;
-        videoA.autoplay = true;
-        videoA.loop = true;
-
-        let videoB = document.createElement('video');
-        videoB.width = 320;
-        videoB.height = 180;
-        videoB.muted = true;
-        videoB.autoplay = true;
-        videoB.loop = true;
-
-        frame.appendChild(videoA);
-        frame.appendChild(videoB);
-
-        // Ajouter le conteneur du joueur au conteneur général des vidéos
-        dualVideosContainer.appendChild(frame);
-
-        // Assigner les vidéos
-        videoA.src = videoSources[videoIndex++];
-        videoB.src = videoSources[videoIndex++];
-
-        videoA.play();
-        videoB.play();
-    });
+function getRandomVideo(exclude = null) {
+    let available = videoSources.filter(v => v !== exclude);
+    return available[Math.floor(Math.random() * available.length)];
 }
 
-// Fonction appelée quand un joueur est ajouté
-document.getElementById('add-player').addEventListener('click', () => {
-    const container = document.getElementById('players-container');
-    const count = container.querySelectorAll('.player-entry').length;
+function startChallenge() {
+    // Supprimer les anciennes vidéos avant de commencer une nouvelle
+    cleanupVideos();
+
+    // Créer et ajouter le conteneur pour la première vidéo
+    firstVideo = getRandomVideo();
+    const singleContainer = document.createElement('div');
+    singleContainer.id = 'single-video';
+    singleContainer.classList.add('single-video');
+    singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+    document.body.appendChild(singleContainer);
+
+    let videoA = document.getElementById('videoA');
+    videoA.src = firstVideo;
+    videoA.volume = 0.2;
+    videoA.play();
+
+    videoA.onended = () => {
+        // Supprimer complètement le conteneur vidéo A
+        videoA.pause();
+        singleContainer.remove();  // Retirer le conteneur et la vidéo
+
+        // Créer et ajouter le conteneur pour la deuxième vidéo
+        secondVideo = getRandomVideo(firstVideo);
+        const secondContainer = document.createElement('div');
+        secondContainer.id = 'second-video';
+        secondContainer.classList.add('single-video');
+        secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+        document.body.appendChild(secondContainer);
+
+        let videoB = document.getElementById('videoB');
+        videoB.src = secondVideo;
+        videoB.volume = 0.2;
+        videoB.play();
+
+        videoB.onended = () => {
+            // Supprimer complètement le conteneur vidéo B
+            videoB.pause();
+            secondContainer.remove();  // Retirer le conteneur et la vidéo
+
+            // Montrer les petites vidéos
+            document.getElementById('dual-videos').classList.remove('hidden');
+            choiceA.src = firstVideo;
+            choiceB.src = secondVideo;
+            choiceA.play();
+            choiceB.play();
+        };
+    };
+}
+
+function cleanupVideos() {
+    // Vérifie si un conteneur vidéo existe déjà et le supprime
+    let oldSingleVideo = document.getElementById('single-video');
+    let oldSecondVideo = document.getElementById('second-video');
+    
+    if (oldSingleVideo) oldSingleVideo.remove();
+    if (oldSecondVideo) oldSecondVideo.remove();
+
+    // Supprime aussi les vidéos petites (si elles existent déjà)
+    let choiceA = document.getElementById('choiceA');
+    let choiceB = document.getElementById('choiceB');
+
+    if (choiceA) {
+        choiceA.pause();
+        choiceA.src = '';
+    }
+    if (choiceB) {
+        choiceB.pause();
+        choiceB.src = '';
+    }
+
+    // Masquer la section de choix des petites vidéos
+    document.getElementById('dual-videos').classList.add('hidden');
+}
+
+function cleanupChoices() {
+    // Arrêter les petites vidéos quand l'utilisateur fait un choix
+    cleanupVideos();
+
+    // Démarrer un nouveau challenge (vider les éléments et recharger)
+    startChallenge();
+}
+
+document.getElementById('start-button').addEventListener('click', () => {
+    console.log('Bouton Commencer cliqué');
+    document.getElementById('menu-container').classList.add('hidden');
+    startChallenge();
+});
+
+// Gestion des jokers input
+document.querySelectorAll('input[name="joker"]').forEach(radio => {
+    radio.addEventListener('change', function () {
+        document.getElementById('joker-count').disabled = (this.value !== 'custom');
+    });
+});
+
+const removeButton = document.getElementById('remove-player');
+const addButton = document.getElementById('add-player');
+const playersContainer = document.getElementById('players-container');
+
+function updatePlayerButtons() {
+    const playerCount = playersContainer.querySelectorAll('.player-entry').length;
+
+    // Si il y a un seul joueur, le bouton "Retirer un joueur" est désactivé
+    if (playerCount <= 1) {
+        removeButton.classList.add('disabled');
+    } else {
+        removeButton.classList.remove('disabled');
+    }
+
+    // Si il y a 9 joueurs, le bouton "Ajouter un joueur" est désactivé
+    if (playerCount >= 9) {
+        addButton.classList.add('disabled');
+    } else {
+        addButton.classList.remove('disabled');
+    }
+}
+
+// Ajouter un joueur
+addButton.addEventListener('click', () => {
+    const count = playersContainer.querySelectorAll('.player-entry').length;
     if (count < 9) {
         const div = document.createElement('div');
         div.className = 'player-entry';
         div.innerHTML = `Joueur ${count + 1} : <input type="text" placeholder="Joueur ${count + 1}">`;
-        container.appendChild(div);
-        displayVideosForPlayers(); // Mettre à jour l'affichage des vidéos après ajout
+        playersContainer.appendChild(div);
+        updatePlayerButtons(); // Mettre à jour les boutons
     }
 });
 
-    /*
-    // Ajouter joueur
-    document.getElementById('add-player').addEventListener('click', () => {
-        const container = document.getElementById('players-container');
-        const count = container.querySelectorAll('.player-entry').length;
-        if (count < 9) {
-            const div = document.createElement('div');
-            div.className = 'player-entry';
-            div.innerHTML = `Joueur ${count + 1} : <input type="text" placeholder="Joueur ${count + 1}">`;
-            container.appendChild(div);
+// Retirer un joueur
+removeButton.addEventListener('click', () => {
+    const players = playersContainer.querySelectorAll('.player-entry');
+    if (players.length > 1) {
+        playersContainer.removeChild(players[players.length - 1]);  // Retirer le dernier joueur
+        updatePlayerButtons(); // Mettre à jour les boutons
+    }
+});
+
+// Initialiser l'état des boutons
+updatePlayerButtons();
+
+// Affichage des vidéos et du cadre de chaque joueur
+function displayDualVideosWithFrames() {
+    const players = playersContainer.querySelectorAll('.player-entry');
+    let frameColor, playerName, frame;
+
+    // Créer des cadres pour chaque joueur
+    players.forEach((player, index) => {
+        playerName = player.querySelector('input').value || `Joueur ${index + 1}`;
+        frame = document.createElement('div');
+        frame.classList.add('video-frame');
+        frame.innerHTML = `<h4 style="color: black; font-weight: bold;">${playerName}</h4><div id="dual-videos" class="hidden"><video id="choiceA" width="360" height="202" controls></video><video id="choiceB" width="360" height="202" controls></video></div>`;
+        
+        // Définir la couleur du cadre en fonction du numéro du joueur
+        if ((index + 1) % 2 === 0) {  // Joueurs pairs (2, 4, 6, 8)
+            frame.style.backgroundColor = 'rgba(138, 106, 172, 0.5)';
+            frame.style.border = '2px solid #8a6ace';
+        } else {  // Joueurs impairs (1, 3, 5, 7, 9)
+            frame.style.backgroundColor = '#00c5d5';
+            frame.style.border = '2px solid #00c5d5';
         }
+
+        frame.style.borderRadius = '5px';
+        document.body.appendChild(frame);
     });
-    */
+}
+
 </script>
 
 </body>
