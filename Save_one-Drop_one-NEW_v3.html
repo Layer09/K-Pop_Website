@@ -185,18 +185,6 @@
         document.getElementById('dual-videos').classList.add('hidden');
     }
 
-    /*
-    choiceA.onclick = () => {
-        alert('Tu as choisi la première vidéo !');
-        cleanupChoices();
-    };
-
-    choiceB.onclick = () => {
-        alert('Tu as choisi la deuxième vidéo !');
-        cleanupChoices();
-    };
-    */
-
     function cleanupChoices() {
         // Arrêter les petites vidéos quand l'utilisateur fait un choix
         cleanupVideos();
@@ -263,6 +251,79 @@
 
 // Initialiser l'état des boutons
 updatePlayerButtons();
+
+// Modification pour ajouter des encadrés vidéo dynamiques avec couleurs alternées
+function displayVideosForPlayers() {
+    let players = document.querySelectorAll('.player-entry input');
+    let dualVideosContainer = document.getElementById('dual-videos');
+    let videoIndex = 0;  // Indice pour les vidéos affichées
+
+    // Réinitialiser l'affichage des vidéos avant d'ajouter les nouvelles
+    dualVideosContainer.innerHTML = '';
+
+    players.forEach((player, index) => {
+        // Créer un nouvel encadré vidéo pour chaque joueur
+        let frame = document.createElement('div');
+        frame.classList.add('video-frame');
+        frame.id = `player${index + 1}-frame`;
+
+        // Déterminer la couleur en fonction du numéro du joueur (pair ou impair)
+        if ((index + 1) % 2 === 0) {
+            frame.style.backgroundColor = 'rgba(138, 106, 206, 0.5)';
+            frame.style.borderColor = '#8a6ace';
+        } else {
+            frame.style.backgroundColor = 'rgba(0, 197, 213, 0.5)';
+            frame.style.borderColor = '#00c5d5';
+        }
+
+        // Créer le nom du joueur
+        let playerName = document.createElement('h4');
+        playerName.classList.add('player-name');
+        playerName.textContent = player.value || `Joueur ${index + 1}`;  // Si le champ est vide, afficher "Joueur X"
+        frame.appendChild(playerName);
+
+        // Créer les vidéos pour chaque joueur
+        let videoA = document.createElement('video');
+        videoA.width = 320;
+        videoA.height = 180;
+        videoA.muted = true;
+        videoA.autoplay = true;
+        videoA.loop = true;
+
+        let videoB = document.createElement('video');
+        videoB.width = 320;
+        videoB.height = 180;
+        videoB.muted = true;
+        videoB.autoplay = true;
+        videoB.loop = true;
+
+        frame.appendChild(videoA);
+        frame.appendChild(videoB);
+
+        // Ajouter le conteneur du joueur au conteneur général des vidéos
+        dualVideosContainer.appendChild(frame);
+
+        // Assigner les vidéos
+        videoA.src = videoSources[videoIndex++];
+        videoB.src = videoSources[videoIndex++];
+
+        videoA.play();
+        videoB.play();
+    });
+}
+
+// Fonction appelée quand un joueur est ajouté
+document.getElementById('add-player').addEventListener('click', () => {
+    const container = document.getElementById('players-container');
+    const count = container.querySelectorAll('.player-entry').length;
+    if (count < 9) {
+        const div = document.createElement('div');
+        div.className = 'player-entry';
+        div.innerHTML = `Joueur ${count + 1} : <input type="text" placeholder="Joueur ${count + 1}">`;
+        container.appendChild(div);
+        displayVideosForPlayers(); // Mettre à jour l'affichage des vidéos après ajout
+    }
+});
 
     /*
     // Ajouter joueur
