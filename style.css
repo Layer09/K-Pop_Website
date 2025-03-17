@@ -262,3 +262,75 @@ nav ul li a img:hover {
     opacity: 0.5;
     pointer-events: none; /* Empêche les clics */
 }
+
+
+
+/* Style général pour le conteneur des vidéos */
+.video-frame {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 350px;
+    height: 300px;
+}
+
+/* Style pour les vidéos à l'intérieur du cadre */
+video {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+/* Style pour le nom du joueur */
+.player-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+    color: black;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+/* Styles spécifiques selon le numéro du joueur */
+#player1-frame {
+    background-color: rgba(0, 197, 213, 0.5); /* Player 1: couleur #00c5d5 */
+    border: 2px solid #00c5d5;
+}
+#player2-frame {
+    background-color: rgba(138, 106, 206, 0.5); /* Player 2: couleur #8a6ace */
+    border: 2px solid #8a6ace;
+}
+#player3-frame {
+    background-color: rgba(0, 197, 213, 0.5); /* Player 3: couleur #00c5d5 */
+    border: 2px solid #00c5d5;
+}
+#player4-frame {
+    background-color: rgba(138, 106, 206, 0.5); /* Player 4: couleur #8a6ace */
+    border: 2px solid #8a6ace;
+}
+#player5-frame {
+    background-color: rgba(0, 197, 213, 0.5); /* Player 3: couleur #00c5d5 */
+    border: 2px solid #00c5d5;
+}
+#player6-frame {
+    background-color: rgba(138, 106, 206, 0.5); /* Player 4: couleur #8a6ace */
+    border: 2px solid #8a6ace;
+}
+#player7-frame {
+    background-color: rgba(0, 197, 213, 0.5); /* Player 3: couleur #00c5d5 */
+    border: 2px solid #00c5d5;
+}
+#player8-frame {
+    background-color: rgba(138, 106, 206, 0.5); /* Player 4: couleur #8a6ace */
+    border: 2px solid #8a6ace;
+}
+#player9-frame {
+    background-color: rgba(0, 197, 213, 0.5); /* Player 3: couleur #00c5d5 */
+    border: 2px solid #00c5d5;
+}
+
+
