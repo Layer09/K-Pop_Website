@@ -78,7 +78,7 @@ nav ul li a img:hover {
 }
 
 /* Nav version mobile */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1050px) {
         nav ul {
             flex-direction: column;
             align-items: flex-start;
