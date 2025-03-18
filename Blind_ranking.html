@@ -20,7 +20,7 @@
         }
 
         video {
-            width: 90%;
+            width: 80%;
             height: auto;
         }
 
@@ -169,6 +169,7 @@
             const video = getRandomVideo();
             if (video) {
                 currentVideo.src = videosDir + video;
+                currentVideo.volume = 0.1;  // Réduire le volume à 10%
                 currentVideo.load();
                 currentVideo.play();
                 currentVideo.dataset.video = video;
@@ -183,7 +184,7 @@
                 button.style.background = `url(${videosDir + video})`;
                 button.style.backgroundSize = 'cover';
                 button.style.color = 'transparent';
-
+        
                 if (Object.keys(assignedVideos).length === 6) {
                     validateBtn.classList.add('enabled');
                     validateBtn.disabled = false;
