@@ -77,6 +77,33 @@ nav ul li a img:hover {
     transform: scale(1.1);
 }
 
+/* Nav version mobile */
+    @media screen and (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a img {
+            display: none; /* On masque les images */
+        }
+
+        nav ul li a {
+            font-size: 18px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        nav ul li a::after {
+            content: attr(data-label);
+        }
+    }
+
 
 /* Style de l'annexe */
 .annexe {
