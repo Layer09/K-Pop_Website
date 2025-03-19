@@ -18,7 +18,7 @@
             color : white;
         }
 
-        .challenge-section {
+        #challenge-section {
             height: 700px;
             width: 100%;
             display: flex;
@@ -71,7 +71,7 @@
             border: 1px solid #ccc;
         }
 
-        .youtube-section {
+        #youtube-section {
             height: 700px;
             width: 100%;
             display: flex;
@@ -175,7 +175,7 @@
         </li>
     </ul>
 </nav>
-<section class="challenge-section">
+<section id="challenge-section">
     <!-- Mode vidéo 1 -->
     <div id="single-video" class="single-video">
         <video width="1440" height="810" id="videoA" controls></video>
@@ -196,7 +196,7 @@
     <!-- <br><br><br><br><br><br><br><br><br><br> -->
     <hr>
 
-  <section class="youtube-section">
+  <section id="youtube-section">
     <h3>Tu préfères regarder une vidéo Youtube ?</h3><br>
 
     <div class="tabs">
@@ -721,7 +721,7 @@
         singleContainer.id = 'single-video';
         singleContainer.classList.add('single-video');
         singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-        document.getElementByClass('challenge').appendChild(singleContainer);
+        document.getElementById('challenge').appendChild(singleContainer);
 
         let videoA = document.getElementById('videoA');
         videoA.src = firstVideo;
@@ -739,7 +739,7 @@
             secondContainer.id = 'second-video';
             secondContainer.classList.add('single-video');
             secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-            document.getElementByClass('challenge').appendChild(secondContainer);
+            document.getElementById('challenge').appendChild(secondContainer);
 
             let videoB = document.getElementById('videoB');
             videoB.src = secondVideo;
