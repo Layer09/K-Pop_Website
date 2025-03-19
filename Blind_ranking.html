@@ -32,7 +32,7 @@
             flex-wrap: wrap;
         }
 
-        .btnB {
+        .btn1, btn3, btn5 {
             width: 30%;
             aspect-ratio: 16 / 9;
             background-color: black;
@@ -45,7 +45,7 @@
             background-position: center;
         }
 
-          .btnV {
+          .btn2, btn4, btn6 {
             width: 30%;
             aspect-ratio: 16 / 9;
             background-color: black;
@@ -120,13 +120,13 @@
     </div>
 
     <div class="buttons">
-        <button class="btnB" id="btn1">1</button>
-        <button class="btnV" id="btn2">2</button>
-        <button class="btnB" id="btn3">3</button>
+        <button class="btn" id="btn1">1</button>
+        <button class="btn" id="btn2">2</button>
+        <button class="btn" id="btn3">3</button>
 
-        <button class="btnV" id="btn4">4</button>
-        <button class="btnB" id="btn5">5</button>
-        <button class="btnV" id="btn6">6</button>
+        <button class="btn" id="btn4">4</button>
+        <button class="btn" id="btn5">5</button>
+        <button class="btn" id="btn6">6</button>
     </div>
 
     <button id="validate">Valider</button>
@@ -153,7 +153,7 @@
         if (usedVideos.length >= videos.length) usedVideos = []; // reset si plus de vidéo dispo
         const nextVideo = getRandomVideo();
         videoElement.src = videosDir + nextVideo;
-        videoElement.volume = 1.0; // volume normal pour la vidéo centrale
+        videoElement.volume = 0.1; // volume normal pour la vidéo centrale
         videoElement.muted = false; // désactive mute pour la vidéo centrale
         videoElement.play();
         videoElement.dataset.video = nextVideo;
