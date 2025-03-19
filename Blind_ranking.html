@@ -65,7 +65,7 @@
 
         .btn {
             position: relative;
-            font-size: 40px;
+            font-size: 60px;
             font-weight: bold;
             color: white;
             display: flex;
@@ -80,7 +80,7 @@
             position: relative;
             z-index: 2;
             font-weight: bold;
-            font-size: 70%; /* 70% du bouton via flex */
+            font-size: 200%;
             line-height: 1;
         }
         
@@ -196,7 +196,7 @@
             buttons.forEach(btn => {
                 btn.disabled = false;
                 btn.style.background = 'black';
-                btn.textContent = btn.id.replace('btn', '');
+                /* btn.textContent = btn.id.replace('btn', ''); */
                 btn.style.color = 'white';
             });
             validateBtn.classList.remove('enabled');
