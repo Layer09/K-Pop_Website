@@ -156,6 +156,8 @@ nav ul li a img:hover {
 }
 
 .version-content {
+    width: 100%;
+    height: auto;
     display: none;
     margin-top: 20px;
 }
