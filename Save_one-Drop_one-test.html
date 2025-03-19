@@ -16,6 +16,7 @@
     <style>
         h3 {
             color : white;
+            margin-bottom: 20px;
         }
 
         #challenge-section {
@@ -29,7 +30,7 @@
 
         .single-video {
             position: absolute;
-            top: 855px;
+            top: 880px;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1;
@@ -77,6 +78,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         .youtube-section iframe {
@@ -90,12 +92,22 @@
         #version1 {
             display: block;
         }
+        
+        .version-content {
+            display: none; /* Par défaut caché */
+            margin-top: 20px;
+        }
+        
+        .version-content.active {
+            display: block; /* Affiche la version active */
+        }
 
         /* Onglets */
         .tabs {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            margin-bottom: 20px;
             margin-top: 20px;
         }
         
