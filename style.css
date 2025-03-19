@@ -191,7 +191,7 @@ nav ul li a img:hover {
 
 /* Container des grandes vidéos */
 .single-video, #second-video {
-    margin-top: -40%;
+    margin-top: -80%;
     display: flex;
     justify-content: center;
     align-items: center;
