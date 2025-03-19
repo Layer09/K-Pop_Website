@@ -706,134 +706,136 @@
     let firstVideo = '';
     let secondVideo = '';
 
-    function getRandomVideo(exclude = null) {
-        let available = videoSources.filter(v => v !== exclude);
-        return available[Math.floor(Math.random() * available.length)];
-    }
-
-    function startChallenge() {
-        // Supprimer les anciennes vidéos avant de commencer une nouvelle
-        cleanupVideos();
-
-        // Créer et ajouter le conteneur pour la première vidéo
-        firstVideo = getRandomVideo();
-        const singleContainer = document.createElement('div');
-        singleContainer.id = 'single-video';
-        singleContainer.classList.add('single-video');
-        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-        document.getElementById('challenge').appendChild(singleContainer);
-
-        let videoA = document.getElementById('videoA');
-        videoA.src = firstVideo;
-        videoA.volume = 0.1;
-        videoA.play();
-
-        videoA.onended = () => {
-            // Supprimer complètement le conteneur vidéo A
-            videoA.pause();
-            singleContainer.remove();  // Retirer le conteneur et la vidéo
-
-            // Créer et ajouter le conteneur pour la deuxième vidéo
-            secondVideo = getRandomVideo(firstVideo);
-            const secondContainer = document.createElement('div');
-            secondContainer.id = 'second-video';
-            secondContainer.classList.add('single-video');
-            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-            document.getElementById('challenge').appendChild(secondContainer);
-
-            let videoB = document.getElementById('videoB');
-            videoB.src = secondVideo;
-            videoB.volume = 0.1;
-            videoB.play();
-
-            videoB.onended = () => {
-                // Supprimer complètement le conteneur vidéo B
-                videoB.pause();
-                secondContainer.remove();  // Retirer le conteneur et la vidéo
-
-                // Montrer les petites vidéos
-                document.getElementById('dual-videos').classList.remove('hidden');
-                choiceA.src = firstVideo;
-                choiceB.src = secondVideo;
-                choiceA.play();
-                choiceB.play();
+    document.addEventListener("DOMContentLoaded", () => {
+    
+        function getRandomVideo(exclude = null) {
+            let available = videoSources.filter(v => v !== exclude);
+            return available[Math.floor(Math.random() * available.length)];
+        }
+    
+        function startChallenge() {
+            // Supprimer les anciennes vidéos avant de commencer une nouvelle
+            cleanupVideos();
+    
+            // Créer et ajouter le conteneur pour la première vidéo
+            firstVideo = getRandomVideo();
+            const singleContainer = document.createElement('div');
+            singleContainer.id = 'single-video';
+            singleContainer.classList.add('single-video');
+            singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+            document.getElementById('challenge').appendChild(singleContainer);
+    
+            let videoA = document.getElementById('videoA');
+            videoA.src = firstVideo;
+            videoA.volume = 0.1;
+            videoA.play();
+    
+            videoA.onended = () => {
+                // Supprimer complètement le conteneur vidéo A
+                videoA.pause();
+                singleContainer.remove();  // Retirer le conteneur et la vidéo
+    
+                // Créer et ajouter le conteneur pour la deuxième vidéo
+                secondVideo = getRandomVideo(firstVideo);
+                const secondContainer = document.createElement('div');
+                secondContainer.id = 'second-video';
+                secondContainer.classList.add('single-video');
+                secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+                document.getElementById('challenge').appendChild(secondContainer);
+    
+                let videoB = document.getElementById('videoB');
+                videoB.src = secondVideo;
+                videoB.volume = 0.1;
+                videoB.play();
+    
+                videoB.onended = () => {
+                    // Supprimer complètement le conteneur vidéo B
+                    videoB.pause();
+                    secondContainer.remove();  // Retirer le conteneur et la vidéo
+    
+                    // Montrer les petites vidéos
+                    document.getElementById('dual-videos').classList.remove('hidden');
+                    choiceA.src = firstVideo;
+                    choiceB.src = secondVideo;
+                    choiceA.play();
+                    choiceB.play();
+                };
             };
+        }
+    
+        function cleanupVideos() {
+            // Vérifie si un conteneur vidéo existe déjà et le supprime
+            let oldSingleVideo = document.getElementById('single-video');
+            let oldSecondVideo = document.getElementById('second-video');
+            
+            if (oldSingleVideo) oldSingleVideo.remove();
+            if (oldSecondVideo) oldSecondVideo.remove();
+    
+            // Supprime aussi les vidéos petites (si elles existent déjà)
+            let choiceA = document.getElementById('choiceA');
+            let choiceB = document.getElementById('choiceB');
+    
+            if (choiceA) {
+                choiceA.pause();
+                choiceA.src = '';
+            }
+            if (choiceB) {
+                choiceB.pause();
+                choiceB.src = '';
+            }
+    
+            // Masquer la section de choix des petites vidéos
+            document.getElementById('dual-videos').classList.add('hidden');
+        }
+            
+        choiceA.onclick = () => {
+            /* alert('Tu as choisi la première vidéo !'); */
+            cleanupChoices();
         };
-    }
-
-    function cleanupVideos() {
-        // Vérifie si un conteneur vidéo existe déjà et le supprime
-        let oldSingleVideo = document.getElementById('single-video');
-        let oldSecondVideo = document.getElementById('second-video');
-        
-        if (oldSingleVideo) oldSingleVideo.remove();
-        if (oldSecondVideo) oldSecondVideo.remove();
-
-        // Supprime aussi les vidéos petites (si elles existent déjà)
-        let choiceA = document.getElementById('choiceA');
-        let choiceB = document.getElementById('choiceB');
-
-        if (choiceA) {
-            choiceA.pause();
-            choiceA.src = '';
+    
+        choiceB.onclick = () => {
+            /* alert('Tu as choisi la deuxième vidéo !'); */
+            cleanupChoices();
+        };
+    
+        function cleanupChoices() {
+            // Arrêter les petites vidéos quand l'utilisateur fait un choix
+            cleanupVideos();
+    
+            // Démarrer un nouveau challenge (vider les éléments et recharger)
+            startChallenge();
         }
-        if (choiceB) {
-            choiceB.pause();
-            choiceB.src = '';
-        }
-
-        // Masquer la section de choix des petites vidéos
-        document.getElementById('dual-videos').classList.add('hidden');
-    }
+    
+        let hoverTimeoutA;
+        let hoverTimeoutB;
         
-    choiceA.onclick = () => {
-        /* alert('Tu as choisi la première vidéo !'); */
-        cleanupChoices();
-    };
-
-    choiceB.onclick = () => {
-        /* alert('Tu as choisi la deuxième vidéo !'); */
-        cleanupChoices();
-    };
-
-    function cleanupChoices() {
-        // Arrêter les petites vidéos quand l'utilisateur fait un choix
-        cleanupVideos();
-
-        // Démarrer un nouveau challenge (vider les éléments et recharger)
-        startChallenge();
+        choiceA.addEventListener('mouseenter', () => {
+            hoverTimeoutA = setTimeout(() => {
+                choiceA.muted = false;
+                choiceA.volume = 0.1;
+            }, 1000);
+        });
+        
+        choiceA.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeoutA);
+            choiceA.muted = true;
+        });
+        
+        choiceB.addEventListener('mouseenter', () => {
+            hoverTimeoutB = setTimeout(() => {
+                choiceB.muted = false;
+                choiceB.volume = 0.1;
+            }, 1000);
+        });
+        
+        choiceB.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeoutB);
+            choiceB.muted = true;
+        });
+    
+    
+        window.onload = startChallenge;
     }
-
-    let hoverTimeoutA;
-    let hoverTimeoutB;
-    
-    choiceA.addEventListener('mouseenter', () => {
-        hoverTimeoutA = setTimeout(() => {
-            choiceA.muted = false;
-            choiceA.volume = 0.1;
-        }, 1000);
-    });
-    
-    choiceA.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeoutA);
-        choiceA.muted = true;
-    });
-    
-    choiceB.addEventListener('mouseenter', () => {
-        hoverTimeoutB = setTimeout(() => {
-            choiceB.muted = false;
-            choiceB.volume = 0.1;
-        }, 1000);
-    });
-    
-    choiceB.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeoutB);
-        choiceB.muted = true;
-    });
-
-
-    window.onload = startChallenge;
-
 
 
     function showVersion(version) {
