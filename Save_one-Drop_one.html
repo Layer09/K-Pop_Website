@@ -9,35 +9,125 @@
 </head>
 <body onload="showVersion(1)">
     <header>
-        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
+        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1><br>
         <h2 class="subtitle">Save one Drop one</h2>
     </header>
     
     <style>
         h3 {
             color : white;
+            margin-bottom: 20px;
+            width: 100%;
         }
 
-        #video-container-YT {
-            padding-bottom: 5%;
+        #texte {
+            justify-content: center;  
+            align-items: center;
+        }
+
+        #challenge-section {
+            height: 700px;
             width: 100%;
-            height : auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .single-video {
+            position: absolute;
+            top: 880px;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 100%
+        }
+        
+        .single-video video {
+            width: 90%;
+            height: auto; /* Maintient le ratio 16:9 automatiquement */
+            max-width: 90vw; /* Pour éviter de dépasser l'écran en cas de petits écrans */
+            max-height: 90vh; /* Pour que la vidéo ne sorte pas verticalement */
+            border-radius: 8px;
+        }
+
+        #dual-videos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        #dual-videos video {
+            width: 30%;
+            height: auto;
+            cursor: pointer;
+        }
+
+
+        #dual-videos.hidden {
+            display: none;
         }
 
         hr {
+            width: 90%;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+        }
+
+        #youtube-section {
+            height: 700px;
             width: 100%;
-            margin-top: 100%
-            color: white;
+            justify-content: center;
+            display: block;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .youtube-section iframe {
+            width: 90%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            border: none;
+            border-radius: 8px;
+        }
+
+        #video-container-YT {
+            height: 100%;
+            width: 100%;
         }
 
         #version1 {
             display: block;
         }
+        
+        .version-content {
+            display: none; /* Par défaut caché */
+            margin-top: 20px;
+            width: 90%;
+            height: 90%;
+        }
+
+        iframe {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .version-content.active {
+            display: block; /* Affiche la version active */
+            width: 90%;
+        }
 
         /* Onglets */
         .tabs {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+            margin-bottom: 20px;
             margin-top: 20px;
         }
         
@@ -53,38 +143,7 @@
         .tab:hover {
             background-color: #888;
         }
-
-        /* Contenu des vidéos */
-        .video-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        .version-content {
-            width: 100%;
-            height: auto;
-            display: none;
-            margin-top: 20px;
-        }
-        
-        #video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            margin-top: 0;
-            position: absolute;
-            padding-bottom: 10px;
-        }
-        
-        #video-container-YT iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
+      
         /* Séparateur bouton */
         .tab-separateur {
             background-color: #fff;
@@ -95,44 +154,29 @@
         }
         
         
-        
-        /* Container des grandes vidéos */
-        .single-video, #second-video {
-            margin-top: -75%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px; /* Espacement entre les vidéos */
-        }
-        
-        /* Container des petites vidéos */
-        #dual-videos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5%; /* Espacement de 10% entre les petites vidéos */
-            width: 100%;
-            padding-bottom: 30%;
-        }
-        
-        /* Pour les petites vidéos */
-        #choiceA, #choiceB {
-            width: 30%;
-            height: auto;
-            cursor: pointer;
-        }
-        
-        /* Pour les grandes vidéos */
-        #videoA, #videoB {
-            width: 75%;
-            height: auto;
-        }
-        
-        #video-container,
-        #dual-videos,
-        #second-video,
-        .single-video {
-            z-index: 1; /* Place-les derrière */
+      /* Responsive mobile */
+        @media (max-width: 1100px) {
+            .challenge-section {
+                height: auto;
+                padding: 20px 0;
+            }
+
+            .single-video video {
+                width: 95%;
+            }
+
+            #dual-videos video {
+                width: 45%;
+            }
+
+            .youtube-section {
+                height: auto;
+                padding-bottom: 20px;
+            }
+
+            .youtube-section iframe {
+                width: 95%;
+            }
         }
     </style>
     <nav>
@@ -164,7 +208,7 @@
         </li>
     </ul>
 </nav>
-
+<section id="challenge-section">
     <!-- Mode vidéo 1 -->
     <div id="single-video" class="single-video">
         <video width="1440" height="810" id="videoA" controls></video>
@@ -180,11 +224,15 @@
         <video id="choiceA" width="320" height="180" muted autoplay loop></video>
         <video id="choiceB" width="320" height="180" muted autoplay loop></video>
     </div>
-
-    <br><br><br><br><br><br><br><br><br><br>
+</section>
+  
+    <!-- <br><br><br><br><br><br><br><br><br><br> -->
     <hr>
 
-    <h3>Tu préfères regarder une vidéo Youtube ?</h3>
+  <section id="youtube-section">
+    <div id="texte">
+      <h3>Tu préfères regarder une vidéo Youtube ?</h3>
+    </div>
 
     <div class="tabs">
         <button class="tab" onclick="showVersion(1)">Vidéo 1</button>
@@ -197,7 +245,7 @@
         <button class="tab" onclick="showVersion(7)">Vidéo 7</button>
         <button class="tab" onclick="showVersion(8)">Vidéo 8</button>
         <button class="tab" onclick="showVersion(9)">Vidéo 9</button>
-    </div>
+    </div><br>
 
     <div id="version1" class="version-content">
         <div id="video-container-YT">
@@ -244,6 +292,7 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/2kgHNN8FY7g?si=QElbxMBZxBAAY3ZT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
+  </section>
 
     <script>
     const videoSources = [
@@ -692,134 +741,136 @@
     let firstVideo = '';
     let secondVideo = '';
 
-    function getRandomVideo(exclude = null) {
-        let available = videoSources.filter(v => v !== exclude);
-        return available[Math.floor(Math.random() * available.length)];
-    }
-
-    function startChallenge() {
-        // Supprimer les anciennes vidéos avant de commencer une nouvelle
-        cleanupVideos();
-
-        // Créer et ajouter le conteneur pour la première vidéo
-        firstVideo = getRandomVideo();
-        const singleContainer = document.createElement('div');
-        singleContainer.id = 'single-video';
-        singleContainer.classList.add('single-video');
-        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-        document.body.appendChild(singleContainer);
-
-        let videoA = document.getElementById('videoA');
-        videoA.src = firstVideo;
-        videoA.volume = 0.1;
-        videoA.play();
-
-        videoA.onended = () => {
-            // Supprimer complètement le conteneur vidéo A
-            videoA.pause();
-            singleContainer.remove();  // Retirer le conteneur et la vidéo
-
-            // Créer et ajouter le conteneur pour la deuxième vidéo
-            secondVideo = getRandomVideo(firstVideo);
-            const secondContainer = document.createElement('div');
-            secondContainer.id = 'second-video';
-            secondContainer.classList.add('single-video');
-            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-            document.body.appendChild(secondContainer);
-
-            let videoB = document.getElementById('videoB');
-            videoB.src = secondVideo;
-            videoB.volume = 0.1;
-            videoB.play();
-
-            videoB.onended = () => {
-                // Supprimer complètement le conteneur vidéo B
-                videoB.pause();
-                secondContainer.remove();  // Retirer le conteneur et la vidéo
-
-                // Montrer les petites vidéos
-                document.getElementById('dual-videos').classList.remove('hidden');
-                choiceA.src = firstVideo;
-                choiceB.src = secondVideo;
-                choiceA.play();
-                choiceB.play();
+    document.addEventListener("DOMContentLoaded", () => {
+    
+        function getRandomVideo(exclude = null) {
+            let available = videoSources.filter(v => v !== exclude);
+            return available[Math.floor(Math.random() * available.length)];
+        }
+    
+        function startChallenge() {
+            // Supprimer les anciennes vidéos avant de commencer une nouvelle
+            cleanupVideos();
+    
+            // Créer et ajouter le conteneur pour la première vidéo
+            firstVideo = getRandomVideo();
+            const singleContainer = document.createElement('div');
+            singleContainer.id = 'single-video';
+            singleContainer.classList.add('single-video');
+            singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+            document.body.appendChild(singleContainer);
+    
+            let videoA = document.getElementById('videoA');
+            videoA.src = firstVideo;
+            videoA.volume = 0.1;
+            videoA.play();
+    
+            videoA.onended = () => {
+                // Supprimer complètement le conteneur vidéo A
+                videoA.pause();
+                singleContainer.remove();  // Retirer le conteneur et la vidéo
+    
+                // Créer et ajouter le conteneur pour la deuxième vidéo
+                secondVideo = getRandomVideo(firstVideo);
+                const secondContainer = document.createElement('div');
+                secondContainer.id = 'second-video';
+                secondContainer.classList.add('single-video');
+                secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+                document.body.appendChild(secondContainer);
+    
+                let videoB = document.getElementById('videoB');
+                videoB.src = secondVideo;
+                videoB.volume = 0.1;
+                videoB.play();
+    
+                videoB.onended = () => {
+                    // Supprimer complètement le conteneur vidéo B
+                    videoB.pause();
+                    secondContainer.remove();  // Retirer le conteneur et la vidéo
+    
+                    // Montrer les petites vidéos
+                    document.getElementById('dual-videos').classList.remove('hidden');
+                    choiceA.src = firstVideo;
+                    choiceB.src = secondVideo;
+                    choiceA.play();
+                    choiceB.play();
+                };
             };
+        }
+    
+        function cleanupVideos() {
+            // Vérifie si un conteneur vidéo existe déjà et le supprime
+            let oldSingleVideo = document.getElementById('single-video');
+            let oldSecondVideo = document.getElementById('second-video');
+            
+            if (oldSingleVideo) oldSingleVideo.remove();
+            if (oldSecondVideo) oldSecondVideo.remove();
+    
+            // Supprime aussi les vidéos petites (si elles existent déjà)
+            let choiceA = document.getElementById('choiceA');
+            let choiceB = document.getElementById('choiceB');
+    
+            if (choiceA) {
+                choiceA.pause();
+                choiceA.src = '';
+            }
+            if (choiceB) {
+                choiceB.pause();
+                choiceB.src = '';
+            }
+    
+            // Masquer la section de choix des petites vidéos
+            document.getElementById('dual-videos').classList.add('hidden');
+        }
+            
+        choiceA.onclick = () => {
+            /* alert('Tu as choisi la première vidéo !'); */
+            cleanupChoices();
         };
-    }
-
-    function cleanupVideos() {
-        // Vérifie si un conteneur vidéo existe déjà et le supprime
-        let oldSingleVideo = document.getElementById('single-video');
-        let oldSecondVideo = document.getElementById('second-video');
-        
-        if (oldSingleVideo) oldSingleVideo.remove();
-        if (oldSecondVideo) oldSecondVideo.remove();
-
-        // Supprime aussi les vidéos petites (si elles existent déjà)
-        let choiceA = document.getElementById('choiceA');
-        let choiceB = document.getElementById('choiceB');
-
-        if (choiceA) {
-            choiceA.pause();
-            choiceA.src = '';
+    
+        choiceB.onclick = () => {
+            /* alert('Tu as choisi la deuxième vidéo !'); */
+            cleanupChoices();
+        };
+    
+        function cleanupChoices() {
+            // Arrêter les petites vidéos quand l'utilisateur fait un choix
+            cleanupVideos();
+    
+            // Démarrer un nouveau challenge (vider les éléments et recharger)
+            startChallenge();
         }
-        if (choiceB) {
-            choiceB.pause();
-            choiceB.src = '';
-        }
-
-        // Masquer la section de choix des petites vidéos
-        document.getElementById('dual-videos').classList.add('hidden');
-    }
+    
+        let hoverTimeoutA;
+        let hoverTimeoutB;
         
-    choiceA.onclick = () => {
-        /* alert('Tu as choisi la première vidéo !'); */
-        cleanupChoices();
-    };
-
-    choiceB.onclick = () => {
-        /* alert('Tu as choisi la deuxième vidéo !'); */
-        cleanupChoices();
-    };
-
-    function cleanupChoices() {
-        // Arrêter les petites vidéos quand l'utilisateur fait un choix
-        cleanupVideos();
-
-        // Démarrer un nouveau challenge (vider les éléments et recharger)
-        startChallenge();
-    }
-
-    let hoverTimeoutA;
-    let hoverTimeoutB;
+        choiceA.addEventListener('mouseenter', () => {
+            hoverTimeoutA = setTimeout(() => {
+                choiceA.muted = false;
+                choiceA.volume = 0.1;
+            }, 1000);
+        });
+        
+        choiceA.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeoutA);
+            choiceA.muted = true;
+        });
+        
+        choiceB.addEventListener('mouseenter', () => {
+            hoverTimeoutB = setTimeout(() => {
+                choiceB.muted = false;
+                choiceB.volume = 0.1;
+            }, 1000);
+        });
+        
+        choiceB.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeoutB);
+            choiceB.muted = true;
+        });
     
-    choiceA.addEventListener('mouseenter', () => {
-        hoverTimeoutA = setTimeout(() => {
-            choiceA.muted = false;
-            choiceA.volume = 0.1;
-        }, 1000);
-    });
     
-    choiceA.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeoutA);
-        choiceA.muted = true;
+        window.onload = startChallenge;
     });
-    
-    choiceB.addEventListener('mouseenter', () => {
-        hoverTimeoutB = setTimeout(() => {
-            choiceB.muted = false;
-            choiceB.volume = 0.1;
-        }, 1000);
-    });
-    
-    choiceB.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeoutB);
-        choiceB.muted = true;
-    });
-
-
-    window.onload = startChallenge;
-
 
 
     function showVersion(version) {
