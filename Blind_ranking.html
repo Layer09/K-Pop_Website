@@ -63,6 +63,37 @@
             color: transparent;
         }
 
+        .btn {
+            position: relative;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: attr(data-num); /* injecte le numéro via data-num */
+            position: absolute;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            z-index: 2;
+        }
+        
+        .btn video.bg-preview {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.7); /* léger assombrissement si besoin */
+            pointer-events: none;
+        }
+
         #validate {
             margin-top: 20px;
             padding: 10px 20px;
@@ -177,26 +208,37 @@
         }
         
         buttons.forEach(button => {
+            button.dataset.num = button.id.replace('btn', '');
+        
             button.addEventListener('click', () => {
                 const video = currentVideo.dataset.video;
                 assignedVideos[button.id] = video;
                 button.disabled = true;
-                button.style.background = `url(${videosDir + video})`;
-                button.style.backgroundSize = 'cover';
-                button.style.color = 'transparent';
+        
+                // Supprimer ancienne vidéo s’il y en a une
+                const oldVid = button.querySelector('video.bg-preview');
+                if (oldVid) oldVid.remove();
+        
+                // Ajouter une vidéo muette en fond du bouton
+                const bgVideo = document.createElement('video');
+                bgVideo.src = videosDir + video;
+                bgVideo.autoplay = true;
+                bgVideo.loop = true;
+                bgVideo.muted = true;
+                bgVideo.playsInline = true;
+                bgVideo.classList.add('bg-preview');
+                button.appendChild(bgVideo);
         
                 if (Object.keys(assignedVideos).length === 6) {
-                    // Tous les boutons sont remplis, pas de nouvelle vidéo
                     validateBtn.classList.add('enabled');
                     validateBtn.disabled = false;
                     validateBtn.style.cursor = 'pointer';
-                    currentVideo.src = ''; // optionnel : vider le lecteur
-                    currentVideo.load();
                 } else {
                     loadNextVideo();
                 }
             });
         });
+
         
         validateBtn.addEventListener('click', () => {
             if (!validateBtn.classList.contains('enabled')) return;
