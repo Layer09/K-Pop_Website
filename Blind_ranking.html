@@ -168,7 +168,7 @@
         function loadNextVideo() {
             const video = getRandomVideo();
             if (video) {
-                videoElement.volume = 0.1; // volume normal pour la vidéo centrale
+                currentVideo.volume = 0.1; // volume normal pour la vidéo centrale
                 currentVideo.src = videosDir + video;
                 currentVideo.load();
                 currentVideo.play();
