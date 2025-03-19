@@ -60,9 +60,9 @@
 
         .btn:disabled {
             cursor: not-allowed;
-            color: transparent;
+            opacity: 0.5;
         }
-
+    
         .btn {
             position: relative;
             font-size: 60px;
@@ -103,8 +103,9 @@
             pointer-events: none;
         }
 
-        #validate {
+            #validate {
             margin-top: 20px;
+            margin-bottom: 20px;
             padding: 10px 20px;
             font-size: 18px;
             background-color: black;
@@ -112,12 +113,13 @@
             border: 2px solid white;
             cursor: not-allowed;
         }
-
+        
         #validate.enabled {
             cursor: pointer;
             background-color: white;
             color: black;
         }
+
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -216,6 +218,7 @@
             }
         }
         
+        // Lors du clic sur un bouton numéroté
         buttons.forEach(button => {
             const num = button.id.replace('btn', '');
             button.dataset.num = num;
@@ -225,9 +228,11 @@
                 assignedVideos[button.id] = video;
                 button.disabled = true;
         
+                // On supprime la vidéo de fond précédente avant d'ajouter la nouvelle
                 const oldVid = button.querySelector('video.bg-preview');
                 if (oldVid) oldVid.remove();
         
+                // Crée et ajoute la vidéo de fond
                 const bgVideo = document.createElement('video');
                 bgVideo.src = videosDir + video;
                 bgVideo.autoplay = true;
@@ -237,6 +242,7 @@
                 bgVideo.classList.add('bg-preview');
                 button.appendChild(bgVideo);
         
+                // Une fois tous les boutons remplis, active le bouton valider
                 if (Object.keys(assignedVideos).length === 6) {
                     validateBtn.classList.add('enabled');
                     validateBtn.disabled = false;
@@ -247,12 +253,21 @@
             });
         });
         
+        // Lors du clic sur le bouton valider, réinitialise le jeu
         validateBtn.addEventListener('click', () => {
             if (!validateBtn.classList.contains('enabled')) return;
+        
+            // Supprimer les vidéos de fond des boutons
+            buttons.forEach(button => {
+                const oldVid = button.querySelector('video.bg-preview');
+                if (oldVid) oldVid.remove();
+            });
+        
+            // Réinitialisation
             resetGame();
         });
         
-        // Initialisation
+        // Réinitialisation
         resetGame();
 </script>
 
