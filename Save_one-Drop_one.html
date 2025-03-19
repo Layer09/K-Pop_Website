@@ -30,6 +30,8 @@
             justify-content: center;  
             align-items: center;
             display: flex;
+            height: 100%;
+            width: 100%;
         }
 
         #challenge-section {
@@ -748,14 +750,26 @@
         './videos/440-Seventeen-Hit-Ep20-22.mp4'
     ];
 
-    let firstVideo = '';
+    let firstVideo = ''; 
     let secondVideo = '';
-
+    let titresRestants = [...videoSources];  // Initialise titresRestants avec une copie de videoSources
+    
     document.addEventListener("DOMContentLoaded", () => {
     
         function getRandomVideo(exclude = null) {
-            let available = videoSources.filter(v => v !== exclude);
-            return available[Math.floor(Math.random() * available.length)];
+            // Si titresRestants est vide, réinitialiser à partir de videoSources
+            if (titresRestants.length === 0) {
+                titresRestants = [...videoSources];
+            }
+    
+            let available = titresRestants.filter(v => v !== exclude);
+            const randomIndex = Math.floor(Math.random() * available.length);
+            const video = available[randomIndex];
+    
+            // Retirer la vidéo sélectionnée de titresRestants
+            titresRestants = titresRestants.filter(v => v !== video);
+    
+            return video;
         }
     
         function startChallenge() {
@@ -812,7 +826,7 @@
             // Vérifie si un conteneur vidéo existe déjà et le supprime
             let oldSingleVideo = document.getElementById('single-video');
             let oldSecondVideo = document.getElementById('second-video');
-            
+    
             if (oldSingleVideo) oldSingleVideo.remove();
             if (oldSecondVideo) oldSecondVideo.remove();
     
@@ -832,7 +846,7 @@
             // Masquer la section de choix des petites vidéos
             document.getElementById('dual-videos').classList.add('hidden');
         }
-            
+    
         choiceA.onclick = () => {
             /* alert('Tu as choisi la première vidéo !'); */
             cleanupChoices();
@@ -853,35 +867,33 @@
     
         let hoverTimeoutA;
         let hoverTimeoutB;
-        
+    
         choiceA.addEventListener('mouseenter', () => {
             hoverTimeoutA = setTimeout(() => {
                 choiceA.muted = false;
                 choiceA.volume = 0.1;
             }, 1000);
         });
-        
+    
         choiceA.addEventListener('mouseleave', () => {
             clearTimeout(hoverTimeoutA);
             choiceA.muted = true;
         });
-        
+    
         choiceB.addEventListener('mouseenter', () => {
             hoverTimeoutB = setTimeout(() => {
                 choiceB.muted = false;
                 choiceB.volume = 0.1;
             }, 1000);
         });
-        
+    
         choiceB.addEventListener('mouseleave', () => {
             clearTimeout(hoverTimeoutB);
             choiceB.muted = true;
         });
     
-    
         window.onload = startChallenge;
     });
-
 
     function showVersion(version) {
         document.querySelectorAll('.version-content').forEach(div => {
@@ -904,7 +916,6 @@
         } else {
             document.querySelector(`.tab:nth-child(${version + 1})`).style.backgroundColor = "#333333";
         }
-        
     }
 
 </script>
