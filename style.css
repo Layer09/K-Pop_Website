@@ -102,6 +102,14 @@ nav ul li a img:hover {
         nav ul li a::after {
             content: attr(data-label);
         }
+
+        .single-video, #second-video {
+            margin-top: -40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* Espacement entre les vidéos */
+        }
     }
 
 
@@ -193,7 +201,7 @@ nav ul li a img:hover {
 
 /* Container des grandes vidéos */
 .single-video, #second-video {
-    margin-top: -70%;
+    margin-top: -75%;
     display: flex;
     justify-content: center;
     align-items: center;
