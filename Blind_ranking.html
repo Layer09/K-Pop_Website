@@ -138,10 +138,10 @@
         const currentVideo = document.getElementById('currentVideo');
         const buttons = document.querySelectorAll('.btn');
         const validateBtn = document.getElementById('validate');
-
+        
         let usedVideos = [];
         let assignedVideos = {};
-
+        
         function getRandomVideo() {
             const available = videoFiles.filter(v => !usedVideos.includes(v));
             if (available.length === 0) return null;
@@ -149,7 +149,7 @@
             usedVideos.push(video);
             return video;
         }
-
+        
         function resetGame() {
             usedVideos = [];
             assignedVideos = {};
@@ -164,7 +164,7 @@
             validateBtn.style.cursor = 'not-allowed';
             loadNextVideo();
         }
-
+        
         function loadNextVideo() {
             const video = getRandomVideo();
             if (video) {
@@ -175,7 +175,7 @@
                 currentVideo.dataset.video = video;
             }
         }
-
+        
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 const video = currentVideo.dataset.video;
@@ -184,21 +184,25 @@
                 button.style.background = `url(${videosDir + video})`;
                 button.style.backgroundSize = 'cover';
                 button.style.color = 'transparent';
-
+        
                 if (Object.keys(assignedVideos).length === 6) {
+                    // Tous les boutons sont remplis, pas de nouvelle vidéo
                     validateBtn.classList.add('enabled');
                     validateBtn.disabled = false;
                     validateBtn.style.cursor = 'pointer';
+                    currentVideo.src = ''; // optionnel : vider le lecteur
+                    currentVideo.load();
+                } else {
+                    loadNextVideo();
                 }
-                loadNextVideo();
             });
         });
-
+        
         validateBtn.addEventListener('click', () => {
             if (!validateBtn.classList.contains('enabled')) return;
             resetGame();
         });
-
+        
         // Initialisation
         resetGame();
 </script>
