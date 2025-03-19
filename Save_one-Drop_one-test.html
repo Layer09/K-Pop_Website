@@ -723,7 +723,7 @@
             singleContainer.id = 'single-video';
             singleContainer.classList.add('single-video');
             singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-            document.getElementById('challenge').appendChild(singleContainer);
+            document.body.appendChild(singleContainer);
     
             let videoA = document.getElementById('videoA');
             videoA.src = firstVideo;
@@ -741,7 +741,7 @@
                 secondContainer.id = 'second-video';
                 secondContainer.classList.add('single-video');
                 secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-                document.getElementById('challenge').appendChild(secondContainer);
+                document.body.appendChild(secondContainer);
     
                 let videoB = document.getElementById('videoB');
                 videoB.src = secondVideo;
