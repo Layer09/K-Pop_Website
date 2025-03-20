@@ -928,7 +928,7 @@
         const globalVolumeInput = document.getElementById('globalVolume');
         const volumeValueDisplay = document.getElementById('volumeValue');
     
-        // Charger le volume global depuis le localStorage ou par défaut à 0.1
+        // Charger le volume global depuis le localStorage ou par défaut à 0.5
         let savedVolume = localStorage.getItem('volumeGlobal');
         if (savedVolume === null) {
             savedVolume = 0.5;
@@ -939,13 +939,9 @@
     
         // Appliquer ce volume à toutes les vidéos de la page
         const applyGlobalVolume = () => {
-            // Récupérer la valeur du volume de l'utilisateur (par exemple, entre 0 et 100)
-            const savedVolume = parseFloat(localStorage.getItem('volume')) || 50;  // Valeur par défaut 50% si non définie
-        
-            // Calculer le volume réel à appliquer en fonction de la valeur du volume choisi
-            const realVolume = (savedVolume / 100) * 0.2;  // Par exemple, 50% choisi = 10% du volume réel
-        
-            // Appliquer ce volume à toutes les vidéos
+            const savedVolume = parseFloat(localStorage.getItem('volumeGlobal')) || 0.5;  // bien prendre volumeGlobal
+            
+            const realVolume = savedVolume * 0.2;  // 50% dans la barre = 10% réel
             document.querySelectorAll('video').forEach(video => {
                 video.volume = realVolume;
             });
@@ -955,12 +951,13 @@
     
         // Quand l'utilisateur modifie le slider
         globalVolumeInput.addEventListener('input', () => {
-            savedVolume = globalVolumeInput.value;
+            savedVolume = globalVolumeInput.value / 100;
             localStorage.setItem('volumeGlobal', savedVolume);
             volumeValueDisplay.textContent = Math.round(savedVolume * 100) + '%';
             applyGlobalVolume();
         });
     });
+
 
 </script>
 </body>
