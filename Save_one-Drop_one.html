@@ -163,7 +163,24 @@
             border-radius: 5px;
             border-color: #fff;
         }
+
+        /* Son par défaut des vidéos */
+        video::-webkit-media-controls-volume-slider {
+            display: none;
+        }
         
+        video::-webkit-media-controls-mute-button {
+            display: none;
+        }
+
+        /* Cast des petites vidéos */
+        video::-internal-media-controls-overlay-cast-button {
+            display: none;
+        }
+        
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
         
       /* Responsive mobile */
         @media (max-width: 1100px) {
@@ -842,10 +859,12 @@
     
             if (choiceA) {
                 choiceA.pause();
+                choiceA.setAttribute('disableRemotePlayback', true);
                 choiceA.src = '';
             }
             if (choiceB) {
                 choiceB.pause();
+                choiceB.setAttribute('disableRemotePlayback', true);
                 choiceB.src = '';
             }
     
