@@ -63,8 +63,15 @@
     
         // Appliquer ce volume à toutes les vidéos de la page
         const applyGlobalVolume = () => {
+            // Récupérer la valeur du volume de l'utilisateur (par exemple, entre 0 et 100)
+            const savedVolume = parseFloat(localStorage.getItem('volume')) || 50;  // Valeur par défaut 50% si non définie
+        
+            // Calculer le volume réel à appliquer en fonction de la valeur du volume choisi
+            const realVolume = (savedVolume / 100) * 0.2;  // Par exemple, 50% choisi = 10% du volume réel
+        
+            // Appliquer ce volume à toutes les vidéos
             document.querySelectorAll('video').forEach(video => {
-                video.volume = parseFloat(savedVolume);
+                video.volume = realVolume;
             });
         };
     
