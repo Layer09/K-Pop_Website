@@ -928,18 +928,20 @@
         const globalVolumeInput = document.getElementById('globalVolume');
         const volumeValueDisplay = document.getElementById('volumeValue');
     
-        // Charger le volume global depuis le localStorage ou par défaut à 50%
+        // Charger depuis localStorage
         let savedVolume = localStorage.getItem('volumeGlobal');
         if (savedVolume === null) {
             savedVolume = 50;
             localStorage.setItem('volumeGlobal', savedVolume);
+        } else {
+            savedVolume = parseFloat(savedVolume);
         }
+    
         globalVolumeInput.value = savedVolume;
         volumeValueDisplay.textContent = savedVolume + '%';
     
         const applyGlobalVolume = () => {
-            const savedVolume = parseFloat(localStorage.getItem('volumeGlobal')) || 50;  // valeur de 0 à 100
-            const realVolume = (savedVolume / 100) * 0.2;  // 50% dans la barre = 10% réel
+            const realVolume = (savedVolume / 100) * 0.2;
             document.querySelectorAll('video').forEach(video => {
                 video.volume = realVolume;
             });
@@ -948,14 +950,32 @@
         applyGlobalVolume();
     
         globalVolumeInput.addEventListener('input', () => {
-            savedVolume = globalVolumeInput.value;
+            savedVolume = parseFloat(globalVolumeInput.value);
             localStorage.setItem('volumeGlobal', savedVolume);
             volumeValueDisplay.textContent = savedVolume + '%';
             applyGlobalVolume();
         });
-    });
-
-
+    
+        // Observer si de nouvelles vidéos sont ajoutées
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.tagName === 'VIDEO') {
+                        const realVolume = (savedVolume / 100) * 0.2;
+                        node.volume = realVolume;
+                    }
+                    // Si des containers complets sont ajoutés
+                    if (node.querySelectorAll) {
+                        node.querySelectorAll('video').forEach(video => {
+                            const realVolume = (savedVolume / 100) * 0.2;
+                            video.volume = realVolume;
+                        });
+                    }
+                });
+            });
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
 
 </script>
 </body>
