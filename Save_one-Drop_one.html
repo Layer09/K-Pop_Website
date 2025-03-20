@@ -792,7 +792,7 @@
     
             let videoA = document.getElementById('videoA');
             videoA.src = firstVideo;
-            videoA.volume = 0.1;
+            /* videoA.volume = 0.1; */
             videoA.play();
     
             videoA.onended = () => {
@@ -810,7 +810,7 @@
     
                 let videoB = document.getElementById('videoB');
                 videoB.src = secondVideo;
-                videoB.volume = 0.1;
+                /* videoB.volume = 0.1; */
                 videoB.play();
     
                 videoB.onended = () => {
@@ -877,7 +877,7 @@
         choiceA.addEventListener('mouseenter', () => {
             hoverTimeoutA = setTimeout(() => {
                 choiceA.muted = false;
-                choiceA.volume = 0.1;
+                /* choiceA.volume = 0.1; */
             }, 1000);
         });
     
@@ -889,7 +889,7 @@
         choiceB.addEventListener('mouseenter', () => {
             hoverTimeoutB = setTimeout(() => {
                 choiceB.muted = false;
-                choiceB.volume = 0.1;
+                /* choiceB.volume = 0.1; */
             }, 1000);
         });
     
