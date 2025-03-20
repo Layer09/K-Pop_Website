@@ -102,6 +102,29 @@ nav ul li a img:hover {
     margin-top: -10px;
 }
 
+#sidebar {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #222;
+    color: white;
+    padding: 15px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+}
+
+#globalVolume {
+    width: 100%;
+}
+
+#volumeValue {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+}
+
 /* Nav version mobile */
     @media screen and (max-width: 1050px) {
         nav ul {
