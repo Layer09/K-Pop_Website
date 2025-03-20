@@ -47,6 +47,37 @@
         <input type="range" id="globalVolume" min="0" max="1" step="0.01">
         <span id="volumeValue"></span>
     </div>
-
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const globalVolumeInput = document.getElementById('globalVolume');
+        const volumeValueDisplay = document.getElementById('volumeValue');
+    
+        // Charger le volume global depuis le localStorage ou par défaut à 0.1
+        let savedVolume = localStorage.getItem('volumeGlobal');
+        if (savedVolume === null) {
+            savedVolume = 0.5;
+            localStorage.setItem('volumeGlobal', savedVolume);
+        }
+        globalVolumeInput.value = savedVolume;
+        volumeValueDisplay.textContent = Math.round(savedVolume * 100) + '%';
+    
+        // Appliquer ce volume à toutes les vidéos de la page
+        const applyGlobalVolume = () => {
+            document.querySelectorAll('video').forEach(video => {
+                video.volume = parseFloat(savedVolume);
+            });
+        };
+    
+        applyGlobalVolume();
+    
+        // Quand l'utilisateur modifie le slider
+        globalVolumeInput.addEventListener('input', () => {
+            savedVolume = globalVolumeInput.value;
+            localStorage.setItem('volumeGlobal', savedVolume);
+            volumeValueDisplay.textContent = Math.round(savedVolume * 100) + '%';
+            applyGlobalVolume();
+        });
+    });
+    </script>
 </body>
 </html>
