@@ -52,24 +52,20 @@
         const globalVolumeInput = document.getElementById('globalVolume');
         const volumeValueDisplay = document.getElementById('volumeValue');
     
-        // Charger le volume global depuis le localStorage ou par défaut à 0.1
+        // Charger depuis localStorage
         let savedVolume = localStorage.getItem('volumeGlobal');
         if (savedVolume === null) {
-            savedVolume = 0.5;
+            savedVolume = 50;
             localStorage.setItem('volumeGlobal', savedVolume);
+        } else {
+            savedVolume = parseFloat(savedVolume);
         }
-        globalVolumeInput.value = savedVolume;
-        volumeValueDisplay.textContent = Math.round(savedVolume * 100) + '%';
     
-        // Appliquer ce volume à toutes les vidéos de la page
+        globalVolumeInput.value = savedVolume;
+        volumeValueDisplay.textContent = savedVolume + '%';
+    
         const applyGlobalVolume = () => {
-            // Récupérer la valeur du volume de l'utilisateur (par exemple, entre 0 et 100)
-            const savedVolume = parseFloat(localStorage.getItem('volume')) || 50;  // Valeur par défaut 50% si non définie
-        
-            // Calculer le volume réel à appliquer en fonction de la valeur du volume choisi
-            const realVolume = (savedVolume / 100) * 0.2;  // Par exemple, 50% choisi = 10% du volume réel
-        
-            // Appliquer ce volume à toutes les vidéos
+            const realVolume = (savedVolume / 100) * 0.2;
             document.querySelectorAll('video').forEach(video => {
                 video.volume = realVolume;
             });
@@ -77,13 +73,32 @@
     
         applyGlobalVolume();
     
-        // Quand l'utilisateur modifie le slider
         globalVolumeInput.addEventListener('input', () => {
-            savedVolume = globalVolumeInput.value;
+            savedVolume = parseFloat(globalVolumeInput.value);
             localStorage.setItem('volumeGlobal', savedVolume);
-            volumeValueDisplay.textContent = Math.round(savedVolume * 100) + '%';
+            volumeValueDisplay.textContent = savedVolume + '%';
             applyGlobalVolume();
         });
+    
+        // Observer pour capter les vidéos dynamiques
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.tagName === 'VIDEO') {
+                        const realVolume = (savedVolume / 100) * 0.2;
+                        node.volume = realVolume;
+                    }
+                    if (node.querySelectorAll) {
+                        node.querySelectorAll('video').forEach(video => {
+                            const realVolume = (savedVolume / 100) * 0.2;
+                            video.volume = realVolume;
+                        });
+                    }
+                });
+            });
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
     });
     </script>
 </body>
