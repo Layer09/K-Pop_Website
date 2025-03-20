@@ -956,7 +956,7 @@
             applyGlobalVolume();
         });
     
-        // Observer si de nouvelles vidéos sont ajoutées
+        // Observer pour capter les vidéos dynamiques
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
                 mutation.addedNodes.forEach(node => {
@@ -964,7 +964,6 @@
                         const realVolume = (savedVolume / 100) * 0.2;
                         node.volume = realVolume;
                     }
-                    // Si des containers complets sont ajoutés
                     if (node.querySelectorAll) {
                         node.querySelectorAll('video').forEach(video => {
                             const realVolume = (savedVolume / 100) * 0.2;
@@ -976,7 +975,7 @@
         });
     
         observer.observe(document.body, { childList: true, subtree: true });
-
+    });
 </script>
 </body>
 </html>
