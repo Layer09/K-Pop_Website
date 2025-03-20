@@ -104,7 +104,7 @@ nav ul li a img:hover {
 
 /* Volume */
 #sidebar {
-    position: fixed;
+    position: absolute;
     left: 5%;
     top: 130px;
     transform: translateY(-50%);
