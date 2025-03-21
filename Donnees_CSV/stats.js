@@ -1,111 +1,107 @@
-import React, { useState, useEffect } from "react";
-import { Bar, Pie, Line, Radar, Doughnut } from "react-chartjs-2";
-import Chart from "chart.js/auto";
-import Papa from "papaparse";
-
-const Graphiques = () => {
-  const [selectedOption, setSelectedOption] = useState("Annees");
-  const [excludeLowCounts, setExcludeLowCounts] = useState(false);
-  const [chartData, setChartData] = useState({ labels: [], values: [] });
-
-  const csvFiles = {
-    Annees: "./Donnees_CSV/Annees.csv",
-    Artistes: "./Donnees_CSV/Artistes.csv",
-    Compagnies: "./Donnees_CSV/Compagnies.csv",
-    Episodes: "./Donnees_CSV/Episodes.csv",
-    Generations: "./Donnees_CSV/Generations.csv",
-    Numeros: "./Donnees_CSV/Numeros.csv",
-    Sexes: "./Donnees_CSV/Sexes.csv",
-    Tailles: "./Donnees_CSV/Tailles.csv",
-    Titres: "./Donnees_CSV/Titres.csv",
-  };
-
-  useEffect(() => {
-    const fetchCSV = async () => {
-      const response = await fetch(csvFiles[selectedOption]);
-      const csvText = await response.text();
-      Papa.parse(csvText, {
-        header: true,
-        complete: (result) => {
-          let labels = [];
-          let values = [];
-
-          result.data.forEach((row) => {
-            if (selectedOption === "Titres") {
-              labels.push(row["Titre"]);
-              values.push(parseInt(row["Moyenne"]));
-            } else {
-              const labelKey = Object.keys(row)[0];
-              const valueKey = "Nombre_de_titres";
-              labels.push(row[labelKey] === "/Null/" ? "Sans compagnie" : row[labelKey]);
-              values.push(parseInt(row[valueKey]));
-            }
-          });
-
-          if (excludeLowCounts) {
-            const filtered = labels.map((label, i) => ({ label, value: values[i] }))
-              .filter((item) => item.value >= 2);
-            labels = filtered.map((item) => item.label);
-            values = filtered.map((item) => item.value);
-          }
-
-          setChartData({ labels, values });
-        },
-      });
+document.addEventListener("DOMContentLoaded", function () {
+    const csvFiles = {
+        Annees: "./Donnees_CSV/Annees.csv",
+        Artistes: "./Donnees_CSV/Artistes.csv",
+        Compagnies: "./Donnees_CSV/Compagnies.csv",
+        Episodes: "./Donnees_CSV/Episodes.csv",
+        Generations: "./Donnees_CSV/Generations.csv",
+        Numeros: "./Donnees_CSV/Numeros.csv",
+        Sexes: "./Donnees_CSV/Sexes.csv",
+        Tailles: "./Donnees_CSV/Tailles.csv",
+        Titres: "./Donnees_CSV/Titres.csv"
     };
 
-    fetchCSV();
-  }, [selectedOption, excludeLowCounts]);
+    function fetchCSV(file, callback) {
+        Papa.parse(file, {
+            download: true,
+            header: true,
+            complete: function (results) {
+                callback(results.data);
+            }
+        });
+    }
 
-  const data = {
-    labels: chartData.labels,
-    datasets: [
-      {
-        label: selectedOption,
-        data: chartData.values,
-        backgroundColor: "rgba(75,192,192,0.6)",
-        borderColor: "rgba(75,192,192,1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+    function createBar(label, value, total) {
+        const percentage = total ? Math.round((value / total) * 100) : 0;
+        return `
+            <div class="bar">
+                <div class="label">${label} (${value})</div>
+                <div class="progress">
+                    <div class="progress-bar" style="width: ${percentage}%;">
+                        ${percentage}%
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
+    function renderSection(title, data, keyField, valueField) {
+        let total = 0;
+        data.forEach(row => {
+            total += parseInt(row[valueField]) || 0;
+        });
 
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <h1 className="text-2xl font-bold mb-4">Graphiques dynamiques</h1>
-      <select
-        className="p-2 border rounded"
-        value={selectedOption}
-        onChange={(e) => setSelectedOption(e.target.value)}
-      >
-        {Object.keys(csvFiles).map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <label className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          checked={excludeLowCounts}
-          onChange={() => setExcludeLowCounts(!excludeLowCounts)}
-        />
-        Exclure les occurrences peu fréquentes
-      </label>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
-        <div className="h-64"><Bar data={data} options={options} /></div>
-        <div className="h-64"><Pie data={data} options={options} /></div>
-        <div className="h-64"><Line data={data} options={options} /></div>
-        <div className="h-64"><Radar data={data} options={options} /></div>
-        <div className="h-64"><Doughnut data={data} options={options} /></div>
-docn       </div>
-    </div>
-  );
-};
+        let bars = "";
+        data.forEach(row => {
+            const label = row[keyField] || "Sans nom";
+            const value = parseInt(row[valueField]) || 0;
+            bars += createBar(label, value, total);
+        });
 
-export default Graphiques;
+        return `
+            <section>
+                <h2>${title}</h2>
+                ${bars}
+            </section>
+        `;
+    }
+
+    function loadAllCSVs() {
+        const promises = Object.keys(csvFiles).map(key => {
+            return new Promise((resolve) => {
+                fetchCSV(csvFiles[key], data => resolve({ key, data }));
+            });
+        });
+
+        Promise.all(promises).then(results => {
+            const container = document.getElementById("stats-container");
+            let html = "";
+
+            results.forEach(({ key, data }) => {
+                switch (key) {
+                    case "Annees":
+                        html += renderSection("Années", data, "Annee", "Nombre_de_titres");
+                        break;
+                    case "Artistes":
+                        html += renderSection("Artistes", data, "Artiste", "Nombre_de_titres");
+                        break;
+                    case "Compagnies":
+                        html += renderSection("Compagnies", data, "Compagnie", "Nombre_de_titres");
+                        break;
+                    case "Episodes":
+                        html += renderSection("Épisodes", data, "Episode", "Nombre_de_titres");
+                        break;
+                    case "Generations":
+                        html += renderSection("Générations", data, "Generation", "Nombre_de_titres");
+                        break;
+                    case "Numeros":
+                        html += renderSection("Numéros", data, "Numero", "Nombre_de_titres");
+                        break;
+                    case "Sexes":
+                        html += renderSection("Sexes", data, "Sexe", "Nombre_de_titres");
+                        break;
+                    case "Tailles":
+                        html += renderSection("Tailles", data, "Taille", "Nombre_de_titres");
+                        break;
+                    case "Titres":
+                        html += renderSection("Titres", data, "Titre", "Moyenne");
+                        break;
+                }
+            });
+
+            container.innerHTML = html;
+        });
+    }
+
+    loadAllCSVs();
+});
