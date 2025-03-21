@@ -1,68 +1,142 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const datasetSelect = document.getElementById('datasetSelect');
+document.addEventListener('DOMContentLoaded', () => {
     const excludeRareCheckbox = document.getElementById('excludeRare');
+    const datasetSelect = document.getElementById('datasetSelect');
     const chartsContainer = document.getElementById('charts-container');
+    const tableContainer = document.getElementById('table-container');
 
-    const datasetFiles = {
-        Annees: "Annees.csv",
-        Artistes: "Artistes.csv",
-        Compagnies: "Compagnies.csv",
-        Episodes: "Episodes.csv",
-        Generations: "Generations.csv",
-        Numeros: "Numeros.csv",
-        Sexes: "Sexes.csv",
-        Tailles: "Tailles.csv",
-        Titres: "Titres.csv"
-    };
+    let dataset = null; // To store data for the selected dataset
 
-    datasetSelect.addEventListener('change', () => {
-        loadCSV(datasetSelect.value);
-        excludeRareCheckbox.disabled = datasetSelect.value !== "Artistes" && datasetSelect.value !== "Titres";
-    });
-
-    excludeRareCheckbox.addEventListener('change', () => {
-        loadCSV(datasetSelect.value);
-    });
-
-    async function loadCSV(selectedDataset) {
-        const fileName = datasetFiles[selectedDataset];
-        const response = await fetch(`./Donnees_CSV/${fileName}`);
-        const csvText = await response.text();
-        const data = Papa.parse(csvText, { header: true }).data;
-
-        const filteredData = excludeRareCheckbox.checked
-            ? data.filter(row => parseInt(row.count) >= 3)
-            : data;
-
-        renderChart(filteredData, selectedDataset);
+    // Fonction pour charger un fichier CSV
+    function loadCSV(filePath) {
+        return fetch(filePath)
+            .then(response => response.text())
+            .then(text => {
+                const rows = text.split('\n').map(row => row.split(','));
+                const header = rows[0];
+                const data = rows.slice(1).map(row => {
+                    let obj = {};
+                    header.forEach((col, index) => {
+                        obj[col.trim()] = row[index].trim();
+                    });
+                    return obj;
+                });
+                return data;
+            });
     }
 
-    function renderChart(data, datasetName) {
-        chartsContainer.innerHTML = ''; // Clear existing chart
-        const canvas = document.createElement('canvas');
-        chartsContainer.appendChild(canvas);
+    // Fonction pour exclure les occurrences peu fréquentes
+    function filterData(data) {
+        return data.filter(row => parseInt(row.Nombre_de_titres) > 4);
+    }
 
-        const labels = data.map(row => row.label);
-        const counts = data.map(row => parseInt(row.count));
+    // Fonction pour afficher les graphiques
+    function displayCharts(data, type) {
+        chartsContainer.innerHTML = ''; // Clear previous charts
 
-        new Chart(canvas, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: datasetName,
-                    data: counts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true } }
+        if (type === 'Annees' || type === 'Episodes' || type === 'Generations' || type === 'Numeros' || type === 'Sexes' || type === 'Titres') {
+            const titlesData = data.map(row => parseInt(row.Nombre_de_titres));
+            const labels = data.map(row => row[type]);
+
+            // Camembert
+            const pieCanvas = document.createElement('canvas');
+            const pieChart = new Chart(pieCanvas, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: titlesData,
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#66b3ff', '#99ff99'],
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+            chartsContainer.appendChild(pieCanvas);
+
+            // Diagramme en barre
+            const barCanvas = document.createElement('canvas');
+            const barChart = new Chart(barCanvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'MOYENNE_TOTALE',
+                        data: data.map(row => parseFloat(row.MOYENNE_TOTALE)),
+                        backgroundColor: '#42A5F5',
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: type } },
+                        y: { title: { display: true, text: 'MOYENNE_TOTALE' } }
+                    },
+                    responsive: true,
+                }
+            });
+            chartsContainer.appendChild(barCanvas);
+
+            // Si l'option est "Episodes", ajouter une image
+            if (type === 'Episodes') {
+                const image = document.createElement('img');
+                image.src = './path/to/your/image.jpg'; // Remplace par le chemin de ton image
+                chartsContainer.appendChild(image);
             }
-        });
+        }
     }
 
-    // Chargement initial
-    loadCSV(datasetSelect.value);
+    // Fonction pour afficher un tableau
+    function displayTable(data) {
+        tableContainer.innerHTML = ''; // Clear previous table
+        const table = document.createElement('table');
+        const headerRow = document.createElement('tr');
+        const headers = Object.keys(data[0]);
+
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.innerText = header;
+            th.addEventListener('click', () => sortTable(header));
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        data.forEach(row => {
+            const rowElement = document.createElement('tr');
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.innerText = row[header];
+                rowElement.appendChild(td);
+            });
+            table.appendChild(rowElement);
+        });
+
+        tableContainer.appendChild(table);
+    }
+
+    // Fonction pour trier le tableau
+    function sortTable(column) {
+        dataset.sort((a, b) => {
+            return a[column] < b[column] ? -1 : a[column] > b[column] ? 1 : 0;
+        });
+        displayTable(dataset);
+    }
+
+    // Lorsque l'utilisateur choisit un nouveau dataset
+    datasetSelect.addEventListener('change', async () => {
+        const selectedOption = datasetSelect.value;
+        let filePath = `./Donnees_CSV/${selectedOption}.csv`;
+
+        dataset = await loadCSV(filePath);
+        if (excludeRareCheckbox.checked) {
+            dataset = filterData(dataset);
+        }
+
+        displayCharts(dataset, selectedOption);
+        displayTable(dataset);
+    });
+
+    // Initialisation
+    datasetSelect.dispatchEvent(new Event('change'));
 });
