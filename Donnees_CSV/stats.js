@@ -50,7 +50,6 @@ function createPieChart(data, labels, title) {
                 }
             }
         });
-    });
     return ctx;
 }
 
