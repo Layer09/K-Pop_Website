@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <title>K-Pop Website - Statistiques</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Style moderne pour le menu déroulant */
+        .dropdown-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+            font-size: 1em;
+        }
+        /* Styles spécifiques pour Artistes et Titres */
+        option[value="Artistes"] {
+            background: #ffe0e0; /* couleur modifiable */
+        }
+        option[value="Titres"] {
+            background: #e0f0ff; /* couleur modifiable */
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
+        <h2 class="subtitle">Statistiques</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <!-- Liens nav inchangés -->
+            <li><a href="index.html"><img src="./images/Accueil.png" alt="Accueil"></a></li>
+            <li><a href="Save_one-Drop_one.html"><img src="./images/Save_one-Drop_one.png" alt="Save One Drop One"></a></li>
+            <li><a href="Blind_ranking.html"><img src="./images/Blind_ranking.png" alt="Blind Ranking"></a></li>
+            <li><a href="Blind_test.html"><img src="./images/Blind_test.png" alt="Blind Test"></a></li>
+            <li><a href="Statistiques.html"><img src="./images/Statistiques.png" alt="Statistiques"></a></li>
+        </ul>
+    </nav>
+
+    <!-- Menu déroulant et case à cocher -->
+    <div class="dropdown-container">
+        <select id="datasetSelect">
+            <option value="Annees">Années</option>
+            <option value="Artistes">Artistes</option>
+            <option value="Compagnies">Compagnies</option>
+            <option value="Episodes">Épisodes</option>
+            <option value="Generations">Générations</option>
+            <option value="Numeros">Numéros</option>
+            <option value="Sexes">Sexes</option>
+            <option value="Tailles">Tailles</option>
+            <option value="Titres">Titres</option>
+        </select>
+        <div class="checkbox-container">
+            <input type="checkbox" id="excludeRare" disabled>
+            <label for="excludeRare">Exclure les occurrences peu fréquentes</label>
+        </div>
+    </div>
+
+    <!-- Conteneur pour les graphiques -->
+    <div id="charts-container">
+        <!-- Les graphiques seront générés ici dynamiquement -->
+    </div>
+
+    <script src="./Donnees_CSV/stats.js"></script>
+</body>
+</html>
