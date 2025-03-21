@@ -1,97 +1,111 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const datasetSelect = document.getElementById("datasetSelect");
-    const excludeRareCheckbox = document.getElementById("excludeRare");
-    const chartsContainer = document.getElementById("charts-container");
+import React, { useState, useEffect } from "react";
+import { Bar, Pie, Line, Radar, Doughnut } from "react-chartjs-2";
+import Chart from "chart.js/auto";
+import Papa from "papaparse";
 
-    // Données CSV mockées pour l'exemple
-    const mockData = {
-        Annees: { "2018": 12, "2019": 8, "2020": 15, "2021": 20 },
-        Artistes: { "BTS": 10, "Blackpink": 7, "Twice": 5, "ITZY": 3 },
-        Compagnies: { "SM": 12, "YG": 8, "JYP": 10 },
-        Episodes: { "1": 4, "2": 5, "3": 8, "4": 3 },
-        Generations: { "2nd Gen": 6, "3rd Gen": 12, "4th Gen": 10 },
-        Numeros: { "1": 6, "2": 2, "3": 5, "4": 7 },
-        Sexes: { "Féminin": 20, "Masculin": 15 },
-        Tailles: { "Solo": 10, "Duo": 5, "Groupe": 12 },
-        Titres: { "Dynamite": 4, "LALISA": 3, "Feel Special": 2, "Next Level": 1 }
+const Graphiques = () => {
+  const [selectedOption, setSelectedOption] = useState("Annees");
+  const [excludeLowCounts, setExcludeLowCounts] = useState(false);
+  const [chartData, setChartData] = useState({ labels: [], values: [] });
+
+  const csvFiles = {
+    Annees: "./Donnees_CSV/Annees.csv",
+    Artistes: "./Donnees_CSV/Artistes.csv",
+    Compagnies: "./Donnees_CSV/Compagnies.csv",
+    Episodes: "./Donnees_CSV/Episodes.csv",
+    Generations: "./Donnees_CSV/Generations.csv",
+    Numeros: "./Donnees_CSV/Numeros.csv",
+    Sexes: "./Donnees_CSV/Sexes.csv",
+    Tailles: "./Donnees_CSV/Tailles.csv",
+    Titres: "./Donnees_CSV/Titres.csv",
+  };
+
+  useEffect(() => {
+    const fetchCSV = async () => {
+      const response = await fetch(csvFiles[selectedOption]);
+      const csvText = await response.text();
+      Papa.parse(csvText, {
+        header: true,
+        complete: (result) => {
+          let labels = [];
+          let values = [];
+
+          result.data.forEach((row) => {
+            if (selectedOption === "Titres") {
+              labels.push(row["Titre"]);
+              values.push(parseInt(row["Moyenne"]));
+            } else {
+              const labelKey = Object.keys(row)[0];
+              const valueKey = "Nombre_de_titres";
+              labels.push(row[labelKey] === "/Null/" ? "Sans compagnie" : row[labelKey]);
+              values.push(parseInt(row[valueKey]));
+            }
+          });
+
+          if (excludeLowCounts) {
+            const filtered = labels.map((label, i) => ({ label, value: values[i] }))
+              .filter((item) => item.value >= 2);
+            labels = filtered.map((item) => item.label);
+            values = filtered.map((item) => item.value);
+          }
+
+          setChartData({ labels, values });
+        },
+      });
     };
 
-    const disableCheckboxFor = ["Sexes", "Titres", "Episodes", "Numeros"];
+    fetchCSV();
+  }, [selectedOption, excludeLowCounts]);
 
-    datasetSelect.addEventListener("change", () => {
-        const selected = datasetSelect.value;
-        // Activation ou non de la case à cocher
-        if (disableCheckboxFor.includes(selected)) {
-            excludeRareCheckbox.disabled = true;
-            excludeRareCheckbox.checked = false;
-        } else {
-            excludeRareCheckbox.disabled = false;
-        }
-        renderCharts(selected);
-    });
+  const data = {
+    labels: chartData.labels,
+    datasets: [
+      {
+        label: selectedOption,
+        data: chartData.values,
+        backgroundColor: "rgba(75,192,192,0.6)",
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 1,
+      },
+    ],
+  };
 
-    excludeRareCheckbox.addEventListener("change", () => {
-        renderCharts(datasetSelect.value);
-    });
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
-    function renderCharts(dataset) {
-        chartsContainer.innerHTML = ""; // On nettoie avant d'afficher de nouveaux graphiques
-        let data = { ...mockData[dataset] };
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <h1 className="text-2xl font-bold mb-4">Graphiques dynamiques</h1>
+      <select
+        className="p-2 border rounded"
+        value={selectedOption}
+        onChange={(e) => setSelectedOption(e.target.value)}
+      >
+        {Object.keys(csvFiles).map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          checked={excludeLowCounts}
+          onChange={() => setExcludeLowCounts(!excludeLowCounts)}
+        />
+        Exclure les occurrences peu fréquentes
+      </label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
+        <div className="h-64"><Bar data={data} options={options} /></div>
+        <div className="h-64"><Pie data={data} options={options} /></div>
+        <div className="h-64"><Line data={data} options={options} /></div>
+        <div className="h-64"><Radar data={data} options={options} /></div>
+        <div className="h-64"><Doughnut data={data} options={options} /></div>
+docn       </div>
+    </div>
+  );
+};
 
-        if (excludeRareCheckbox.checked) {
-            // Filtrage des occurrences < 3 pour l'exemple
-            data = Object.fromEntries(Object.entries(data).filter(([_, v]) => v >= 3));
-        }
-
-        const labels = Object.keys(data);
-        const values = Object.values(data);
-
-        // Création de plusieurs types de graphiques
-        createChart("bar", labels, values, "Graphique en barres");
-        createChart("pie", labels, values, "Camembert");
-        createChart("line", labels, values, "Courbe");
-        createChart("radar", labels, values, "Radar");
-        createChart("polarArea", labels, values, "Aire polaire");
-    }
-
-    function createChart(type, labels, data, title) {
-        const canvas = document.createElement("canvas");
-        chartsContainer.appendChild(canvas);
-
-        new Chart(canvas, {
-            type: type,
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: title,
-                    data: data,
-                    backgroundColor: [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-                        '#FF9F40', '#C9CBCF', '#B7E778', '#FFA1B5', '#6EDBFF'
-                    ],
-                    borderColor: '#333',
-                    borderWidth: 1,
-                    fill: type === "line" ? false : true
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: title
-                    },
-                    legend: {
-                        display: type !== "bar" && type !== "line"
-                    }
-                },
-                scales: (type === "bar" || type === "line") ? {
-                    y: { beginAtZero: true }
-                } : {}
-            }
-        });
-    }
-
-    // Génération initiale
-    renderCharts(datasetSelect.value);
-});
+export default Graphiques;
