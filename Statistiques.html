@@ -33,12 +33,26 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: white;
         }
         #charts-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -50,7 +64,6 @@
 
     <nav>
         <ul>
-            <!-- Liens nav inchangés -->
             <li><a href="index.html"><img src="./images/Accueil.png" alt="Accueil"></a></li>
             <li><a href="Save_one-Drop_one.html"><img src="./images/Save_one-Drop_one.png" alt="Save One Drop One"></a></li>
             <li><a href="Blind_ranking.html"><img src="./images/Blind_ranking.png" alt="Blind Ranking"></a></li>
@@ -73,17 +86,21 @@
             <option value="Titres">Titres</option>
         </select>
         <div class="checkbox-container">
-            <input type="checkbox" id="excludeRare" disabled>
+            <input type="checkbox" id="excludeRare">
             <label for="excludeRare">Exclure les occurrences peu fréquentes</label>
         </div>
     </div>
 
-    <!-- Conteneur pour les graphiques -->
+    <!-- Endroit où placer les conteneur pour les graphiques -->
     <div id="charts-container">
-        <!-- Les graphiques seront générés ici dynamiquement -->
+        <!-- Graphiques seront insérés ici via JavaScript -->
     </div>
 
-    <script src="./Donnees_CSV/stats.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- Tableau -->
+    <div id="table-container">
+        <!-- Tableau sera inséré ici -->
+    </div>
+
+    <script src="./Donnees_CSV/stats.js"></script> <!-- Stats.js à compléter -->
 </body>
 </html>
