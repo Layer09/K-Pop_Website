@@ -21,7 +21,7 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
-// Fonction pour afficher un graphique en camembert (pie chart)
+// Fonction pour afficher un graphique en camembert
 function createPieChart(data, labels, title) {
     const ctx = document.createElement('canvas');
     const chartData = {
@@ -38,9 +38,7 @@ function createPieChart(data, labels, title) {
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    position: 'top',
-                },
+                legend: { position: 'top' },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
@@ -54,7 +52,7 @@ function createPieChart(data, labels, title) {
     return ctx;
 }
 
-// Fonction pour afficher un graphique en barres (bar chart)
+// Fonction pour afficher un graphique en barres
 function createBarChart(data, labels, title) {
     const ctx = document.createElement('canvas');
     const chartData = {
@@ -72,11 +70,7 @@ function createBarChart(data, labels, title) {
         data: chartData,
         options: {
             responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
+            scales: { y: { beginAtZero: true } },
             plugins: {
                 tooltip: {
                     callbacks: {
@@ -91,28 +85,20 @@ function createBarChart(data, labels, title) {
     return ctx;
 }
 
-// Fonction pour générer un tableau HTML à partir des données CSV
+// Fonction pour créer un tableau HTML
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
-    // Créer les en-têtes du tableau
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = key;
-
-        // Ajouter un gestionnaire de clic pour trier la colonne
         th.onclick = () => sortTableByColumn(table, key);
-
-        // Ajouter l’en-tête au tableau
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
 
-    // Créer un élément <tbody> pour ajouter les lignes de données
     const tbody = document.createElement('tbody');
-
-    // Ajouter les données
     data.forEach(row => {
         const tr = document.createElement('tr');
         Object.values(row).forEach(value => {
@@ -120,52 +106,39 @@ function createTable(data) {
             td.textContent = value;
             tr.appendChild(td);
         });
-        tbody.appendChild(tr);  // Ajouter la ligne au <tbody>
+        tbody.appendChild(tr);
     });
-
-    // Ajouter le <tbody> à la table
     table.appendChild(tbody);
 
     return table;
 }
 
-// Fonction pour trier un tableau HTML par colonne
+// Fonction corrigée pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));  // Récupérer toutes les lignes du tbody
-    const headers = table.querySelectorAll('th');  // Récupérer les en-têtes du tableau
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const headers = table.querySelectorAll('th');
     let columnIndex = -1;
 
-    // Trouver l'index de la colonne en fonction du texte de l'en-tête
     headers.forEach((header, index) => {
         if (header.textContent.trim() === columnKey) {
             columnIndex = index;
         }
     });
-
-    // Si la colonne est introuvable, retourner
     if (columnIndex === -1) return;
 
-    // Vérifier l'ordre de tri actuel pour cette colonne
     const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
-
-    // Si la colonne a déjà été triée et qu'on clique à nouveau dessus, inverser l'ordre
     const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-
-    // Mettre à jour l'ordre de tri pour la colonne
+    headers.forEach(header => header.removeAttribute('data-sort-order'));
     headers[columnIndex].setAttribute('data-sort-order', sortOrder);
 
-    // Trier les lignes en fonction de la colonne
     rows.sort((a, b) => {
-        const cellA = a.cells[columnIndex]?.textContent.trim();  // Utilisation de l'opérateur de chaînage optionnel (?.)
-        const cellB = b.cells[columnIndex]?.textContent.trim();  // Utilisation de l'opérateur de chaînage optionnel (?.)
-
-        // Si l'une des cellules est undefined, on ne tente pas de faire le tri
-        if (cellA === undefined || cellB === undefined) return 0;
+        const cellA = a.cells[columnIndex]?.textContent.trim();
+        const cellB = b.cells[columnIndex]?.textContent.trim();
 
         if (isNaN(cellA) || isNaN(cellB)) {
-            return sortOrder === 'asc' 
-                ? cellA.localeCompare(cellB) 
+            return sortOrder === 'asc'
+                ? cellA.localeCompare(cellB)
                 : cellB.localeCompare(cellA);
         } else {
             return sortOrder === 'asc'
@@ -174,114 +147,19 @@ function sortTableByColumn(table, columnKey) {
         }
     });
 
-    // Vider le tbody existant
-    tbody.innerHTML = '';
-
-    // Réinsérer les lignes triées dans le tbody
     rows.forEach(row => tbody.appendChild(row));
-
-    // Gérer l'affichage des flèches de tri
-    updateSortingArrows(table, columnKey, sortOrder);
 }
 
-// Fonction pour mettre à jour les flèches de tri
-function updateSortingArrows(table, columnKey, sortOrder) {
-    const headers = table.querySelectorAll('th');
-    
-    // Supprimer les flèches existantes
-    headers.forEach(header => {
-        const arrow = header.querySelector('.sort-arrow');
-        if (arrow) {
-            header.removeChild(arrow);
-        }
-    });
+// Gestion des événements
+const select = document.getElementById('datasetSelect');
+const checkbox = document.getElementById('excludeRare');
+const chartsContainer = document.getElementById('charts-container');
+const tableContainer = document.getElementById('table-container');
 
-    // Ajouter la flèche pour la colonne triée
-    const th = Array.from(headers).find(header => header.textContent.trim() === columnKey);
-    if (th) {
-        const arrow = document.createElement('span');
-        arrow.classList.add('sort-arrow');
-        arrow.textContent = sortOrder === 'asc' ? '▲' : '▼';  // Flèche ascendant ou descendant
-        th.appendChild(arrow);
-    }
-}
+// Fonction principale pour charger et afficher les données
+async function updateDisplay() {
+    const dataset = select.value;
+    const exclude = checkbox.checked;
 
-// Fonction principale pour gérer les différentes options
-async function handleDatasetChange(event) {
-    const datasetSelect = document.getElementById('datasetSelect');
-    const selectedDataset = datasetSelect.value;
-    const excludeRare = document.getElementById('excludeRare').checked;
-    let data;
-
-    // Charger les données du CSV approprié
-    switch (selectedDataset) {
-        case 'Annees':
-            data = await loadCSV('./Donnees_CSV/Annees.csv');
-            break;
-        case 'Artistes':
-            data = await loadCSV('./Donnees_CSV/Artistes.csv');
-            break;
-        case 'Compagnies':
-            data = await loadCSV('./Donnees_CSV/Compagnies.csv');
-            break;
-        case 'Episodes':
-            data = await loadCSV('./Donnees_CSV/Episodes.csv');
-            break;
-        case 'Generations':
-            data = await loadCSV('./Donnees_CSV/Generations.csv');
-            break;
-        case 'Numeros':
-            data = await loadCSV('./Donnees_CSV/Numeros.csv');
-            break;
-        case 'Sexes':
-            data = await loadCSV('./Donnees_CSV/Sexes.csv');
-            break;
-        case 'Tailles':
-            data = await loadCSV('./Donnees_CSV/Tailles.csv');
-            break;
-        case 'Titres':
-            data = await loadCSV('./Donnees_CSV/Titres.csv');
-            break;
-    }
-
-    // Appliquer le filtre pour exclure les occurrences peu fréquentes
-    data = filterFrequentOccurrences(data, excludeRare);
-
-    // Créer les graphiques et tableaux en fonction des données
-    const chartsContainer = document.getElementById('charts-container');
-    chartsContainer.innerHTML = '';  // Effacer les anciens graphiques et tableaux
-
-    let chartContainer;
-    if (selectedDataset === 'Episodes') {
-        // Ajouter une image pour les épisodes
-        const image = document.createElement('img');
-        image.src = './images/episode-image.jpg';  // Remplace par le nom de ton image
-        chartsContainer.appendChild(image);
-    }
-
-    // Créer un graphique en camembert pour les options avec moins de 50 lignes
-    if (['Annees', 'Artistes', 'Compagnies', 'Episodes', 'Generations', 'Numeros', 'Sexes', 'Tailles'].includes(selectedDataset)) {
-        const labels = data.map(row => row[Object.keys(row)[0]]);
-        const values = data.map(row => parseInt(row.Nombre_de_titres));
-        chartContainer = createPieChart(values, labels, 'Nombre de titres');
-        chartsContainer.appendChild(chartContainer);
-    }
-
-    // Créer un graphique en barres pour MOYENNE_TOTALE
-    const moyenneLabels = data.map(row => row[Object.keys(row)[0]]);
-    const moyenneValues = data.map(row => parseFloat(row.MOYENNE_TOTALE));
-    chartContainer = createBarChart(moyenneValues, moyenneLabels, 'Moyenne totale');
-    chartsContainer.appendChild(chartContainer);
-
-    // Créer un tableau
-    const table = createTable(data);
-    chartsContainer.appendChild(table);
-}
-
-// Initialiser les événements et charger les données au chargement de la page
-document.getElementById('datasetSelect').addEventListener('change', handleDatasetChange);
-
-// Initialisation
-window.onload = async () => {
-    await handleDatasetChange({ target: { value: 'Annees' } });  // Charge les données de départ (ex: Annees)
-};
+    const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
+    const filtered
