@@ -86,7 +86,6 @@ function createBarChart(data, labels, title) {
                 }
             }
         });
-    });
     return ctx;
 }
 
