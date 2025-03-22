@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Style moderne pour le menu déroulant */
         .dropdown-container {
             display: flex;
             align-items: center;
@@ -22,12 +21,11 @@
             background: #f9f9f9;
             font-size: 1em;
         }
-        /* Styles spécifiques pour Artistes et Titres */
         option[value="Artistes"] {
-            background: #ffe0e0; /* couleur modifiable */
+            background: #ffe0e0;
         }
         option[value="Titres"] {
-            background: #e0f0ff; /* couleur modifiable */
+            background: #e0f0ff;
         }
         .checkbox-container {
             display: flex;
@@ -73,7 +71,6 @@
         </ul>
     </nav>
 
-    <!-- Menu déroulant et case à cocher -->
     <div class="dropdown-container">
         <select id="datasetSelect">
             <option value="Annees">Années</option>
@@ -92,16 +89,9 @@
         </div>
     </div>
 
-    <!-- Endroit où placer les conteneur pour les graphiques -->
-    <div id="charts-container">
-        <!-- Graphiques seront insérés ici via JavaScript -->
-    </div>
+    <div id="charts-container"></div>
+    <div id="table-container"></div>
 
-    <!-- Tableau -->
-    <div id="table-container">
-        <!-- Tableau sera inséré ici -->
-    </div>
-
-    <script src="./Donnees_CSV/stats-Save.js"></script>
+    <script src="./Donnees_CSV/stats.js"></script>
 </body>
 </html>
