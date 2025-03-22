@@ -112,14 +112,27 @@ function createBarChart(data, labels, title) {
     return ctx;
 }
 
+// Object de remplacement pour les noms de colonnes
+const columnNameReplacements = {
+    'Nombre_de_titres': 'Nombre de titres',
+    'MOYENNE_TOTALE': 'Moyenne',
+    // Ajoute d'autres remplacements si nécessaire
+};
+
+// Fonction pour remplacer les noms de colonnes
+function getColumnName(originalColumnName) {
+    return columnNameReplacements[originalColumnName] || originalColumnName;
+}
+
 // Fonction pour créer un tableau HTML
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
+    // Remplacer les noms de colonnes dans l'en-tête
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = key;
+        th.textContent = getColumnName(key);  // Remplace le nom de la colonne
         th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
@@ -197,11 +210,14 @@ async function updateDisplay() {
 
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
-        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
-    } else {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+    // Conditions selon le dataset sélectionné
+    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
+        chartsContainer.appendChild(createPieChart(counts, labels, dataset)); // PieChart pour "Nombre_de_titres"
+        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart pour "MOYENNE_TOTALE"
+    } else if (dataset === "Episodes" || dataset === "Numeros") {
+        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart uniquement pour "MOYENNE_TOTALE"
     }
 
     const table = createTable(filteredData);
