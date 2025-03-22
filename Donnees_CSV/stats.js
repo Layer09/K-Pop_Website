@@ -130,7 +130,6 @@ function createTable(data) {
 }
 
 // Fonction pour trier un tableau HTML par colonne
-// Fonction de tri pour les colonnes du tableau
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));  // Récupérer toutes les lignes du tbody
@@ -228,7 +227,6 @@ function updateSortingArrows(table, columnKey, sortOrder) {
         th.appendChild(arrow);
     }
 }
-
 
 // Fonction pour mettre à jour les flèches de tri
 function updateSortingArrows(table, columnKey, sortOrder) {
