@@ -44,7 +44,8 @@ function getChartColors(numColors) {
 
 // Fonction pour créer un PieChart
 function createPieChart(data, labels, dataset, colors) {
-    const chart = new Chart(document.createElement('canvas'), {
+    const canvas = document.createElement('canvas');
+    new Chart(canvas, {
         type: 'pie',
         data: {
             labels: labels,
@@ -55,13 +56,13 @@ function createPieChart(data, labels, dataset, colors) {
             }]
         }
     });
-    chart.canvas.title = "Nombre de titres";
-    return chart;
+    return canvas; // On retourne le canvas
 }
 
 // Fonction pour créer un BarChart
 function createBarChart(data, labels, dataset, colors) {
-    const chart = new Chart(document.createElement('canvas'), {
+    const canvas = document.createElement('canvas');
+    new Chart(canvas, {
         type: 'bar',
         data: {
             labels: labels,
@@ -73,8 +74,7 @@ function createBarChart(data, labels, dataset, colors) {
             }]
         }
     });
-    chart.canvas.title = "Moyenne des notes";
-    return chart;
+    return canvas; // On retourne le canvas
 }
 
 // Fonction pour assombrir une couleur (utile pour les bordures)
