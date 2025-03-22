@@ -238,6 +238,12 @@ async function updateDisplay() {
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
 
+    // Vérifier si filteredData contient des données
+    if (filteredData.length === 0) {
+        console.error("Aucune donnée filtrée disponible.");
+        return;
+    }
+
     // Reset containers
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
