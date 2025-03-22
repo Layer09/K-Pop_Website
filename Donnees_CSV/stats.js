@@ -102,7 +102,12 @@ function darkenColor(color) {
 const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
     'MOYENNE_TOTALE': 'Moyenne',
-    // Ajoute d'autres remplacements si nécessaire
+    'Annee': 'Année',
+    'Generation': 'Génération',
+    'Episode': 'Épisode',
+    'Numero': 'Numéro',
+    'Sous_unite': 'Sous-unité ?',
+    'Featuring': 'Featuring ?'
 };
 
 // Fonction pour remplacer les noms de colonnes
@@ -231,7 +236,7 @@ async function updateDisplay() {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         barChart.title = "Moyenne des notes";
         chartsContainer.appendChild(barChart);
-    } else if (["Episodes", "Numeros"].includes(dataset) || (dataset === "Compagnies" && !exclude)) {
+    } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         barChart.title = "Moyenne des notes";
         chartsContainer.appendChild(barChart);
