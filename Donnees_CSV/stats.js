@@ -148,7 +148,7 @@ function sortTableByColumn(table, columnKey) {
 
     // Vérifier l'ordre de tri actuel pour cette colonne
     const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
-    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc'; // Alternance du tri entre ascendant et descendant
     headers[columnIndex].setAttribute('data-sort-order', sortOrder);  // Changer l'ordre de tri pour la colonne
 
     // Trier les lignes en fonction de la colonne
@@ -179,6 +179,29 @@ function sortTableByColumn(table, columnKey) {
     // Gérer l'affichage des flèches de tri
     updateSortingArrows(table, columnKey, sortOrder);
 }
+
+// Fonction pour mettre à jour les flèches de tri
+function updateSortingArrows(table, columnKey, sortOrder) {
+    const headers = table.querySelectorAll('th');
+    
+    // Supprimer les flèches existantes
+    headers.forEach(header => {
+        const arrow = header.querySelector('.sort-arrow');
+        if (arrow) {
+            header.removeChild(arrow);
+        }
+    });
+
+    // Ajouter la flèche pour la colonne triée
+    const th = Array.from(headers).find(header => header.textContent.trim() === columnKey);
+    if (th) {
+        const arrow = document.createElement('span');
+        arrow.classList.add('sort-arrow');
+        arrow.textContent = sortOrder === 'asc' ? '▲' : '▼';  // Flèche ascendant ou descendant
+        th.appendChild(arrow);
+    }
+}
+
 
 // Fonction pour mettre à jour les flèches de tri
 function updateSortingArrows(table, columnKey, sortOrder) {
