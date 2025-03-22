@@ -68,7 +68,7 @@ function createPieChart(data, labels, dataset, colors) {
 // Fonction pour créer un BarChart
 function createBarChart(data, labels, dataset, colors) {
     const canvas = document.createElement('canvas');
-    new Chart(canvas, {
+    const config = {
         type: 'bar',
         data: {
             labels: labels,
@@ -78,9 +78,19 @@ function createBarChart(data, labels, dataset, colors) {
                 backgroundColor: colors,
                 borderWidth: 1
             }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false // Légende désactivée
+                }
+            }
         }
-    });
-    return canvas; // On retourne le canvas
+    };
+
+    new Chart(canvas, config);
+    return canvas;
 }
 
 // Fonction pour assombrir une couleur (utile pour les bordures)
@@ -240,6 +250,17 @@ async function updateDisplay() {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         barChart.title = "Moyenne des notes";
         chartsContainer.appendChild(barChart);
+    }
+
+    // Ajouter l'image uniquement pour "Episodes"
+        if (dataset === "Episodes") {
+            const heatmapImage = document.createElement('img');
+            heatmapImage.src = './images/HeatMap-Ep1a20.png';
+            heatmapImage.alt = 'Heatmap Episodes';
+            heatmapImage.style.width = '100%';
+            heatmapImage.style.margin = '20px 0';
+            chartsContainer.appendChild(heatmapImage);
+        }
     }
 
     const table = createTable(filteredData);
