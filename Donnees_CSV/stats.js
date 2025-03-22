@@ -189,12 +189,22 @@ async function updateDisplay() {
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
 
+    // Désactive ou active la checkbox en fonction du dataset sélectionné
+    if (dataset === "Titres") {
+        checkbox.checked = false;
+        checkbox.disabled = true;
+    } else {
+        checkbox.disabled = false;
+    }
+    
+    // Si aucune donnée n’est trouvée après filtrage
     if (!filteredData || filteredData.length === 0) {
         console.error("Aucune donnée filtrée disponible.");
         chartsContainer.innerHTML = '<p>Aucune donnée à afficher.</p>';
         tableContainer.innerHTML = '';
         return;
     }
+
 
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
