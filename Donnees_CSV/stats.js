@@ -120,9 +120,6 @@ function createTable(data) {
         table.appendChild(tr);
     });
 
-    // Initialiser le premier tri sur la première colonne
-    sortTableByColumn(table, Object.keys(data[0])[0]);
-
     return table;
 }
 
