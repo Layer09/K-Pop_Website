@@ -128,12 +128,9 @@ function sortTableByColumn(table, column) {
     const headerCells = Array.from(table.rows[0].cells);
     const index = headerCells.findIndex(cell => cell.textContent.replace(/ ▲| ▼/, '').trim() === column);
 
-    let tbody = table.querySelector('tbody');
-    if (!tbody) {
-        tbody = table; // Si le tbody n'existe pas, on travaille directement avec la table.
-    }
-
-    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const thead = table.querySelector('thead'); // Sélectionner l'en-tête
+    const tbody = table.querySelector('tbody'); // Sélectionner le corps du tableau
+    const rows = Array.from(tbody.querySelectorAll('tr')); // Sélectionner toutes les lignes du tbody
 
     // Initialiser le sens de tri (ascendant ou descendant)
     if (headerCells[index].asc === undefined) {
@@ -171,7 +168,7 @@ function sortTableByColumn(table, column) {
 
     // Trier et réinjecter dans le tbody
     const sortedRows = rows.sort(compare(index, headerCells[index].asc));
-    sortedRows.forEach(row => tbody.appendChild(row));
+    sortedRows.forEach(row => tbody.appendChild(row)); // Ajouter les lignes triées à leur emplacement d'origine
 }
 
 
