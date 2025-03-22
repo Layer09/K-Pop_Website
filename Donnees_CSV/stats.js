@@ -130,6 +130,7 @@ function createTable(data) {
 }
 
 // Fonction pour trier un tableau HTML par colonne
+// Fonction de tri pour les colonnes du tableau
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));  // Récupérer toutes les lignes du tbody
@@ -151,7 +152,7 @@ function sortTableByColumn(table, columnKey) {
 
     // Si la colonne a déjà été triée et qu'on clique à nouveau dessus, inverser l'ordre
     const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-    
+
     // Mettre à jour l'ordre de tri pour la colonne
     headers[columnIndex].setAttribute('data-sort-order', sortOrder);
 
