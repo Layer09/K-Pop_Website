@@ -210,11 +210,14 @@ async function updateDisplay() {
 
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
-        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
-    } else {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+    // Conditions selon le dataset sélectionné
+    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
+        chartsContainer.appendChild(createPieChart(counts, labels, dataset)); // PieChart pour "Nombre_de_titres"
+        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart pour "MOYENNE_TOTALE"
+    } else if (dataset === "Episodes" || dataset === "Numeros") {
+        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart uniquement pour "MOYENNE_TOTALE"
     }
 
     const table = createTable(filteredData);
