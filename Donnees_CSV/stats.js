@@ -92,6 +92,7 @@ function createBarChart(data, labels, title) {
 }
 
 // Fonction pour générer un tableau HTML à partir des données CSV
+// Fonction pour générer un tableau HTML à partir des données CSV
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
@@ -109,6 +110,9 @@ function createTable(data) {
     });
     table.appendChild(headerRow);
 
+    // Créer un élément <tbody> pour ajouter les lignes de données
+    const tbody = document.createElement('tbody');
+
     // Ajouter les données
     data.forEach(row => {
         const tr = document.createElement('tr');
@@ -117,8 +121,11 @@ function createTable(data) {
             td.textContent = value;
             tr.appendChild(td);
         });
-        table.appendChild(tr);
+        tbody.appendChild(tr);  // Ajouter la ligne au <tbody>
     });
+
+    // Ajouter le <tbody> à la table
+    table.appendChild(tbody);
 
     return table;
 }
