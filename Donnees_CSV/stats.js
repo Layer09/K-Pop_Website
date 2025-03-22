@@ -95,14 +95,20 @@ function createBarChart(data, labels, title) {
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
+
     // Créer les en-têtes du tableau
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = key;
+
+        // Ajouter un gestionnaire de clic pour trier la colonne
         th.onclick = () => sortTableByColumn(table, key);
+
+        // Ajouter l’en-tête au tableau
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
+
     // Ajouter les données
     data.forEach(row => {
         const tr = document.createElement('tr');
@@ -113,6 +119,10 @@ function createTable(data) {
         });
         table.appendChild(tr);
     });
+
+    // Initialiser le premier tri sur la première colonne
+    sortTableByColumn(table, Object.keys(data[0])[0]);
+
     return table;
 }
 
