@@ -162,4 +162,28 @@ async function updateDisplay() {
     const exclude = checkbox.checked;
 
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
-    const filtered
+    const filteredData = filterFrequentOccurrences(data, exclude);
+
+    // Reset containers
+    chartsContainer.innerHTML = '';
+    tableContainer.innerHTML = '';
+
+    const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
+    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+
+    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
+        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
+    } else {
+        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+    }
+
+    const table = createTable(filteredData);
+    tableContainer.appendChild(table);
+}
+
+// Event listeners
+select.addEventListener('change', updateDisplay);
+checkbox.addEventListener('change', updateDisplay);
+
+// Initialisation
+updateDisplay();
