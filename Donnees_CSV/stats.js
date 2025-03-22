@@ -50,6 +50,12 @@ async function updateDisplay() {
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
 
+    // Vérifier si filteredData contient des données
+    if (filteredData.length === 0) {
+        console.error("Aucune donnée filtrée disponible.");
+        return;
+    }
+
     // Reset containers
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
@@ -57,6 +63,12 @@ async function updateDisplay() {
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
+
+    // Vérifier si les labels et counts/averages sont bien définis
+    if (!labels || !counts || !averages) {
+        console.error("Données manquantes pour les labels, counts ou averages.");
+        return;
+    }
 
     const chartColors = getChartColors(filteredData.length); // Détermine les couleurs à utiliser
 
