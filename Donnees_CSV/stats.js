@@ -92,7 +92,6 @@ function createBarChart(data, labels, title) {
 }
 
 // Fonction pour générer un tableau HTML à partir des données CSV
-// Fonction pour générer un tableau HTML à partir des données CSV
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
@@ -131,60 +130,59 @@ function createTable(data) {
 }
 
 // Fonction pour trier un tableau HTML par colonne
-function sortTableByColumn(table, column) {
-    const headerCells = Array.from(table.rows[0].cells);
-    const index = headerCells.findIndex(cell => cell.textContent.replace(/ ▲| ▼/, '').trim() === column);
-
-    // Sélectionner les éléments <thead> et <tbody>
-    const thead = table.querySelector('thead');
+function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
-    
-    // Vérifier si tbody existe
-    if (!tbody) {
-        console.error("Le corps du tableau (tbody) n'a pas été trouvé.");
-        return;
-    }
+    const rows = Array.from(tbody.querySelectorAll('tr'));  // Récupérer toutes les lignes du tbody
+    const columnIndex = Object.keys(data[0]).indexOf(columnKey);  // Trouver l'index de la colonne en fonction du nom
 
-    // Sélectionner les lignes du tbody
-    const rows = Array.from(tbody.querySelectorAll('tr'));
+    // Alternance entre tri ascendant et descendant
+    let sortOrder = table.getAttribute('data-sort-order') === 'asc' ? 'desc' : 'asc';
+    table.setAttribute('data-sort-order', sortOrder);  // Changer l'ordre de tri pour la prochaine fois
 
-    // Initialiser le sens de tri (ascendant ou descendant)
-    if (headerCells[index].asc === undefined) {
-        headerCells[index].asc = true;
-    } else {
-        headerCells[index].asc = !headerCells[index].asc;
-    }
+    // Trier les lignes en fonction de la colonne
+    rows.sort((a, b) => {
+        const cellA = a.cells[columnIndex].textContent.trim();  // Récupérer la valeur de la cellule de la colonne
+        const cellB = b.cells[columnIndex].textContent.trim();  // Récupérer la valeur de la cellule de la colonne
 
-    // Réinitialiser toutes les flèches sauf celle cliquée
-    headerCells.forEach((cell, i) => {
-        if (i !== index) {
-            cell.innerHTML = cell.textContent.replace(/ ▲| ▼/, '');
-            delete cell.asc;
+        if (isNaN(cellA) || isNaN(cellB)) {
+            return sortOrder === 'asc' 
+                ? cellA.localeCompare(cellB) 
+                : cellB.localeCompare(cellA);
+        } else {
+            return sortOrder === 'asc'
+                ? parseFloat(cellA) - parseFloat(cellB)
+                : parseFloat(cellB) - parseFloat(cellA);
         }
     });
 
-    // Ajouter l’icône de tri sur la colonne
-    headerCells[index].innerHTML = column + (headerCells[index].asc ? ' ▲' : ' ▼');
+    // Vider le tbody existant
+    tbody.innerHTML = '';
 
-    // Fonction de comparaison
-    const compare = function(ids, asc) {
-        return function(row1, row2) {
-            const tdValue = function(row, ids) {
-                return row.children[ids].textContent.trim();
-            };
-            const v1 = tdValue(row1, ids);
-            const v2 = tdValue(row2, ids);
-            if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)) {
-                return asc ? v1 - v2 : v2 - v1;
-            } else {
-                return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
-            }
-        };
-    };
+    // Réinsérer les lignes triées dans le tbody
+    rows.forEach(row => tbody.appendChild(row));
 
-    // Trier les lignes et réinjecter dans le tbody
-    const sortedRows = rows.sort(compare(index, headerCells[index].asc));
-    sortedRows.forEach(row => tbody.appendChild(row)); // Réinsérer les lignes triées dans le tbody
+    // Gérer l'affichage des flèches de tri
+    updateSortingArrows(table, columnKey, sortOrder);
+}
+
+// Fonction pour mettre à jour les flèches de tri
+function updateSortingArrows(table, columnKey, sortOrder) {
+    const headers = table.querySelectorAll('th');
+    
+    // Supprimer les flèches existantes
+    headers.forEach(header => {
+        const arrow = header.querySelector('.sort-arrow');
+        if (arrow) {
+            header.removeChild(arrow);
+        }
+    });
+
+    // Ajouter la flèche pour la colonne triée
+    const th = Array.from(headers).find(header => header.textContent.trim() === columnKey);
+    const arrow = document.createElement('span');
+    arrow.classList.add('sort-arrow');
+    arrow.textContent = sortOrder === 'asc' ? '▲' : '▼';  // Flèche ascendant ou descendant
+    th.appendChild(arrow);
 }
 
 // Fonction principale pour gérer les différentes options
