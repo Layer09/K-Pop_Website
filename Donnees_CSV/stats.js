@@ -90,11 +90,10 @@ function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
-    Object.keys(data[0]).forEach((key, index) => {
+    Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = `${key} ○`;  // Ajouter le symbole par défaut
-        th.dataset.index = index;  // Utiliser l'index pour identifier la colonne
-        th.onclick = () => sortTableByColumn(table, key, th);
+        th.textContent = key;
+        th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
@@ -114,22 +113,24 @@ function createTable(data) {
     return table;
 }
 
-// Fonction pour trier un tableau HTML et changer l'icône de tri
-function sortTableByColumn(table, columnKey, headerCell) {
+// Fonction corrigée pour trier un tableau HTML
+function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
     const headers = table.querySelectorAll('th');
-    const columnIndex = headerCell.dataset.index;
-    
-    const currentSortOrder = headerCell.getAttribute('data-sort-order') || 'asc';
-    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-    headers.forEach(header => {
-        header.removeAttribute('data-sort-order');
-        header.textContent = header.textContent.replace(/[△▽○]/g, '○');  // Remplacer les symboles
+    let columnIndex = -1;
+
+    headers.forEach((header, index) => {
+        if (header.textContent.trim() === columnKey) {
+            columnIndex = index;
+        }
     });
-    
-    headerCell.setAttribute('data-sort-order', sortOrder);
-    headerCell.textContent = `${headerCell.textContent.replace(' ○', '')} ${sortOrder === 'asc' ? '△' : '▽'}`;
+    if (columnIndex === -1) return;
+
+    const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
+    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+    headers.forEach(header => header.removeAttribute('data-sort-order'));
+    headers[columnIndex].setAttribute('data-sort-order', sortOrder);
 
     rows.sort((a, b) => {
         const cellA = a.cells[columnIndex]?.textContent.trim();
