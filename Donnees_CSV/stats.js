@@ -117,7 +117,6 @@ function createPieChart(data, labels, dataset, colors) {
             datasets: [{
                 data: data,
                 backgroundColor: colors,
-                borderColor: colors.map(color => darkenColor(color)), // Optionnel pour ajouter une couleur de bordure
                 borderWidth: 1
             }]
         }
@@ -136,7 +135,6 @@ function createBarChart(data, labels, dataset, colors) {
                 label: 'Moyenne des notes',
                 data: data,
                 backgroundColor: colors,
-                borderColor: colors.map(color => darkenColor(color)), // Optionnel pour ajouter une couleur de bordure
                 borderWidth: 1
             }]
         }
