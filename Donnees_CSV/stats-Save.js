@@ -21,7 +21,7 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
-// Fonction pour afficher un graphique en camembert (pie chart)
+// Fonction pour afficher un graphique en camembert
 function createPieChart(data, labels, title) {
     const ctx = document.createElement('canvas');
     const chartData = {
@@ -38,9 +38,7 @@ function createPieChart(data, labels, title) {
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    position: 'top',
-                },
+                legend: { position: 'top' },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
@@ -54,7 +52,7 @@ function createPieChart(data, labels, title) {
     return ctx;
 }
 
-// Fonction pour afficher un graphique en barres (bar chart)
+// Fonction pour afficher un graphique en barres
 function createBarChart(data, labels, title) {
     const ctx = document.createElement('canvas');
     const chartData = {
@@ -72,11 +70,7 @@ function createBarChart(data, labels, title) {
         data: chartData,
         options: {
             responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
+            scales: { y: { beginAtZero: true } },
             plugins: {
                 tooltip: {
                     callbacks: {
@@ -91,11 +85,11 @@ function createBarChart(data, labels, title) {
     return ctx;
 }
 
-// Fonction pour générer un tableau HTML à partir des données CSV
+// Fonction pour créer un tableau HTML
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
-    // Créer les en-têtes du tableau
+
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = key;
@@ -103,7 +97,8 @@ function createTable(data) {
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
-    // Ajouter les données
+
+    const tbody = document.createElement('tbody');
     data.forEach(row => {
         const tr = document.createElement('tr');
         Object.values(row).forEach(value => {
@@ -111,99 +106,84 @@ function createTable(data) {
             td.textContent = value;
             tr.appendChild(td);
         });
-        table.appendChild(tr);
+        tbody.appendChild(tr);
     });
+    table.appendChild(tbody);
+
     return table;
 }
 
-// Fonction pour trier un tableau HTML par colonne
-function sortTableByColumn(table, column) {
-    const rows = Array.from(table.rows).slice(1);
-    const index = Array.from(table.rows[0].cells).findIndex(cell => cell.textContent === column);
-    const sortedRows = rows.sort((a, b) => {
-        const aValue = a.cells[index].textContent;
-        const bValue = b.cells[index].textContent;
-        return isNaN(aValue) || isNaN(bValue) ? aValue.localeCompare(bValue) : parseFloat(aValue) - parseFloat(bValue);
+// Fonction pour trier un tableau HTML
+function sortTableByColumn(table, columnKey) {
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const headers = table.querySelectorAll('th');
+    let columnIndex = -1;
+
+    headers.forEach((header, index) => {
+        if (header.textContent.trim() === columnKey) {
+            columnIndex = index;
+        }
     });
-    sortedRows.forEach(row => table.appendChild(row));
+    if (columnIndex === -1) return;
+
+    const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
+    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+    headers.forEach(header => header.removeAttribute('data-sort-order'));
+    headers[columnIndex].setAttribute('data-sort-order', sortOrder);
+
+    rows.sort((a, b) => {
+        const cellA = a.cells[columnIndex]?.textContent.trim();
+        const cellB = b.cells[columnIndex]?.textContent.trim();
+
+        if (isNaN(cellA) || isNaN(cellB)) {
+            return sortOrder === 'asc'
+                ? cellA.localeCompare(cellB)
+                : cellB.localeCompare(cellA);
+        } else {
+            return sortOrder === 'asc'
+                ? parseFloat(cellA) - parseFloat(cellB)
+                : parseFloat(cellB) - parseFloat(cellA);
+        }
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
 }
 
-// Fonction principale pour gérer les différentes options
-async function handleDatasetChange(event) {
-    const datasetSelect = document.getElementById('datasetSelect');
-    const selectedDataset = datasetSelect.value;
-    const excludeRare = document.getElementById('excludeRare').checked;
-    let data;
+// Gestion des événements
+const select = document.getElementById('datasetSelect');
+const checkbox = document.getElementById('excludeRare');
+const chartsContainer = document.getElementById('charts-container');
+const tableContainer = document.getElementById('table-container');
 
-    // Charger les données du CSV approprié
-    switch (selectedDataset) {
-        case 'Annees':
-            data = await loadCSV('./Donnees_CSV/Annees.csv');
-            break;
-        case 'Artistes':
-            data = await loadCSV('./Donnees_CSV/Artistes.csv');
-            break;
-        case 'Compagnies':
-            data = await loadCSV('./Donnees_CSV/Compagnies.csv');
-            break;
-        case 'Episodes':
-            data = await loadCSV('./Donnees_CSV/Episodes.csv');
-            break;
-        case 'Generations':
-            data = await loadCSV('./Donnees_CSV/Generations.csv');
-            break;
-        case 'Numeros':
-            data = await loadCSV('./Donnees_CSV/Numeros.csv');
-            break;
-        case 'Sexes':
-            data = await loadCSV('./Donnees_CSV/Sexes.csv');
-            break;
-        case 'Tailles':
-            data = await loadCSV('./Donnees_CSV/Tailles.csv');
-            break;
-        case 'Titres':
-            data = await loadCSV('./Donnees_CSV/Titres.csv');
-            break;
+// Fonction principale pour charger et afficher les données
+async function updateDisplay() {
+    const dataset = select.value;
+    const exclude = checkbox.checked;
+
+    const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
+    const filteredData = filterFrequentOccurrences(data, exclude);
+
+    // Reset containers
+    chartsContainer.innerHTML = '';
+    tableContainer.innerHTML = '';
+
+    const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
+    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+
+    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
+        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
+    } else {
+        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
     }
 
-    // Appliquer le filtre pour exclure les occurrences peu fréquentes
-    data = filterFrequentOccurrences(data, excludeRare);
-
-    // Créer les graphiques et tableaux en fonction des données
-    const chartsContainer = document.getElementById('charts-container');
-    chartsContainer.innerHTML = '';  // Effacer les anciens graphiques et tableaux
-
-    let chartContainer;
-    if (selectedDataset === 'Episodes') {
-        // Ajouter une image pour les épisodes
-        const image = document.createElement('img');
-        image.src = './images/episode-image.jpg';  // Remplace par le nom de ton image
-        chartsContainer.appendChild(image);
-    }
-
-    // Créer un graphique en camembert pour les options avec moins de 50 lignes
-    if (['Annees', 'Artistes', 'Compagnies', 'Episodes', 'Generations', 'Numeros', 'Sexes', 'Tailles'].includes(selectedDataset)) {
-        const labels = data.map(row => row[Object.keys(row)[0]]);
-        const values = data.map(row => parseInt(row.Nombre_de_titres));
-        chartContainer = createPieChart(values, labels, 'Nombre de titres');
-        chartsContainer.appendChild(chartContainer);
-    }
-
-    // Créer un graphique en barres pour MOYENNE_TOTALE
-    const moyenneLabels = data.map(row => row[Object.keys(row)[0]]);
-    const moyenneValues = data.map(row => parseFloat(row.MOYENNE_TOTALE));
-    chartContainer = createBarChart(moyenneValues, moyenneLabels, 'Moyenne totale');
-    chartsContainer.appendChild(chartContainer);
-
-    // Créer un tableau
-    const table = createTable(data);
-    chartsContainer.appendChild(table);
+    const table = createTable(filteredData);
+    tableContainer.appendChild(table);
 }
 
-// Initialiser les événements et charger les données au chargement de la page
-document.getElementById('datasetSelect').addEventListener('change', handleDatasetChange);
+// Event listeners
+select.addEventListener('change', updateDisplay);
+checkbox.addEventListener('change', updateDisplay);
 
 // Initialisation
-window.onload = async () => {
-    await handleDatasetChange({ target: { value: 'Annees' } });  // Charge les données de départ (ex: Annees)
-};
+updateDisplay();
