@@ -33,10 +33,16 @@ function getChartColors(numColors) {
         "#F10700", "#F100BF", "#AD00F1"
     ];
 
+    const miniColors = [
+        "#0000F1", "#8AFF87", "#FFFF09", "#F10700", "#AD00F1"
+    ];
+
     if (numColors < 3) {
         return ["#1BB8FF", "#FFFF09", "#F10700"]; // Moins de 3 couleurs
+    } else if (numColors <= 5) {
+        return miniColors.slice(0, numColors); // Moins de 5 mais plus que 3 couleurs
     } else if (numColors <= 12) {
-        return subsetColors.slice(0, numColors); // Moins de 12 mais plus que 3 couleurs
+        return subsetColors.slice(0, numColors); // Moins de 12 mais plus que 5 couleurs
     } else {
         return allColors; // Plus de 12 couleurs
     }
@@ -197,17 +203,25 @@ async function updateDisplay() {
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    const chartColors = getChartColors(filteredData.length);
+    let chartColors;
+    if (dataset === "Sexes") {
+        chartColors = ['#F100BF', '#1BB8FF'];
+    } else {
+        chartColors = getChartColors(filteredData.length);
+    }
 
-    if (["Annees", "Generations", "Compagnies", "Sexes", "Tailles"].includes(dataset)) {
+    if (
+        ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
+        (dataset === "Compagnies" && exclude)
+    ) {
         const pieChart = createPieChart(counts, labels, dataset, chartColors);
         pieChart.title = "Nombre de titres";
         chartsContainer.appendChild(pieChart);
-
+    
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         barChart.title = "Moyenne des notes";
         chartsContainer.appendChild(barChart);
-    } else if (["Episodes", "Numeros"].includes(dataset)) {
+    } else if (["Episodes", "Numeros"].includes(dataset) || (dataset === "Compagnies" && !exclude)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         barChart.title = "Moyenne des notes";
         chartsContainer.appendChild(barChart);
