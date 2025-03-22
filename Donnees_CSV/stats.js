@@ -128,7 +128,11 @@ function sortTableByColumn(table, column) {
     const headerCells = Array.from(table.rows[0].cells);
     const index = headerCells.findIndex(cell => cell.textContent.replace(/ ▲| ▼/, '').trim() === column);
 
-    const tbody = table.querySelector('tbody');
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        tbody = table; // Si le tbody n'existe pas, on travaille directement avec la table.
+    }
+
     const rows = Array.from(tbody.querySelectorAll('tr'));
 
     // Initialiser le sens de tri (ascendant ou descendant)
@@ -169,6 +173,7 @@ function sortTableByColumn(table, column) {
     const sortedRows = rows.sort(compare(index, headerCells[index].asc));
     sortedRows.forEach(row => tbody.appendChild(row));
 }
+
 
 // Fonction principale pour gérer les différentes options
 async function handleDatasetChange(event) {
