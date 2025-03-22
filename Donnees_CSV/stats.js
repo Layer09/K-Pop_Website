@@ -21,95 +21,117 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
-// Fonction pour charger et afficher les données
+// Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
+function getChartColors(numColors) {
+    const allColors = [
+        "#0000F1", "#1BB8FF", "#40FFD2", "#8AFF87", "#D2FF40", "#FFFF09", 
+        "#FFC400", "#FF6C00", "#F10700", "#F10371", "#F100BF", "#AD00F1"
+    ];
+
+    const subsetColors = [
+        "#0000F1", "#40FFD2", "#8AFF87", "#FFFF09", "#FFC400", 
+        "#F10700", "#F100BF", "#AD00F1"
+    ];
+
+    if (numColors < 3) {
+        return ["#1BB8FF", "#FFFF09", "#F10700"]; // Moins de 3 couleurs
+    } else if (numColors <= 12) {
+        return subsetColors.slice(0, numColors); // Moins de 12 mais plus que 3 couleurs
+    } else {
+        return allColors; // Plus de 12 couleurs
+    }
+}
+
+// Fonction principale pour charger et afficher les données
 async function updateDisplay() {
     const dataset = select.value;
-    const exclude = checkbox.checked;  // Récupère la valeur de la case à cocher
+    const exclude = checkbox.checked;
 
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
-    const filteredData = filterFrequentOccurrences(data, exclude);  // Applique le filtre selon la case
+    const filteredData = filterFrequentOccurrences(data, exclude);
 
-    // Réinitialise les containers
+    // Reset containers
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
 
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    // Création du graphique selon le dataset
-    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
-        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
-    } else {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+    const chartColors = getChartColors(filteredData.length); // Détermine les couleurs à utiliser
+
+    // Conditions selon le dataset sélectionné
+    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
+        // PieChart pour "Nombre_de_titres"
+        const pieChart = createPieChart(counts, labels, dataset, chartColors);
+        pieChart.title = "Nombre de titres"; // Titre du PieChart
+        chartsContainer.appendChild(pieChart);
+
+        // BarChart pour "MOYENNE_TOTALE"
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes"; // Titre du BarChart
+        chartsContainer.appendChild(barChart);
+    } else if (dataset === "Episodes" || dataset === "Numeros") {
+        // BarChart uniquement pour "MOYENNE_TOTALE"
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes"; // Titre du BarChart
+        chartsContainer.appendChild(barChart);
     }
 
-    // Création du tableau
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
 }
 
-// Fonction pour afficher un graphique en camembert
-function createPieChart(data, labels, title) {
-    const ctx = document.createElement('canvas');
-    const chartData = {
-        labels: labels,
-        datasets: [{
-            data: data,
-            backgroundColor: ['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0'],
-            hoverBackgroundColor: ['#ff6666','#3399ff','#66ff66','#ff9966','#9999ff'],
-        }]
-    };
-    new Chart(ctx, {
+// Fonction pour créer un PieChart
+function createPieChart(data, labels, dataset, colors) {
+    const chart = new Chart(document.createElement('canvas'), {
         type: 'pie',
-        data: chartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + ' titres';
-                        }
-                    }
-                }
-            }
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors,
+                borderColor: colors.map(color => darkenColor(color)), // Optionnel pour ajouter une couleur de bordure
+                borderWidth: 1
+            }]
         }
     });
-    return ctx;
+    chart.canvas.title = "Nombre de titres";
+    return chart;
 }
 
-// Fonction pour afficher un graphique en barres
-function createBarChart(data, labels, title) {
-    const ctx = document.createElement('canvas');
-    const chartData = {
-        labels: labels,
-        datasets: [{
-            label: title,
-            data: data,
-            backgroundColor: '#4e73df',
-            borderColor: '#2e59d9',
-            borderWidth: 1
-        }]
-    };
-    new Chart(ctx, {
+// Fonction pour créer un BarChart
+function createBarChart(data, labels, dataset, colors) {
+    const chart = new Chart(document.createElement('canvas'), {
         type: 'bar',
-        data: chartData,
-        options: {
-            responsive: true,
-            scales: { y: { beginAtZero: true } },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + ' titres';
-                        }
-                    }
-                }
-            }
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Moyenne des notes',
+                data: data,
+                backgroundColor: colors,
+                borderColor: colors.map(color => darkenColor(color)), // Optionnel pour ajouter une couleur de bordure
+                borderWidth: 1
+            }]
         }
     });
-    return ctx;
+    chart.canvas.title = "Moyenne des notes";
+    return chart;
+}
+
+// Fonction pour assombrir une couleur (utile pour les bordures)
+function darkenColor(color) {
+    let c = color.substring(1); // Retirer le "#"
+    let rgb = parseInt(c, 16); // Convertir en nombre
+    let r = (rgb >> 16) & 0xff;
+    let g = (rgb >>  8) & 0xff;
+    let b = (rgb >>  0) & 0xff;
+
+    r = Math.max(0, r - 30); // Assombrir de manière uniforme
+    g = Math.max(0, g - 30);
+    b = Math.max(0, b - 30);
+
+    return `#${(1 << 24) + (r << 16) + (g << 8) + b}.toString(16).slice(1)}`;
 }
 
 // Object de remplacement pour les noms de colonnes
