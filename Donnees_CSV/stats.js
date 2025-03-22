@@ -118,13 +118,42 @@ function createTable(data) {
 
 // Fonction pour trier un tableau HTML par colonne
 function sortTableByColumn(table, column) {
+    const headerCells = Array.from(table.rows[0].cells);
+    const index = headerCells.findIndex(cell => cell.textContent.replace(/[\u25B2\u25BC]/g, '').trim() === column);
+
+    // On stocke l'état de tri dans l'attribut dataset
+    const currentHeader = headerCells[index];
+    const currentOrder = currentHeader.dataset.order === 'asc' ? 'desc' : 'asc';
+    currentHeader.dataset.order = currentOrder;
+
+    // Supprimer les flèches des autres colonnes
+    headerCells.forEach(cell => {
+        if (cell !== currentHeader) {
+            cell.dataset.order = '';
+            cell.textContent = cell.textContent.replace(/[\u25B2\u25BC]/g, '').trim();
+        }
+    });
+
+    // Appliquer l'icône selon l'ordre
+    const arrow = currentOrder === 'asc' ? ' △' : ' ▽';
+    currentHeader.textContent = column + arrow;
+
+    // Trier les lignes
     const rows = Array.from(table.rows).slice(1);
-    const index = Array.from(table.rows[0].cells).findIndex(cell => cell.textContent === column);
     const sortedRows = rows.sort((a, b) => {
         const aValue = a.cells[index].textContent;
         const bValue = b.cells[index].textContent;
-        return isNaN(aValue) || isNaN(bValue) ? aValue.localeCompare(bValue) : parseFloat(aValue) - parseFloat(bValue);
+        if (isNaN(aValue) || isNaN(bValue)) {
+            return currentOrder === 'asc'
+                ? aValue.localeCompare(bValue)
+                : bValue.localeCompare(aValue);
+        } else {
+            return currentOrder === 'asc'
+                ? parseFloat(aValue) - parseFloat(bValue)
+                : parseFloat(bValue) - parseFloat(aValue);
+        }
     });
+
     sortedRows.forEach(row => table.appendChild(row));
 }
 
