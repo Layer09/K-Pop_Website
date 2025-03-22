@@ -113,7 +113,7 @@ function createTable(data) {
     return table;
 }
 
-// Fonction pour trier un tableau HTML
+// Fonction corrigée pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
