@@ -149,9 +149,11 @@ function sortTableByColumn(table, columnKey) {
     // Vérifier l'ordre de tri actuel pour cette colonne
     const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
 
-    // Déterminer le nouvel ordre de tri
+    // Si la colonne a déjà été triée et qu'on clique à nouveau dessus, inverser l'ordre
     const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-    headers[columnIndex].setAttribute('data-sort-order', sortOrder);  // Mettre à jour l'ordre de tri pour la colonne
+    
+    // Mettre à jour l'ordre de tri pour la colonne
+    headers[columnIndex].setAttribute('data-sort-order', sortOrder);
 
     // Trier les lignes en fonction de la colonne
     rows.sort((a, b) => {
