@@ -24,12 +24,12 @@ function filterFrequentOccurrences(data, excludeRare) {
 // Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
 function getChartColors(numColors) {
     const allColors = [
-        "#0000F1", "#1BB8FF", "#40FFD2", "#8AFF87", "#D2FF40", "#FFFF09", 
+        "#0000F1", "#1BB8FF", "#40FFD2", "#8AFF87", "#D2FF40", "#FFFF09",
         "#FFC400", "#FF6C00", "#F10700", "#F10371", "#F100BF", "#AD00F1"
     ];
 
     const subsetColors = [
-        "#0000F1", "#40FFD2", "#8AFF87", "#FFFF09", "#FFC400", 
+        "#0000F1", "#40FFD2", "#8AFF87", "#FFFF09", "#FFC400",
         "#F10700", "#F100BF", "#AD00F1"
     ];
 
@@ -40,72 +40,6 @@ function getChartColors(numColors) {
     } else {
         return allColors; // Plus de 12 couleurs
     }
-}
-
-// Fonction principale pour charger et afficher les données
-async function updateDisplay() {
-    const dataset = select.value;
-    const exclude = checkbox.checked;
-
-    const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
-    
-    // Filtrage des données
-    const filteredData = filterFrequentOccurrences(data, exclude);
-
-    // Vérifier si filteredData contient des données
-    if (!filteredData || filteredData.length === 0) {
-        console.error("Aucune donnée filtrée disponible.");
-        return;
-    }
-
-    console.log("Données filtrées : ", filteredData); // Log des données filtrées pour vérifier leur contenu
-
-    // Reset containers
-    chartsContainer.innerHTML = '';
-    tableContainer.innerHTML = '';
-
-    // Vérification de la présence des données avant de les utiliser
-    if (!filteredData[0] || !filteredData[0].Nombre_de_titres || !filteredData[0].MOYENNE_TOTALE) {
-        console.error("Les colonnes attendues (Nombre_de_titres, MOYENNE_TOTALE) sont manquantes dans filteredData.");
-        return;
-    }
-
-    const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
-    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
-    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
-
-    // Vérification des valeurs extraites avec map
-    if (!labels || !counts || !averages || labels.length === 0 || counts.length === 0 || averages.length === 0) {
-        console.error("Données manquantes ou invalides dans les variables : labels, counts, averages.");
-        return;
-    }
-
-    console.log("Labels: ", labels); // Affiche les labels pour vérification
-    console.log("Counts: ", counts); // Affiche les counts pour vérification
-    console.log("Averages: ", averages); // Affiche les averages pour vérification
-
-    const chartColors = getChartColors(filteredData.length); // Détermine les couleurs à utiliser
-
-    // Conditions selon le dataset sélectionné
-    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
-        // PieChart pour "Nombre_de_titres"
-        const pieChart = createPieChart(counts, labels, dataset, chartColors);
-        pieChart.title = "Nombre de titres"; // Titre du PieChart
-        chartsContainer.appendChild(pieChart);
-
-        // BarChart pour "MOYENNE_TOTALE"
-        const barChart = createBarChart(averages, labels, dataset, chartColors);
-        barChart.title = "Moyenne des notes"; // Titre du BarChart
-        chartsContainer.appendChild(barChart);
-    } else if (dataset === "Episodes" || dataset === "Numeros") {
-        // BarChart uniquement pour "MOYENNE_TOTALE"
-        const barChart = createBarChart(averages, labels, dataset, chartColors);
-        barChart.title = "Moyenne des notes"; // Titre du BarChart
-        chartsContainer.appendChild(barChart);
-    }
-
-    const table = createTable(filteredData);
-    tableContainer.appendChild(table);
 }
 
 // Fonction pour créer un PieChart
@@ -145,17 +79,17 @@ function createBarChart(data, labels, dataset, colors) {
 
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
-    let c = color.substring(1); // Retirer le "#"
-    let rgb = parseInt(c, 16); // Convertir en nombre
+    let c = color.substring(1);
+    let rgb = parseInt(c, 16);
     let r = (rgb >> 16) & 0xff;
-    let g = (rgb >>  8) & 0xff;
-    let b = (rgb >>  0) & 0xff;
+    let g = (rgb >> 8) & 0xff;
+    let b = (rgb >> 0) & 0xff;
 
-    r = Math.max(0, r - 30); // Assombrir de manière uniforme
+    r = Math.max(0, r - 30);
     g = Math.max(0, g - 30);
     b = Math.max(0, b - 30);
 
-    return `#${(1 << 24) + (r << 16) + (g << 8) + b}.toString(16).slice(1)}`;
+    return `#${(1 << 24) + (r << 16) + (g << 8) + b}`.toString(16).slice(1);
 }
 
 // Object de remplacement pour les noms de colonnes
@@ -175,10 +109,9 @@ function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
-    // Remplacer les noms de colonnes dans l'en-tête
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = getColumnName(key);  // Remplace le nom de la colonne
+        th.textContent = getColumnName(key);
         th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
@@ -199,7 +132,7 @@ function createTable(data) {
     return table;
 }
 
-// Fonction corrigée pour trier un tableau HTML
+// Fonction pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
@@ -207,7 +140,7 @@ function sortTableByColumn(table, columnKey) {
     let columnIndex = -1;
 
     headers.forEach((header, index) => {
-        if (header.textContent.trim() === columnKey) {
+        if (getColumnName(columnKey) === header.textContent.trim()) {
             columnIndex = index;
         }
     });
@@ -242,7 +175,7 @@ const checkbox = document.getElementById('excludeRare');
 const chartsContainer = document.getElementById('charts-container');
 const tableContainer = document.getElementById('table-container');
 
-// Fonction principale pour charger et afficher les données
+// Fonction principale unique pour charger et afficher les données
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
@@ -250,13 +183,13 @@ async function updateDisplay() {
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
 
-    // Vérifier si filteredData contient des données
-    if (filteredData.length === 0) {
+    if (!filteredData || filteredData.length === 0) {
         console.error("Aucune donnée filtrée disponible.");
+        chartsContainer.innerHTML = '<p>Aucune donnée à afficher.</p>';
+        tableContainer.innerHTML = '';
         return;
     }
 
-    // Reset containers
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
 
@@ -264,21 +197,27 @@ async function updateDisplay() {
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    // Conditions selon le dataset sélectionné
-    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset)); // PieChart pour "Nombre_de_titres"
-        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart pour "MOYENNE_TOTALE"
-    } else if (dataset === "Episodes" || dataset === "Numeros") {
-        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart uniquement pour "MOYENNE_TOTALE"
+    const chartColors = getChartColors(filteredData.length);
+
+    if (["Annees", "Generations", "Compagnies", "Sexes", "Tailles"].includes(dataset)) {
+        const pieChart = createPieChart(counts, labels, dataset, chartColors);
+        pieChart.title = "Nombre de titres";
+        chartsContainer.appendChild(pieChart);
+
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes";
+        chartsContainer.appendChild(barChart);
+    } else if (["Episodes", "Numeros"].includes(dataset)) {
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes";
+        chartsContainer.appendChild(barChart);
     }
 
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
 }
 
-// Event listeners
+// Lier l'événement
 select.addEventListener('change', updateDisplay);
 checkbox.addEventListener('change', updateDisplay);
-
-// Initialisation
-updateDisplay();
+window.addEventListener('DOMContentLoaded', updateDisplay);
