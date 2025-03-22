@@ -112,14 +112,27 @@ function createBarChart(data, labels, title) {
     return ctx;
 }
 
+// Object de remplacement pour les noms de colonnes
+const columnNameReplacements = {
+    'Nombre_de_titres': 'Nombre de titres',
+    'MOYENNE_TOTALE': 'Moyenne',
+    // Ajoute d'autres remplacements si nécessaire
+};
+
+// Fonction pour remplacer les noms de colonnes
+function getColumnName(originalColumnName) {
+    return columnNameReplacements[originalColumnName] || originalColumnName;
+}
+
 // Fonction pour créer un tableau HTML
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
+    // Remplacer les noms de colonnes dans l'en-tête
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = key;
+        th.textContent = getColumnName(key);  // Remplace le nom de la colonne
         th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
