@@ -119,42 +119,48 @@ function createTable(data) {
 // Fonction pour trier un tableau HTML par colonne
 function sortTableByColumn(table, column) {
     const headerCells = Array.from(table.rows[0].cells);
-    const index = headerCells.findIndex(cell => cell.textContent.replace(/[\u25B2\u25BC]/g, '').trim() === column);
+    const index = headerCells.findIndex(cell => cell.textContent.replace(/ ▲| ▼/, '').trim() === column);
 
-    // On stocke l'état de tri dans l'attribut dataset
-    const currentHeader = headerCells[index];
-    const currentOrder = currentHeader.dataset.order === 'asc' ? 'desc' : 'asc';
-    currentHeader.dataset.order = currentOrder;
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
 
-    // Supprimer les flèches des autres colonnes
-    headerCells.forEach(cell => {
-        if (cell !== currentHeader) {
-            cell.dataset.order = '';
-            cell.textContent = cell.textContent.replace(/[\u25B2\u25BC]/g, '').trim();
+    // Initialiser le sens de tri (ascendant ou descendant)
+    if (headerCells[index].asc === undefined) {
+        headerCells[index].asc = true;
+    } else {
+        headerCells[index].asc = !headerCells[index].asc;
+    }
+
+    // Réinitialiser toutes les flèches sauf celle cliquée
+    headerCells.forEach((cell, i) => {
+        if (i !== index) {
+            cell.innerHTML = cell.textContent.replace(/ ▲| ▼/, '');
+            delete cell.asc;
         }
     });
 
-    // Appliquer l'icône selon l'ordre
-    const arrow = currentOrder === 'asc' ? ' △' : ' ▽';
-    currentHeader.textContent = column + arrow;
+    // Ajouter l’icône
+    headerCells[index].innerHTML = column + (headerCells[index].asc ? ' ▲' : ' ▼');
 
-    // Trier les lignes
-    const rows = Array.from(table.rows).slice(1);
-    const sortedRows = rows.sort((a, b) => {
-        const aValue = a.cells[index].textContent;
-        const bValue = b.cells[index].textContent;
-        if (isNaN(aValue) || isNaN(bValue)) {
-            return currentOrder === 'asc'
-                ? aValue.localeCompare(bValue)
-                : bValue.localeCompare(aValue);
-        } else {
-            return currentOrder === 'asc'
-                ? parseFloat(aValue) - parseFloat(bValue)
-                : parseFloat(bValue) - parseFloat(aValue);
-        }
-    });
+    // Fonction de comparaison
+    const compare = function(ids, asc) {
+        return function(row1, row2) {
+            const tdValue = function(row, ids) {
+                return row.children[ids].textContent.trim();
+            };
+            const v1 = tdValue(row1, ids);
+            const v2 = tdValue(row2, ids);
+            if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)) {
+                return asc ? v1 - v2 : v2 - v1;
+            } else {
+                return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
+            }
+        };
+    };
 
-    sortedRows.forEach(row => table.appendChild(row));
+    // Trier et réinjecter dans le tbody
+    const sortedRows = rows.sort(compare(index, headerCells[index].asc));
+    sortedRows.forEach(row => tbody.appendChild(row));
 }
 
 // Fonction principale pour gérer les différentes options
