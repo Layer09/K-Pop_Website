@@ -146,9 +146,10 @@ function sortTableByColumn(table, columnKey) {
     // Si la colonne est introuvable, retourner
     if (columnIndex === -1) return;
 
-    // Alternance entre tri ascendant et descendant
-    let sortOrder = table.getAttribute('data-sort-order') === 'asc' ? 'desc' : 'asc';
-    table.setAttribute('data-sort-order', sortOrder);  // Changer l'ordre de tri pour la prochaine fois
+    // Vérifier l'ordre de tri actuel pour cette colonne
+    const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
+    const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+    headers[columnIndex].setAttribute('data-sort-order', sortOrder);  // Changer l'ordre de tri pour la colonne
 
     // Trier les lignes en fonction de la colonne
     rows.sort((a, b) => {
