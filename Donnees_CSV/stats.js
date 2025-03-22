@@ -48,6 +48,8 @@ async function updateDisplay() {
     const exclude = checkbox.checked;
 
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
+    
+    // Filtrage des données
     const filteredData = filterFrequentOccurrences(data, exclude);
 
     // Vérifier si filteredData contient des données
@@ -56,20 +58,31 @@ async function updateDisplay() {
         return;
     }
 
+    console.log("Données filtrées : ", filteredData); // Log des données filtrées pour vérifier leur contenu
+
     // Reset containers
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
 
-    // Vérification que les données sont bien définies avant de les mapper
+    // Vérification de la présence des données avant de les utiliser
+    if (!filteredData[0] || !filteredData[0].Nombre_de_titres || !filteredData[0].MOYENNE_TOTALE) {
+        console.error("Les colonnes attendues (Nombre_de_titres, MOYENNE_TOTALE) sont manquantes dans filteredData.");
+        return;
+    }
+
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    // Vérification supplémentaire pour s'assurer que les données nécessaires sont présentes
+    // Vérification des valeurs extraites avec map
     if (!labels || !counts || !averages || labels.length === 0 || counts.length === 0 || averages.length === 0) {
-        console.error("Données manquantes ou invalides.");
+        console.error("Données manquantes ou invalides dans les variables : labels, counts, averages.");
         return;
     }
+
+    console.log("Labels: ", labels); // Affiche les labels pour vérification
+    console.log("Counts: ", counts); // Affiche les counts pour vérification
+    console.log("Averages: ", averages); // Affiche les averages pour vérification
 
     const chartColors = getChartColors(filteredData.length); // Détermine les couleurs à utiliser
 
