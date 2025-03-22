@@ -21,6 +21,33 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
+// Fonction pour charger et afficher les données
+async function updateDisplay() {
+    const dataset = select.value;
+    const exclude = checkbox.checked;  // Récupère la valeur de la case à cocher
+
+    const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
+    const filteredData = filterFrequentOccurrences(data, exclude);  // Applique le filtre selon la case
+
+    // Réinitialise les containers
+    chartsContainer.innerHTML = '';
+    tableContainer.innerHTML = '';
+
+    const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
+    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
+
+    // Création du graphique selon le dataset
+    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
+        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
+    } else {
+        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+    }
+
+    // Création du tableau
+    const table = createTable(filteredData);
+    tableContainer.appendChild(table);
+}
+
 // Fonction pour afficher un graphique en camembert
 function createPieChart(data, labels, title) {
     const ctx = document.createElement('canvas');
