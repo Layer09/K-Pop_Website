@@ -152,8 +152,11 @@ function sortTableByColumn(table, columnKey) {
 
     // Trier les lignes en fonction de la colonne
     rows.sort((a, b) => {
-        const cellA = a.cells[columnIndex].textContent.trim();  // Récupérer la valeur de la cellule de la colonne
-        const cellB = b.cells[columnIndex].textContent.trim();  // Récupérer la valeur de la cellule de la colonne
+        const cellA = a.cells[columnIndex]?.textContent.trim();  // Utilisation de l'opérateur de chaînage optionnel (?.)
+        const cellB = b.cells[columnIndex]?.textContent.trim();  // Utilisation de l'opérateur de chaînage optionnel (?.)
+
+        // Si l'une des cellules est undefined, on ne tente pas de faire le tri
+        if (cellA === undefined || cellB === undefined) return 0;
 
         if (isNaN(cellA) || isNaN(cellB)) {
             return sortOrder === 'asc' 
@@ -190,10 +193,12 @@ function updateSortingArrows(table, columnKey, sortOrder) {
 
     // Ajouter la flèche pour la colonne triée
     const th = Array.from(headers).find(header => header.textContent.trim() === columnKey);
-    const arrow = document.createElement('span');
-    arrow.classList.add('sort-arrow');
-    arrow.textContent = sortOrder === 'asc' ? '▲' : '▼';  // Flèche ascendant ou descendant
-    th.appendChild(arrow);
+    if (th) {
+        const arrow = document.createElement('span');
+        arrow.classList.add('sort-arrow');
+        arrow.textContent = sortOrder === 'asc' ? '▲' : '▼';  // Flèche ascendant ou descendant
+        th.appendChild(arrow);
+    }
 }
 
 // Fonction principale pour gérer les différentes options
