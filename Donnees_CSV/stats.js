@@ -133,7 +133,18 @@ function createTable(data) {
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));  // Récupérer toutes les lignes du tbody
-    const columnIndex = Object.keys(data[0]).indexOf(columnKey);  // Trouver l'index de la colonne en fonction du nom
+    const headers = table.querySelectorAll('th');  // Récupérer les en-têtes du tableau
+    let columnIndex = -1;
+
+    // Trouver l'index de la colonne en fonction du texte de l'en-tête
+    headers.forEach((header, index) => {
+        if (header.textContent.trim() === columnKey) {
+            columnIndex = index;
+        }
+    });
+
+    // Si la colonne est introuvable, retourner
+    if (columnIndex === -1) return;
 
     // Alternance entre tri ascendant et descendant
     let sortOrder = table.getAttribute('data-sort-order') === 'asc' ? 'desc' : 'asc';
