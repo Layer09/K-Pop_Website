@@ -51,7 +51,7 @@ function getChartColors(numColors) {
 // Fonction pour créer un PieChart
 function createPieChart(data, labels, dataset, colors) {
     const canvas = document.createElement('canvas');
-    new Chart(canvas, {
+    const config = {
         type: 'pie',
         data: {
             labels: labels,
@@ -60,8 +60,24 @@ function createPieChart(data, labels, dataset, colors) {
                 backgroundColor: colors,
                 borderWidth: 1
             }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Nombre de titres',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
         }
-    });
+    };
+    new Chart(canvas, config);
     return canvas; // On retourne le canvas
 }
 
@@ -76,22 +92,35 @@ function createBarChart(data, labels, dataset, colors) {
                 label: 'Moyenne des notes',
                 data: data,
                 backgroundColor: colors,
+                borderColor: colors.map(c => darkenColor(c)),
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             plugins: {
+                title: {
+                    display: true,
+                    text: 'Moyenne des notes',
+                    font: {
+                        size: 18
+                    }
+                },
                 legend: {
-                    display: false // Légende désactivée
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         }
     };
-
     new Chart(canvas, config);
     return canvas;
 }
+
 
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
