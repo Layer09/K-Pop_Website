@@ -2,7 +2,13 @@
 async function loadCSV(file) {
     const response = await fetch(file);
     const text = await response.text();
-    const rows = text.split('\n').map(row => row.split(','));
+    let rows = text.split('\n').map(row => row.split(','));
+
+    // Supprimer la dernière ligne si elle est vide
+    if (rows.length > 1 && rows[rows.length - 1].every(cell => cell.trim() === '')) {
+        rows.pop();
+    }
+
     const headers = rows[0];
     return rows.slice(1).map(row => {
         let obj = {};
@@ -107,7 +113,7 @@ function createBarChart(data, labels, dataset, colors) {
                     }
                 },
                 legend: {
-                    display: false
+                    display: true
                 }
             },
             scales: {
