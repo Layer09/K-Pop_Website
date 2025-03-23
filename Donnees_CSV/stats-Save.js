@@ -21,102 +21,103 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
-// Fonction pour charger et afficher les données
-async function updateDisplay() {
-    const dataset = select.value;
-    const exclude = checkbox.checked;  // Récupère la valeur de la case à cocher
+// Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
+function getChartColors(numColors) {
+    const allColors = [
+        "#0000F1", "#1BB8FF", "#40FFD2", "#8AFF87", "#D2FF40", "#FFFF09",
+        "#FFC400", "#FF6C00", "#F10700", "#F10371", "#F100BF", "#AD00F1"
+    ];
 
-    const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
-    const filteredData = filterFrequentOccurrences(data, exclude);  // Applique le filtre selon la case
+    const subsetColors = [
+        "#0000F1", "#40FFD2", "#8AFF87", "#FFFF09", "#FFC400",
+        "#F10700", "#F100BF", "#AD00F1"
+    ];
 
-    // Réinitialise les containers
-    chartsContainer.innerHTML = '';
-    tableContainer.innerHTML = '';
+    const miniColors = [
+        "#0000F1", "#8AFF87", "#FFFF09", "#F10700", "#AD00F1"
+    ];
 
-    const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
-    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
-
-    // Création du graphique selon le dataset
-    if (dataset === "Annees" || dataset === "Numeros" || dataset === "Episodes") {
-        chartsContainer.appendChild(createBarChart(counts, labels, dataset));
+    if (numColors < 3) {
+        return ["#1BB8FF", "#FFFF09", "#F10700"]; // Moins de 3 couleurs
+    } else if (numColors <= 5) {
+        return miniColors.slice(0, numColors); // Moins de 5 mais plus que 3 couleurs
+    } else if (numColors <= 12) {
+        return subsetColors.slice(0, numColors); // Moins de 12 mais plus que 5 couleurs
     } else {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset));
+        return allColors; // Plus de 12 couleurs
     }
-
-    // Création du tableau
-    const table = createTable(filteredData);
-    tableContainer.appendChild(table);
 }
 
-// Fonction pour afficher un graphique en camembert
-function createPieChart(data, labels, title) {
-    const ctx = document.createElement('canvas');
-    const chartData = {
-        labels: labels,
-        datasets: [{
-            data: data,
-            backgroundColor: ['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0'],
-            hoverBackgroundColor: ['#ff6666','#3399ff','#66ff66','#ff9966','#9999ff'],
-        }]
-    };
-    new Chart(ctx, {
+// Fonction pour créer un PieChart
+function createPieChart(data, labels, dataset, colors) {
+    const canvas = document.createElement('canvas');
+    new Chart(canvas, {
         type: 'pie',
-        data: chartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + ' titres';
-                        }
-                    }
-                }
-            }
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
         }
     });
-    return ctx;
+    return canvas; // On retourne le canvas
 }
 
-// Fonction pour afficher un graphique en barres
-function createBarChart(data, labels, title) {
-    const ctx = document.createElement('canvas');
-    const chartData = {
-        labels: labels,
-        datasets: [{
-            label: title,
-            data: data,
-            backgroundColor: '#4e73df',
-            borderColor: '#2e59d9',
-            borderWidth: 1
-        }]
-    };
-    new Chart(ctx, {
+// Fonction pour créer un BarChart
+function createBarChart(data, labels, dataset, colors) {
+    const canvas = document.createElement('canvas');
+    const config = {
         type: 'bar',
-        data: chartData,
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Moyenne des notes',
+                data: data,
+                backgroundColor: colors,
+                borderWidth: 1
+            }]
+        },
         options: {
             responsive: true,
-            scales: { y: { beginAtZero: true } },
             plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.label + ': ' + tooltipItem.raw + ' titres';
-                        }
-                    }
+                legend: {
+                    display: false // Légende désactivée
                 }
             }
         }
-    });
-    return ctx;
+    };
+
+    new Chart(canvas, config);
+    return canvas;
+}
+
+// Fonction pour assombrir une couleur (utile pour les bordures)
+function darkenColor(color) {
+    let c = color.substring(1);
+    let rgb = parseInt(c, 16);
+    let r = (rgb >> 16) & 0xff;
+    let g = (rgb >> 8) & 0xff;
+    let b = (rgb >> 0) & 0xff;
+
+    r = Math.max(0, r - 30);
+    g = Math.max(0, g - 30);
+    b = Math.max(0, b - 30);
+
+    return `#${(1 << 24) + (r << 16) + (g << 8) + b}`.toString(16).slice(1);
 }
 
 // Object de remplacement pour les noms de colonnes
 const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
     'MOYENNE_TOTALE': 'Moyenne',
-    // Ajoute d'autres remplacements si nécessaire
+    'Annee': 'Année',
+    'Generation': 'Génération',
+    'Episode': 'Épisode',
+    'Numero': 'Numéro',
+    'Sous_unite': 'Sous-unité ?',
+    'Featuring': 'Featuring ?'
 };
 
 // Fonction pour remplacer les noms de colonnes
@@ -129,10 +130,9 @@ function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
-    // Remplacer les noms de colonnes dans l'en-tête
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
-        th.textContent = getColumnName(key);  // Remplace le nom de la colonne
+        th.textContent = getColumnName(key);
         th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
@@ -153,7 +153,7 @@ function createTable(data) {
     return table;
 }
 
-// Fonction corrigée pour trier un tableau HTML
+// Fonction pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
@@ -161,7 +161,7 @@ function sortTableByColumn(table, columnKey) {
     let columnIndex = -1;
 
     headers.forEach((header, index) => {
-        if (header.textContent.trim() === columnKey) {
+        if (getColumnName(columnKey) === header.textContent.trim()) {
             columnIndex = index;
         }
     });
@@ -196,7 +196,7 @@ const checkbox = document.getElementById('excludeRare');
 const chartsContainer = document.getElementById('charts-container');
 const tableContainer = document.getElementById('table-container');
 
-// Fonction principale pour charger et afficher les données
+// Fonction principale unique pour charger et afficher les données
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
@@ -204,7 +204,20 @@ async function updateDisplay() {
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
 
-    // Reset containers
+    // Désactive ou active la checkbox en fonction du dataset sélectionné
+if (dataset === "Titres") {
+    if (checkbox.checked) {
+        checkbox.checked = false;
+        checkbox.disabled = true;
+        updateDisplay(); // Relance l'affichage en "mode Titres" sans la case cochée
+        return; 
+    } else {
+        checkbox.disabled = true;
+    }
+} else {
+    checkbox.disabled = false;
+}
+
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
 
@@ -212,21 +225,45 @@ async function updateDisplay() {
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
 
-    // Conditions selon le dataset sélectionné
-    if (dataset === "Annees" || dataset === "Generations" || dataset === "Compagnies" || dataset === "Sexes" || dataset === "Tailles") {
-        chartsContainer.appendChild(createPieChart(counts, labels, dataset)); // PieChart pour "Nombre_de_titres"
-        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart pour "MOYENNE_TOTALE"
-    } else if (dataset === "Episodes" || dataset === "Numeros") {
-        chartsContainer.appendChild(createBarChart(averages, labels, dataset)); // BarChart uniquement pour "MOYENNE_TOTALE"
+    let chartColors;
+    if (dataset === "Sexes") {
+        chartColors = ['#F100BF', '#1BB8FF'];
+    } else {
+        chartColors = getChartColors(filteredData.length);
     }
+
+    if (
+        ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
+        (dataset === "Compagnies" && exclude)
+    ) {
+        const pieChart = createPieChart(counts, labels, dataset, chartColors);
+        pieChart.title = "Nombre de titres";
+        chartsContainer.appendChild(pieChart);
+    
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes";
+        chartsContainer.appendChild(barChart);
+    } else if (["Episodes", "Numeros"].includes(dataset)) {
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        barChart.title = "Moyenne des notes";
+        chartsContainer.appendChild(barChart);
+    }
+
+    // Ajouter l'image uniquement pour "Episodes"
+        if (dataset === "Episodes") {
+            const heatmapImage = document.createElement('img');
+            heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
+            heatmapImage.alt = 'Heatmap Episodes';
+            heatmapImage.style.width = '100%';
+            heatmapImage.style.margin = '20px 0';
+            chartsContainer.appendChild(heatmapImage);
+        }
 
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
 }
 
-// Event listeners
+// Lier l'événement
 select.addEventListener('change', updateDisplay);
 checkbox.addEventListener('change', updateDisplay);
-
-// Initialisation
-updateDisplay();
+window.addEventListener('DOMContentLoaded', updateDisplay);
