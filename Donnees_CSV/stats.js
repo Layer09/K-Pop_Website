@@ -171,10 +171,17 @@ function createTable(data) {
             if (key === "Vidéo Youtube" && value.startsWith("http")) {
                 const a = document.createElement('a');
                 a.href = value;
-                a.textContent = "Voir la vidéo";
                 a.target = "_blank";
                 a.rel = "noopener noreferrer";
-                td.appendChild(a);
+                // Création de l'élément image avec le logo YouTube
+                const img = document.createElement('img');
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
+                img.alt = "YouTube";
+                img.style.width = "24px"; // Taille du logo (ajustable)
+                img.style.height = "24px"; // Taille du logo (ajustable)
+                img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
+                a.appendChild(img); // Ajouter l'image au lien
+                td.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
             } else {
                 td.textContent = value;
             }
@@ -185,6 +192,7 @@ function createTable(data) {
     table.appendChild(tbody);
     return table;
 }
+
 
 // Fonction pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
