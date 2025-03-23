@@ -208,18 +208,13 @@ async function updateDisplay() {
     if (dataset === "Titres") {
         checkbox.checked = false;
         checkbox.disabled = true;
+        // Relancer l'apparition du tableau
+        tableContainer.innerHTML = '';  // Vide l'ancien contenu du tableau
+        const table = createTable(filteredData);  // Crée le nouveau tableau
+        tableContainer.appendChild(table);  // Ajoute le tableau à la page
     } else {
         checkbox.disabled = false;
     }
-    
-    // Si aucune donnée n’est trouvée après filtrage
-    if (!filteredData || filteredData.length === 0) {
-        console.error("Aucune donnée filtrée disponible.");
-        chartsContainer.innerHTML = '<p>Aucune donnée à afficher.</p>';
-        tableContainer.innerHTML = '';
-        return;
-    }
-
 
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
