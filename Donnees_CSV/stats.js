@@ -113,7 +113,7 @@ function createBarChart(data, labels, dataset, colors) {
                     }
                 },
                 legend: {
-                    display: true
+                    display: false
                 }
             },
             scales: {
