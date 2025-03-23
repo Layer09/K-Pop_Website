@@ -256,7 +256,6 @@ async function updateDisplay() {
             heatmapImage.style.margin = '20px 0';
             chartsContainer.appendChild(heatmapImage);
         }
-    }
 
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
