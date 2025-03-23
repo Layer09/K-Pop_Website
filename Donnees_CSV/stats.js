@@ -205,16 +205,18 @@ async function updateDisplay() {
     const filteredData = filterFrequentOccurrences(data, exclude);
 
     // Désactive ou active la checkbox en fonction du dataset sélectionné
-    if (dataset === "Titres") {
+if (dataset === "Titres") {
+    if (checkbox.checked) {
         checkbox.checked = false;
         checkbox.disabled = true;
-        // Relancer l'apparition du tableau
-        tableContainer.innerHTML = '';  // Vide l'ancien contenu du tableau
-        const table = createTable(filteredData);  // Crée le nouveau tableau
-        tableContainer.appendChild(table);  // Ajoute le tableau à la page
+        updateDisplay(); // Relance l'affichage en "mode Titres" sans la case cochée
+        return; 
     } else {
-        checkbox.disabled = false;
+        checkbox.disabled = true;
     }
+} else {
+    checkbox.disabled = false;
+}
 
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
