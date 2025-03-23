@@ -2,7 +2,13 @@
 async function loadCSV(file) {
     const response = await fetch(file);
     const text = await response.text();
-    const rows = text.split('\n').map(row => row.split(','));
+    let rows = text.split('\n').map(row => row.split(','));
+
+    // Supprimer la dernière ligne si elle est vide
+    if (rows.length > 1 && rows[rows.length - 1].every(cell => cell.trim() === '')) {
+        rows.pop();
+    }
+
     const headers = rows[0];
     return rows.slice(1).map(row => {
         let obj = {};
@@ -51,7 +57,7 @@ function getChartColors(numColors) {
 // Fonction pour créer un PieChart
 function createPieChart(data, labels, dataset, colors) {
     const canvas = document.createElement('canvas');
-    new Chart(canvas, {
+    const config = {
         type: 'pie',
         data: {
             labels: labels,
@@ -60,8 +66,24 @@ function createPieChart(data, labels, dataset, colors) {
                 backgroundColor: colors,
                 borderWidth: 1
             }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Nombre de titres',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
         }
-    });
+    };
+    new Chart(canvas, config);
     return canvas; // On retourne le canvas
 }
 
@@ -76,22 +98,35 @@ function createBarChart(data, labels, dataset, colors) {
                 label: 'Moyenne des notes',
                 data: data,
                 backgroundColor: colors,
+                borderColor: colors.map(c => darkenColor(c)),
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             plugins: {
+                title: {
+                    display: true,
+                    text: 'Moyenne des notes',
+                    font: {
+                        size: 18
+                    }
+                },
                 legend: {
-                    display: false // Légende désactivée
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         }
     };
-
     new Chart(canvas, config);
     return canvas;
 }
+
 
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
@@ -197,6 +232,8 @@ const chartsContainer = document.getElementById('charts-container');
 const tableContainer = document.getElementById('table-container');
 
 // Fonction principale unique pour charger et afficher les données
+// ... tout le code que tu as donné reste inchangé jusqu'à updateDisplay ...
+
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
@@ -205,18 +242,18 @@ async function updateDisplay() {
     const filteredData = filterFrequentOccurrences(data, exclude);
 
     // Désactive ou active la checkbox en fonction du dataset sélectionné
-if (dataset === "Titres") {
-    if (checkbox.checked) {
-        checkbox.checked = false;
-        checkbox.disabled = true;
-        updateDisplay(); // Relance l'affichage en "mode Titres" sans la case cochée
-        return; 
+    if (dataset === "Titres") {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            checkbox.disabled = true;
+            updateDisplay(); // Relance l'affichage en "mode Titres" sans la case cochée
+            return; 
+        } else {
+            checkbox.disabled = true;
+        }
     } else {
-        checkbox.disabled = true;
+        checkbox.disabled = false;
     }
-} else {
-    checkbox.disabled = false;
-}
 
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
@@ -232,38 +269,65 @@ if (dataset === "Titres") {
         chartColors = getChartColors(filteredData.length);
     }
 
+    // Changement des titres et légendes selon le dataset
     if (
         ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
         (dataset === "Compagnies" && exclude)
     ) {
         const pieChart = createPieChart(counts, labels, dataset, chartColors);
-        pieChart.title = "Nombre de titres";
+        if (dataset === "Sexes") {
+            pieChart.title = "Répartition du nombre de titres par sexe";
+        } else if (dataset === "Annees") {
+            pieChart.title = "Répartition du nombre de titres par année";
+        } else if (dataset === "Generations") {
+            pieChart.title = "Répartition du nombre de titres par génération";
+        } else if (dataset === "Tailles") {
+            pieChart.title = "Répartition du nombre de titres par taille de groupe";
+        } else if (dataset === "Compagnies") {
+            pieChart.title = "Répartition du nombre de titres par compagnie";
+        }
         chartsContainer.appendChild(pieChart);
-    
+
         const barChart = createBarChart(averages, labels, dataset, chartColors);
-        barChart.title = "Moyenne des notes";
+        if (dataset === "Sexes") {
+            barChart.title = "Moyenne des notes par sexe";
+        } else if (dataset === "Annees") {
+            barChart.title = "Moyenne des notes par année";
+        } else if (dataset === "Generations") {
+            barChart.title = "Moyenne des notes par génération";
+        } else if (dataset === "Tailles") {
+            barChart.title = "Moyenne des notes par taille de groupe";
+        } else if (dataset === "Compagnies") {
+            barChart.title = "Moyenne des notes par compagnie";
+        }
         chartsContainer.appendChild(barChart);
     } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
-        barChart.title = "Moyenne des notes";
+        if (dataset === "Episodes") {
+            barChart.title = "Moyenne des notes par épisode";
+        } else if (dataset === "Numeros") {
+            barChart.title = "Moyenne des notes par numéro";
+        }
         chartsContainer.appendChild(barChart);
     }
 
     // Ajouter l'image uniquement pour "Episodes"
-        if (dataset === "Episodes") {
-            const heatmapImage = document.createElement('img');
-            heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
-            heatmapImage.alt = 'Heatmap Episodes';
-            heatmapImage.style.width = '100%';
-            heatmapImage.style.margin = '20px 0';
-            chartsContainer.appendChild(heatmapImage);
-        }
+    if (dataset === "Episodes") {
+        const heatmapImage = document.createElement('img');
+        heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
+        heatmapImage.alt = 'Heatmap Episodes';
+        heatmapImage.style.width = '100%';
+        heatmapImage.style.margin = '20px 0';
+        chartsContainer.appendChild(heatmapImage);
+    }
 
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
 }
 
-// Lier l'événement
+
 select.addEventListener('change', updateDisplay);
 checkbox.addEventListener('change', updateDisplay);
-window.addEventListener('DOMContentLoaded', updateDisplay);
+
+// Chargement initial
+updateDisplay();
