@@ -12,8 +12,12 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     if (user) {
         localStorage.setItem("loggedInUser", username);  // Sauvegarde de la session
         document.getElementById("message").innerText = "Connexion réussie ! Redirection...";
+
+        // Récupérer l'URL de la page précédente
+        let previousPage = localStorage.getItem("previousPage") || "index.html"; // Page par défaut si non définie
+
         setTimeout(() => {
-            window.location.href = "index.html";  // Redirection après connexion
+            window.location.href = previousPage;  // Redirection vers la page précédente
         }, 1500);
     } else {
         document.getElementById("message").innerText = "Identifiants incorrects.";
