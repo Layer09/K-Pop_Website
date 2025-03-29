@@ -7,7 +7,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     // Hachage du mot de passe en SHA-256
     let hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
-    let user = users.find(u => u.username === username && u.password === hashedPassword);
+    let user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === hashedPassword);
 
     if (user) {
         localStorage.setItem("loggedInUser", username);  // Sauvegarde de la session
