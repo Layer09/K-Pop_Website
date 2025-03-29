@@ -13,7 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         localStorage.setItem("loggedInUser", username);  // Sauvegarde de la session
         document.getElementById("message").innerText = "Connexion réussie ! Redirection...";
         setTimeout(() => {
-            window.location.href = "dashboard.html";  // Redirection après connexion
+            window.location.href = "index.html";  // Redirection après connexion
         }, 1500);
     } else {
         document.getElementById("message").innerText = "Identifiants incorrects.";
