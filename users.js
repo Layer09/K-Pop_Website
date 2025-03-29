@@ -1,7 +1,7 @@
 const users = [
-    { username: "anna", password: "ae5f4cceb2b7c4eaac9374684dbe2a68c087995fc3bc4b3308504beeb6d484b9" }, // 12032004
-    { username: "melyssa", password: "6cd780750f65844a2193cb590e399abf8e7b6e3df147df6b68a2cb83f35b08db" }, // 07012004
-    { username: "laurana", password: "4fdb1521906e0f2e7c85b2ff1fc14449a14db5dd5608cb5de2d1c2fb9a05c3a5" }, // 09072001
-    { username: "jeremy", password: "309cf8ea909b6ef1b4cb308dddfb8a6de64c7a2ed3b2e034abafce7492c54f48" }, // 12091996
-    { username: "andy", password: "48f4f34ff3c3eb4e47418706068fa8bc264f7ad6df4c41584ffec43cc0cc1c98" }  // 04121997
+    { username: "anna", password: "d67b32d66a2648b39cdb57074232804fcbf6d43a04fbd7e66b0468ab0c3f9ad7" },
+    { username: "melyssa", password: "a7361d1aafdf672f96a6f37566f5958aa7747407093f92c5d79632bb67d557ca" },
+    { username: "laurana", password: "847a30b29119055aa53ec6a26a8e3df64ddb325feb2b2e8989f0bf263194781d" },
+    { username: "jeremy", password: "332418375d0118e50a3d928416efd13b3d35cd69f6b99d46f305d9c08874d806" },
+    { username: "andy", password: "9d0153551508b76a66d2456649914ce1d52a33e88e8eb7aa59f1e2c9d76d9439" }
 ];
