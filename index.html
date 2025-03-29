@@ -12,6 +12,7 @@
             position: absolute;
             top: 10px;
             right: 20px;
+            width: 200px;
         }
 
         #user-container {
@@ -43,9 +44,19 @@
             margin-right: 8px;
         }
 
+        #user-info {
+            display: flex;
+            align-items: center; /* Centre verticalement les éléments */
+            cursor: pointer;
+            position: relative;
+        }
+
         #username-display {
+            display: flex;
+            align-items: center; /* Centrer le texte verticalement */
+            height: 100%; /* Assurer que l'élément prenne toute la hauteur de son conteneur */
             color: white;
-            font-size: 16px;
+            font-size: 23px;
         }
 
         /* Menu déroulant */
@@ -58,7 +69,8 @@
             overflow: hidden;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
             display: none;
-            min-width: 180px;
+            /* min-width: 180px; */
+            width: 225px;
         }
 
         #dropdown-menu.show {
