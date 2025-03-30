@@ -36,6 +36,7 @@
             color: white;
             display: flex;
             align-items: center; /* Centre verticalement */
+            vertical-align: middle;
             gap: 5px; /* Espacement entre l'icône et le texte */
         }
 
@@ -259,25 +260,28 @@
         }
     
         // Afficher/masquer le menu déroulant
-        userInfo.addEventListener("click", () => {
-            dropdownMenu.classList.toggle("show");
-        });
+        if (userInfo) {
+            userInfo.addEventListener("click", (event) => {
+                event.stopPropagation(); // Empêche la fermeture immédiate après ouverture
+                dropdownMenu.classList.toggle("hidden");
+            });
+    
+            // Fermer le menu si on clique ailleurs
+            document.addEventListener("click", (event) => {
+                if (!userInfo.contains(event.target)) {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
+        }
     
         // Déconnexion
-        logoutButton.addEventListener("click", () => {
-            localStorage.removeItem("loggedInUser"); // Retirer l'utilisateur de localStorage
-            window.location.reload(); // Recharger la page pour réinitialiser l'affichage
-        });
-    
-        // Cacher le menu si on clique ailleurs
-        document.addEventListener("click", event => {
-            if (!userInfo.contains(event.target)) {
-                dropdownMenu.classList.remove("show");
-            }
-        });
+        if (logoutButton) {
+            logoutButton.addEventListener("click", () => {
+                localStorage.removeItem("loggedInUser"); // Retirer l'utilisateur de localStorage
+                window.location.reload(); // Recharger la page pour réinitialiser l'affichage
+            });
+        }
     });
-
-        
     </script>
 </body>
 </html>
