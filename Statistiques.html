@@ -46,10 +46,6 @@
             gap: 30px;
             margin: 0 auto;
         }
-
-        .label_switch {
-            color: #00c5d5;
-        }
         
         table {
             width: 100%;
@@ -101,6 +97,26 @@
             margin: 0 10px;
             font-weight: bold;
         }
+
+        .excludeRare {
+            margin-right: 6px;
+            margin-top: 10.5px;
+            margin-bottom: 10.5px;
+        }
+
+        #excludeRare {
+            margin-left: 6px;
+        }
+        
+        .label_switch_1 {
+            color: #00c5d5;
+            margin-left: 5px;
+        }
+
+        .label_switch_2 {
+            color: #00c5d5;
+            margin-right: 5px;
+        }
     
         .switch {
             position: relative;
@@ -141,6 +157,8 @@
 
         .switch-wrapper {
             margin: 0 12px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
     
         input:checked + .slider {
@@ -192,14 +210,14 @@
             <label for="excludeRare">Exclure les occurrences peu fréquentes</label>
         </div>
         <div class="switch-container">
-          <span class="label_switch">Global</span>
+          <span class="label_switch_1">Global</span>
             <div class="switch-wrapper">
               <label class="switch">
                 <input type="checkbox" id="toggle" />
                 <span class="slider"></span>
               </label>
             </div>
-          <span class="label_switch">Générationnel</span>
+          <span class="label_switch_2">Générationnel</span>
         </div>
     </div>
 
