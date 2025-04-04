@@ -117,7 +117,7 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: #f9f9f9;
+          background-color: #00c5d5;
           border-radius: 34px;
           transition: 0.4s;
         }
@@ -132,6 +132,10 @@
           background-color: white;
           border-radius: 50%;
           transition: 0.4s;
+        }
+
+        .switch-wrapper {
+          margin: 0 12px;
         }
     
         input:checked + .slider {
@@ -184,10 +188,12 @@
         </div>
         <div class="switch-container">
           <span class="label_switch">Global</span>
-          <label class="switch">
-            <input type="checkbox" id="toggle" />
-            <span class="slider"></span>
-          </label>
+            <div class="switch-wrapper">
+              <label class="switch">
+                <input type="checkbox" id="toggle" />
+                <span class="slider"></span>
+              </label>
+            </div>
           <span class="label_switch">Générationnel</span>
         </div>
     </div>
