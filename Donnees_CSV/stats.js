@@ -25,6 +25,16 @@ function filterFrequentOccurrences(data, excludeRare) {
     return data;
 }
 
+// On/Off général ou groupé
+const toggle = document.getElementById('toggle');
+toggle.addEventListener('change', function() {
+if (this.checked) {
+  console.log('Mode : Générationnel');
+} else {
+  console.log('Mode : Global');
+}
+});
+
 // Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
 function getChartColors(numColors) {
     const allColors = [
