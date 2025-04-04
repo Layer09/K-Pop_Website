@@ -1,4 +1,4 @@
-Taille,Nombre_de_titres,MOYENNE_TOTALE
-Groupe,385,6.4
-Solo,48,5.6
-Duo,1,4.7
+Taille,Nombre_de_titres,Moyenne_Nouveaux_fans,Moyenne_Anciens_fans,Moyenne_Totale
+Groupe,384,5.41,7.59,6.5
+Solo,48,4.57,6.67,5.62
+Duo,2,6.5,5.0,5.75
