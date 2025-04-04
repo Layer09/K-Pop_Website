@@ -257,7 +257,7 @@ async function updateDisplay() {
     tableContainer.innerHTML = '';
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
-    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
+    const averages = filteredData.map(row => parseFloat(row.Moyenne_Totale));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
