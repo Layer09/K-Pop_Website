@@ -82,7 +82,61 @@
         th[data-sort-order="desc"]::after {
             content: ' ▽';
         }
-
+    
+        .switch-container {
+          display: flex;
+          align-items: center;
+          font-family: sans-serif;
+        }
+    
+        .label {
+          margin: 0 10px;
+          font-weight: bold;
+        }
+    
+        .switch {
+          position: relative;
+          width: 60px;
+          height: 30px;
+        }
+    
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+    
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #f9f9f9;
+          border-radius: 34px;
+          transition: 0.4s;
+        }
+    
+        .slider::before {
+          position: absolute;
+          content: "";
+          height: 24px;
+          width: 24px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          border-radius: 50%;
+          transition: 0.4s;
+        }
+    
+        input:checked + .slider {
+          background-color: #00c5d5;
+        }
+    
+        input:checked + .slider::before {
+          transform: translateX(30px);
+        }
     </style>
 </head>
 <body>
@@ -123,6 +177,14 @@
         <div class="checkbox-container">
             <input type="checkbox" id="excludeRare">
             <label for="excludeRare">Exclure les occurrences peu fréquentes</label>
+        </div>
+        <div class="switch-container">
+          <span class="label">Global</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle" />
+            <span class="slider"></span>
+          </label>
+          <span class="label">Générationnel</span>
         </div>
     </div>
 
