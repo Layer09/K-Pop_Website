@@ -3,12 +3,10 @@ async function loadCSV(file) {
     const response = await fetch(file);
     const text = await response.text();
     let rows = text.split('\n').map(row => row.split(','));
-
     // Supprimer la dernière ligne si elle est vide
     if (rows.length > 1 && rows[rows.length - 1].every(cell => cell.trim() === '')) {
         rows.pop();
     }
-
     const headers = rows[0];
     return rows.slice(1).map(row => {
         let obj = {};
@@ -33,16 +31,13 @@ function getChartColors(numColors) {
         "#0000F1", "#1BB8FF", "#40FFD2", "#8AFF87", "#D2FF40", "#FFFF09",
         "#FFC400", "#FF6C00", "#F10700", "#F10371", "#F100BF", "#AD00F1"
     ];
-
     const subsetColors = [
         "#0000F1", "#40FFD2", "#8AFF87", "#FFFF09", "#FFC400",
         "#F10700", "#F100BF", "#AD00F1"
     ];
-
     const miniColors = [
         "#0000F1", "#8AFF87", "#FFFF09", "#F10700", "#AD00F1"
     ];
-
     if (numColors < 3) {
         return ["#1BB8FF", "#FFFF09", "#F10700"]; // Moins de 3 couleurs
     } else if (numColors <= 5) {
@@ -127,7 +122,6 @@ function createBarChart(data, labels, dataset, colors) {
     return canvas;
 }
 
-
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
     let c = color.substring(1);
@@ -135,18 +129,18 @@ function darkenColor(color) {
     let r = (rgb >> 16) & 0xff;
     let g = (rgb >> 8) & 0xff;
     let b = (rgb >> 0) & 0xff;
-
     r = Math.max(0, r - 30);
     g = Math.max(0, g - 30);
     b = Math.max(0, b - 30);
-
     return `#${(1 << 24) + (r << 16) + (g << 8) + b}`.toString(16).slice(1);
 }
 
 // Object de remplacement pour les noms de colonnes
 const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
-    'MOYENNE_TOTALE': 'Moyenne',
+    'Moyenne_Nouveaux_fans': 'Moyenne (Nouveaux fans) /10',
+    'Moyenne_Anciens_fans': 'Moyenne (Anciens fans) /10',
+    'Moyenne_Totale': 'Moyenne /10',
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
@@ -164,7 +158,6 @@ function getColumnName(originalColumnName) {
 function createTable(data) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
-
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = getColumnName(key);
@@ -172,21 +165,36 @@ function createTable(data) {
         headerRow.appendChild(th);
     });
     table.appendChild(headerRow);
-
     const tbody = document.createElement('tbody');
     data.forEach(row => {
         const tr = document.createElement('tr');
-        Object.values(row).forEach(value => {
+        Object.entries(row).forEach(([key, value]) => {
             const td = document.createElement('td');
-            td.textContent = value;
+            if (key === "Vidéo Youtube" && value.startsWith("http")) {
+                const a = document.createElement('a');
+                a.href = value;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                // Création de l'élément image avec le logo YouTube
+                const img = document.createElement('img');
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
+                img.alt = "YouTube";
+                img.style.width = "21px"; // Taille du logo (ajustable)
+                img.style.height = "15px"; // Taille du logo (ajustable)
+                img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
+                a.appendChild(img); // Ajouter l'image au lien
+                td.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
+            } else {
+                td.textContent = value;
+            }
             tr.appendChild(td);
         });
         tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-
     return table;
 }
+
 
 // Fonction pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
@@ -194,23 +202,19 @@ function sortTableByColumn(table, columnKey) {
     const rows = Array.from(tbody.querySelectorAll('tr'));
     const headers = table.querySelectorAll('th');
     let columnIndex = -1;
-
     headers.forEach((header, index) => {
         if (getColumnName(columnKey) === header.textContent.trim()) {
             columnIndex = index;
         }
     });
     if (columnIndex === -1) return;
-
     const currentSortOrder = headers[columnIndex].getAttribute('data-sort-order') || 'asc';
     const sortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
     headers.forEach(header => header.removeAttribute('data-sort-order'));
     headers[columnIndex].setAttribute('data-sort-order', sortOrder);
-
     rows.sort((a, b) => {
         const cellA = a.cells[columnIndex]?.textContent.trim();
         const cellB = b.cells[columnIndex]?.textContent.trim();
-
         if (isNaN(cellA) || isNaN(cellB)) {
             return sortOrder === 'asc'
                 ? cellA.localeCompare(cellB)
@@ -221,7 +225,6 @@ function sortTableByColumn(table, columnKey) {
                 : parseFloat(cellB) - parseFloat(cellA);
         }
     });
-
     rows.forEach(row => tbody.appendChild(row));
 }
 
@@ -232,15 +235,11 @@ const chartsContainer = document.getElementById('charts-container');
 const tableContainer = document.getElementById('table-container');
 
 // Fonction principale unique pour charger et afficher les données
-// ... tout le code que tu as donné reste inchangé jusqu'à updateDisplay ...
-
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
-
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
-
     // Désactive ou active la checkbox en fonction du dataset sélectionné
     if (dataset === "Titres") {
         if (checkbox.checked) {
@@ -254,21 +253,17 @@ async function updateDisplay() {
     } else {
         checkbox.disabled = false;
     }
-
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
-
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
-    const averages = filteredData.map(row => parseFloat(row.MOYENNE_TOTALE));
-
+    const averages = filteredData.map(row => parseFloat(row.Moyenne_Totale));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
     } else {
         chartColors = getChartColors(filteredData.length);
     }
-
     // Changement des titres et légendes selon le dataset
     if (
         ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
@@ -287,7 +282,6 @@ async function updateDisplay() {
             pieChart.title = "Répartition du nombre de titres par compagnie";
         }
         chartsContainer.appendChild(pieChart);
-
         const barChart = createBarChart(averages, labels, dataset, chartColors);
         if (dataset === "Sexes") {
             barChart.title = "Moyenne des notes par sexe";
@@ -310,7 +304,6 @@ async function updateDisplay() {
         }
         chartsContainer.appendChild(barChart);
     }
-
     // Ajouter l'image uniquement pour "Episodes"
     if (dataset === "Episodes") {
         const heatmapImage = document.createElement('img');
@@ -320,12 +313,9 @@ async function updateDisplay() {
         heatmapImage.style.margin = '20px 0';
         chartsContainer.appendChild(heatmapImage);
     }
-
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
 }
-
-
 select.addEventListener('change', updateDisplay);
 checkbox.addEventListener('change', updateDisplay);
 
