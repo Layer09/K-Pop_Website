@@ -38,6 +38,8 @@
             color: white;
             border: 2px solid white;
             border-radius: 2px;
+            cursor: pointer;
+            user-select: none;
         }
         
         #charts-container {
@@ -91,6 +93,7 @@
             font-family: sans-serif;
             border: 2px solid #00c5d5;
             border-radius: 2px;
+            cursor: pointer;
         }
     
         .label {
@@ -205,7 +208,7 @@
             <option value="Tailles">Tailles</option>
             <option value="Titres">Titres</option>
         </select>
-        <div class="checkbox-container">
+        <div class="checkbox-container" for="excludeRare">
             <input type="checkbox" id="excludeRare">
             <label for="excludeRare" class="excludeRare">Exclure les occurrences peu fréquentes</label>
         </div>
@@ -278,7 +281,17 @@
         });
     
         observer.observe(document.body, { childList: true, subtree: true });
-    });
+      });
+
+      const container = document.getElementById('toggleContainer');
+      const checkbox = document.getElementById('toggle');
+      container.addEventListener('click', (e) => {
+        // Évite de double-cliquer si on clique directement sur l'input
+        if (e.target.tagName !== 'INPUT') {
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event('change')); // pour déclencher les éventuels listeners
+        }
+      });
     </script>
 </body>
 </html>
