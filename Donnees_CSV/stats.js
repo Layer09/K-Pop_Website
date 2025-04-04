@@ -138,7 +138,9 @@ function darkenColor(color) {
 // Object de remplacement pour les noms de colonnes
 const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
-    'MOYENNE_TOTALE': 'Moyenne /10',
+    'Moyenne_Nouveaux_fans': 'Moyenne (Nouveaux fans) /10',
+    'Moyenne_Anciens_fans': 'Moyenne (Anciens fans) /10',
+    'Moyenne_Totale': 'Moyenne /10',
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
