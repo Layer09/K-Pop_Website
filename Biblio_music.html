@@ -128,7 +128,10 @@
             gap: 10px;
             align-items: center;
             margin: 10px;
-            border: 2px white;
+        }
+
+        .filters-wrapper {
+            border: 2px solid white;
             border-radius: 2px;
         }
 
@@ -153,13 +156,15 @@
         
         #toggle-more {
             background-color: transparent;
-            border: 1px solid #8a6ace;
+            border: 2px solid #8a6ace;
             color: #8a6ace;
             padding: 6px 10px;
             cursor: pointer;
             border-radius: 4px;
-            height: fit-content;
-            margin-top: 20px;
+            height: 32px;
+            margin-top: 15px;
+            width: 183px;
+            font-size: 1.1em;
         }
         
         .hidden {
@@ -244,51 +249,53 @@
         <input type="range" id="globalVolume" min="0" max="100" step="1">
         <span id="volumeValue"></span>
     </div>
-    <div class="filters-container">
-      <div class="filter">
-        <label for="artist">Artiste</label>
-        <input type="text" id="artist" />
-      </div>
-      <div class="filter">
-        <label for="title">Titre</label>
-        <input type="text" id="title" />
-      </div>
-      <div class="filter">
-        <label for="year">Année</label>
-        <input type="text" id="year" />
-      </div>
-      <button id="toggle-more">Plus de filtres</button>
-  
-      <div id="more-filters" class="hidden line">
-        <div class="filter">
-          <label for="id">ID</label>
-          <input type="text" id="id" />
+    <div class="filters-wrapper">
+        <div class="filters-container">
+          <div class="filter">
+            <label for="artist">Artiste</label>
+            <input type="text" id="artist" />
+          </div>
+          <div class="filter">
+            <label for="title">Titre</label>
+            <input type="text" id="title" />
+          </div>
+          <div class="filter">
+            <label for="year">Année</label>
+            <input type="text" id="year" />
+          </div>
+          <button id="toggle-more">Plus de filtres</button>
+      
+          <div id="more-filters" class="hidden line">
+            <div class="filter">
+              <label for="id">ID</label>
+              <input type="text" id="id" />
+            </div>
+            <div class="filter">
+              <label for="episode">Épisode</label>
+              <input type="text" id="episode" />
+            </div>
+            <div class="filter">
+              <label for="number">Numéro</label>
+              <input type="text" id="number" />
+            </div>
+            <div class="filter">
+              <label for="generation">Génération</label>
+              <input type="text" id="generation" />
+            </div>
+            <div class="filter">
+              <label for="company">Compagnie</label>
+              <input type="text" id="company" />
+            </div>
+            <div class="filter">
+              <label for="sex">Sexe</label>
+              <input type="text" id="sex" />
+            </div>
+            <div class="filter">
+              <label for="size">Taille</label>
+              <input type="text" id="size" />
+            </div>
+          </div>
         </div>
-        <div class="filter">
-          <label for="episode">Épisode</label>
-          <input type="text" id="episode" />
-        </div>
-        <div class="filter">
-          <label for="number">Numéro</label>
-          <input type="text" id="number" />
-        </div>
-        <div class="filter">
-          <label for="generation">Génération</label>
-          <input type="text" id="generation" />
-        </div>
-        <div class="filter">
-          <label for="company">Compagnie</label>
-          <input type="text" id="company" />
-        </div>
-        <div class="filter">
-          <label for="sex">Sexe</label>
-          <input type="text" id="sex" />
-        </div>
-        <div class="filter">
-          <label for="size">Taille</label>
-          <input type="text" id="size" />
-        </div>
-      </div>
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
