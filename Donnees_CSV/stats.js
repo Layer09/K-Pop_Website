@@ -15,9 +15,6 @@ async function loadCSV(file) {
         });
         return obj;
     });
-    console.log("Exemple data[0] :", data[0]);
-    console.log("Clés de l'objet :", Object.keys(data[0]));
-
 }
 
 // Fonction pour exclure les occurrences peu fréquentes (Nombre_de_titres <= 4)
@@ -316,6 +313,9 @@ async function updateDisplay() {
     const exclude = checkbox.checked;
     const data = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const filteredData = filterFrequentOccurrences(data, exclude);
+    console.log("Exemple data[0] :", data[0]);
+    console.log("Clés de l'objet :", Object.keys(data[0]));
+
     // Désactive ou active la checkbox en fonction du dataset sélectionné
     if (dataset === "Titres") {
         if (checkbox.checked) {
