@@ -27,12 +27,8 @@ function filterFrequentOccurrences(data, excludeRare) {
 
 // On/Off général ou groupé
 const toggle = document.getElementById('toggle');
-toggle.addEventListener('change', function() {
-if (this.checked) {
-  console.log('Mode : Générationnel');
-} else {
-  console.log('Mode : Global');
-}
+toggle.addEventListener('change', function () {
+    updateDisplay(); // Met à jour l'affichage selon la position du toggle
 });
 
 // Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
@@ -132,6 +128,67 @@ function createBarChart(data, labels, dataset, colors) {
     return canvas;
 }
 
+// Fonction pour créer un LineChart
+function createLineChart(data, labels, dataset) {
+    const Couleurs = [
+        "#00c5d5", // Nouveaux fans
+        "#8a6ace"  // Anciens fans
+    ];
+    // Extraire les moyennes pour chaque groupe de fans
+    const dataNouveaux = data.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
+    const dataAnciens = data.map(row => parseFloat(row.Moyenne_Anciens_fans));
+
+    const canvas = document.createElement('canvas');
+
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Moyenne - Nouveaux fans',
+                    data: dataNouveaux,
+                    backgroundColor: Couleurs[0],
+                    borderColor: Couleurs[0],
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: 'Moyenne - Anciens fans',
+                    data: dataAnciens,
+                    backgroundColor: Couleurs[1],
+                    borderColor: Couleurs[1],
+                    fill: false,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Moyenne des notes (Nouveaux vs Anciens fans)',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+    new Chart(canvas, config);
+    return canvas;
+}
+
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
     let c = color.substring(1);
@@ -189,8 +246,8 @@ function createTable(data) {
                 const img = document.createElement('img');
                 img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
                 img.alt = "YouTube";
-                img.style.width = "21px"; // Taille du logo (ajustable)
-                img.style.height = "15px"; // Taille du logo (ajustable)
+                img.style.width = "21px"; // Taille du logo (largeur)
+                img.style.height = "15px"; // Taille du logo (hauteur)
                 img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
                 a.appendChild(img); // Ajouter l'image au lien
                 td.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
@@ -274,54 +331,110 @@ async function updateDisplay() {
     } else {
         chartColors = getChartColors(filteredData.length);
     }
-    // Changement des titres et légendes selon le dataset
-    if (
-        ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
-        (dataset === "Compagnies" && exclude)
-    ) {
-        const pieChart = createPieChart(counts, labels, dataset, chartColors);
-        if (dataset === "Sexes") {
-            pieChart.title = "Répartition du nombre de titres par sexe";
-        } else if (dataset === "Annees") {
-            pieChart.title = "Répartition du nombre de titres par année";
-        } else if (dataset === "Generations") {
-            pieChart.title = "Répartition du nombre de titres par génération";
-        } else if (dataset === "Tailles") {
-            pieChart.title = "Répartition du nombre de titres par taille de groupe";
-        } else if (dataset === "Compagnies") {
-            pieChart.title = "Répartition du nombre de titres par compagnie";
+    const toggle = document.getElementById('toggle');
+    if (toggle.checked) {
+        // Mode Générationnel (PieChart + LineChart)
+        if (
+            ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
+            (dataset === "Compagnies" && exclude)
+        ) {
+            const pieChart = createPieChart(counts, labels, dataset, chartColors);
+            if (dataset === "Sexes") {
+                pieChart.title = "Répartition du nombre de titres par sexe";
+            } else if (dataset === "Annees") {
+                pieChart.title = "Répartition du nombre de titres par année";
+            } else if (dataset === "Generations") {
+                pieChart.title = "Répartition du nombre de titres par génération";
+            } else if (dataset === "Tailles") {
+                pieChart.title = "Répartition du nombre de titres par taille de groupe";
+            } else if (dataset === "Compagnies") {
+                pieChart.title = "Répartition du nombre de titres par compagnie";
+            }
+            chartsContainer.appendChild(pieChart);
+            
+            const barChart = createLineChart(averages, labels, dataset, chartColors);
+            if (dataset === "Sexes") {
+                barChart.title = "Moyenne des notes par sexe";
+            } else if (dataset === "Annees") {
+                barChart.title = "Moyenne des notes par année";
+            } else if (dataset === "Generations") {
+                barChart.title = "Moyenne des notes par génération";
+            } else if (dataset === "Tailles") {
+                barChart.title = "Moyenne des notes par taille de groupe";
+            } else if (dataset === "Compagnies") {
+                barChart.title = "Moyenne des notes par compagnie";
+            }
+            chartsContainer.appendChild(barChart);
+        } else if (["Episodes", "Numeros"].includes(dataset)) {
+            const barChart = createBarChart(averages, labels, dataset, chartColors);
+            if (dataset === "Episodes") {
+                barChart.title = "Moyenne des notes par épisode";
+            } else if (dataset === "Numeros") {
+                barChart.title = "Moyenne des notes par numéro";
+            }
+            chartsContainer.appendChild(barChart);
         }
-        chartsContainer.appendChild(pieChart);
-        const barChart = createBarChart(averages, labels, dataset, chartColors);
-        if (dataset === "Sexes") {
-            barChart.title = "Moyenne des notes par sexe";
-        } else if (dataset === "Annees") {
-            barChart.title = "Moyenne des notes par année";
-        } else if (dataset === "Generations") {
-            barChart.title = "Moyenne des notes par génération";
-        } else if (dataset === "Tailles") {
-            barChart.title = "Moyenne des notes par taille de groupe";
-        } else if (dataset === "Compagnies") {
-            barChart.title = "Moyenne des notes par compagnie";
-        }
-        chartsContainer.appendChild(barChart);
-    } else if (["Episodes", "Numeros"].includes(dataset)) {
-        const barChart = createBarChart(averages, labels, dataset, chartColors);
+
+        // Ajouter l'image uniquement pour "Episodes"
         if (dataset === "Episodes") {
-            barChart.title = "Moyenne des notes par épisode";
-        } else if (dataset === "Numeros") {
-            barChart.title = "Moyenne des notes par numéro";
+            const heatmapImage = document.createElement('img');
+            heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
+            heatmapImage.alt = 'Heatmap Episodes';
+            heatmapImage.style.width = '100%';
+            heatmapImage.style.margin = '20px 0';
+            chartsContainer.appendChild(heatmapImage);
         }
-        chartsContainer.appendChild(barChart);
-    }
-    // Ajouter l'image uniquement pour "Episodes"
-    if (dataset === "Episodes") {
-        const heatmapImage = document.createElement('img');
-        heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
-        heatmapImage.alt = 'Heatmap Episodes';
-        heatmapImage.style.width = '100%';
-        heatmapImage.style.margin = '20px 0';
-        chartsContainer.appendChild(heatmapImage);
+    } else {
+        // Mode Global (PieChart + BarChart)
+        if (
+            ["Annees", "Generations", "Sexes", "Tailles"].includes(dataset) ||
+            (dataset === "Compagnies" && exclude)
+        ) {
+            const pieChart = createPieChart(counts, labels, dataset, chartColors);
+            if (dataset === "Sexes") {
+                pieChart.title = "Répartition du nombre de titres par sexe";
+            } else if (dataset === "Annees") {
+                pieChart.title = "Répartition du nombre de titres par année";
+            } else if (dataset === "Generations") {
+                pieChart.title = "Répartition du nombre de titres par génération";
+            } else if (dataset === "Tailles") {
+                pieChart.title = "Répartition du nombre de titres par taille de groupe";
+            } else if (dataset === "Compagnies") {
+                pieChart.title = "Répartition du nombre de titres par compagnie";
+            }
+            chartsContainer.appendChild(pieChart);
+
+            const barChart = createBarChart(averages, labels, dataset, chartColors);
+            if (dataset === "Sexes") {
+                barChart.title = "Moyenne des notes par sexe";
+            } else if (dataset === "Annees") {
+                barChart.title = "Moyenne des notes par année";
+            } else if (dataset === "Generations") {
+                barChart.title = "Moyenne des notes par génération";
+            } else if (dataset === "Tailles") {
+                barChart.title = "Moyenne des notes par taille de groupe";
+            } else if (dataset === "Compagnies") {
+                barChart.title = "Moyenne des notes par compagnie";
+            }
+            chartsContainer.appendChild(barChart);
+        } else if (["Episodes", "Numeros"].includes(dataset)) {
+            const barChart = createBarChart(averages, labels, dataset, chartColors);
+            if (dataset === "Episodes") {
+                barChart.title = "Moyenne des notes par épisode";
+            } else if (dataset === "Numeros") {
+                barChart.title = "Moyenne des notes par numéro";
+            }
+            chartsContainer.appendChild(barChart);
+        }
+        // Ajouter l'image uniquement pour "Episodes"
+        if (dataset === "Episodes") {
+            const heatmapImage = document.createElement('img');
+            heatmapImage.src = './Donnees_CSV/HeatMap-Ep1a20.png';
+            heatmapImage.alt = 'Heatmap Episodes';
+            heatmapImage.style.width = '100%';
+            heatmapImage.style.margin = '20px 0';
+            chartsContainer.appendChild(heatmapImage);
+        }
     }
     const table = createTable(filteredData);
     tableContainer.appendChild(table);
