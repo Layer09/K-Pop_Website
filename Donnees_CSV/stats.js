@@ -129,10 +129,6 @@ function createLineChart(data, labels, dataset) {
         "#8a6ace"  // Anciens fans
     ];
     // Extraire les moyennes pour chaque groupe de fans
-    const dataNouveaux = data.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
-    const dataAnciens = data.map(row => parseFloat(row.Moyenne_Anciens_fans));
-    console.log("Nouveaux fans :", dataNouveaux);
-    console.log("Anciens fans :", dataAnciens);
     const canvas = document.createElement('canvas');
     const config = {
         type: 'line',
@@ -319,6 +315,8 @@ async function updateDisplay() {
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.Moyenne_Totale));
+    const dataNouveaux = filteredData.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
+    const dataAnciens = filteredData.map(row => parseFloat(row.Moyenne_Anciens_fans));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
@@ -343,7 +341,7 @@ async function updateDisplay() {
             pieChart.title = "Répartition du nombre de titres par compagnie";
         }
         chartsContainer.appendChild(pieChart);
-        const barChart = createBarChart(averages, labels, dataset, chartColors);
+        const barChart = createBarChart(averages, dataAnciens, labels, dataset, chartColors);
         if (dataset === "Sexes") {
             barChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
@@ -356,7 +354,7 @@ async function updateDisplay() {
             barChart.title = "Moyenne des notes par compagnie";
         }
         chartsContainer.appendChild(barChart);
-        const lineChart = createLineChart(averages, labels, dataset);
+        const lineChart = createLineChart(dataNouveaux, labels, dataset);
         if (dataset === "Sexes") {
             lineChart.title = "Moyenne générationnelle des notes par sexe";
         } else if (dataset === "Annees") {
