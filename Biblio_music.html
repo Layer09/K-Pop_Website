@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <title>K-Pop Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        .filters-container {
+            margin: 40px auto;
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .filter {
+            margin: 15px 0;
+        }
+
+        .filter label {
+            font-weight: bold;
+            color: #00c5d5;
+        }
+
+        .filter select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #8a6ace;
+            background-color: #333333;
+            color: white;
+        }
+
+        .filter input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #8a6ace;
+            background-color: #333333;
+            color: white;
+        }
+
+        #more-filters {
+            color: #8a6ace;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .filter-btn {
+            background-color: #00c5d5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .filter-btn:hover {
+            background-color: #8a6ace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
+        <h2 class="subtitle">Bibliothèque musicale</h2>
+    </header>
+
+    <div class="filters-container">
+        <div class="filter">
+            <label for="artist">Artiste</label>
+            <input type="text" id="artist" placeholder="Chercher un artiste...">
+            <div id="artist-options" class="hidden">
+                <select id="artist-select"></select>
+            </div>
+        </div>
+
+        <div class="filter">
+            <label for="title">Titre</label>
+            <input type="text" id="title" placeholder="Chercher un titre...">
+            <div id="title-options" class="hidden">
+                <select id="title-select"></select>
+            </div>
+        </div>
+
+        <div class="filter">
+            <label for="year">Année</label>
+            <input type="text" id="year" placeholder="Chercher une année...">
+            <div id="year-options" class="hidden">
+                <select id="year-select"></select>
+            </div>
+        </div>
+
+        <div id="more-filters" class="hidden">
+            <h3>Plus de filtres</h3>
+            <div class="filter">
+                <label for="episode">Épisode</label>
+                <input type="text" id="episode" placeholder="Chercher un épisode...">
+                <div id="episode-options" class="hidden">
+                    <select id="episode-select"></select>
+                </div>
+            </div>
+
+            <div class="filter">
+                <label for="number">Numéro</label>
+                <input type="text" id="number" placeholder="Chercher un numéro...">
+                <div id="number-options" class="hidden">
+                    <select id="number-select"></select>
+                </div>
+            </div>
+
+            <div class="filter">
+                <label for="generation">Génération</label>
+                <input type="text" id="generation" placeholder="Chercher une génération...">
+                <div id="generation-options" class="hidden">
+                    <select id="generation-select"></select>
+                </div>
+            </div>
+
+            <div class="filter">
+                <label for="company">Compagnie</label>
+                <input type="text" id="company" placeholder="Chercher une compagnie...">
+                <div id="company-options" class="hidden">
+                    <select id="company-select"></select>
+                </div>
+            </div>
+
+            <div class="filter">
+                <label for="sex">Sexe</label>
+                <input type="text" id="sex" placeholder="Chercher un sexe...">
+                <div id="sex-options" class="hidden">
+                    <select id="sex-select"></select>
+                </div>
+            </div>
+
+            <div class="filter">
+                <label for="size">Taille</label>
+                <input type="text" id="size" placeholder="Chercher une taille...">
+                <div id="size-options" class="hidden">
+                    <select id="size-select"></select>
+                </div>
+            </div>
+        </div>
+
+        <button id="filter-toggle" class="filter-btn">Afficher Plus de Filtres</button>
+
+        <button class="filter-btn" id="apply-filters">Appliquer les filtres</button>
+    </div>
+
+    <script>
+        // Charger le fichier CSV et parser avec PapaParse
+        Papa.parse('./Donnees_CSV/Titres.csv', {
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            complete: function(results) {
+                let data = results.data;
+
+                // Remplir les menus déroulants avec les données du CSV
+                const artistSelect = document.getElementById('artist-select');
+                const titleSelect = document.getElementById('title-select');
+                const yearSelect = document.getElementById('year-select');
+                const episodeSelect = document.getElementById('episode-select');
+                const numberSelect = document.getElementById('number-select');
+                const generationSelect = document.getElementById('generation-select');
+                const companySelect = document.getElementById('company-select');
+                const sexSelect = document.getElementById('sex-select');
+                const sizeSelect = document.getElementById('size-select');
+
+                let artists = new Set();
+                let titles = new Set();
+                let years = new Set();
+                let episodes = new Set();
+                let numbers = new Set();
+                let generations = new Set();
+                let companies = new Set();
+                let sexes = new Set();
+                let sizes = new Set();
+
+                // Parcourir les données et remplir les sets
+                data.forEach(row => {
+                    artists.add(row.Artiste);
+                    titles.add(row.Titre);
+                    years.add(row.Annee);
+                    episodes.add(row.Episode);
+                    numbers.add(row.Numero);
+                    generations.add(row.Generation);
+                    companies.add(row.Compagnie);
+                    sexes.add(row.Sexe);
+                    sizes.add(row.Taille);
+                });
+
+                // Fonction pour remplir les sélecteurs
+                function fillSelect(selectElement, values) {
+                    values.forEach(value => {
+                        let option = document.createElement('option');
+                        option.textContent = value;
+                        selectElement.appendChild(option);
+                    });
+                }
+
+                // Remplir les menus avec les valeurs uniques
+                fillSelect(artistSelect, Array.from(artists));
+                fillSelect(titleSelect, Array.from(titles));
+                fillSelect(yearSelect, Array.from(years));
+                fillSelect(episodeSelect, Array.from(episodes));
+                fillSelect(numberSelect, Array.from(numbers));
+                fillSelect(generationSelect, Array.from(generations));
+                fillSelect(companySelect, Array.from(companies));
+                fillSelect(sexSelect, Array.from(sexes));
+                fillSelect(sizeSelect, Array.from(sizes));
+            }
+        });
+
+        document.getElementById('filter-toggle').addEventListener('click', () => {
+            document.getElementById('more-filters').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
