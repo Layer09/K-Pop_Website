@@ -256,14 +256,17 @@
           <div class="filter">
             <label for="artist">Artiste</label>
             <input type="text" id="artist" />
+            <datalist id="artist-list"></datalist>
           </div>
           <div class="filter">
             <label for="title">Titre</label>
             <input type="text" id="title" />
+            <datalist id="title-list"></datalist>
           </div>
           <div class="filter">
             <label for="year">Année</label>
             <input type="text" id="year" />
+            <datalist id="year-list"></datalist>
           </div>
           <button id="toggle-more">Plus de filtres</button>
       
@@ -271,30 +274,37 @@
             <div class="filter">
               <label for="id">ID</label>
               <input type="text" id="id" />
+              <datalist id="id-list"></datalist>
             </div>
             <div class="filter">
               <label for="episode">Épisode</label>
               <input type="text" id="episode" />
+              <datalist id="episode-list"></datalist>
             </div>
             <div class="filter">
               <label for="number">Numéro</label>
               <input type="text" id="number" />
+              <datalist id="number-list"></datalist>
             </div>
             <div class="filter">
               <label for="generation">Génération</label>
               <input type="text" id="generation" />
+              <datalist id="generation-list"></datalist>
             </div>
             <div class="filter">
               <label for="company">Compagnie</label>
               <input type="text" id="company" />
+              <datalist id="company-list"></datalist>
             </div>
             <div class="filter">
               <label for="sex">Sexe</label>
               <input type="text" id="sex" />
+              <datalist id="sex-list"></datalist>
             </div>
             <div class="filter">
               <label for="size">Taille</label>
               <input type="text" id="size" />
+              <datalist id="size-list"></datalist>
             </div>
           </div>
         </div>
@@ -395,8 +405,7 @@
         }
     });
 
-
-      const toggleBtn = document.getElementById("toggle-more");
+    const toggleBtn = document.getElementById("toggle-more");
     const moreFilters = document.getElementById("more-filters");
 
     toggleBtn.addEventListener("click", () => {
@@ -418,26 +427,40 @@
         size: document.getElementById("size")?.value.trim()
       };
 
-      console.log("Filtres appliqués :", filters);
-
-      // TODO: Filtrer les données et mettre à jour l'affichage ici
+      console.log("🧩 Filtres appliqués :", filters);
     }
 
-    // Appliquer le filtre automatiquement à chaque modification
-    document.querySelectorAll("input").forEach(input => {
-      input.addEventListener("input", updateDisplay);
-    });
+    function remplirDatalist(colonne, datalistId) {
+      const values = [...new Set(csvData.map(row => row[colonne]).filter(val => val !== ""))];
+      const datalist = document.getElementById(datalistId);
+      datalist.innerHTML = values.sort().map(val => `<option value="${val}">`).join("");
+    }
 
-    // Charger le CSV (tu pourras filtrer les résultats dans `updateDisplay`)
     let csvData = [];
     Papa.parse("./Donnees_CSV/Titres.csv", {
       download: true,
       header: true,
-      dynamicTyping: true,
       complete: function(results) {
         csvData = results.data;
-        console.log("CSV chargé :", csvData.length, "lignes");
+
+        // Remplir les datalists
+        remplirDatalist("Artiste", "artist-list");
+        remplirDatalist("Titre", "title-list");
+        remplirDatalist("Annee", "year-list");
+        remplirDatalist("ID", "id-list");
+        remplirDatalist("Episode", "episode-list");
+        remplirDatalist("Numero", "number-list");
+        remplirDatalist("Generation", "generation-list");
+        remplirDatalist("Compagnie", "company-list");
+        remplirDatalist("Sexe", "sex-list");
+        remplirDatalist("Taille", "size-list");
+
+        console.log("✅ Datalists chargées");
       }
+    });
+
+    document.querySelectorAll("input").forEach(input => {
+      input.addEventListener("input", updateDisplay);
     });
     </script>
 </body>
