@@ -369,12 +369,16 @@ async function updateDisplay() {
         chartsContainer.appendChild(lineChart);
     } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
+        const lineChart = createLineChart(dataNouveaux, dataAnciens, labels, dataset);
         if (dataset === "Episodes") {
-            barChart.title = "Moyenne des notes par épisode";
+            barChart.title = "Moyenne générationnelle des notes par épisode";
+            lineChart.title = "Moyenne des notes par épisode";
         } else if (dataset === "Numeros") {
             barChart.title = "Moyenne des notes par numéro";
+            lineChart.title = "Moyenne générationnelle des notes par numéro";
         }
         chartsContainer.appendChild(barChart);
+        chartsContainer.appendChild(lineChart);
     }
     // Ajouter l'image uniquement pour "Episodes"
     if (dataset === "Episodes") {
