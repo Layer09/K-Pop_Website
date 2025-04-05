@@ -15,6 +15,9 @@ async function loadCSV(file) {
         });
         return obj;
     });
+    console.log("Exemple data[0] :", data[0]);
+    console.log("Clés de l'objet :", Object.keys(data[0]));
+
 }
 
 // Fonction pour exclure les occurrences peu fréquentes (Nombre_de_titres <= 4)
