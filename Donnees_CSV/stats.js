@@ -138,6 +138,7 @@ function createLineChart(data, labels, dataset) {
     const dataNouveaux = data.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
     const dataAnciens = data.map(row => parseFloat(row.Moyenne_Anciens_fans));
 
+
     const canvas = document.createElement('canvas');
 
     const config = {
@@ -185,9 +186,10 @@ function createLineChart(data, labels, dataset) {
             }
         }
     };
-    console.log("Labels:", labels);
-    console.log("Nouveaux fans:", dataNouveaux);
-    console.log("Anciens fans:", dataAnciens);
+    console.log("Première ligne du CSV :", data[0]);
+    console.log("Valeur nouveaux fans (brute) :", data[0].Moyenne_Nouveaux_fans);
+    console.log("Convertie en float :", parseFloat(data[0].Moyenne_Nouveaux_fans));
+
     
     new Chart(canvas, config);
     return canvas;
