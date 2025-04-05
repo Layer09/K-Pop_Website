@@ -185,6 +185,10 @@ function createLineChart(data, labels, dataset) {
             }
         }
     };
+    console.log("Labels:", labels);
+    console.log("Nouveaux fans:", dataNouveaux);
+    console.log("Anciens fans:", dataAnciens);
+    
     new Chart(canvas, config);
     return canvas;
 }
