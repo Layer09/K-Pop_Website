@@ -137,7 +137,8 @@ function createLineChart(data, labels, dataset) {
     // Extraire les moyennes pour chaque groupe de fans
     const dataNouveaux = data.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
     const dataAnciens = data.map(row => parseFloat(row.Moyenne_Anciens_fans));
-
+    console.log("Nouveaux fans :", dataNouveaux);
+    console.log("Anciens fans :", dataAnciens);
 
     const canvas = document.createElement('canvas');
 
