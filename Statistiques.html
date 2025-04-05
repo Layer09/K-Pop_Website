@@ -36,10 +36,6 @@
             align-items: center;
             gap: 10px;
             color: white;
-            border: 2px solid white;
-            border-radius: 2px;
-            cursor: pointer;
-            user-select: none;
         }
         
         #charts-container {
@@ -86,91 +82,7 @@
         th[data-sort-order="desc"]::after {
             content: ' ▽';
         }
-    
-        .switch-container {
-            display: flex;
-            align-items: center;
-            font-family: sans-serif;
-            border: 2px solid #00c5d5;
-            border-radius: 2px;
-            cursor: pointer;
-        }
-    
-        .label {
-            margin: 0 10px;
-            font-weight: bold;
-        }
 
-        .excludeRare {
-            margin-right: 6px;
-            margin-top: 10.5px;
-            margin-bottom: 10.5px;
-        }
-
-        #excludeRare {
-            margin-left: 6px;
-        }
-        
-        .label_switch_1 {
-            color: #00c5d5;
-            margin-left: 5px;
-        }
-
-        .label_switch_2 {
-            color: #00c5d5;
-            margin-right: 5px;
-        }
-    
-        .switch {
-            position: relative;
-            display: block;
-            width: 60px;
-            height: 30px;
-        }
-    
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-    
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #00c5d5;
-            border-radius: 34px;
-            transition: 0.4s;
-        }
-    
-        .slider::before {
-            position: absolute;
-            content: "";
-            height: 24px;
-            width: 24px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
-            transition: 0.4s;
-        }
-
-        .switch-wrapper {
-            margin: 0 12px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    
-        input:checked + .slider {
-            background-color: #00c5d5;
-        }
-    
-        input:checked + .slider::before {
-            transform: translateX(30px);
-        }
     </style>
 </head>
 <body>
@@ -208,19 +120,9 @@
             <option value="Tailles">Tailles</option>
             <option value="Titres">Titres</option>
         </select>
-        <div class="checkbox-container" for="excludeRare">
+        <div class="checkbox-container">
             <input type="checkbox" id="excludeRare">
-            <label for="excludeRare" class="excludeRare">Exclure les occurrences peu fréquentes</label>
-        </div>
-        <div class="switch-container">
-          <span class="label_switch_1">Global</span>
-            <div class="switch-wrapper">
-              <label class="switch">
-                <input type="checkbox" id="toggle" />
-                <span class="slider"></span>
-              </label>
-            </div>
-          <span class="label_switch_2">Générationnel</span>
+            <label for="excludeRare">Exclure les occurrences peu fréquentes</label>
         </div>
     </div>
 
@@ -281,17 +183,7 @@
         });
     
         observer.observe(document.body, { childList: true, subtree: true });
-      });
-
-      const container = document.getElementById('toggleContainer');
-      const checkbox = document.getElementById('toggle');
-      container.addEventListener('click', (e) => {
-        // Évite de double-cliquer si on clique directement sur l'input
-        if (e.target.tagName !== 'INPUT') {
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event('change')); // pour déclencher les éventuels listeners
-        }
-      });
+    });
     </script>
 </body>
 </html>
