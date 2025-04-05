@@ -123,7 +123,7 @@ function createBarChart(data, labels, dataset, colors) {
 }
 
 // Fonction pour créer un LineChart
-function createLineChart(data, labels, dataset) {
+function createLineChart(dataNouveaux, dataAnciens, labels, dataset) {
     const Couleurs = [
         "#00c5d5", // Nouveaux fans
         "#8a6ace"  // Anciens fans
