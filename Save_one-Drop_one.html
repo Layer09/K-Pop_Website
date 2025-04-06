@@ -11,6 +11,30 @@
     <header>
         <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1><br>
         <h2 class="subtitle">Save one Drop one</h2>
+
+        <div id="user-menu">
+            <div id="user-container">
+                <a id="login-link" href="Login.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                    Me connecter
+                </a>
+                <div id="user-info" class="hidden">
+                    <img src="./images/Logo.png" alt="Icône utilisateur">
+                    <span id="username-display"></span>
+                    <div id="dropdown-menu" class="hidden">
+                        <ul>
+                            <li><a href="Save_one-Drop_one-Perso.html">Mon Save One Drop One</a></li>
+                            <li><a href="Statistiques-Perso.html">Mes statistiques</a></li>
+                            <hr>
+                            <li id="logout">Me déconnecter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     
     <style>
@@ -208,30 +232,35 @@
             }
         }
     </style>
-    <nav>
+<nav>
     <ul>
         <li>
-            <a href="index.html" data-label="Accueil">
+            <a href="index.html">
                 <img src="./images/Accueil.png" alt="Accueil">
             </a>
         </li>
         <li>
-            <a href="Save_one-Drop_one.html" data-label="Save One Drop One">
+            <a href="Save_one-Drop_one.html">
                 <img src="./images/Save_one-Drop_one.png" alt="Save One Drop One">
             </a>
         </li>
         <li>
-            <a href="Blind_ranking.html" data-label="Blind Ranking">
+            <a href="Blind_ranking.html">
                 <img src="./images/Blind_ranking.png" alt="Blind Ranking">
             </a>
         </li>
         <li>
-            <a href="Blind_test.html" data-label="Blind Test">
+            <a href="Blind_test.html">
                 <img src="./images/Blind_test.png" alt="Blind Test">
             </a>
         </li>
         <li>
-            <a href="Statistiques.html" data-label="Statistiques">
+            <a href="Biblio_music.html">
+                <img src="./images/Biblio_music.png" alt="Bibliothèque musicale">
+            </a>
+        </li>
+        <li>
+            <a href="Statistiques.html">
                 <img src="./images/Statistiques.png" alt="Statistiques">
             </a>
         </li>
