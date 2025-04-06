@@ -1,4 +1,5 @@
     document.addEventListener("DOMContentLoaded", () => {
+      // VOLUME
         // Gestion du volume global
         const globalVolumeInput = document.getElementById('globalVolume');
         const volumeValueDisplay = document.getElementById('volumeValue');
@@ -47,35 +48,41 @@
         });
     
         observer.observe(document.body, { childList: true, subtree: true });
-    
+
+      //CONNEXION UTILISATEUR
         // Gestion de la connexion utilisateur
         const loginLink = document.getElementById("login-link");
         const userInfo = document.getElementById("user-info");
         const usernameDisplay = document.getElementById("username-display");
         const dropdownMenu = document.getElementById("dropdown-menu");
         const logoutButton = document.getElementById("logout");
-    
+        
         // Vérification de la connexion utilisateur avec localStorage
         let loggedInUser = localStorage.getItem("loggedInUser");
-    
+        
         if (loggedInUser) {
             let formattedName = loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1);
-    
+        
             usernameDisplay.textContent = formattedName;
             loginLink.classList.add("hidden"); // Cache le lien "Se connecter"
             userInfo.classList.remove("hidden"); // Affiche le menu utilisateur
         } else {
             userInfo.classList.add("hidden"); // Cache le menu utilisateur
             loginLink.classList.remove("hidden"); // Affiche le lien "Se connecter"
+        
+            // Enregistre la page actuelle quand on clique sur "Me connecter"
+            loginLink.addEventListener("click", () => {
+                localStorage.setItem("lastVisitedPage", window.location.href);
+            });
         }
-    
+        
         // Afficher/masquer le menu déroulant
         if (userInfo) {
             userInfo.addEventListener("click", (event) => {
                 event.stopPropagation(); // Empêche la fermeture immédiate après ouverture
                 dropdownMenu.classList.toggle("hidden");
             });
-    
+        
             // Fermer le menu si on clique ailleurs
             document.addEventListener("click", (event) => {
                 if (!userInfo.contains(event.target)) {
@@ -83,7 +90,7 @@
                 }
             });
         }
-    
+        
         // Déconnexion
         if (logoutButton) {
             logoutButton.addEventListener("click", () => {
