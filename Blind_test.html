@@ -3,10 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <title>K-Pop Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
+        <h2 class="subtitle">Accueil</h2>
+
+
+    </header>
+
+    <!-- Barre latérale -->
+    <div id="sidebar">
+        <h3>Volume Global</h3>
+        <input type="range" id="globalVolume" min="0" max="100" step="1">
+        <span id="volumeValue"></span>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-Pop Website</title>
     <link rel="icon" type="image/png" href="images/icone.png">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Conteneur principal de l'utilisateur / connexion */
+        #user-menu {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 200px;
+        }
+
+        #user-container {
+            display: flex;
+            align-items: center;
+            background-color: #222222;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #user-container:hover {
+            background-color: #444444;
+        }
+
+        /* Lien de connexion */
+        #login-link {
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center; /* Centre verticalement */
+            vertical-align: middle;
+            gap: 5px; /* Espacement entre l'icône et le texte */
+        }
+
+        /* Icône utilisateur */
+        #user-info img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 8px;
+            color: white;
+            font-size: 23px;
+        }
+
+        #user-info {
+            display: flex;
+            align-items: center; /* Centre verticalement les éléments */
+            cursor: pointer;
+            position: relative;
+        }
+
+        #username-display {
+            display: flex;
+            align-items: center; /* Centrer le texte verticalement */
+            height: 100%; /* Assurer que l'élément prenne toute la hauteur de son conteneur */
+            color: white;
+            font-size: 23px;
+        }
+
+        /* Menu déroulant */
+        #dropdown-menu {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: #333333;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            display: none;
+            /* min-width: 180px; */
+            width: 225px;
+        }
+
+        #dropdown-menu.show {
+            display: block;
+        }
+
+        /* Éléments du menu */
+        #dropdown-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #dropdown-menu ul li {
+            padding: 10px 15px;
+            color: white;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #dropdown-menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        #dropdown-menu ul li:hover {
+            background-color: #555555;
+        }
+
+        /* Séparateur */
+        hr {
+            margin: 5px 0;
+            border: none;
+            height: 1px;
+            background: #555555;
+        }
+
+        /* Classes dynamiques */
+        .hidden {
+            display: none !important;
+        }
+        
         #video-container {
           position: relative;
           width: 80%;
@@ -31,17 +187,66 @@
     <header>
         <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1>
         <h2 class="subtitle">Blind test</h2>
+
+        <div id="user-menu">
+            <div id="user-container">
+                <a id="login-link" href="Login.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                    Me connecter
+                </a>
+                <div id="user-info" class="hidden">
+                    <img src="./images/Logo.png" alt="Icône utilisateur">
+                    <span id="username-display"></span>
+                    <div id="dropdown-menu" class="hidden">
+                        <ul>
+                            <li><a href="Save_one-Drop_one-Perso.html">Mon Save One Drop One</a></li>
+                            <li><a href="Statistiques-Perso.html">Mes statistiques</a></li>
+                            <hr>
+                            <li id="logout">Me déconnecter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <nav>
-        <ul>
-            <li><a href="index.html"><img src="./images/Accueil.png" alt="Accueil"></a></li>
-            <li><a href="Save_one-Drop_one.html"><img src="./images/Save_one-Drop_one.png" alt="Save One Drop One"></a></li>
-            <li><a href="Blind_ranking.html"><img src="./images/Blind_ranking.png" alt="Blind Ranking"></a></li>
-            <li><a href="Blind_test.html"><img src="./images/Blind_test.png" alt="Blind Test"></a></li>
-            <li><a href="Statistiques.html"><img src="./images/Statistiques.png" alt="Statistiques"></a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li>
+            <a href="index.html">
+                <img src="./images/Accueil.png" alt="Accueil">
+            </a>
+        </li>
+        <li>
+            <a href="Save_one-Drop_one.html">
+                <img src="./images/Save_one-Drop_one.png" alt="Save One Drop One">
+            </a>
+        </li>
+        <li>
+            <a href="Blind_ranking.html">
+                <img src="./images/Blind_ranking.png" alt="Blind Ranking">
+            </a>
+        </li>
+        <li>
+            <a href="Blind_test.html">
+                <img src="./images/Blind_test.png" alt="Blind Test">
+            </a>
+        </li>
+        <li>
+            <a href="Biblio_music.html">
+                <img src="./images/Biblio_music.png" alt="Bibliothèque musicale">
+            </a>
+        </li>
+        <li>
+            <a href="Statistiques.html">
+                <img src="./images/Statistiques.png" alt="Statistiques">
+            </a>
+        </li>
+    </ul>
+</nav>
 
     <div id="sidebar">
         <h3>Volume Global</h3>
@@ -56,37 +261,100 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-          const globalVolumeInput = document.getElementById('globalVolume');
-          const volumeValueDisplay = document.getElementById('volumeValue');
-    
-          let savedVolume = localStorage.getItem('volumeGlobal');
-          if (savedVolume === null) {
-            savedVolume = 50;
-            localStorage.setItem('volumeGlobal', savedVolume);
-          } else {
-            savedVolume = parseFloat(savedVolume);
-          }
-    
-          globalVolumeInput.value = savedVolume;
-          volumeValueDisplay.textContent = savedVolume + '%';
-    
-          const realVolume = () => (savedVolume / 100) * 0.2;
-    
-          const applyGlobalVolume = () => {
-            document.querySelectorAll('video').forEach(video => {
-              video.volume = realVolume();
-            });
-          };
-    
-          applyGlobalVolume();
-    
-          globalVolumeInput.addEventListener('input', () => {
-            savedVolume = parseFloat(globalVolumeInput.value);
-            localStorage.setItem('volumeGlobal', savedVolume);
+            // Gestion du volume global
+            const globalVolumeInput = document.getElementById('globalVolume');
+            const volumeValueDisplay = document.getElementById('volumeValue');
+        
+            let savedVolume = localStorage.getItem('volumeGlobal');
+            if (savedVolume === null) {
+                savedVolume = 50;
+                localStorage.setItem('volumeGlobal', savedVolume);
+            } else {
+                savedVolume = parseFloat(savedVolume);
+            }
+        
+            globalVolumeInput.value = savedVolume;
             volumeValueDisplay.textContent = savedVolume + '%';
+        
+            const applyGlobalVolume = () => {
+                const realVolume = (savedVolume / 100) * 0.2;
+                document.querySelectorAll('video').forEach(video => {
+                    video.volume = realVolume;
+                });
+            };
+        
             applyGlobalVolume();
-          });
-    
+        
+            globalVolumeInput.addEventListener('input', () => {
+                savedVolume = parseFloat(globalVolumeInput.value);
+                localStorage.setItem('volumeGlobal', savedVolume);
+                volumeValueDisplay.textContent = savedVolume + '%';
+                applyGlobalVolume();
+            });
+        
+            // Observer pour les vidéos dynamiques
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.tagName === 'VIDEO') {
+                            node.volume = (savedVolume / 100) * 0.2;
+                        }
+                        if (node.querySelectorAll) {
+                            node.querySelectorAll('video').forEach(video => {
+                                video.volume = (savedVolume / 100) * 0.2;
+                            });
+                        }
+                    });
+                });
+            });
+        
+            observer.observe(document.body, { childList: true, subtree: true });
+        
+            // Gestion de la connexion utilisateur
+            const loginLink = document.getElementById("login-link");
+            const userInfo = document.getElementById("user-info");
+            const usernameDisplay = document.getElementById("username-display");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            const logoutButton = document.getElementById("logout");
+        
+            // Vérification de la connexion utilisateur avec localStorage
+            let loggedInUser = localStorage.getItem("loggedInUser");
+        
+            if (loggedInUser) {
+                let formattedName = loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1);
+        
+                usernameDisplay.textContent = formattedName;
+                loginLink.classList.add("hidden"); // Cache le lien "Se connecter"
+                userInfo.classList.remove("hidden"); // Affiche le menu utilisateur
+            } else {
+                userInfo.classList.add("hidden"); // Cache le menu utilisateur
+                loginLink.classList.remove("hidden"); // Affiche le lien "Se connecter"
+            }
+        
+            // Afficher/masquer le menu déroulant
+            if (userInfo) {
+                userInfo.addEventListener("click", (event) => {
+                    event.stopPropagation(); // Empêche la fermeture immédiate après ouverture
+                    dropdownMenu.classList.toggle("hidden");
+                });
+        
+                // Fermer le menu si on clique ailleurs
+                document.addEventListener("click", (event) => {
+                    if (!userInfo.contains(event.target)) {
+                        dropdownMenu.classList.add("hidden");
+                    }
+                });
+            }
+        
+            // Déconnexion
+            if (logoutButton) {
+                logoutButton.addEventListener("click", () => {
+                    localStorage.removeItem("loggedInUser"); // Retirer l'utilisateur de localStorage
+                    window.location.reload(); // Recharger la page pour réinitialiser l'affichage
+                });
+            }
+        });
+        
           const mainVideo = document.getElementById('mainVideo');
           const chronoVideo = document.getElementById('chronoVideo');
     
