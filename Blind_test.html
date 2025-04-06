@@ -120,6 +120,8 @@
                 titresRestants = [...videoList];
             }
             const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
+            // Retirer la vidéo sélectionnée de titresRestants
+            titresRestants = titresRestants.filter(v => v !== randomFile);
             return `./videos/${randomFile}`;
           }
     
