@@ -116,6 +116,7 @@
           function pickRandomVideo() {
             // Si titresRestants est vide, réinitialiser à partir de videoSources
             if (titresRestants.length === 0) {
+                alert('Bravo ! Tu as fait un tour des musiques !');
                 titresRestants = [...videoList];
             }
             const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
