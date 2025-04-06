@@ -49,6 +49,7 @@
     
         observer.observe(document.body, { childList: true, subtree: true });
 
+        
       //CONNEXION UTILISATEUR
         // Gestion de la connexion utilisateur
         const loginLink = document.getElementById("login-link");
@@ -64,16 +65,18 @@
             let formattedName = loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1);
         
             usernameDisplay.textContent = formattedName;
-            loginLink.classList.add("hidden"); // Cache le lien "Se connecter"
-            userInfo.classList.remove("hidden"); // Affiche le menu utilisateur
+            loginLink.classList.add("hidden");       // Cache le lien "Se connecter"
+            userInfo.classList.remove("hidden");     // Affiche le menu utilisateur
         } else {
-            userInfo.classList.add("hidden"); // Cache le menu utilisateur
-            loginLink.classList.remove("hidden"); // Affiche le lien "Se connecter"
+            userInfo.classList.add("hidden");        // Cache le menu utilisateur
+            loginLink.classList.remove("hidden");    // Affiche le lien "Se connecter"
         
-            // Enregistre la page actuelle quand on clique sur "Me connecter"
-            loginLink.addEventListener("click", () => {
-                localStorage.setItem("lastVisitedPage", window.location.href);
-            });
+            // Enregistre la page actuelle quand on clique sur "Se connecter"
+            if (loginLink) {
+                loginLink.addEventListener("click", (event) => {
+                    localStorage.setItem("lastVisitedPage", window.location.href);
+                });
+            }
         }
         
         // Afficher/masquer le menu déroulant
@@ -94,8 +97,8 @@
         // Déconnexion
         if (logoutButton) {
             logoutButton.addEventListener("click", () => {
-                localStorage.removeItem("loggedInUser"); // Retirer l'utilisateur de localStorage
-                window.location.reload(); // Recharger la page pour réinitialiser l'affichage
+                localStorage.removeItem("loggedInUser");
+                window.location.reload();
             });
         }
     });
