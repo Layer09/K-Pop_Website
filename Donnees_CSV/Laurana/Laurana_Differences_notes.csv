@@ -1,0 +1,441 @@
+Nombre,Artiste,Titre,Note,Old_Note,Difference
+2,Stray Kids,Hellevator,9.5,9.5,0.0
+3,(G)I-dle,Latata,8.0,8.0,0.0
+4,Exo,Monster,8.0,8.0,0.0
+12,BlackPink,Ddu-du-ddu-du,7.5,7.5,0.0
+19,Stray Kids,Miroh,10.0,10.0,0.0
+33,Nmixx,Soñar,6.5,6.5,0.0
+34,Ateez,Inception,10.0,10.0,0.0
+37,Stray Kids,Thunderous,10.0,10.0,0.0
+40,Dreamcatcher,Boca,10.0,10.0,0.0
+44,BTS,Not today,10.0,10.0,0.0
+47,Stray Kids,The sound,10.0,10.0,0.0
+55,Stray Kids,Megaverse,10.0,10.0,0.0
+57,BTS,Fire,10.0,10.0,0.0
+59,Everglow,Dun dun,8.5,8.5,0.0
+65,Stray Kids,Back door,10.0,10.0,0.0
+66,Enhypen,Drunk-Dazed,10.0,10.0,0.0
+71,Stray Kids,Social path,10.0,10.0,0.0
+73,Illit,Magnetic,0.5,0.5,0.0
+88,Stray Kids,Lalalala,10.0,10.0,0.0
+92,Twice,What is love?,1.0,1.0,0.0
+109,Stray Kids,Stray Kids,10.0,10.0,0.0
+120,BTS,Dynamite,3.0,3.0,0.0
+124,Stray Kids,Mountains,10.0,10.0,0.0
+125,Ateez,Halazia,10.0,10.0,0.0
+130,Winner,Really really,2.0,2.0,0.0
+132,Stray Kids,Chk chk boom,10.0,10.0,0.0
+138,TXT,Run away,10.0,10.0,0.0
+167,Ateez,Guerrilla,10.0,10.0,0.0
+168,Aespa,Next level,4.5,4.5,0.0
+171,Iz*one,Panorama,4.0,4.0,0.0
+176,Enhypen,Polaroid love,4.5,4.5,0.0
+179,Stray Kids,Charmer,10.0,10.0,0.0
+180,Pentagon,Shine,4.5,4.5,0.0
+186,NewJeans,Ditto,0.5,0.5,0.0
+189,Momoland,I'm so hot,4.5,4.5,0.0
+191,Red Velvet,Red flavor,2.0,2.0,0.0
+197,Ateez,Say my name,8.5,8.5,0.0
+211,Got7,Lullaby,5.0,5.0,0.0
+212,Everglow,Bon bon chocolat,5.0,5.0,0.0
+213,Jimin,Who,10.0,10.0,0.0
+214,Itzy,Dalla dalla,4.5,4.5,0.0
+215,Seventeen,Cheers,4.0,4.0,0.0
+220,Treasure,I love you,10.0,10.0,0.0
+223,J-Hope,Chicken noodle soup,0.0,0.0,0.0
+234,Le Sserafim,Perfect night,4.0,4.0,0.0
+243,BigBang,Loser,1.0,1.0,0.0
+283,Iz*one,La vie en rose,3.0,3.0,0.0
+290,Nmixx,Dash,4.5,4.5,0.0
+306,BTS,Just one day,2.5,2.5,0.0
+308,Dreamcatcher,Justice,10.0,10.0,0.0
+316,Pentagon,Naughty boy,3.0,3.0,0.0
+321,Kang Daniel,Movie,3.0,3.0,0.0
+323,Huh Yunjin,I ≠ DOLL,2.0,2.0,0.0
+330,Agust D,Daechwita,3.0,3.0,0.0
+333,Block B,Shall we dance,3.5,3.5,0.0
+342,StayC,Beautiful monster,2.0,2.0,0.0
+344,Pentagon,Spring snow,4.5,4.5,0.0
+357,Xdinary Heroes,Freakin' bad,8.0,8.0,0.0
+358,Viviz,Maniac,3.5,3.5,0.0
+363,Jihyo,Killin'me good,5.0,5.0,0.0
+376,2 PM,Heartbeat,3.0,3.0,0.0
+379,Dreamcatcher,Chase me,7.0,7.0,0.0
+380,Stray Kids,Why?,10.0,10.0,0.0
+381,NCT U,Make a wish,4.0,4.0,0.0
+382,(G)I-dle,Tomboy,4.5,4.5,0.0
+383,BoyNextDoor,Nice guy,4.0,4.0,0.0
+389,Oneus,Erase me,7.5,7.5,0.0
+397,The rose,Alive,6.0,6.0,0.0
+400,Dreamcatcher,Piri,7.0,7.0,0.0
+403,Yena,NemoNemo,3.0,3.0,0.0
+413,Xdinary Heroes,Boy comics,7.0,7.0,0.0
+415,Enhypen,No doubt,4.5,4.5,0.0
+420,Sunmi,Siren,4.5,4.5,0.0
+423,Dreamcatcher,OODT,6.5,6.5,0.0
+434,NCT Dream,When I'm with you,5.0,5.0,0.0
+1,BTS,War of hormones,9.0,8.5,-0.5
+5,Ateez,Crazy form,8.5,8.0,-0.5
+6,Jennie,Solo,5.0,5.5,0.5
+8,Bangchan & Hyunjin,Red lights,9.0,8.5,-0.5
+9,Dreamcatcher,Scream,9.0,8.5,-0.5
+11,NCT 127,Fact check,8.5,8.0,-0.5
+14,TXT,Loser=Lover,9.0,8.5,-0.5
+15,Hwa Sa,Maria,8.5,8.0,-0.5
+17,Itzy,Loco,8.5,8.0,-0.5
+21,Seventeen,Rock with you,10.0,9.5,-0.5
+22,Psy,That that,4.5,4.0,-0.5
+24,Aespa,Drama,10.0,9.5,-0.5
+31,Stray Kids,District 9,9.0,9.5,0.5
+42,Jimin,Set me free,10.0,9.5,-0.5
+49,Treasure,Move,10.0,9.5,-0.5
+63,Ateez,Bouncy,6.0,5.5,-0.5
+64,BlackPink,Pink venom,6.0,5.5,-0.5
+79,Stray Kids,Topline,8.5,8.0,-0.5
+80,Ateez,Wonderland,10.0,9.5,-0.5
+82,Shaun,Way back home,3.0,2.5,-0.5
+89,2Ne1,I am the best,5.5,5.0,-0.5
+101,Stella Jang,Colors,0.0,0.5,0.5
+111,Riize,Get a guitar,2.5,2.0,-0.5
+114,Stray Kids,Jjam,9.0,8.5,-0.5
+115,NewJeans,Super shy,0.0,0.5,0.5
+116,Enhypen,Bite me,8.0,7.5,-0.5
+131,Ive,Heya,8.5,8.0,-0.5
+133,NewJeans,OMG,1.5,1.0,-0.5
+134,Got7,Just right,2.5,2.0,-0.5
+135,Stray Kids,My pace,9.0,8.5,-0.5
+137,BTS,No more dream,8.0,7.5,-0.5
+143,BTS,Anpanman,8.5,8.0,-0.5
+144,BlackPink,As if it's your last,7.5,7.0,-0.5
+150,Treasure,Darari,4.5,4.0,-0.5
+152,f(x),Electric shock,3.0,2.5,-0.5
+156,Stray Kids,Christmas EveL,7.5,7.0,-0.5
+157,Twice,Fancy,2.5,2.0,-0.5
+162,SHINee,Ring ding dong,2.0,1.5,-0.5
+165,Red Velvet,Zimzalabim,3.5,3.0,-0.5
+170,Super junior,Mamacita,3.5,4.0,0.5
+172,BTS,My universe,5.5,5.0,-0.5
+174,NewJeans,Hype boy,1.5,1.0,-0.5
+182,BTS,Boy in luv,9.5,9.0,-0.5
+192,Stray Kids,I like it,10.0,9.5,-0.5
+194,Ive,After like,3.5,3.0,-0.5
+199,Fifty fifty,Cupid,1.0,0.5,-0.5
+200,Stray Kids,Get lit,7.0,7.5,0.5
+205,TXT,Blue hour,3.0,2.5,-0.5
+209,Ive,Eleven,3.5,4.0,0.5
+224,Riize,Boom boom bass,4.5,4.0,-0.5
+228,Ive,Baddie,3.0,2.5,-0.5
+229,Stray Kids,Levanter,9.5,9.0,-0.5
+231,Wonder Girls,Be my baby,0.5,1.0,0.5
+237,Aespa,Spicy,4.0,3.5,-0.5
+239,BTS,Go go,4.5,4.0,-0.5
+241,Stray Kids,Side Effects,10.0,9.5,-0.5
+242,Psy,Gentleman,4.0,3.5,-0.5
+246,BTS,Airplane,5.5,5.0,-0.5
+247,Sunmi,Gashina,5.5,5.0,-0.5
+250,Everglow,Slay,5.5,5.0,-0.5
+262,Stray Kids,Insomnia,6.5,6.0,-0.5
+263,Rosé,On the Ground,3.0,3.5,0.5
+267,StayC,Asap,0.0,0.5,0.5
+273,SF9,Good guy,4.5,4.0,-0.5
+278,BTS,Yet to come,2.5,2.0,-0.5
+280,BlackPink,Whistle,6.5,6.0,-0.5
+289,Monsta X,Hero,6.0,5.5,-0.5
+300,Gfriend,Me gustas tu,2.0,1.5,-0.5
+302,BlackPink,Stay,1.0,1.5,0.5
+303,Exo,The eve,5.5,5.0,-0.5
+307,Ateez,Not okay,9.5,9.0,-0.5
+309,MCND,Spring,5.0,4.5,-0.5
+313,Zerobaseone,Good so bad,5.0,4.5,-0.5
+326,Mamamoo,Aya,4.5,4.0,-0.5
+328,Aespa,Savage,4.0,4.5,0.5
+334,Sunmi,Noir,3.0,3.5,0.5
+336,NCT 127,Walk,4.0,3.5,-0.5
+339,SF9,Mamma mia,4.5,4.0,-0.5
+348,Jeon somi,Dumb dumb,4.5,5.0,0.5
+349,Stray Kids,Get cool,4.5,4.0,-0.5
+351,Kep1er,Up!,1.5,1.0,-0.5
+356,4Minute,Crazy,4.5,4.0,-0.5
+360,Super junior,Mr. Simple,4.0,3.5,-0.5
+361,NewJeans,How sweet,1.5,2.0,0.5
+366,(G)I-dle,Klaxon,2.0,1.5,-0.5
+373,Red Velvet,Cosmic,3.0,2.5,-0.5
+377,Twice,Cheer up,3.0,2.5,-0.5
+385,Red Velvet,Bad boy,3.5,3.0,-0.5
+386,Xdinary Heroes,Little things,7.5,7.0,-0.5
+395,2Ne1,Come back home,2.5,2.0,-0.5
+399,TXT,Everlasting shine,5.5,6.0,0.5
+401,Dongkiz,Lupin,5.5,6.0,0.5
+406,Loossemble,TTYL,3.5,3.0,-0.5
+407,Pentagon,Daisy,8.0,7.5,-0.5
+408,Oneus,Valkyrie,8.0,7.5,-0.5
+409,Twice,Dance the night away,2.5,2.0,-0.5
+411,AleXa,Revolution,6.5,6.0,-0.5
+414,Exid,I love you,3.5,3.0,-0.5
+417,Lucy,Villain,6.5,6.0,-0.5
+419,Xdinary Heroes,Happy death day,6.5,6.0,-0.5
+428,Nmixx,Dice,4.0,4.5,0.5
+430,Brave Girls,Rollin',2.0,1.5,-0.5
+436,Tzuyu,Run away,4.5,4.0,-0.5
+439,Enhypen,Hey Tayo,2.0,1.5,-0.5
+440,Seventeen,Hit,8.0,7.5,-0.5
+7,Wanna one,Beautiful,4.5,3.5,-1.0
+10,BTS,Save me,8.5,7.5,-1.0
+13,Agust D,Agust D,6.0,5.0,-1.0
+16,BTS,Run,9.0,8.0,-1.0
+18,Enhypen,Fever,8.0,7.0,-1.0
+23,BigBang,Fantastic baby,6.5,5.5,-1.0
+25,Seventeen,Super,9.5,8.5,-1.0
+26,Stray Kids,Maniac,10.0,9.0,-1.0
+28,BTS,N.O,9.0,8.0,-1.0
+30,BlackPink,How you like that,9.0,8.0,-1.0
+32,Exo,Love shot,8.5,7.5,-1.0
+36,Lisa,Lalisa,9.0,8.0,-1.0
+39,BTS,Idol,10.0,9.0,-1.0
+41,TXT,Back for more,10.0,9.0,-1.0
+45,iKon,Love scenario,2.5,1.5,-1.0
+46,Aespa,Black mamba,9.5,8.5,-1.0
+48,Itzy,Born to be,9.0,8.0,-1.0
+54,TXT,Good boy gone bad,10.0,9.0,-1.0
+60,Seventeen,Fighting,7.5,6.5,-1.0
+67,Dreamcatcher,Odd eye,9.0,8.0,-1.0
+70,BlackPink,Kill this love,9.0,8.0,-1.0
+77,BTS,I need U,9.0,8.0,-1.0
+84,Nayeon,Abcd,9.0,8.0,-1.0
+86,Seventeen,Maestro,8.0,7.0,-1.0
+87,Lisa,Rockstar,6.0,5.0,-1.0
+90,Monsta X,Dramarama,9.0,8.0,-1.0
+98,NewJeans,Eta,1.0,2.0,1.0
+102,BTS,Danger,9.0,8.0,-1.0
+103,NCT Dream,ISTJ,10.0,9.0,-1.0
+104,Red Velvet,Psycho,5.0,6.0,1.0
+105,TXT,0X1=Lovesong,9.5,8.5,-1.0
+106,Ateez,Deja vu,10.0,9.0,-1.0
+108,BTS,Permission to dance,3.0,2.0,-1.0
+110,BlackPink,Shut down,6.0,5.0,-1.0
+113,BlackPink,Boombayah,8.0,7.0,-1.0
+121,Momoland,Bboom bboom,4.0,3.0,-1.0
+123,Itzy,Untouchable,9.0,8.0,-1.0
+126,Kiss of life,Bad news,5.5,4.5,-1.0
+136,Aespa,Armageddon,5.5,4.5,-1.0
+140,Seventeen,Very nice,5.5,4.5,-1.0
+151,Stray Kids,S-Class,9.5,8.5,-1.0
+160,BlackPink,Pretty Savage,8.0,7.0,-1.0
+166,Stray Kids,Double knot,10.0,9.0,-1.0
+169,NCT U,Boss,3.0,4.0,1.0
+173,Seventeen,God of music,6.0,5.0,-1.0
+183,Nmixx,O.O,6.0,5.0,-1.0
+193,Got7,You calling my name,4.0,3.0,-1.0
+195,BTS,Dionysus,9.0,8.0,-1.0
+196,Le Sserafim,Easy,3.0,2.0,-1.0
+203,Kep1er,Wa da da,4.0,3.0,-1.0
+204,BoyNextDoor,Earth. Wind & Fire,10.0,9.0,-1.0
+217,BlackPink,Playing with fire,8.0,7.0,-1.0
+219,Aespa,Girls,8.5,7.5,-1.0
+222,Kiss of life,Midas touch,5.0,4.0,-1.0
+230,Ateez,Answer,10.0,9.0,-1.0
+232,Treasure,King kong,8.5,7.5,-1.0
+236,Wanna one,Boomerang,5.0,4.0,-1.0
+238,Seventeen,Clap,5.0,4.0,-1.0
+249,Stray Kids,Victory song,9.5,8.5,-1.0
+258,Seventeen,Change up,5.0,4.0,-1.0
+259,NCT Dream,Hot sauce,5.5,4.5,-1.0
+264,P1Harmony,Jump,8.5,7.5,-1.0
+266,Super junior,Black suit,6.5,5.5,-1.0
+274,Wonder Girls,Why so lonely,1.5,0.5,-1.0
+276,Stray Kids,Freeze,9.0,8.0,-1.0
+277,Ive,Accendio,7.5,6.5,-1.0
+287,Wendy,Wish you hell,4.0,3.0,-1.0
+288,SuperM,Jopping,7.0,6.0,-1.0
+291,Taemin,Want,3.0,2.0,-1.0
+305,Lisa,New women,6.0,5.0,-1.0
+317,NCT Dream,Smoothie,4.5,3.5,-1.0
+319,Wanna one,Energetic,4.5,3.5,-1.0
+322,Stray Kids,Voices,9.5,8.5,-1.0
+324,Astro,Blue flame,9.0,8.0,-1.0
+331,(G)I-dle,Wife,1.5,0.5,-1.0
+340,Twice,Set me free,3.0,2.0,-1.0
+341,Enhypen,Brought the heat back,10.0,9.0,-1.0
+347,Riize,Impossible,4.5,3.5,-1.0
+350,Just B,Medusa,5.5,4.5,-1.0
+354,NCT 127,2 Baddies,3.0,2.0,-1.0
+359,Psy,New face,4.5,3.5,-1.0
+364,Stray Kids,All in,9.0,8.0,-1.0
+367,NCT Dream,We go up,4.0,3.0,-1.0
+370,Exo,Call me baby,4.0,3.0,-1.0
+387,Rosé,APT,6.0,7.0,1.0
+388,Exo,Ko ko bop,5.0,4.0,-1.0
+390,Iz*one,Secret story of the swan,4.0,3.0,-1.0
+394,Lucy,Boogie man,6.0,5.0,-1.0
+396,The boyz,Trigger,6.0,5.0,-1.0
+402,Day6,Time of our life,7.0,6.0,-1.0
+410,Xikers,Bittersweet,8.0,7.0,-1.0
+412,BigBang,This love,3.0,2.0,-1.0
+416,(G)I-dle,Lion,7.0,6.0,-1.0
+418,Stray Kids,Top,9.5,8.5,-1.0
+422,Uniq,Eoeo,3.0,2.0,-1.0
+429,X1,Flash,7.5,6.5,-1.0
+432,Jackson Wang,Bullet to the heart,4.5,3.5,-1.0
+433,Loona,Why not?,5.0,4.0,-1.0
+435,Stray Kids,Giant,10.0,9.0,-1.0
+27,Le Sserafim,Antifragile,7.5,6.0,-1.5
+29,Jung Kook,Seven,8.0,6.5,-1.5
+35,Enhypen,Sweet venom,8.5,7.0,-1.5
+43,Ive,I am,7.5,6.0,-1.5
+50,BabyMonster,Batter up,7.5,6.0,-1.5
+51,Got7,If you do,6.0,4.5,-1.5
+53,Lisa,Money,8.0,6.5,-1.5
+62,BTS,MIC drop,10.0,8.5,-1.5
+68,BTS,Butter,3.5,2.0,-1.5
+75,TXT,Chasing that feeling,9.0,7.5,-1.5
+78,(G)I-dle,Super lady,5.5,4.0,-1.5
+81,Le Sserafim,Smart,4.5,3.0,-1.5
+83,Treasure,Jikjin,9.5,8.0,-1.5
+117,Got7,Hard carry,9.5,8.0,-1.5
+119,TXT,Sugar rush ride,8.0,6.5,-1.5
+122,P1Harmony,Killin'it,9.5,8.0,-1.5
+129,Twice,I can't stop me,5.0,3.5,-1.5
+139,Ive,Love dive,4.5,3.0,-1.5
+142,Ateez,Work,6.0,4.5,-1.5
+145,Stray Kids,Domino,9.0,7.5,-1.5
+148,B.A.P,One shot,10.0,8.5,-1.5
+149,Itzy,Wannabe,9.5,8.0,-1.5
+154,Everglow,La di da,9.0,7.5,-1.5
+155,Psy,Gangnam style,6.0,4.5,-1.5
+163,Le Sserafim,Crazy,3.5,2.0,-1.5
+175,Stray Kids,Case 143,9.5,8.0,-1.5
+177,TXT,Deja vu,8.0,6.5,-1.5
+178,(G)I-dle,Oh my god,7.0,5.5,-1.5
+181,BlackPink,Lovesick girls,8.0,6.5,-1.5
+187,Enhypen,Given-Taken,9.0,7.5,-1.5
+188,BTS,Black swan,3.5,2.0,-1.5
+190,Seventeen,Don't Wanna Cry,6.0,4.5,-1.5
+198,Super junior,Sorry sorry,5.0,3.5,-1.5
+201,Mamamoo,Gogobebe,7.0,5.5,-1.5
+202,BTS,Jump,10.0,8.5,-1.5
+206,Girls' Generation,The boys,4.0,2.5,-1.5
+207,Ateez,The black cat Nero,10.0,8.5,-1.5
+208,Stray Kids,Cheese,8.5,7.0,-1.5
+216,Stray Kids,Circus,9.0,7.5,-1.5
+225,BlackPink,Forever young,8.0,6.5,-1.5
+235,Stray Kids,Slash,10.0,8.5,-1.5
+240,BabyMonster,Like that,6.0,4.5,-1.5
+245,Ateez,Horizon,10.0,8.5,-1.5
+248,TXT,Puma,6.0,4.5,-1.5
+255,Badvillain,Badvillain,7.0,5.5,-1.5
+256,BTS,For youth,3.5,2.0,-1.5
+257,(G)I-dle,Hwaa,6.0,4.5,-1.5
+260,BlackPink,The Girls,8.0,6.5,-1.5
+261,The boyz,Reveal,9.5,8.0,-1.5
+269,Twice,Talk that talk,3.5,2.0,-1.5
+279,N.Flying,Oh Really,5.5,4.0,-1.5
+282,Oneus,Come back home,8.0,6.5,-1.5
+285,Yena & Yuqi,Hate Rodrigo,3.5,2.0,-1.5
+286,Stray Kids,Astronaut,7.5,6.0,-1.5
+294,Psy,Daddy,4.5,3.0,-1.5
+295,Iz*one,Violeta,3.5,2.0,-1.5
+296,TXT,Tinnitus,4.0,2.5,-1.5
+297,Hwa Sa,Na,6.5,5.0,-1.5
+299,Stray Kids,Gone days,6.5,5.0,-1.5
+301,Xdinary Heroes,Love and fear,8.0,6.5,-1.5
+310,Le Sserafim,Eve. psyche & the bluebeard's wife,6.0,4.5,-1.5
+312,Everglow,Adios,9.0,7.5,-1.5
+329,P1Harmony,Sad song,10.0,8.5,-1.5
+335,N.Flying,The real,6.5,5.0,-1.5
+338,ONF,Why,6.5,5.0,-1.5
+343,The Boyz,No air,5.5,4.0,-1.5
+345,Everglow,First,8.0,6.5,-1.5
+346,NCT Dream,Boom,6.5,5.0,-1.5
+353,Nmixx,Love me like this,3.5,2.0,-1.5
+355,Oneus,Baila conmigo,6.5,5.0,-1.5
+368,Girls' Generation,Gee,3.5,2.0,-1.5
+369,P1Harmony,Back down,4.5,3.0,-1.5
+378,The KingDom,Flip that coin,9.5,8.0,-1.5
+391,Seventeen,Oh my!,4.5,3.0,-1.5
+392,Tempest,Lighthouse,9.5,8.0,-1.5
+393,Yena,Wicked love,8.0,6.5,-1.5
+404,8Turn,Excel,8.0,6.5,-1.5
+424,AB6IX,Breathe,4.5,3.0,-1.5
+425,Weekly,After school,2.5,4.0,1.5
+427,Cnblue,Love girl,4.5,3.0,-1.5
+437,Woodz,Drowning,6.5,5.0,-1.5
+438,Twice,More & more,3.5,5.0,1.5
+56,Jisoo,Flower,4.5,2.5,-2.0
+72,Kai,Rover,7.5,5.5,-2.0
+74,BigBang,Bang bang bang,6.0,4.0,-2.0
+85,BTS,On,10.0,8.0,-2.0
+96,BTS,Spring day,4.0,2.0,-2.0
+100,Treasure,Bona bona,10.0,8.0,-2.0
+107,BabyMonster,Sheesh,4.0,2.0,-2.0
+112,BTS,Fake love,8.0,6.0,-2.0
+118,Bibi,Bibi vengeance,8.0,6.0,-2.0
+128,Seventeen,Left & Right,7.0,5.0,-2.0
+141,Mamamoo,Hip,8.0,6.0,-2.0
+146,BabyMonster,Forever,7.0,5.0,-2.0
+158,BTS,Blood sweat & tears,8.0,6.0,-2.0
+159,Treasure,Hello,7.5,5.5,-2.0
+161,TXT,Crown,7.0,5.0,-2.0
+164,BTS,Run BTS,10.0,8.0,-2.0
+184,B.A.P,Young. wild & free,10.0,8.0,-2.0
+185,Stray Kids,Venom,7.5,5.5,-2.0
+210,BTS,We are bulletproof,9.0,7.0,-2.0
+218,BTS,DNA,9.0,7.0,-2.0
+227,BTS,Dope,9.5,7.5,-2.0
+244,Twice,Likey,3.0,1.0,-2.0
+251,Eric Nam,Congratulations,4.0,2.0,-2.0
+253,CIX,Movie star,5.5,3.5,-2.0
+268,Pentagon,Dr.Bebe,10.0,8.0,-2.0
+271,Ateez,Wave,6.0,4.0,-2.0
+281,TXT,Cat & dog,4.0,2.0,-2.0
+284,Zerobaseone,In bloom,6.5,4.5,-2.0
+298,VIXX,Chained up,6.0,4.0,-2.0
+304,Seventeen,Darl+ing,4.0,2.0,-2.0
+315,Chung Ha,Snapping,8.0,6.0,-2.0
+318,Loona,Paint the town,8.0,6.0,-2.0
+320,StayC,Bubble,4.0,2.0,-2.0
+325,N.Flying,Rooftop,6.0,4.0,-2.0
+332,Nu'est,I'm in trouble,6.0,4.0,-2.0
+337,Itzy,Cake,4.0,2.0,-2.0
+365,Block B,Her,6.5,4.5,-2.0
+371,XG,Puppet show,4.0,2.0,-2.0
+374,Yeonjun,Ggum,8.0,6.0,-2.0
+384,Zerobaseone,Crush,7.0,5.0,-2.0
+398,GOT the beat,Step back,4.0,6.0,2.0
+421,Bus,Liar,10.0,8.0,-2.0
+431,Cravity,Ready or not,8.0,6.0,-2.0
+20,Twice,One spark,4.0,1.5,-2.5
+91,Jimin,Like crazy,7.5,5.0,-2.5
+93,Stray Kids,God's menu,8.5,6.0,-2.5
+94,TWS,Plot twist,7.5,5.0,-2.5
+97,Seventeen,Hot,8.5,6.0,-2.5
+99,Stray Kids,Lose my breath,9.0,6.5,-2.5
+147,Enhypen,XO,6.0,3.5,-2.5
+153,BTS,Boy with luv,8.0,5.5,-2.5
+226,TXT,Can't you see me?,7.5,5.0,-2.5
+272,Jeon somi,Fast forward,7.0,4.5,-2.5
+275,SHINee,View,6.0,3.5,-2.5
+292,Irene & Seulgi,Naughty,4.5,2.0,-2.5
+293,NCT 127,Fire truck,4.5,2.0,-2.5
+311,Xikers,Tricky house,8.0,5.5,-2.5
+314,Day6,Sweet chaos,7.5,5.0,-2.5
+327,The rose,Back to me,8.0,5.5,-2.5
+352,iKon,Killing me,8.0,5.5,-2.5
+362,Ampers&one,On and on,8.0,5.5,-2.5
+372,SuperM,Tiger inside,7.0,4.5,-2.5
+375,Samuel,One,7.5,5.0,-2.5
+405,Ftisland,I wish,5.5,3.0,-2.5
+426,8Turn,Ru-pum pum,6.5,4.0,-2.5
+38,Jennie,You & Me,6.0,3.0,-3.0
+58,Jung Kook,Standing next to you,7.5,4.5,-3.0
+61,Girls' Generation,Run devil run,4.5,1.5,-3.0
+95,(G)I-dle,Queencard,5.0,2.0,-3.0
+127,BTS,Life goes on,4.5,1.5,-3.0
+221,BTS,Make it right,6.0,3.0,-3.0
+233,NCT 127,Kick it,7.5,4.5,-3.0
+254,Nu'est,Face,7.5,4.5,-3.0
+265,Seventeen,_World,6.0,3.0,-3.0
+270,Day6,Shoot me,8.0,5.0,-3.0
+52,BTS,Stay gold,5.5,2.0,-3.5
+76,Aespa,Supernova,7.0,3.5,-3.5
+252,Le Sserafim,Unforgiven,6.0,2.5,-3.5
+69,Jung Kook,3D,7.0,3.0,-4.0
