@@ -1,4 +1,4 @@
-Nombre,Episode,Numero,Artiste,Generation,Compagnie,Sexe,Taille,Titre,Annee,Sous_unite,Featuring,Note
+ID,Episode,Numero,Artiste,Generation,Compagnie,Sexe,Taille,Titre,Annee,Sous_unite,Featuring,Note
 1,1,1,BTS,3,BigHit Entertainment,Gars,Groupe,War of hormones,2014,Non,Non,8.0
 2,1,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Hellevator,2017,Non,Non,9.5
 3,1,3,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Latata,2018,Non,Non,7.0
