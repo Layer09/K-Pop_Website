@@ -283,8 +283,11 @@ const tableContainer = document.getElementById('table-container');
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
+    /*
     const usernameDisplay = document.getElementById("username-display");
     const username = usernameDisplay.textContent;
+    */
+    const username = "Laurana";
     if (username === "Laurana") {
         const data = await loadCSV(`./Donnees_CSV/Laurana/${dataset}.csv`);
     } else {
