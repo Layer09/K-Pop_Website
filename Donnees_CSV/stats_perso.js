@@ -283,10 +283,12 @@ const tableContainer = document.getElementById('table-container');
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
-    if usernameDisplay === "Laurana" {
+    const usernameDisplay = document.getElementById("username-display");
+    const username = usernameDisplay.textContent;
+    if (username === "Laurana") {
         const data = await loadCSV(`./Donnees_CSV/Laurana/${dataset}.csv`);
     } else {
-        const data = await loadCSV(`./Donnees_CSV/_${usernameDisplay}/${dataset}.csv`);
+        const data = await loadCSV(`./Donnees_CSV/_${username}/${dataset}.csv`);
     }
     const filteredData = filterFrequentOccurrences(data, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
