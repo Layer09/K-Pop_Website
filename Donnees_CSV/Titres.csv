@@ -1,441 +1,441 @@
 ID,Episode,Numero,Artiste,Generation,Compagnie,Sexe,Taille,Titre,Annee,Sous_unite,Featuring,Moyenne_Nouveaux_fans,Moyenne_Anciens_fans,Moyenne_Totale
-1,1,1,BTS,3,BigHit Entertainment,Gars,Groupe,War of hormones,2014,Non,Non,6.25,7.5,6.88
+1,1,1,BTS,3,BigHit Entertainment,Gars,Groupe,War of hormones,2014,Non,Non,6.5,7.5,7.0
 2,1,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Hellevator,2017,Non,Non,8.25,9.75,9.0
 3,1,3,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Latata,2018,Non,Non,6.0,6.5,6.25
 4,1,4,Exo,3,SM Entertainment,Gars,Groupe,Monster,2016,Non,Non,6.75,8.5,7.63
-5,1,5,Ateez,4,KQ Entertainment,Gars,Groupe,Crazy form,2023,Non,Non,7.0,6.0,6.5
-6,1,6,Jennie,3,YG Entertainment,Fille,Solo,Solo,2018,Non,Non,4.25,3.0,3.63
-7,1,7,Wanna one,3,YMC Entertainment,Gars,Groupe,Beautiful,2017,Non,Non,2.75,9.5,6.13
-8,1,8,Bangchan & Hyunjin,4,JYP Entertainment,Gars,Duo,Red lights,2021,Non,Non,9.0,4.5,6.75
-9,1,9,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Scream,2020,Non,Non,9.25,10.0,9.63
-10,1,10,BTS,3,BigHit Entertainment,Gars,Groupe,Save me,2016,Non,Non,5.75,9.5,7.63
-11,1,11,NCT 127,4,SM Entertainment,Gars,Groupe,Fact check,2023,Non,Non,6.5,7.0,6.75
+5,1,5,Ateez,4,KQ Entertainment,Gars,Groupe,Crazy form,2023,Non,Non,7.25,6.0,6.63
+6,1,6,Jennie,3,YG Entertainment,Fille,Solo,Solo,2018,Non,Non,4.0,3.0,3.5
+7,1,7,Wanna one,3,YMC Entertainment,Gars,Groupe,Beautiful,2017,Non,Non,3.25,9.5,6.38
+8,1,8,Bangchan & Hyunjin,4,JYP Entertainment,Gars,Duo,Red lights,2021,Non,Non,9.25,4.5,6.88
+9,1,9,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Scream,2020,Non,Non,9.5,10.0,9.75
+10,1,10,BTS,3,BigHit Entertainment,Gars,Groupe,Save me,2016,Non,Non,6.25,9.5,7.88
+11,1,11,NCT 127,4,SM Entertainment,Gars,Groupe,Fact check,2023,Non,Non,6.75,7.0,6.88
 12,1,12,BlackPink,3,YG Entertainment,Fille,Groupe,Ddu-du-ddu-du,2018,Non,Non,6.25,4.5,5.38
-13,1,13,Agust D,3,BigHit Entertainment,Gars,Solo,Agust D,2016,Non,Non,3.5,7.0,5.25
-14,1,14,TXT,4,BigHit Entertainment,Gars,Groupe,Loser=Lover,2021,Non,Non,7.75,10.0,8.88
-15,1,15,Hwa Sa,3,RBW,Fille,Solo,Maria,2020,Non,Non,7.0,8.5,7.75
-16,1,16,BTS,3,BigHit Entertainment,Gars,Groupe,Run,2015,Non,Non,7.0,4.5,5.75
-17,1,17,Itzy,4,JYP Entertainment,Fille,Groupe,Loco,2021,Non,Non,7.75,7.0,7.38
-18,1,18,Enhypen,4,Belift Lab,Gars,Groupe,Fever,2021,Non,Non,7.0,9.75,8.38
+13,1,13,Agust D,3,BigHit Entertainment,Gars,Solo,Agust D,2016,Non,Non,4.0,7.0,5.5
+14,1,14,TXT,4,BigHit Entertainment,Gars,Groupe,Loser=Lover,2021,Non,Non,8.0,10.0,9.0
+15,1,15,Hwa Sa,3,RBW,Fille,Solo,Maria,2020,Non,Non,7.25,8.5,7.88
+16,1,16,BTS,3,BigHit Entertainment,Gars,Groupe,Run,2015,Non,Non,8.0,4.5,6.25
+17,1,17,Itzy,4,JYP Entertainment,Fille,Groupe,Loco,2021,Non,Non,8.0,7.0,7.5
+18,1,18,Enhypen,4,Belift Lab,Gars,Groupe,Fever,2021,Non,Non,7.5,9.75,8.63
 19,1,19,Stray Kids,4,JYP Entertainment,Gars,Groupe,Miroh,2019,Non,Non,10.0,10.0,10.0
-20,1,20,Twice,3,JYP Entertainment,Fille,Groupe,One spark,2023,Non,Non,2.25,7.75,5.0
-21,1,21,Seventeen,3,Pledis Entertainment,Gars,Groupe,Rock with you,2021,Non,Non,9.75,10.0,9.88
-22,1,22,Psy,2,YG Entertainment,Gars,Solo,That that,2022,Non,Non,3.0,4.0,3.5
-23,2,1,BigBang,2,YG Entertainment,Gars,Groupe,Fantastic baby,2012,Non,Non,3.75,9.5,6.63
-24,2,2,Aespa,4,SM Entertainment,Fille,Groupe,Drama,2023,Non,Non,7.75,6.0,6.88
-25,2,3,Seventeen,3,Pledis Entertainment,Gars,Groupe,Super,2023,Non,Non,7.25,4.5,5.88
-26,2,4,Stray Kids,4,JYP Entertainment,Gars,Groupe,Maniac,2023,Non,Non,9.5,7.75,8.63
-27,2,5,Le Sserafim,4,Source Music,Fille,Groupe,Antifragile,2022,Non,Non,5.5,3.5,4.5
-28,2,6,BTS,3,BigHit Entertainment,Gars,Groupe,N.O,2013,Non,Non,5.0,6.75,5.88
-29,2,7,Jung Kook,3,BigHit Entertainment,Gars,Solo,Seven,2023,Non,Non,7.25,8.5,7.88
-30,2,8,BlackPink,3,YG Entertainment,Fille,Groupe,How you like that,2020,Non,Non,7.0,8.5,7.75
-31,2,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,District 9,2018,Non,Non,7.75,8.0,7.88
-32,2,10,Exo,3,SM Entertainment,Gars,Groupe,Love shot,2018,Non,Non,5.75,8.25,7.0
+20,1,20,Twice,3,JYP Entertainment,Fille,Groupe,One spark,2023,Non,Non,5.75,7.75,6.75
+21,1,21,Seventeen,3,Pledis Entertainment,Gars,Groupe,Rock with you,2021,Non,Non,10.0,10.0,10.0
+22,1,22,Psy,2,YG Entertainment,Gars,Solo,That that,2022,Non,Non,3.25,4.0,3.63
+23,2,1,BigBang,2,YG Entertainment,Gars,Groupe,Fantastic baby,2012,Non,Non,4.25,9.5,6.88
+24,2,2,Aespa,4,SM Entertainment,Fille,Groupe,Drama,2023,Non,Non,8.0,6.0,7.0
+25,2,3,Seventeen,3,Pledis Entertainment,Gars,Groupe,Super,2023,Non,Non,7.75,4.5,6.13
+26,2,4,Stray Kids,4,JYP Entertainment,Gars,Groupe,Maniac,2023,Non,Non,10.0,7.75,8.88
+27,2,5,Le Sserafim,4,Source Music,Fille,Groupe,Antifragile,2022,Non,Non,6.25,3.5,4.88
+28,2,6,BTS,3,BigHit Entertainment,Gars,Groupe,N.O,2013,Non,Non,5.5,6.75,6.13
+29,2,7,Jung Kook,3,BigHit Entertainment,Gars,Solo,Seven,2023,Non,Non,9.0,8.5,8.75
+30,2,8,BlackPink,3,YG Entertainment,Fille,Groupe,How you like that,2020,Non,Non,7.5,8.5,8.0
+31,2,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,District 9,2018,Non,Non,7.5,8.0,7.75
+32,2,10,Exo,3,SM Entertainment,Gars,Groupe,Love shot,2018,Non,Non,6.25,8.25,7.25
 33,2,11,Nmixx,4,JYP Entertainment,Fille,Groupe,Soñar,2023,Non,Non,5.75,3.5,4.63
 34,2,12,Ateez,4,KQ Entertainment,Gars,Groupe,Inception,2020,Non,Non,10.0,10.0,10.0
-35,2,13,Enhypen,4,Belift Lab,Gars,Groupe,Sweet venom,2023,Non,Non,7.0,7.75,7.38
-36,2,14,Lisa,3,YG Entertainment,Fille,Solo,Lalisa,2021,Non,Non,6.0,3.5,4.75
+35,2,13,Enhypen,4,Belift Lab,Gars,Groupe,Sweet venom,2023,Non,Non,7.75,7.75,7.75
+36,2,14,Lisa,3,YG Entertainment,Fille,Solo,Lalisa,2021,Non,Non,6.5,3.5,5.0
 37,2,15,Stray Kids,4,JYP Entertainment,Gars,Groupe,Thunderous,2021,Non,Non,10.0,5.25,7.63
-38,2,16,Jennie,3,YG Entertainment,Fille,Solo,You & Me,2023,Non,Non,3.0,2.75,2.88
-39,2,17,BTS,3,BigHit Entertainment,Gars,Groupe,Idol,2018,Non,Non,7.0,4.5,5.75
+38,2,16,Jennie,3,YG Entertainment,Fille,Solo,You & Me,2023,Non,Non,4.5,2.75,3.63
+39,2,17,BTS,3,BigHit Entertainment,Gars,Groupe,Idol,2018,Non,Non,7.5,4.5,6.0
 40,2,18,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Boca,2020,Non,Non,10.0,10.0,10.0
-41,2,19,TXT,4,BigHit Entertainment,Gars,Groupe,Back for more,2023,Non,Non,9.25,4.75,7.0
-42,2,20,Jimin,3,BigHit Entertainment,Gars,Solo,Set me free,2023,Non,Non,7.25,6.25,6.75
-43,2,21,Ive,4,Starship Entertainment,Fille,Groupe,I am,2023,Non,Non,6.0,5.0,5.5
+41,2,19,TXT,4,BigHit Entertainment,Gars,Groupe,Back for more,2023,Non,Non,10.0,4.75,7.38
+42,2,20,Jimin,3,BigHit Entertainment,Gars,Solo,Set me free,2023,Non,Non,9.0,6.25,7.63
+43,2,21,Ive,4,Starship Entertainment,Fille,Groupe,I am,2023,Non,Non,6.75,5.0,5.88
 44,2,22,BTS,3,BigHit Entertainment,Gars,Groupe,Not today,2017,Non,Non,8.75,7.25,8.0
-45,3,1,iKon,2,YG Entertainment,Gars,Groupe,Love scenario,2018,Non,Non,4.25,9.0,6.63
-46,3,2,Aespa,4,SM Entertainment,Fille,Groupe,Black mamba,2020,Non,Non,6.75,6.0,6.38
+45,3,1,iKon,2,YG Entertainment,Gars,Groupe,Love scenario,2018,Non,Non,4.75,9.0,6.88
+46,3,2,Aespa,4,SM Entertainment,Fille,Groupe,Black mamba,2020,Non,Non,7.25,6.0,6.63
 47,3,3,Stray Kids,4,JYP Entertainment,Gars,Groupe,The sound,2023,Non,Non,10.0,5.25,7.63
-48,3,4,Itzy,4,JYP Entertainment,Fille,Groupe,Born to be,2023,Non,Non,6.0,5.25,5.63
-49,3,5,Treasure,4,YG Entertainment,Gars,Groupe,Move,2023,T5,Non,6.25,5.75,6.0
-50,3,6,BabyMonster,5,YG Entertainment,Fille,Groupe,Batter up,2023,Non,Non,4.75,5.0,4.88
-51,3,7,Got7,3,JYP Entertainment,Gars,Groupe,If you do,2015,Non,Non,4.75,9.0,6.88
-52,3,8,BTS,3,BigHit Entertainment,Gars,Groupe,Stay gold,2020,Non,Non,2.0,3.0,2.5
-53,3,9,Lisa,3,YG Entertainment,Fille,Solo,Money,2021,Non,Non,6.75,6.5,6.63
-54,3,10,TXT,4,BigHit Entertainment,Gars,Groupe,Good boy gone bad,2022,Non,Non,8.25,4.5,6.38
+48,3,4,Itzy,4,JYP Entertainment,Fille,Groupe,Born to be,2023,Non,Non,6.5,5.25,5.88
+49,3,5,Treasure,4,YG Entertainment,Gars,Groupe,Move,2023,T5,Non,7.5,5.75,6.63
+50,3,6,BabyMonster,5,YG Entertainment,Fille,Groupe,Batter up,2023,Non,Non,6.25,5.0,5.63
+51,3,7,Got7,3,JYP Entertainment,Gars,Groupe,If you do,2015,Non,Non,5.5,9.0,7.25
+52,3,8,BTS,3,BigHit Entertainment,Gars,Groupe,Stay gold,2020,Non,Non,4.75,3.0,3.88
+53,3,9,Lisa,3,YG Entertainment,Fille,Solo,Money,2021,Non,Non,7.5,6.5,7.0
+54,3,10,TXT,4,BigHit Entertainment,Gars,Groupe,Good boy gone bad,2022,Non,Non,8.75,4.5,6.63
 55,3,11,Stray Kids,4,JYP Entertainment,Gars,Groupe,Megaverse,2023,Non,Non,10.0,7.25,8.63
-56,3,12,Jisoo,3,YG Entertainment,Fille,Solo,Flower,2023,Non,Non,2.75,4.0,3.38
+56,3,12,Jisoo,3,YG Entertainment,Fille,Solo,Flower,2023,Non,Non,3.75,4.0,3.88
 57,3,13,BTS,3,BigHit Entertainment,Gars,Groupe,Fire,2016,Non,Non,8.0,7.75,7.88
-58,3,14,Jung Kook,3,BigHit Entertainment,Gars,Solo,Standing next to you,2023,Non,Non,6.25,4.0,5.13
+58,3,14,Jung Kook,3,BigHit Entertainment,Gars,Solo,Standing next to you,2023,Non,Non,7.75,4.0,5.88
 59,3,15,Everglow,4,Yuehua Entertainment,Fille,Groupe,Dun dun,2020,Non,Non,7.5,8.0,7.75
-60,3,16,Seventeen,3,Pledis Entertainment,Gars,Groupe,Fighting,2023,BSS,Non,6.25,8.0,7.13
-61,3,17,Girls' Generation,2,SM Entertainment,Fille,Groupe,Run devil run,2010,Non,Non,2.75,6.75,4.75
-62,3,18,BTS,3,BigHit Entertainment,Gars,Groupe,MIC drop,2017,Non,Non,7.5,6.5,7.0
-63,3,19,Ateez,4,KQ Entertainment,Gars,Groupe,Bouncy,2023,Non,Non,3.75,7.25,5.5
-64,3,20,BlackPink,3,YG Entertainment,Fille,Groupe,Pink venom,2022,Non,Non,5.75,7.0,6.38
+60,3,16,Seventeen,3,Pledis Entertainment,Gars,Groupe,Fighting,2023,BSS,Non,6.75,8.0,7.38
+61,3,17,Girls' Generation,2,SM Entertainment,Fille,Groupe,Run devil run,2010,Non,Non,4.25,6.75,5.5
+62,3,18,BTS,3,BigHit Entertainment,Gars,Groupe,MIC drop,2017,Non,Non,8.25,6.5,7.38
+63,3,19,Ateez,4,KQ Entertainment,Gars,Groupe,Bouncy,2023,Non,Non,4.0,7.25,5.63
+64,3,20,BlackPink,3,YG Entertainment,Fille,Groupe,Pink venom,2022,Non,Non,6.0,7.0,6.5
 65,3,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Back door,2020,Non,Non,9.25,8.5,8.88
 66,3,22,Enhypen,4,Belift Lab,Gars,Groupe,Drunk-Dazed,2021,Non,Non,10.0,10.0,10.0
-67,4,1,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Odd eye,2020,Non,Non,8.5,8.5,8.5
-68,4,2,BTS,3,BigHit Entertainment,Gars,Groupe,Butter,2021,Non,Non,1.5,3.75,2.63
-69,4,3,Jung Kook,3,BigHit Entertainment,Gars,Solo,3D,2023,Non,Non,3.0,3.5,3.25
-70,4,4,BlackPink,3,YG Entertainment,Fille,Groupe,Kill this love,2019,Non,Non,6.5,7.75,7.13
+67,4,1,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Odd eye,2020,Non,Non,9.0,8.5,8.75
+68,4,2,BTS,3,BigHit Entertainment,Gars,Groupe,Butter,2021,Non,Non,2.25,3.75,3.0
+69,4,3,Jung Kook,3,BigHit Entertainment,Gars,Solo,3D,2023,Non,Non,6.0,3.5,4.75
+70,4,4,BlackPink,3,YG Entertainment,Fille,Groupe,Kill this love,2019,Non,Non,7.0,7.75,7.38
 71,4,5,Stray Kids,4,JYP Entertainment,Gars,Groupe,Social path,2023,Non,LiSA,10.0,9.5,9.75
-72,4,6,Kai,3,SM Entertainment,Gars,Solo,Rover,2023,Non,Non,5.75,5.25,5.5
-73,4,7,Illit,4,BELIFT LAB,Fille,Groupe,Magnetic,2024,Non,Non,2.75,8.5,5.63
-74,4,8,BigBang,2,YG Entertainment,Gars,Groupe,Bang bang bang,2015,Non,Non,3.5,9.75,6.63
-75,4,9,TXT,4,BigHit Entertainment,Gars,Groupe,Chasing that feeling,2023,Non,Non,7.25,5.5,6.38
-76,4,10,Aespa,4,SM Entertainment,Fille,Groupe,Supernova,2024,Non,Non,4.75,6.0,5.38
-77,4,11,BTS,3,BigHit Entertainment,Gars,Groupe,I need U,2015,Non,Non,5.0,8.5,6.75
-78,4,12,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Super lady,2023,Non,Non,4.5,7.75,6.13
-79,4,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Topline,2023,Non,Non,8.0,7.25,7.63
-80,4,14,Ateez,4,KQ Entertainment,Gars,Groupe,Wonderland,2019,Non,Non,7.75,7.5,7.63
-81,4,15,Le Sserafim,4,Source Music,Fille,Groupe,Smart,2024,Non,Non,5.5,5.5,5.5
-82,4,16,Shaun,3,AOMG,Gars,Solo,Way back home,2018,Non,Non,4.25,9.0,6.63
-83,4,17,Treasure,4,YG Entertainment,Gars,Groupe,Jikjin,2021,Non,Non,6.25,6.5,6.38
-84,4,18,Nayeon,3,JYP Entertainment,Fille,Solo,Abcd,2024,Non,Non,6.5,4.75,5.63
-85,4,19,BTS,3,BigHit Entertainment,Gars,Groupe,On,2019,Non,Non,8.0,4.5,6.25
-86,4,20,Seventeen,3,Pledis Entertainment,Gars,Groupe,Maestro,2024,Non,Non,6.5,6.5,6.5
-87,4,21,Lisa,3,YG Entertainment,Fille,Solo,Rockstar,2024,Non,Non,4.0,6.0,5.0
+72,4,6,Kai,3,SM Entertainment,Gars,Solo,Rover,2023,Non,Non,6.75,5.25,6.0
+73,4,7,Illit,4,BELIFT LAB,Fille,Groupe,Magnetic,2024,Non,Non,5.0,8.5,6.75
+74,4,8,BigBang,2,YG Entertainment,Gars,Groupe,Bang bang bang,2015,Non,Non,4.5,9.75,7.13
+75,4,9,TXT,4,BigHit Entertainment,Gars,Groupe,Chasing that feeling,2023,Non,Non,8.0,5.5,6.75
+76,4,10,Aespa,4,SM Entertainment,Fille,Groupe,Supernova,2024,Non,Non,6.5,6.0,6.25
+77,4,11,BTS,3,BigHit Entertainment,Gars,Groupe,I need U,2015,Non,Non,5.5,8.5,7.0
+78,4,12,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Super lady,2023,Non,Non,5.25,7.75,6.5
+79,4,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Topline,2023,Non,Non,8.25,7.25,7.75
+80,4,14,Ateez,4,KQ Entertainment,Gars,Groupe,Wonderland,2019,Non,Non,8.0,7.5,7.75
+81,4,15,Le Sserafim,4,Source Music,Fille,Groupe,Smart,2024,Non,Non,7.25,5.5,6.38
+82,4,16,Shaun,3,AOMG,Gars,Solo,Way back home,2018,Non,Non,4.5,9.0,6.75
+83,4,17,Treasure,4,YG Entertainment,Gars,Groupe,Jikjin,2021,Non,Non,7.0,6.5,6.75
+84,4,18,Nayeon,3,JYP Entertainment,Fille,Solo,Abcd,2024,Non,Non,7.0,4.75,5.88
+85,4,19,BTS,3,BigHit Entertainment,Gars,Groupe,On,2019,Non,Non,9.0,4.5,6.75
+86,4,20,Seventeen,3,Pledis Entertainment,Gars,Groupe,Maestro,2024,Non,Non,7.0,6.5,6.75
+87,4,21,Lisa,3,YG Entertainment,Fille,Solo,Rockstar,2024,Non,Non,4.5,6.0,5.25
 88,4,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Lalalala,2023,Non,Non,10.0,5.25,7.63
-89,5,1,2Ne1,2,YG Entertainment,Fille,Groupe,I am the best,2011,Non,Non,2.75,8.25,5.5
-90,5,2,Monsta X,3,Starship Entertainment,Gars,Groupe,Dramarama,2017,Non,Non,6.0,9.0,7.5
-91,5,3,Jimin,3,BigHit Entertainment,Gars,Solo,Like crazy,2023,Non,Non,5.0,6.25,5.63
-92,5,4,Twice,3,JYP Entertainment,Fille,Groupe,What is love?,2018,Non,Non,2.0,8.0,5.0
-93,5,5,Stray Kids,4,JYP Entertainment,Gars,Groupe,God's menu,2020,Non,Non,7.0,9.75,8.38
-94,5,6,TWS,5,Pledis Entertainment,Gars,Groupe,Plot twist,2024,Non,Non,5.5,6.75,6.13
-95,5,7,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Queencard,2023,Non,Non,2.0,8.5,5.25
-96,5,8,BTS,3,BigHit Entertainment,Gars,Groupe,Spring day,2017,Non,Non,2.5,10.0,6.25
-97,5,9,Seventeen,3,Pledis Entertainment,Gars,Groupe,Hot,2022,Non,Non,5.5,9.0,7.25
-98,5,10,NewJeans,4,ADOR,Fille,Groupe,Eta,2023,Non,Non,2.5,4.0,3.25
-99,5,11,Stray Kids,4,JYP Entertainment,Gars,Groupe,Lose my breath,2024,Non,Non,8.25,6.25,7.25
-100,5,12,Treasure,4,YG Entertainment,Gars,Groupe,Bona bona,2023,Non,Non,7.0,5.25,6.13
-101,5,13,Stella Jang,3,Schnauzer Boulangerie,Fille,Solo,Colors,2016,Non,Non,0.5,6.0,3.25
-102,5,14,BTS,3,BigHit Entertainment,Gars,Groupe,Danger,2014,Non,Non,5.0,7.5,6.25
-103,5,15,NCT Dream,4,SM Entertainment,Gars,Groupe,ISTJ,2023,Non,Non,8.25,6.5,7.38
-104,5,16,Red Velvet,3,SM Entertainment,Fille,Groupe,Psycho,2019,Non,Non,4.5,10.0,7.25
-105,5,17,TXT,4,BigHit Entertainment,Gars,Groupe,0X1=Lovesong,2021,Non,Seori,7.25,6.75,7.0
-106,5,18,Ateez,4,KQ Entertainment,Gars,Groupe,Deja vu,2021,Non,Non,7.75,9.0,8.38
-107,5,19,BabyMonster,5,YG Entertainment,Fille,Groupe,Sheesh,2023,Non,Non,2.5,7.5,5.0
-108,5,20,BTS,3,BigHit Entertainment,Gars,Groupe,Permission to dance,2021,Non,Non,2.5,4.75,3.63
+89,5,1,2Ne1,2,YG Entertainment,Fille,Groupe,I am the best,2011,Non,Non,3.0,8.25,5.63
+90,5,2,Monsta X,3,Starship Entertainment,Gars,Groupe,Dramarama,2017,Non,Non,6.5,9.0,7.75
+91,5,3,Jimin,3,BigHit Entertainment,Gars,Solo,Like crazy,2023,Non,Non,6.25,6.25,6.25
+92,5,4,Twice,3,JYP Entertainment,Fille,Groupe,What is love?,2018,Non,Non,4.5,8.0,6.25
+93,5,5,Stray Kids,4,JYP Entertainment,Gars,Groupe,God's menu,2020,Non,Non,8.25,9.75,9.0
+94,5,6,TWS,5,Pledis Entertainment,Gars,Groupe,Plot twist,2024,Non,Non,6.75,6.75,6.75
+95,5,7,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Queencard,2023,Non,Non,3.5,8.5,6.0
+96,5,8,BTS,3,BigHit Entertainment,Gars,Groupe,Spring day,2017,Non,Non,3.5,10.0,6.75
+97,5,9,Seventeen,3,Pledis Entertainment,Gars,Groupe,Hot,2022,Non,Non,6.75,9.0,7.88
+98,5,10,NewJeans,4,ADOR,Fille,Groupe,Eta,2023,Non,Non,2.0,4.0,3.0
+99,5,11,Stray Kids,4,JYP Entertainment,Gars,Groupe,Lose my breath,2024,Non,Non,9.5,6.25,7.88
+100,5,12,Treasure,4,YG Entertainment,Gars,Groupe,Bona bona,2023,Non,Non,8.0,5.25,6.63
+101,5,13,Stella Jang,3,Schnauzer Boulangerie,Fille,Solo,Colors,2016,Non,Non,0.25,6.0,3.13
+102,5,14,BTS,3,BigHit Entertainment,Gars,Groupe,Danger,2014,Non,Non,5.5,7.5,6.5
+103,5,15,NCT Dream,4,SM Entertainment,Gars,Groupe,ISTJ,2023,Non,Non,8.75,6.5,7.63
+104,5,16,Red Velvet,3,SM Entertainment,Fille,Groupe,Psycho,2019,Non,Non,4.0,10.0,7.0
+105,5,17,TXT,4,BigHit Entertainment,Gars,Groupe,0X1=Lovesong,2021,Non,Seori,9.75,6.75,8.25
+106,5,18,Ateez,4,KQ Entertainment,Gars,Groupe,Deja vu,2021,Non,Non,8.25,9.0,8.63
+107,5,19,BabyMonster,5,YG Entertainment,Fille,Groupe,Sheesh,2023,Non,Non,2.25,7.5,4.88
+108,5,20,BTS,3,BigHit Entertainment,Gars,Groupe,Permission to dance,2021,Non,Non,4.0,4.75,4.38
 109,5,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Stray Kids,2024,Non,Non,9.0,6.75,7.88
-110,5,22,BlackPink,3,YG Entertainment,Fille,Groupe,Shut down,2022,Non,Non,4.5,8.0,6.25
-111,6,1,Riize,5,SM Entertainment,Gars,Groupe,Get a guitar,2023,Non,Non,3.0,6.5,4.75
-112,6,2,BTS,3,BigHit Entertainment,Gars,Groupe,Fake love,2018,Non,Non,5.5,9.5,7.5
-113,6,3,BlackPink,3,YG Entertainment,Fille,Groupe,Boombayah,2016,Non,Non,5.5,8.0,6.75
-114,6,4,Stray Kids,4,JYP Entertainment,Gars,Groupe,Jjam,2024,Non,Non,9.25,6.0,7.63
-115,6,5,NewJeans,4,ADOR,Fille,Groupe,Super shy,2023,Non,Non,2.5,8.5,5.5
-116,6,6,Enhypen,4,Belift Lab,Gars,Groupe,Bite me,2023,Non,Non,7.5,9.0,8.25
-117,6,7,Got7,3,JYP Entertainment,Gars,Groupe,Hard carry,2016,Non,Non,6.75,10.0,8.38
-118,6,8,Bibi,4,88rising,Fille,Solo,Bibi vengeance,2022,Non,Non,5.75,10.0,7.88
-119,6,9,TXT,4,BigHit Entertainment,Gars,Groupe,Sugar rush ride,2023,Non,Non,5.5,5.5,5.5
-120,6,10,BTS,3,BigHit Entertainment,Gars,Groupe,Dynamite,2020,Non,Non,5.0,6.5,5.75
-121,6,11,Momoland,3,MLD Entertainment,Fille,Groupe,Bboom bboom,2018,Non,Non,2.5,7.0,4.75
-122,6,12,P1Harmony,4,FNC Entertainment,Gars,Groupe,Killin'it,2023,Non,Non,6.5,6.75,6.63
-123,6,13,Itzy,4,JYP Entertainment,Fille,Groupe,Untouchable,2024,Non,Non,6.0,6.5,6.25
+110,5,22,BlackPink,3,YG Entertainment,Fille,Groupe,Shut down,2022,Non,Non,5.0,8.0,6.5
+111,6,1,Riize,5,SM Entertainment,Gars,Groupe,Get a guitar,2023,Non,Non,3.25,6.5,4.88
+112,6,2,BTS,3,BigHit Entertainment,Gars,Groupe,Fake love,2018,Non,Non,6.5,9.5,8.0
+113,6,3,BlackPink,3,YG Entertainment,Fille,Groupe,Boombayah,2016,Non,Non,6.0,8.0,7.0
+114,6,4,Stray Kids,4,JYP Entertainment,Gars,Groupe,Jjam,2024,Non,Non,9.5,6.0,7.75
+115,6,5,NewJeans,4,ADOR,Fille,Groupe,Super shy,2023,Non,Non,4.5,8.5,6.5
+116,6,6,Enhypen,4,Belift Lab,Gars,Groupe,Bite me,2023,Non,Non,8.5,9.0,8.75
+117,6,7,Got7,3,JYP Entertainment,Gars,Groupe,Hard carry,2016,Non,Non,7.5,10.0,8.75
+118,6,8,Bibi,4,88rising,Fille,Solo,Bibi vengeance,2022,Non,Non,6.75,10.0,8.38
+119,6,9,TXT,4,BigHit Entertainment,Gars,Groupe,Sugar rush ride,2023,Non,Non,8.25,5.5,6.88
+120,6,10,BTS,3,BigHit Entertainment,Gars,Groupe,Dynamite,2020,Non,Non,6.5,6.5,6.5
+121,6,11,Momoland,3,MLD Entertainment,Fille,Groupe,Bboom bboom,2018,Non,Non,4.0,7.0,5.5
+122,6,12,P1Harmony,4,FNC Entertainment,Gars,Groupe,Killin'it,2023,Non,Non,7.25,6.75,7.0
+123,6,13,Itzy,4,JYP Entertainment,Fille,Groupe,Untouchable,2024,Non,Non,6.5,6.5,6.5
 124,6,14,Stray Kids,4,JYP Entertainment,Gars,Groupe,Mountains,2024,Non,Non,9.25,5.0,7.13
 125,6,15,Ateez,4,KQ Entertainment,Gars,Groupe,Halazia,2022,Non,Non,10.0,6.0,8.0
-126,6,16,Kiss of life,5,S2 Entertainment,Fille,Groupe,Bad news,2023,Non,Non,4.75,4.0,4.38
-127,6,17,BTS,3,BigHit Entertainment,Gars,Groupe,Life goes on,2020,Non,Non,1.75,6.75,4.25
-128,6,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Left & Right,2020,Non,Non,4.5,10.0,7.25
-129,6,19,Twice,3,JYP Entertainment,Fille,Groupe,I can't stop me,2020,Non,Non,5.25,7.25,6.25
+126,6,16,Kiss of life,5,S2 Entertainment,Fille,Groupe,Bad news,2023,Non,Non,5.25,4.0,4.63
+127,6,17,BTS,3,BigHit Entertainment,Gars,Groupe,Life goes on,2020,Non,Non,3.25,6.75,5.0
+128,6,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Left & Right,2020,Non,Non,5.5,10.0,7.75
+129,6,19,Twice,3,JYP Entertainment,Fille,Groupe,I can't stop me,2020,Non,Non,6.0,7.25,6.63
 130,6,20,Winner,3,YG Entertainment,Gars,Groupe,Really really,2017,Non,Non,2.0,9.0,5.5
-131,6,21,Ive,4,Starship Entertainment,Fille,Groupe,Heya,2023,Non,Non,6.5,5.0,5.75
+131,6,21,Ive,4,Starship Entertainment,Fille,Groupe,Heya,2023,Non,Non,6.75,5.0,5.88
 132,6,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Chk chk boom,2024,Non,Non,10.0,5.75,7.88
-133,7,1,NewJeans,4,ADOR,Fille,Groupe,OMG,2023,Non,Non,2.5,9.5,6.0
-134,7,2,Got7,3,JYP Entertainment,Gars,Groupe,Just right,2015,Non,Non,2.5,7.0,4.75
-135,7,3,Stray Kids,4,JYP Entertainment,Gars,Groupe,My pace,2018,Non,Non,7.75,10.0,8.88
-136,7,4,Aespa,4,SM Entertainment,Fille,Groupe,Armageddon,2024,Non,Non,5.25,8.0,6.63
-137,7,5,BTS,3,BigHit Entertainment,Gars,Groupe,No more dream,2013,Non,Non,4.75,8.5,6.63
-138,7,6,TXT,4,BigHit Entertainment,Gars,Groupe,Run away,2019,Non,Non,8.0,10.0,9.0
-139,7,7,Ive,4,Starship Entertainment,Fille,Groupe,Love dive,2022,Non,Non,4.0,5.0,4.5
-140,7,8,Seventeen,3,Pledis Entertainment,Gars,Groupe,Very nice,2016,Non,Non,4.25,8.5,6.38
-141,7,9,Mamamoo,2,RBW,Fille,Groupe,Hip,2019,Non,Non,6.5,10.0,8.25
-142,7,10,Ateez,4,KQ Entertainment,Gars,Groupe,Work,2024,Non,Non,5.75,8.0,6.88
-143,7,11,BTS,3,BigHit Entertainment,Gars,Groupe,Anpanman,2018,Non,Non,7.5,7.5,7.5
-144,7,12,BlackPink,3,YG Entertainment,Fille,Groupe,As if it's your last,2017,Non,Non,6.0,8.25,7.13
-145,7,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Domino,2021,Non,Non,7.25,6.5,6.88
-146,7,14,BabyMonster,5,YG Entertainment,Fille,Groupe,Forever,2024,Non,Non,6.0,5.25,5.63
-147,7,15,Enhypen,4,Belift Lab,Gars,Groupe,XO,2024,Non,Non,6.75,6.5,6.63
-148,7,16,B.A.P,2,TS Entertainment,Gars,Groupe,One shot,2013,Non,Non,6.25,7.0,6.63
-149,7,17,Itzy,4,JYP Entertainment,Fille,Groupe,Wannabe,2020,Non,Non,7.0,9.5,8.25
-150,7,18,Treasure,4,YG Entertainment,Gars,Groupe,Darari,2022,Non,Non,3.5,7.5,5.5
-151,7,19,Stray Kids,4,JYP Entertainment,Gars,Groupe,S-Class,2023,Non,Non,9.25,7.5,8.38
-152,7,20,f(x),2,SM Entertainment,Fille,Groupe,Electric shock,2012,Non,Non,1.75,7.0,4.38
-153,7,21,BTS,3,BigHit Entertainment,Gars,Groupe,Boy with luv,2019,Non,Halsey,4.75,4.5,4.63
-154,7,22,Everglow,4,Yuehua Entertainment,Fille,Groupe,La di da,2020,Non,Non,7.25,6.25,6.75
-155,8,1,Psy,2,YG Entertainment,Gars,Solo,Gangnam style,2012,Non,Non,4.25,7.25,5.75
-156,8,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Christmas EveL,2021,Non,Non,8.0,8.0,8.0
-157,8,3,Twice,3,JYP Entertainment,Fille,Groupe,Fancy,2019,Non,Non,4.25,8.5,6.38
-158,8,4,BTS,3,BigHit Entertainment,Gars,Groupe,Blood sweat & tears,2016,Non,Non,5.25,9.0,7.13
-159,8,5,Treasure,4,YG Entertainment,Gars,Groupe,Hello,2022,Non,Non,6.0,6.0,6.0
-160,8,6,BlackPink,3,YG Entertainment,Fille,Groupe,Pretty Savage,2020,Non,Non,6.0,7.0,6.5
-161,8,7,TXT,4,BigHit Entertainment,Gars,Groupe,Crown,2019,Non,Non,5.0,7.75,6.38
-162,8,8,SHINee,2,SM Entertainment,Gars,Groupe,Ring ding dong,2009,Non,Non,1.25,9.5,5.38
-163,8,9,Le Sserafim,4,Source Music,Fille,Groupe,Crazy,2024,Non,Non,3.5,7.5,5.5
-164,8,10,BTS,3,BigHit Entertainment,Gars,Groupe,Run BTS,2022,Non,Non,5.5,7.5,6.5
-165,8,11,Red Velvet,3,SM Entertainment,Fille,Groupe,Zimzalabim,2019,Non,Non,2.0,6.75,4.38
-166,8,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,Double knot,2019,Non,Non,7.75,6.75,7.25
+133,7,1,NewJeans,4,ADOR,Fille,Groupe,OMG,2023,Non,Non,4.5,9.5,7.0
+134,7,2,Got7,3,JYP Entertainment,Gars,Groupe,Just right,2015,Non,Non,2.75,7.0,4.88
+135,7,3,Stray Kids,4,JYP Entertainment,Gars,Groupe,My pace,2018,Non,Non,8.0,10.0,9.0
+136,7,4,Aespa,4,SM Entertainment,Fille,Groupe,Armageddon,2024,Non,Non,5.75,8.0,6.88
+137,7,5,BTS,3,BigHit Entertainment,Gars,Groupe,No more dream,2013,Non,Non,5.0,8.5,6.75
+138,7,6,TXT,4,BigHit Entertainment,Gars,Groupe,Run away,2019,Non,Non,9.5,10.0,9.75
+139,7,7,Ive,4,Starship Entertainment,Fille,Groupe,Love dive,2022,Non,Non,6.0,5.0,5.5
+140,7,8,Seventeen,3,Pledis Entertainment,Gars,Groupe,Very nice,2016,Non,Non,4.75,8.5,6.63
+141,7,9,Mamamoo,2,RBW,Fille,Groupe,Hip,2019,Non,Non,7.5,10.0,8.75
+142,7,10,Ateez,4,KQ Entertainment,Gars,Groupe,Work,2024,Non,Non,6.5,8.0,7.25
+143,7,11,BTS,3,BigHit Entertainment,Gars,Groupe,Anpanman,2018,Non,Non,7.75,7.5,7.63
+144,7,12,BlackPink,3,YG Entertainment,Fille,Groupe,As if it's your last,2017,Non,Non,6.25,8.25,7.25
+145,7,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Domino,2021,Non,Non,8.0,6.5,7.25
+146,7,14,BabyMonster,5,YG Entertainment,Fille,Groupe,Forever,2024,Non,Non,7.0,5.25,6.13
+147,7,15,Enhypen,4,Belift Lab,Gars,Groupe,XO,2024,Non,Non,8.0,6.5,7.25
+148,7,16,B.A.P,2,TS Entertainment,Gars,Groupe,One shot,2013,Non,Non,7.0,7.0,7.0
+149,7,17,Itzy,4,JYP Entertainment,Fille,Groupe,Wannabe,2020,Non,Non,7.75,9.5,8.63
+150,7,18,Treasure,4,YG Entertainment,Gars,Groupe,Darari,2022,Non,Non,4.5,7.5,6.0
+151,7,19,Stray Kids,4,JYP Entertainment,Gars,Groupe,S-Class,2023,Non,Non,9.75,7.5,8.63
+152,7,20,f(x),2,SM Entertainment,Fille,Groupe,Electric shock,2012,Non,Non,2.0,7.0,4.5
+153,7,21,BTS,3,BigHit Entertainment,Gars,Groupe,Boy with luv,2019,Non,Halsey,7.5,4.5,6.0
+154,7,22,Everglow,4,Yuehua Entertainment,Fille,Groupe,La di da,2020,Non,Non,8.0,6.25,7.13
+155,8,1,Psy,2,YG Entertainment,Gars,Solo,Gangnam style,2012,Non,Non,5.0,7.25,6.13
+156,8,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Christmas EveL,2021,Non,Non,8.25,8.0,8.13
+157,8,3,Twice,3,JYP Entertainment,Fille,Groupe,Fancy,2019,Non,Non,4.5,8.5,6.5
+158,8,4,BTS,3,BigHit Entertainment,Gars,Groupe,Blood sweat & tears,2016,Non,Non,6.25,9.0,7.63
+159,8,5,Treasure,4,YG Entertainment,Gars,Groupe,Hello,2022,Non,Non,7.0,6.0,6.5
+160,8,6,BlackPink,3,YG Entertainment,Fille,Groupe,Pretty Savage,2020,Non,Non,6.5,7.0,6.75
+161,8,7,TXT,4,BigHit Entertainment,Gars,Groupe,Crown,2019,Non,Non,6.0,7.75,6.88
+162,8,8,SHINee,2,SM Entertainment,Gars,Groupe,Ring ding dong,2009,Non,Non,1.5,9.5,5.5
+163,8,9,Le Sserafim,4,Source Music,Fille,Groupe,Crazy,2024,Non,Non,4.25,7.5,5.88
+164,8,10,BTS,3,BigHit Entertainment,Gars,Groupe,Run BTS,2022,Non,Non,6.5,7.5,7.0
+165,8,11,Red Velvet,3,SM Entertainment,Fille,Groupe,Zimzalabim,2019,Non,Non,2.25,6.75,4.5
+166,8,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,Double knot,2019,Non,Non,8.25,6.75,7.5
 167,8,13,Ateez,4,KQ Entertainment,Gars,Groupe,Guerrilla,2022,Non,Non,9.25,7.5,8.38
 168,8,14,Aespa,4,SM Entertainment,Fille,Groupe,Next level,2021,Non,Non,5.75,6.0,5.88
-169,8,15,NCT U,4,SM Entertainment,Gars,Groupe,Boss,2018,Non,Non,3.0,9.5,6.25
-170,8,16,Super junior,2,SM Entertainment,Gars,Groupe,Mamacita,2014,Non,Non,3.5,6.5,5.0
+169,8,15,NCT U,4,SM Entertainment,Gars,Groupe,Boss,2018,Non,Non,2.5,9.5,6.0
+170,8,16,Super junior,2,SM Entertainment,Gars,Groupe,Mamacita,2014,Non,Non,3.25,6.5,4.88
 171,8,17,Iz*one,4,Off The Record Entertainment,Fille,Groupe,Panorama,2020,Non,Non,4.5,7.0,5.75
-172,8,18,BTS,3,BigHit Entertainment,Gars,Groupe,My universe,2021,Non,Coldplay,6.0,4.0,5.0
-173,8,19,Seventeen,3,Pledis Entertainment,Gars,Groupe,God of music,2023,Non,Non,5.0,6.75,5.88
-174,8,20,NewJeans,4,ADOR,Fille,Groupe,Hype boy,2022,Non,Non,2.0,7.0,4.5
-175,8,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Case 143,2022,Non,Non,8.5,7.0,7.75
-176,8,22,Enhypen,4,Belift Lab,Gars,Groupe,Polaroid love,2022,Non,Non,4.75,8.0,6.38
-177,9,1,TXT,4,BigHit Entertainment,Gars,Groupe,Deja vu,2024,Non,Non,5.25,5.5,5.38
-178,9,2,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Oh my god,2020,Non,Non,4.75,10.0,7.38
+172,8,18,BTS,3,BigHit Entertainment,Gars,Groupe,My universe,2021,Non,Coldplay,6.25,4.0,5.13
+173,8,19,Seventeen,3,Pledis Entertainment,Gars,Groupe,God of music,2023,Non,Non,5.5,6.75,6.13
+174,8,20,NewJeans,4,ADOR,Fille,Groupe,Hype boy,2022,Non,Non,2.25,7.0,4.63
+175,8,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Case 143,2022,Non,Non,9.25,7.0,8.13
+176,8,22,Enhypen,4,Belift Lab,Gars,Groupe,Polaroid love,2022,Non,Non,6.0,8.0,7.0
+177,9,1,TXT,4,BigHit Entertainment,Gars,Groupe,Deja vu,2024,Non,Non,6.0,5.5,5.75
+178,9,2,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Oh my god,2020,Non,Non,5.5,10.0,7.75
 179,9,3,Stray Kids,4,JYP Entertainment,Gars,Groupe,Charmer,2022,Non,Non,10.0,6.5,8.25
 180,9,4,Pentagon,3,CUBE Entertainment,Gars,Groupe,Shine,2018,Non,Non,5.75,10.0,7.88
-181,9,5,BlackPink,3,YG Entertainment,Fille,Groupe,Lovesick girls,2020,Non,Non,6.25,7.75,7.0
-182,9,6,BTS,3,BigHit Entertainment,Gars,Groupe,Boy in luv,2014,Non,Non,5.5,9.5,7.5
-183,9,7,Nmixx,4,JYP Entertainment,Fille,Groupe,O.O,2022,Non,Non,5.0,5.5,5.25
-184,9,8,B.A.P,2,TS Entertainment,Gars,Groupe,Young. wild & free,2015,Non,Non,5.5,6.5,6.0
-185,9,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,Venom,2022,Non,Non,5.75,6.75,6.25
+181,9,5,BlackPink,3,YG Entertainment,Fille,Groupe,Lovesick girls,2020,Non,Non,7.0,7.75,7.38
+182,9,6,BTS,3,BigHit Entertainment,Gars,Groupe,Boy in luv,2014,Non,Non,5.75,9.5,7.63
+183,9,7,Nmixx,4,JYP Entertainment,Fille,Groupe,O.O,2022,Non,Non,5.5,5.5,5.5
+184,9,8,B.A.P,2,TS Entertainment,Gars,Groupe,Young. wild & free,2015,Non,Non,7.5,6.5,7.0
+185,9,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,Venom,2022,Non,Non,6.75,6.75,6.75
 186,9,10,NewJeans,4,ADOR,Fille,Groupe,Ditto,2022,Non,Non,1.75,7.5,4.63
-187,9,11,Enhypen,4,Belift Lab,Gars,Groupe,Given-Taken,2020,Non,Non,6.5,8.25,7.38
-188,9,12,BTS,3,BigHit Entertainment,Gars,Groupe,Black swan,2020,Non,Non,4.0,7.5,5.75
+187,9,11,Enhypen,4,Belift Lab,Gars,Groupe,Given-Taken,2020,Non,Non,7.25,8.25,7.75
+188,9,12,BTS,3,BigHit Entertainment,Gars,Groupe,Black swan,2020,Non,Non,4.75,7.5,6.13
 189,9,13,Momoland,3,MLD Entertainment,Fille,Groupe,I'm so hot,2019,Non,Non,2.5,5.75,4.13
-190,9,14,Seventeen,3,Pledis Entertainment,Gars,Groupe,Don't Wanna Cry,2017,Non,Non,5.25,10.0,7.63
+190,9,14,Seventeen,3,Pledis Entertainment,Gars,Groupe,Don't Wanna Cry,2017,Non,Non,6.0,10.0,8.0
 191,9,15,Red Velvet,3,SM Entertainment,Fille,Groupe,Red flavor,2017,Non,Non,2.0,7.25,4.63
-192,9,16,Stray Kids,4,JYP Entertainment,Gars,Groupe,I like it,2024,Non,Non,9.75,8.75,9.25
-193,9,17,Got7,3,JYP Entertainment,Gars,Groupe,You calling my name,2019,Non,Non,5.0,7.5,6.25
-194,9,18,Ive,4,Starship Entertainment,Fille,Groupe,After like,2022,Non,Non,4.0,4.0,4.0
-195,9,19,BTS,3,BigHit Entertainment,Gars,Groupe,Dionysus,2019,Non,Non,6.5,7.0,6.75
-196,9,20,Le Sserafim,4,Source Music,Fille,Groupe,Easy,2024,Non,Non,2.5,8.25,5.38
+192,9,16,Stray Kids,4,JYP Entertainment,Gars,Groupe,I like it,2024,Non,Non,10.0,8.75,9.38
+193,9,17,Got7,3,JYP Entertainment,Gars,Groupe,You calling my name,2019,Non,Non,5.5,7.5,6.5
+194,9,18,Ive,4,Starship Entertainment,Fille,Groupe,After like,2022,Non,Non,4.25,4.0,4.13
+195,9,19,BTS,3,BigHit Entertainment,Gars,Groupe,Dionysus,2019,Non,Non,7.0,7.0,7.0
+196,9,20,Le Sserafim,4,Source Music,Fille,Groupe,Easy,2024,Non,Non,3.0,8.25,5.63
 197,9,21,Ateez,4,KQ Entertainment,Gars,Groupe,Say my name,2019,Non,Non,7.75,9.5,8.63
-198,9,22,Super junior,2,SM Entertainment,Gars,Groupe,Sorry sorry,2009,Non,Non,2.25,9.25,5.75
-199,10,1,Fifty fifty,4,AAP Entertainment,Fille,Groupe,Cupid,2023,Non,Non,2.75,6.5,4.63
-200,10,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Get lit,2023,Non,Non,7.5,6.25,6.88
-201,10,3,Mamamoo,2,RBW,Fille,Groupe,Gogobebe,2019,Non,Non,5.25,10.0,7.63
-202,10,4,BTS,3,BigHit Entertainment,Gars,Groupe,Jump,2018,Non,Non,6.75,7.0,6.88
-203,10,5,Kep1er,4,Wake One Entertainment,Fille,Groupe,Wa da da,2022,Non,Non,3.0,6.5,4.75
-204,10,6,BoyNextDoor,5,KOZ Entertainment,Gars,Groupe,Earth. Wind & Fire,2024,Non,Non,7.75,6.75,7.25
-205,10,7,TXT,4,BigHit Entertainment,Gars,Groupe,Blue hour,2020,Non,Non,3.25,6.5,4.88
-206,10,8,Girls' Generation,2,SM Entertainment,Fille,Groupe,The boys,2011,Non,Non,2.75,7.0,4.88
-207,10,9,Ateez,4,KQ Entertainment,Gars,Groupe,The black cat Nero,2020,Non,Non,7.25,7.25,7.25
-208,10,10,Stray Kids,4,JYP Entertainment,Gars,Groupe,Cheese,2021,Non,Non,7.25,6.5,6.88
-209,10,11,Ive,4,Starship Entertainment,Fille,Groupe,Eleven,2021,Non,Non,4.5,5.0,4.75
-210,10,12,BTS,3,BigHit Entertainment,Gars,Groupe,We are bulletproof,2013,Non,Non,4.0,7.75,5.88
+198,9,22,Super junior,2,SM Entertainment,Gars,Groupe,Sorry sorry,2009,Non,Non,3.0,9.25,6.13
+199,10,1,Fifty fifty,4,AAP Entertainment,Fille,Groupe,Cupid,2023,Non,Non,5.0,6.5,5.75
+200,10,2,Stray Kids,4,JYP Entertainment,Gars,Groupe,Get lit,2023,Non,Non,7.25,6.25,6.75
+201,10,3,Mamamoo,2,RBW,Fille,Groupe,Gogobebe,2019,Non,Non,6.0,10.0,8.0
+202,10,4,BTS,3,BigHit Entertainment,Gars,Groupe,Jump,2018,Non,Non,7.5,7.0,7.25
+203,10,5,Kep1er,4,Wake One Entertainment,Fille,Groupe,Wa da da,2022,Non,Non,5.0,6.5,5.75
+204,10,6,BoyNextDoor,5,KOZ Entertainment,Gars,Groupe,Earth. Wind & Fire,2024,Non,Non,8.25,6.75,7.5
+205,10,7,TXT,4,BigHit Entertainment,Gars,Groupe,Blue hour,2020,Non,Non,3.5,6.5,5.0
+206,10,8,Girls' Generation,2,SM Entertainment,Fille,Groupe,The boys,2011,Non,Non,3.5,7.0,5.25
+207,10,9,Ateez,4,KQ Entertainment,Gars,Groupe,The black cat Nero,2020,Non,Non,8.0,7.25,7.63
+208,10,10,Stray Kids,4,JYP Entertainment,Gars,Groupe,Cheese,2021,Non,Non,8.0,6.5,7.25
+209,10,11,Ive,4,Starship Entertainment,Fille,Groupe,Eleven,2021,Non,Non,4.25,5.0,4.63
+210,10,12,BTS,3,BigHit Entertainment,Gars,Groupe,We are bulletproof,2013,Non,Non,5.0,7.75,6.38
 211,10,13,Got7,3,JYP Entertainment,Gars,Groupe,Lullaby,2018,Non,Non,5.0,6.5,5.75
 212,10,14,Everglow,4,Yuehua Entertainment,Fille,Groupe,Bon bon chocolat,2019,Non,Non,4.0,9.0,6.5
-213,10,15,Jimin,3,BigHit Entertainment,Gars,Solo,Who,2024,Non,Non,9.0,7.0,8.0
+213,10,15,Jimin,3,BigHit Entertainment,Gars,Solo,Who,2024,Non,Non,10.0,7.0,8.5
 214,10,16,Itzy,4,JYP Entertainment,Fille,Groupe,Dalla dalla,2019,Non,Non,4.75,7.0,5.88
-215,10,17,Seventeen,3,Pledis Entertainment,Gars,Groupe,Cheers,2022,SVT Leaders,Non,2.5,8.5,5.5
-216,10,18,Stray Kids,4,JYP Entertainment,Gars,Groupe,Circus,2022,Non,Non,7.25,5.5,6.38
-217,10,19,BlackPink,3,YG Entertainment,Fille,Groupe,Playing with fire,2016,Non,Non,5.0,8.5,6.75
-218,10,20,BTS,3,BigHit Entertainment,Gars,Groupe,DNA,2017,Non,Non,6.5,5.25,5.88
-219,10,21,Aespa,4,SM Entertainment,Fille,Groupe,Girls,2022,Non,Non,6.75,6.75,6.75
+215,10,17,Seventeen,3,Pledis Entertainment,Gars,Groupe,Cheers,2022,SVT Leaders,Non,5.5,8.5,7.0
+216,10,18,Stray Kids,4,JYP Entertainment,Gars,Groupe,Circus,2022,Non,Non,8.0,5.5,6.75
+217,10,19,BlackPink,3,YG Entertainment,Fille,Groupe,Playing with fire,2016,Non,Non,5.5,8.5,7.0
+218,10,20,BTS,3,BigHit Entertainment,Gars,Groupe,DNA,2017,Non,Non,7.5,5.25,6.38
+219,10,21,Aespa,4,SM Entertainment,Fille,Groupe,Girls,2022,Non,Non,7.25,6.75,7.0
 220,10,22,Treasure,4,YG Entertainment,Gars,Groupe,I love you,2020,Non,Non,7.5,8.0,7.75
-221,11,1,BTS,3,BigHit Entertainment,Gars,Groupe,Make it right,2019,Non,Non,4.5,9.0,6.75
-222,11,2,Kiss of life,5,S2 Entertainment,Fille,Groupe,Midas touch,2024,Non,Non,4.75,6.5,5.63
+221,11,1,BTS,3,BigHit Entertainment,Gars,Groupe,Make it right,2019,Non,Non,7.75,9.0,8.38
+222,11,2,Kiss of life,5,S2 Entertainment,Fille,Groupe,Midas touch,2024,Non,Non,5.25,6.5,5.88
 223,11,3,J-Hope,3,BigHit Entertainment,Gars,Solo,Chicken noodle soup,2019,Non,Non,0.0,3.0,1.5
-224,11,4,Riize,5,SM Entertainment,Gars,Groupe,Boom boom bass,2024,Non,Non,5.0,8.0,6.5
-225,11,5,BlackPink,3,YG Entertainment,Fille,Groupe,Forever young,2018,Non,Non,5.75,7.25,6.5
-226,11,6,TXT,4,BigHit Entertainment,Gars,Groupe,Can't you see me?,2020,Non,Non,5.0,8.0,6.5
-227,11,7,BTS,3,BigHit Entertainment,Gars,Groupe,Dope,2015,Non,Non,5.75,8.75,7.25
-228,11,8,Ive,4,Starship Entertainment,Fille,Groupe,Baddie,2023,Non,Non,3.25,5.25,4.25
-229,11,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,Levanter,2019,Non,Non,7.75,9.25,8.5
-230,11,10,Ateez,4,KQ Entertainment,Gars,Groupe,Answer,2020,Non,Non,9.5,10.0,9.75
-231,11,11,Wonder Girls,2,JYP Entertainment,Fille,Groupe,Be my baby,2011,Non,Non,1.0,5.75,3.38
-232,11,12,Treasure,4,YG Entertainment,Gars,Groupe,King kong,2024,Non,Non,5.25,7.25,6.25
-233,11,13,NCT 127,4,SM Entertainment,Gars,Groupe,Kick it,2020,Non,Non,3.25,10.0,6.63
+224,11,4,Riize,5,SM Entertainment,Gars,Groupe,Boom boom bass,2024,Non,Non,5.25,8.0,6.63
+225,11,5,BlackPink,3,YG Entertainment,Fille,Groupe,Forever young,2018,Non,Non,6.5,7.25,6.88
+226,11,6,TXT,4,BigHit Entertainment,Gars,Groupe,Can't you see me?,2020,Non,Non,6.25,8.0,7.13
+227,11,7,BTS,3,BigHit Entertainment,Gars,Groupe,Dope,2015,Non,Non,6.75,8.75,7.75
+228,11,8,Ive,4,Starship Entertainment,Fille,Groupe,Baddie,2023,Non,Non,3.5,5.25,4.38
+229,11,9,Stray Kids,4,JYP Entertainment,Gars,Groupe,Levanter,2019,Non,Non,8.0,9.25,8.63
+230,11,10,Ateez,4,KQ Entertainment,Gars,Groupe,Answer,2020,Non,Non,10.0,10.0,10.0
+231,11,11,Wonder Girls,2,JYP Entertainment,Fille,Groupe,Be my baby,2011,Non,Non,0.75,5.75,3.25
+232,11,12,Treasure,4,YG Entertainment,Gars,Groupe,King kong,2024,Non,Non,5.75,7.25,6.5
+233,11,13,NCT 127,4,SM Entertainment,Gars,Groupe,Kick it,2020,Non,Non,4.75,10.0,7.38
 234,11,14,Le Sserafim,4,Source Music,Fille,Groupe,Perfect night,2023,Non,Non,4.5,7.75,6.13
-235,11,15,Stray Kids,4,JYP Entertainment,Gars,Groupe,Slash,2024,Non,Non,7.75,6.0,6.88
-236,11,16,Wanna one,3,YMC Entertainment,Gars,Groupe,Boomerang,2018,Non,Non,4.0,9.0,6.5
-237,11,17,Aespa,4,SM Entertainment,Fille,Groupe,Spicy,2023,Non,Non,3.75,6.0,4.88
-238,11,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Clap,2017,Non,Non,5.0,8.25,6.63
-239,11,19,BTS,3,BigHit Entertainment,Gars,Groupe,Go go,2018,Non,Non,3.0,4.25,3.63
-240,11,20,BabyMonster,5,YG Entertainment,Fille,Groupe,Like that,2024,Non,Non,5.75,5.25,5.5
-241,11,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Side Effects,2019,Non,Non,8.25,9.0,8.63
-242,11,22,Psy,2,YG Entertainment,Gars,Solo,Gentleman,2013,Non,Non,3.25,7.5,5.38
+235,11,15,Stray Kids,4,JYP Entertainment,Gars,Groupe,Slash,2024,Non,Non,8.5,6.0,7.25
+236,11,16,Wanna one,3,YMC Entertainment,Gars,Groupe,Boomerang,2018,Non,Non,4.5,9.0,6.75
+237,11,17,Aespa,4,SM Entertainment,Fille,Groupe,Spicy,2023,Non,Non,4.0,6.0,5.0
+238,11,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Clap,2017,Non,Non,5.5,8.25,6.88
+239,11,19,BTS,3,BigHit Entertainment,Gars,Groupe,Go go,2018,Non,Non,3.25,4.25,3.75
+240,11,20,BabyMonster,5,YG Entertainment,Fille,Groupe,Like that,2024,Non,Non,6.5,5.25,5.88
+241,11,21,Stray Kids,4,JYP Entertainment,Gars,Groupe,Side Effects,2019,Non,Non,8.5,9.0,8.75
+242,11,22,Psy,2,YG Entertainment,Gars,Solo,Gentleman,2013,Non,Non,3.5,7.5,5.5
 243,12,1,BigBang,2,YG Entertainment,Gars,Groupe,Loser,2015,Non,Non,1.5,9.0,5.25
-244,12,2,Twice,3,JYP Entertainment,Fille,Groupe,Likey,2017,Non,Non,3.0,6.5,4.75
-245,12,3,Ateez,4,KQ Entertainment,Gars,Groupe,Horizon,2020,Non,Non,9.0,8.5,8.75
-246,12,4,BTS,3,BigHit Entertainment,Gars,Groupe,Airplane,2018,Non,Non,4.0,5.5,4.75
-247,12,5,Sunmi,2,Makeus Entertainment,Fille,Solo,Gashina,2017,Non,Non,5.0,10.0,7.5
-248,12,6,TXT,4,BigHit Entertainment,Gars,Groupe,Puma,2020,Non,Non,3.75,5.5,4.63
-249,12,7,Stray Kids,4,JYP Entertainment,Gars,Groupe,Victory song,2019,Non,Non,7.5,9.75,8.63
-250,12,8,Everglow,4,Yuehua Entertainment,Fille,Groupe,Slay,2023,Non,Non,5.0,7.0,6.0
-251,12,9,Eric Nam,3,CJeS Entertainment,Gars,Solo,Congratulations,2019,Non,Non,4.0,10.0,7.0
-252,12,10,Le Sserafim,4,Source Music,Fille,Groupe,Unforgiven,2023,Non,Non,5.0,6.25,5.63
-253,12,11,CIX,4,C9 Entertainment,Gars,Groupe,Movie star,2019,Non,Non,4.25,9.0,6.63
-254,12,12,Nu'est,2,Pledis Entertainment,Gars,Groupe,Face,2012,Non,Non,2.75,9.5,6.13
-255,12,13,Badvillain,5,BPM,Fille,Groupe,Badvillain,2024,Non,Non,6.0,7.0,6.5
-256,12,14,BTS,3,BigHit Entertainment,Gars,Groupe,For youth,2022,Non,Non,2.0,7.5,4.75
-257,12,15,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Hwaa,2021,Non,Non,6.25,7.5,6.88
-258,12,16,Seventeen,3,Pledis Entertainment,Gars,Groupe,Change up,2017,SVT Leaders,Non,4.0,10.0,7.0
-259,12,17,NCT Dream,4,SM Entertainment,Gars,Groupe,Hot sauce,2021,Non,Non,4.25,6.0,5.13
-260,12,18,BlackPink,3,YG Entertainment,Fille,Groupe,The Girls,2023,Non,Non,5.25,5.0,5.13
-261,12,19,The boyz,4,ONE HUNDRED ,Gars,Groupe,Reveal,2020,Non,Non,9.0,9.5,9.25
-262,12,20,Stray Kids,4,JYP Entertainment,Gars,Groupe,Insomnia,2020,Non,Non,6.0,10.0,8.0
-263,12,21,Rosé,3,YG Entertainment,Fille,Solo,On the Ground,2021,Non,Non,2.75,3.5,3.13
-264,12,22,P1Harmony,4,FNC Entertainment,Gars,Groupe,Jump,2023,Non,Non,6.25,8.0,7.13
-265,13,1,Seventeen,3,Pledis Entertainment,Gars,Groupe,_World,2022,Non,Non,4.0,9.0,6.5
-266,13,2,Super junior,2,SM Entertainment,Gars,Groupe,Black suit,2017,Non,Non,4.25,10.0,7.13
-267,13,3,StayC,4,High Up Entertainment,Fille,Groupe,Asap,2021,Non,Non,1.25,5.5,3.38
-268,13,4,Pentagon,3,CUBE Entertainment,Gars,Groupe,Dr.Bebe,2020,Non,Non,7.25,9.5,8.38
-269,13,5,Twice,3,JYP Entertainment,Fille,Groupe,Talk that talk,2022,Non,Non,4.75,10.0,7.38
-270,13,6,Day6,3,JYP Entertainment,Gars,Groupe,Shoot me,2018,Non,Non,6.75,10.0,8.38
-271,13,7,Ateez,4,KQ Entertainment,Gars,Groupe,Wave,2019,Non,Non,4.5,10.0,7.25
-272,13,8,Jeon somi,3,The Black Label,Fille,Solo,Fast forward,2023,Non,Non,5.75,9.0,7.38
-273,13,9,SF9,3,FNC Entertainment,Gars,Groupe,Good guy,2020,Non,Non,5.0,10.0,7.5
-274,13,10,Wonder Girls,2,JYP Entertainment,Fille,Groupe,Why so lonely,2016,Non,Non,2.75,9.5,6.13
-275,13,11,SHINee,2,SM Entertainment,Gars,Groupe,View,2015,Non,Non,4.25,10.0,7.13
-276,13,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,Freeze,2021,Non,Non,7.25,7.25,7.25
-277,13,13,Ive,4,Starship Entertainment,Fille,Groupe,Accendio,2024,Non,Non,5.75,5.5,5.63
-278,13,14,BTS,3,BigHit Entertainment,Gars,Groupe,Yet to come,2022,Non,Non,1.5,4.0,2.75
-279,13,15,N.Flying,2,FNC Entertainment,Gars,Groupe,Oh Really,2020,Non,Non,5.75,9.0,7.38
-280,13,16,BlackPink,3,YG Entertainment,Fille,Groupe,Whistle,2016,Non,Non,5.0,5.5,5.25
-281,13,17,TXT,4,BigHit Entertainment,Gars,Groupe,Cat & dog,2019,Non,Non,2.5,4.5,3.5
-282,13,18,Oneus,4,RBW,Gars,Groupe,Come back home,2020,Non,Non,6.5,10.0,8.25
+244,12,2,Twice,3,JYP Entertainment,Fille,Groupe,Likey,2017,Non,Non,5.25,6.5,5.88
+245,12,3,Ateez,4,KQ Entertainment,Gars,Groupe,Horizon,2020,Non,Non,9.75,8.5,9.13
+246,12,4,BTS,3,BigHit Entertainment,Gars,Groupe,Airplane,2018,Non,Non,4.25,5.5,4.88
+247,12,5,Sunmi,2,Makeus Entertainment,Fille,Solo,Gashina,2017,Non,Non,5.25,10.0,7.63
+248,12,6,TXT,4,BigHit Entertainment,Gars,Groupe,Puma,2020,Non,Non,4.5,5.5,5.0
+249,12,7,Stray Kids,4,JYP Entertainment,Gars,Groupe,Victory song,2019,Non,Non,8.0,9.75,8.88
+250,12,8,Everglow,4,Yuehua Entertainment,Fille,Groupe,Slay,2023,Non,Non,5.25,7.0,6.13
+251,12,9,Eric Nam,3,CJeS Entertainment,Gars,Solo,Congratulations,2019,Non,Non,5.0,10.0,7.5
+252,12,10,Le Sserafim,4,Source Music,Fille,Groupe,Unforgiven,2023,Non,Non,6.75,6.25,6.5
+253,12,11,CIX,4,C9 Entertainment,Gars,Groupe,Movie star,2019,Non,Non,5.25,9.0,7.13
+254,12,12,Nu'est,2,Pledis Entertainment,Gars,Groupe,Face,2012,Non,Non,4.25,9.5,6.88
+255,12,13,Badvillain,5,BPM,Fille,Groupe,Badvillain,2024,Non,Non,6.75,7.0,6.88
+256,12,14,BTS,3,BigHit Entertainment,Gars,Groupe,For youth,2022,Non,Non,2.75,7.5,5.13
+257,12,15,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Hwaa,2021,Non,Non,7.0,7.5,7.25
+258,12,16,Seventeen,3,Pledis Entertainment,Gars,Groupe,Change up,2017,SVT Leaders,Non,4.5,10.0,7.25
+259,12,17,NCT Dream,4,SM Entertainment,Gars,Groupe,Hot sauce,2021,Non,Non,4.75,6.0,5.38
+260,12,18,BlackPink,3,YG Entertainment,Fille,Groupe,The Girls,2023,Non,Non,6.0,5.0,5.5
+261,12,19,The boyz,4,ONE HUNDRED ,Gars,Groupe,Reveal,2020,Non,Non,9.75,9.5,9.63
+262,12,20,Stray Kids,4,JYP Entertainment,Gars,Groupe,Insomnia,2020,Non,Non,6.25,10.0,8.13
+263,12,21,Rosé,3,YG Entertainment,Fille,Solo,On the Ground,2021,Non,Non,2.5,3.5,3.0
+264,12,22,P1Harmony,4,FNC Entertainment,Gars,Groupe,Jump,2023,Non,Non,6.75,8.0,7.38
+265,13,1,Seventeen,3,Pledis Entertainment,Gars,Groupe,_World,2022,Non,Non,5.5,9.0,7.25
+266,13,2,Super junior,2,SM Entertainment,Gars,Groupe,Black suit,2017,Non,Non,4.75,10.0,7.38
+267,13,3,StayC,4,High Up Entertainment,Fille,Groupe,Asap,2021,Non,Non,2.0,5.5,3.75
+268,13,4,Pentagon,3,CUBE Entertainment,Gars,Groupe,Dr.Bebe,2020,Non,Non,8.25,9.5,8.88
+269,13,5,Twice,3,JYP Entertainment,Fille,Groupe,Talk that talk,2022,Non,Non,5.5,10.0,7.75
+270,13,6,Day6,3,JYP Entertainment,Gars,Groupe,Shoot me,2018,Non,Non,8.5,10.0,9.25
+271,13,7,Ateez,4,KQ Entertainment,Gars,Groupe,Wave,2019,Non,Non,5.5,10.0,7.75
+272,13,8,Jeon somi,3,The Black Label,Fille,Solo,Fast forward,2023,Non,Non,7.0,9.0,8.0
+273,13,9,SF9,3,FNC Entertainment,Gars,Groupe,Good guy,2020,Non,Non,5.25,10.0,7.63
+274,13,10,Wonder Girls,2,JYP Entertainment,Fille,Groupe,Why so lonely,2016,Non,Non,3.25,9.5,6.38
+275,13,11,SHINee,2,SM Entertainment,Gars,Groupe,View,2015,Non,Non,5.5,10.0,7.75
+276,13,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,Freeze,2021,Non,Non,8.25,7.25,7.75
+277,13,13,Ive,4,Starship Entertainment,Fille,Groupe,Accendio,2024,Non,Non,6.25,5.5,5.88
+278,13,14,BTS,3,BigHit Entertainment,Gars,Groupe,Yet to come,2022,Non,Non,1.75,4.0,2.88
+279,13,15,N.Flying,2,FNC Entertainment,Gars,Groupe,Oh Really,2020,Non,Non,6.5,9.0,7.75
+280,13,16,BlackPink,3,YG Entertainment,Fille,Groupe,Whistle,2016,Non,Non,5.25,5.5,5.38
+281,13,17,TXT,4,BigHit Entertainment,Gars,Groupe,Cat & dog,2019,Non,Non,3.5,4.5,4.0
+282,13,18,Oneus,4,RBW,Gars,Groupe,Come back home,2020,Non,Non,7.25,10.0,8.63
 283,13,19,Iz*one,4,Off The Record Entertainment,Fille,Groupe,La vie en rose,2018,Non,Non,2.5,8.0,5.25
-284,13,20,Zerobaseone,5,WAKEONE,Gars,Groupe,In bloom,2023,Non,Non,5.25,8.0,6.63
-285,13,21,Yena & Yuqi,4,/Null/,Fille,Duo,Hate Rodrigo,2023,Non,Non,4.0,5.5,4.75
-286,13,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Astronaut,2019,Non,Non,5.75,8.25,7.0
-287,14,1,Wendy,3,SM Entertainment,Fille,Solo,Wish you hell,2024,Non,Non,4.0,6.0,5.0
-288,14,2,SuperM,4,SM Entertainment,Gars,Groupe,Jopping,2019,Non,Non,5.0,8.5,6.75
-289,14,3,Monsta X,3,Starship Entertainment,Gars,Groupe,Hero,2015,Non,Non,5.25,10.0,7.63
+284,13,20,Zerobaseone,5,WAKEONE,Gars,Groupe,In bloom,2023,Non,Non,6.25,8.0,7.13
+285,13,21,Yena & Yuqi,4,/Null/,Fille,Duo,Hate Rodrigo,2023,Non,Non,4.75,5.5,5.13
+286,13,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Astronaut,2019,Non,Non,6.5,8.25,7.38
+287,14,1,Wendy,3,SM Entertainment,Fille,Solo,Wish you hell,2024,Non,Non,4.5,6.0,5.25
+288,14,2,SuperM,4,SM Entertainment,Gars,Groupe,Jopping,2019,Non,Non,5.5,8.5,7.0
+289,14,3,Monsta X,3,Starship Entertainment,Gars,Groupe,Hero,2015,Non,Non,5.5,10.0,7.75
 290,14,4,Nmixx,4,JYP Entertainment,Fille,Groupe,Dash,2024,Non,Non,4.75,4.5,4.63
-291,14,5,Taemin,2,SM Entertainment,Gars,Solo,Want,2019,Non,Non,3.5,9.25,6.38
-292,14,6,Red Velvet,3,SM Entertainment,Fille,Groupe,Naughty,2020,Non,Non,2.5,8.75,5.63
-293,14,7,NCT 127,4,SM Entertainment,Gars,Groupe,Fire truck,2016,Non,Non,2.5,10.0,6.25
-294,14,8,Psy,2,YG Entertainment,Gars,Solo,Daddy,2015,Non,Non,1.5,7.5,4.5
-295,14,9,Iz*one,4,Off The Record Entertainment,Fille,Groupe,Violeta,2019,Non,Non,3.0,8.0,5.5
-296,14,10,TXT,4,BigHit Entertainment,Gars,Groupe,Tinnitus,2023,Non,Non,2.25,4.75,3.5
-297,14,11,Hwa Sa,3,RBW,Fille,Solo,Na,2024,Non,Non,5.0,9.0,7.0
-298,14,12,VIXX,2,Jellyfish Entertainment,Gars,Groupe,Chained up,2015,Non,Non,3.5,10.0,6.75
-299,14,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Gone days,2019,Non,Non,6.0,8.75,7.38
-300,14,14,Gfriend,3,Source Music,Fille,Groupe,Me gustas tu,2015,Non,Non,1.75,8.75,5.25
-301,14,15,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Love and fear,2024,Non,Non,8.25,8.0,8.13
-302,14,16,BlackPink,3,YG Entertainment,Fille,Groupe,Stay,2016,Non,Non,1.0,6.0,3.5
-303,14,17,Exo,3,SM Entertainment,Gars,Groupe,The eve,2017,Non,Non,4.0,8.75,6.38
-304,14,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Darl+ing,2022,Non,Non,3.75,9.0,6.38
-305,14,19,Lisa,3,YG Entertainment,Fille,Solo,New women,2024,Non,Rosalía,4.0,6.5,5.25
+291,14,5,Taemin,2,SM Entertainment,Gars,Solo,Want,2019,Non,Non,4.0,9.25,6.63
+292,14,6,Irene & Seulgi,3,SM Entertainment,Fille,Duo,Naughty,2020,Non,Non,3.75,8.75,6.25
+293,14,7,NCT 127,4,SM Entertainment,Gars,Groupe,Fire truck,2016,Non,Non,3.75,10.0,6.88
+294,14,8,Psy,2,YG Entertainment,Gars,Solo,Daddy,2015,Non,Non,2.25,7.5,4.88
+295,14,9,Iz*one,4,Off The Record Entertainment,Fille,Groupe,Violeta,2019,Non,Non,3.75,8.0,5.88
+296,14,10,TXT,4,BigHit Entertainment,Gars,Groupe,Tinnitus,2023,Non,Non,4.5,4.75,4.63
+297,14,11,Hwa Sa,3,RBW,Fille,Solo,Na,2024,Non,Non,5.75,9.0,7.38
+298,14,12,VIXX,2,Jellyfish Entertainment,Gars,Groupe,Chained up,2015,Non,Non,4.5,10.0,7.25
+299,14,13,Stray Kids,4,JYP Entertainment,Gars,Groupe,Gone days,2019,Non,Non,6.75,8.75,7.75
+300,14,14,Gfriend,3,Source Music,Fille,Groupe,Me gustas tu,2015,Non,Non,4.5,8.75,6.63
+301,14,15,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Love and fear,2024,Non,Non,9.0,8.0,8.5
+302,14,16,BlackPink,3,YG Entertainment,Fille,Groupe,Stay,2016,Non,Non,0.75,6.0,3.38
+303,14,17,Exo,3,SM Entertainment,Gars,Groupe,The eve,2017,Non,Non,4.25,8.75,6.5
+304,14,18,Seventeen,3,Pledis Entertainment,Gars,Groupe,Darl+ing,2022,Non,Non,4.75,9.0,6.88
+305,14,19,Lisa,3,YG Entertainment,Fille,Solo,New women,2024,Non,Rosalía,4.5,6.5,5.5
 306,14,20,BTS,3,BigHit Entertainment,Gars,Groupe,Just one day,2014,Non,Non,1.75,7.5,4.63
-307,14,21,Ateez,4,KQ Entertainment,Gars,Groupe,Not okay,2024,Non,Non,7.75,6.75,7.25
+307,14,21,Ateez,4,KQ Entertainment,Gars,Groupe,Not okay,2024,Non,Non,8.0,6.75,7.38
 308,14,22,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Justice,2024,Non,Non,10.0,8.5,9.25
-309,15,1,MCND,4,TOP Media,Gars,Groupe,Spring,2020,Non,Non,4.75,9.5,7.13
-310,15,2,Le Sserafim,4,Source Music,Fille,Groupe,Eve. psyche & the bluebeard's wife,2023,Non,Non,4.75,6.25,5.5
-311,15,3,Xikers,5,KQ Entertainment,Gars,Groupe,Tricky house,2023,Non,Non,6.25,6.75,6.5
-312,15,4,Everglow,4,Yuehua Entertainment,Fille,Groupe,Adios,2019,Non,Non,5.75,8.0,6.88
-313,15,5,Zerobaseone,5,WAKEONE,Gars,Groupe,Good so bad,2023,Non,Non,5.5,6.5,6.0
-314,15,6,Day6,3,JYP Entertainment,Gars,Groupe,Sweet chaos,2019,Non,Non,7.5,10.0,8.75
-315,15,7,Chung Ha,3,MNH Entertainment,Fille,Solo,Snapping,2019,Non,Non,5.0,10.0,7.5
+309,15,1,MCND,4,TOP Media,Gars,Groupe,Spring,2020,Non,Non,5.0,9.5,7.25
+310,15,2,Le Sserafim,4,Source Music,Fille,Groupe,Eve. psyche & the bluebeard's wife,2023,Non,Non,5.5,6.25,5.88
+311,15,3,Xikers,5,KQ Entertainment,Gars,Groupe,Tricky house,2023,Non,Non,7.5,6.75,7.13
+312,15,4,Everglow,4,Yuehua Entertainment,Fille,Groupe,Adios,2019,Non,Non,6.5,8.0,7.25
+313,15,5,Zerobaseone,5,WAKEONE,Gars,Groupe,Good so bad,2023,Non,Non,5.75,6.5,6.13
+314,15,6,Day6,3,JYP Entertainment,Gars,Groupe,Sweet chaos,2019,Non,Non,8.75,10.0,9.38
+315,15,7,Chung Ha,3,MNH Entertainment,Fille,Solo,Snapping,2019,Non,Non,6.0,10.0,8.0
 316,15,8,Pentagon,3,CUBE Entertainment,Gars,Groupe,Naughty boy,2018,Non,Non,3.5,9.0,6.25
-317,15,9,NCT Dream,4,SM Entertainment,Gars,Groupe,Smoothie,2022,Non,Non,4.25,7.0,5.63
-318,15,10,Loona,3,BlockBerryCreative,Fille,Groupe,Paint the town,2021,Non,Non,5.0,5.25,5.13
-319,15,11,Wanna one,3,YMC Entertainment,Gars,Groupe,Energetic,2017,Non,Non,5.0,10.0,7.5
-320,15,12,StayC,4,High Up Entertainment,Fille,Groupe,Bubble,2023,Non,Non,2.0,5.75,3.88
+317,15,9,NCT Dream,4,SM Entertainment,Gars,Groupe,Smoothie,2022,Non,Non,4.75,7.0,5.88
+318,15,10,Loona,3,BlockBerryCreative,Fille,Groupe,Paint the town,2021,Non,Non,6.0,5.25,5.63
+319,15,11,Wanna one,3,YMC Entertainment,Gars,Groupe,Energetic,2017,Non,Non,5.5,10.0,7.75
+320,15,12,StayC,4,High Up Entertainment,Fille,Groupe,Bubble,2023,Non,Non,5.75,5.75,5.75
 321,15,13,Kang Daniel,3,KONNECT Entertainment,Gars,Groupe,Movie,2020,Non,Non,3.5,8.0,5.75
-322,15,14,Stray Kids,4,JYP Entertainment,Gars,Groupe,Voices,2019,Non,Non,6.75,10.0,8.38
+322,15,14,Stray Kids,4,JYP Entertainment,Gars,Groupe,Voices,2019,Non,Non,7.25,10.0,8.63
 323,15,15,Huh Yunjin,4,Source Music,Fille,Solo,I ≠ DOLL,2023,Non,Non,3.0,8.0,5.5
-324,15,16,Astro,3,Fantagio,Gars,Groupe,Blue flame,2019,Non,Non,7.0,9.75,8.38
-325,15,17,N.Flying,2,FNC Entertainment,Gars,Groupe,Rooftop,2019,Non,Non,5.75,10.0,7.88
-326,15,18,Mamamoo,2,RBW,Fille,Groupe,Aya,2020,Non,Non,4.0,10.0,7.0
-327,15,19,The rose,3,J&Star Entertainment,Gars,Groupe,Back to me,2023,Non,Non,7.75,8.0,7.88
-328,15,20,Aespa,4,SM Entertainment,Fille,Groupe,Savage,2021,Non,Non,3.25,6.25,4.75
-329,15,21,P1Harmony,4,FNC Entertainment,Gars,Groupe,Sad song,2023,Non,Non,6.75,9.5,8.13
+324,15,16,Astro,3,Fantagio,Gars,Groupe,Blue flame,2019,Non,Non,7.5,9.75,8.63
+325,15,17,N.Flying,2,FNC Entertainment,Gars,Groupe,Rooftop,2019,Non,Non,6.75,10.0,8.38
+326,15,18,Mamamoo,2,RBW,Fille,Groupe,Aya,2020,Non,Non,4.25,10.0,7.13
+327,15,19,The rose,3,J&Star Entertainment,Gars,Groupe,Back to me,2023,Non,Non,9.0,8.0,8.5
+328,15,20,Aespa,4,SM Entertainment,Fille,Groupe,Savage,2021,Non,Non,3.0,6.25,4.63
+329,15,21,P1Harmony,4,FNC Entertainment,Gars,Groupe,Sad song,2023,Non,Non,7.5,9.5,8.5
 330,15,22,Agust D,3,BigHit Entertainment,Gars,Solo,Daechwita,2020,Non,Non,2.0,5.5,3.75
-331,16,1,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Wife,2024,Non,Non,0.75,5.0,2.88
-332,16,2,Nu'est,2,Pledis Entertainment,Gars,Groupe,I'm in trouble,2020,Non,Non,4.5,9.0,6.75
+331,16,1,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Wife,2024,Non,Non,1.25,5.0,3.13
+332,16,2,Nu'est,2,Pledis Entertainment,Gars,Groupe,I'm in trouble,2020,Non,Non,5.5,9.0,7.25
 333,16,3,Block B,2,Seven Seasons,Gars,Groupe,Shall we dance,2017,Non,Non,2.75,10.0,6.38
-334,16,4,Sunmi,2,Makeus Entertainment,Fille,Solo,Noir,2019,Non,Non,3.25,9.0,6.13
-335,16,5,N.Flying,2,FNC Entertainment,Gars,Groupe,The real,2017,Non,Non,5.25,9.0,7.13
-336,16,6,NCT 127,4,SM Entertainment,Gars,Groupe,Walk,2024,Non,Non,3.25,7.0,5.13
-337,16,7,Itzy,4,JYP Entertainment,Fille,Groupe,Cake,2023,Non,Non,3.0,6.5,4.75
-338,16,8,ONF,3,WM Entertainment,Gars,Groupe,Why,2022,Non,Non,4.5,9.25,6.88
-339,16,9,SF9,3,FNC Entertainment,Gars,Groupe,Mamma mia,2018,Non,Non,3.5,8.5,6.0
-340,16,10,Twice,3,JYP Entertainment,Fille,Groupe,Set me free,2023,Non,Non,3.5,7.0,5.25
-341,16,11,Enhypen,4,Belift Lab,Gars,Groupe,Brought the heat back,2024,Non,Non,8.25,8.25,8.25
+334,16,4,Sunmi,2,Makeus Entertainment,Fille,Solo,Noir,2019,Non,Non,3.0,9.0,6.0
+335,16,5,N.Flying,2,FNC Entertainment,Gars,Groupe,The real,2017,Non,Non,6.0,9.0,7.5
+336,16,6,NCT 127,4,SM Entertainment,Gars,Groupe,Walk,2024,Non,Non,3.5,7.0,5.25
+337,16,7,Itzy,4,JYP Entertainment,Fille,Groupe,Cake,2023,Non,Non,4.0,6.5,5.25
+338,16,8,ONF,3,WM Entertainment,Gars,Groupe,Why,2022,Non,Non,5.25,9.25,7.25
+339,16,9,SF9,3,FNC Entertainment,Gars,Groupe,Mamma mia,2018,Non,Non,3.75,8.5,6.13
+340,16,10,Twice,3,JYP Entertainment,Fille,Groupe,Set me free,2023,Non,Non,4.0,7.0,5.5
+341,16,11,Enhypen,4,Belift Lab,Gars,Groupe,Brought the heat back,2024,Non,Non,8.75,8.25,8.5
 342,16,12,StayC,4,High Up Entertainment,Fille,Groupe,Beautiful monster,2022,Non,Non,3.5,6.0,4.75
-343,16,13,The Boyz,4,Cre.ker Entertainment,Gars,Groupe,No air,2018,Non,Non,4.5,9.25,6.88
+343,16,13,The Boyz,4,Cre.ker Entertainment,Gars,Groupe,No air,2018,Non,Non,5.25,9.25,7.25
 344,16,14,Pentagon,3,CUBE Entertainment,Gars,Groupe,Spring snow,2020,Non,Non,5.25,8.5,6.88
-345,16,15,Everglow,4,Yuehua Entertainment,Fille,Groupe,First,2021,Non,Non,6.25,7.75,7.0
-346,16,16,NCT Dream,4,SM Entertainment,Gars,Groupe,Boom,2019,Non,Non,5.0,10.0,7.5
-347,16,17,Riize,5,SM Entertainment,Gars,Groupe,Impossible,2024,Non,Non,4.75,7.25,6.0
-348,16,18,Jeon somi,3,The Black Label,Fille,Solo,Dumb dumb,2021,Non,Non,4.0,7.5,5.75
-349,16,19,Stray Kids,4,JYP Entertainment,Gars,Groupe,Get cool,2018,Non,Non,5.5,9.5,7.5
-350,16,20,Just B,4,Bluedot Entertainment,Gars,Groupe,Medusa,2023,Non,Non,4.25,7.0,5.63
-351,16,21,Kep1er,4,Wake One Entertainment,Fille,Groupe,Up!,2022,Non,Non,1.5,6.75,4.13
-352,16,22,iKon,2,YG Entertainment,Gars,Groupe,Killing me,2018,Non,Non,4.75,9.5,7.13
-353,17,1,Nmixx,4,JYP Entertainment,Fille,Groupe,Love me like this,2023,Non,Non,1.5,5.5,3.5
-354,17,2,NCT 127,4,SM Entertainment,Gars,Groupe,2 Baddies,2022,Non,Non,2.0,5.5,3.75
-355,17,3,Oneus,4,RBW,Gars,Groupe,Baila conmigo,2023,Non,Non,5.5,6.0,5.75
-356,17,4,4Minute,2,CUBE Entertainment,Fille,Groupe,Crazy,2015,Non,Non,3.5,10.0,6.75
+345,16,15,Everglow,4,Yuehua Entertainment,Fille,Groupe,First,2021,Non,Non,7.0,7.75,7.38
+346,16,16,NCT Dream,4,SM Entertainment,Gars,Groupe,Boom,2019,Non,Non,5.75,10.0,7.88
+347,16,17,Riize,5,SM Entertainment,Gars,Groupe,Impossible,2024,Non,Non,7.0,7.25,7.13
+348,16,18,Jeon somi,3,The Black Label,Fille,Solo,Dumb dumb,2021,Non,Non,3.75,7.5,5.63
+349,16,19,Stray Kids,4,JYP Entertainment,Gars,Groupe,Get cool,2018,Non,Non,5.75,9.5,7.63
+350,16,20,Just B,4,Bluedot Entertainment,Gars,Groupe,Medusa,2023,Non,Non,4.75,7.0,5.88
+351,16,21,Kep1er,4,Wake One Entertainment,Fille,Groupe,Up!,2022,Non,Non,4.5,6.75,5.63
+352,16,22,iKon,2,YG Entertainment,Gars,Groupe,Killing me,2018,Non,Non,6.0,9.5,7.75
+353,17,1,Nmixx,4,JYP Entertainment,Fille,Groupe,Love me like this,2023,Non,Non,2.25,5.5,3.88
+354,17,2,NCT 127,4,SM Entertainment,Gars,Groupe,2 Baddies,2022,Non,Non,2.5,5.5,4.0
+355,17,3,Oneus,4,RBW,Gars,Groupe,Baila conmigo,2023,Non,Non,6.25,6.0,6.13
+356,17,4,4Minute,2,CUBE Entertainment,Fille,Groupe,Crazy,2015,Non,Non,3.75,10.0,6.88
 357,17,5,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Freakin' bad,2023,Non,Non,9.0,7.5,8.25
-358,17,6,Viviz,4,BPM Entertainment,Fille,Groupe,Maniac,2023,Non,Non,5.0,7.0,6.0
-359,17,7,Psy,2,YG Entertainment,Gars,Solo,New face,2017,Non,Non,1.75,8.5,5.13
-360,17,8,Super junior,2,SM Entertainment,Gars,Groupe,Mr. Simple,2011,Non,Non,2.75,8.5,5.63
-361,17,9,NewJeans,4,ADOR,Fille,Groupe,How sweet,2024,Non,Non,2.5,8.75,5.63
-362,17,10,Ampers&one,5,FNC Entertainment,Gars,Groupe,On and on,2023,Non,Non,4.75,7.0,5.88
+358,17,6,Viviz,4,BPM Entertainment,Fille,Groupe,Maniac,2023,Non,Non,6.5,7.0,6.75
+359,17,7,Psy,2,YG Entertainment,Gars,Solo,New face,2017,Non,Non,2.25,8.5,5.38
+360,17,8,Super junior,2,SM Entertainment,Gars,Groupe,Mr. Simple,2011,Non,Non,3.0,8.5,5.75
+361,17,9,NewJeans,4,ADOR,Fille,Groupe,How sweet,2024,Non,Non,4.25,8.75,6.5
+362,17,10,Ampers&one,5,FNC Entertainment,Gars,Groupe,On and on,2023,Non,Non,6.0,7.0,6.5
 363,17,11,Jihyo,3,JYP Entertainment,Fille,Solo,Killin'me good,2023,Non,Non,4.5,6.75,5.63
-364,17,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,All in,2020,Non,Non,8.0,8.5,8.25
-365,17,13,Block B,2,Seven Seasons,Gars,Groupe,Her,2014,Non,Non,3.75,9.0,6.38
-366,17,14,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Klaxon,2024,Non,Non,1.75,5.0,3.38
-367,17,15,NCT Dream,4,SM Entertainment,Gars,Groupe,We go up,2018,Non,Non,2.5,9.5,6.0
-368,17,16,Girls' Generation,2,SM Entertainment,Fille,Groupe,Gee,2011,Non,Non,2.5,8.0,5.25
-369,17,17,P1Harmony,4,FNC Entertainment,Gars,Groupe,Back down,2022,Non,Non,3.0,7.75,5.38
-370,17,18,Exo,3,SM Entertainment,Gars,Groupe,Call me baby,2015,Non,Non,3.5,9.0,6.25
-371,17,19,XG,4,XGALX,Fille,Groupe,Puppet show,2023,Non,Non,4.0,8.75,6.38
-372,17,20,SuperM,4,SM Entertainment,Gars,Groupe,Tiger inside,2020,Non,Non,4.75,8.25,6.5
-373,17,21,Red Velvet,3,SM Entertainment,Fille,Groupe,Cosmic,2024,Non,Non,3.75,7.75,5.75
-374,17,22,Yeonjun,4,BigHit Entertainment,Gars,Solo,Ggum,2024,Non,Non,4.5,4.0,4.25
-375,18,1,Samuel,3,Brave Entertainment,Gars,Solo,One,2018,Non,Non,5.5,7.25,6.38
+364,17,12,Stray Kids,4,JYP Entertainment,Gars,Groupe,All in,2020,Non,Non,8.5,8.5,8.5
+365,17,13,Block B,2,Seven Seasons,Gars,Groupe,Her,2014,Non,Non,4.75,9.0,6.88
+366,17,14,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Klaxon,2024,Non,Non,5.0,5.0,5.0
+367,17,15,NCT Dream,4,SM Entertainment,Gars,Groupe,We go up,2018,Non,Non,4.0,9.5,6.75
+368,17,16,Girls' Generation,2,SM Entertainment,Fille,Groupe,Gee,2011,Non,Non,4.0,8.0,6.0
+369,17,17,P1Harmony,4,FNC Entertainment,Gars,Groupe,Back down,2022,Non,Non,3.75,7.75,5.75
+370,17,18,Exo,3,SM Entertainment,Gars,Groupe,Call me baby,2015,Non,Non,4.0,9.0,6.5
+371,17,19,XG,4,XGALX,Fille,Groupe,Puppet show,2023,Non,Non,5.0,8.75,6.88
+372,17,20,SuperM,4,SM Entertainment,Gars,Groupe,Tiger inside,2020,Non,Non,6.0,8.25,7.13
+373,17,21,Red Velvet,3,SM Entertainment,Fille,Groupe,Cosmic,2024,Non,Non,6.0,7.75,6.88
+374,17,22,Yeonjun,4,BigHit Entertainment,Gars,Solo,Ggum,2024,Non,Non,5.5,4.0,4.75
+375,18,1,Samuel,3,Brave Entertainment,Gars,Solo,One,2018,Non,Non,6.75,7.25,7.0
 376,18,2,2 PM,2,JYP Entertainment,Gars,Groupe,Heartbeat,2009,Non,Non,2.5,6.0,4.25
-377,18,3,Twice,3,JYP Entertainment,Fille,Groupe,Cheer up,2016,Non,Non,2.25,5.5,3.88
-378,18,4,The KingDom,5,GF Entertainment,Gars,Groupe,Flip that coin,2024,Non,Non,7.0,7.25,7.13
+377,18,3,Twice,3,JYP Entertainment,Fille,Groupe,Cheer up,2016,Non,Non,2.5,5.5,4.0
+378,18,4,The KingDom,5,GF Entertainment,Gars,Groupe,Flip that coin,2024,Non,Non,7.75,7.25,7.5
 379,18,5,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Chase me,2017,Non,Non,8.5,9.0,8.75
 380,18,6,Stray Kids,4,JYP Entertainment,Gars,Groupe,Why?,2024,Non,Non,9.5,6.75,8.13
 381,18,7,NCT U,4,SM Entertainment,Gars,Groupe,Make a wish,2020,Non,Non,4.0,9.5,6.75
 382,18,8,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Tomboy,2022,Non,Non,4.75,8.5,6.63
 383,18,9,BoyNextDoor,5,KOZ Entertainment,Gars,Groupe,Nice guy,2024,Non,Non,4.0,7.0,5.5
-384,18,10,Zerobaseone,5,WAKEONE,Gars,Groupe,Crush,2023,Non,Non,5.5,7.0,6.25
-385,18,11,Red Velvet,3,SM Entertainment,Fille,Groupe,Bad boy,2018,Non,Non,3.5,9.5,6.5
-386,18,12,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Little things,2024,Non,Non,8.5,9.5,9.0
-387,18,13,Rosé,3,YG Entertainment,Fille,Solo,APT,2024,Non,Bruno Mars,8.0,10.0,9.0
-388,18,14,Exo,3,SM Entertainment,Gars,Groupe,Ko ko bop,2017,Non,Non,3.5,9.5,6.5
+384,18,10,Zerobaseone,5,WAKEONE,Gars,Groupe,Crush,2023,Non,Non,6.5,7.0,6.75
+385,18,11,Red Velvet,3,SM Entertainment,Fille,Groupe,Bad boy,2018,Non,Non,3.75,9.5,6.63
+386,18,12,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Little things,2024,Non,Non,8.75,9.5,9.13
+387,18,13,Rosé,3,YG Entertainment,Fille,Solo,APT,2024,Non,Bruno Mars,7.5,10.0,8.75
+388,18,14,Exo,3,SM Entertainment,Gars,Groupe,Ko ko bop,2017,Non,Non,4.0,9.5,6.75
 389,18,15,Oneus,4,RBW,Gars,Groupe,Erase me,2023,Non,Non,7.25,7.0,7.13
-390,18,16,Iz*one,4,Off The Record Entertainment,Fille,Groupe,Secret story of the swan,2020,Non,Non,4.5,9.0,6.75
-391,18,17,Seventeen,3,Pledis Entertainment,Gars,Groupe,Oh my!,2018,Non,Non,4.5,7.75,6.13
-392,18,18,Tempest,4,Yuehua Entertainment,Gars,Groupe,Lighthouse,2024,Non,Non,8.0,7.5,7.75
-393,18,19,Yena,4,Waterbomb,Fille,Solo,Wicked love,2023,Non,Non,6.5,7.25,6.88
-394,18,20,Lucy,4,Mystic Story,Gars,Groupe,Boogie man,2023,Non,Non,7.5,9.0,8.25
-395,18,21,2Ne1,2,YG Entertainment,Fille,Groupe,Come back home,2014,Non,Non,2.0,10.0,6.0
-396,18,22,The boyz,4,ONE HUNDRED ,Gars,Groupe,Trigger,2024,Non,Non,5.0,7.0,6.0
+390,18,16,Iz*one,4,Off The Record Entertainment,Fille,Groupe,Secret story of the swan,2020,Non,Non,5.0,9.0,7.0
+391,18,17,Seventeen,3,Pledis Entertainment,Gars,Groupe,Oh my!,2018,Non,Non,5.25,7.75,6.5
+392,18,18,Tempest,4,Yuehua Entertainment,Gars,Groupe,Lighthouse,2024,Non,Non,8.75,7.5,8.13
+393,18,19,Yena,4,Waterbomb,Fille,Solo,Wicked love,2023,Non,Non,7.25,7.25,7.25
+394,18,20,Lucy,4,Mystic Story,Gars,Groupe,Boogie man,2023,Non,Non,8.0,9.0,8.5
+395,18,21,2Ne1,2,YG Entertainment,Fille,Groupe,Come back home,2014,Non,Non,2.25,10.0,6.13
+396,18,22,The boyz,4,ONE HUNDRED ,Gars,Groupe,Trigger,2024,Non,Non,5.5,7.0,6.25
 397,19,1,The rose,3,J&Star Entertainment,Gars,Groupe,Alive,2023,Non,Non,8.0,7.0,7.5
-398,19,2,GOT the beat,4,SM Entertainment,Fille,Groupe,Step back,2022,Non,Non,5.5,6.0,5.75
-399,19,3,TXT,4,BigHit Entertainment,Gars,Groupe,Everlasting shine,2020,Non,Non,6.0,6.0,6.0
+398,19,2,GOT the beat,4,SM Entertainment,Fille,Groupe,Step back,2022,Non,Non,4.5,6.0,5.25
+399,19,3,TXT,4,BigHit Entertainment,Gars,Groupe,Everlasting shine,2020,Non,Non,5.75,6.0,5.88
 400,19,4,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,Piri,2019,Non,Non,8.5,9.0,8.75
-401,19,5,Dongkiz,4,Dongyo,Gars,Groupe,Lupin,2020,Non,Non,6.0,7.5,6.75
-402,19,6,Day6,3,JYP Entertainment,Gars,Groupe,Time of our life,2019,Non,Non,6.75,9.5,8.13
+401,19,5,Dongkiz,4,Dongyo,Gars,Groupe,Lupin,2020,Non,Non,5.75,7.5,6.63
+402,19,6,Day6,3,JYP Entertainment,Gars,Groupe,Time of our life,2019,Non,Non,7.25,9.5,8.38
 403,19,7,Yena,4,Waterbomb,Fille,Solo,NemoNemo,2024,Non,Non,6.5,4.25,5.38
-404,19,8,8Turn,5,MNH Entertainment,Gars,Groupe,Excel,2023,Non,Non,5.75,7.25,6.5
-405,19,9,Ftisland,2,FNC Entertainment,Gars,Groupe,I wish,2012,Non,Non,4.5,7.75,6.13
-406,19,10,Loossemble,5,CTDE&M,Fille,Groupe,TTYL,2024,Non,Non,6.5,7.25,6.88
-407,19,11,Pentagon,3,CUBE Entertainment,Gars,Groupe,Daisy,2020,Non,Non,6.75,9.0,7.88
-408,19,12,Oneus,4,RBW,Gars,Groupe,Valkyrie,2019,Non,Non,7.75,8.5,8.13
-409,19,13,Twice,3,JYP Entertainment,Fille,Groupe,Dance the night away,2018,Non,Non,2.0,8.5,5.25
-410,19,14,Xikers,5,KQ Entertainment,Gars,Groupe,Bittersweet,2024,Non,Non,7.5,7.5,7.5
-411,19,15,AleXa,4,ZB Label,Fille,Solo,Revolution,2020,Non,Non,7.0,6.5,6.75
-412,19,16,BigBang,2,YG Entertainment,Gars,Groupe,This love,2009,Non,Non,3.5,5.0,4.25
+404,19,8,8Turn,5,MNH Entertainment,Gars,Groupe,Excel,2023,Non,Non,6.5,7.25,6.88
+405,19,9,Ftisland,2,FNC Entertainment,Gars,Groupe,I wish,2012,Non,Non,5.75,7.75,6.75
+406,19,10,Loossemble,5,CTDE&M,Fille,Groupe,TTYL,2024,Non,Non,6.75,7.25,7.0
+407,19,11,Pentagon,3,CUBE Entertainment,Gars,Groupe,Daisy,2020,Non,Non,7.0,9.0,8.0
+408,19,12,Oneus,4,RBW,Gars,Groupe,Valkyrie,2019,Non,Non,8.0,8.5,8.25
+409,19,13,Twice,3,JYP Entertainment,Fille,Groupe,Dance the night away,2018,Non,Non,3.25,8.5,5.88
+410,19,14,Xikers,5,KQ Entertainment,Gars,Groupe,Bittersweet,2024,Non,Non,8.0,7.5,7.75
+411,19,15,AleXa,4,ZB Label,Fille,Solo,Revolution,2020,Non,Non,7.25,6.5,6.88
+412,19,16,BigBang,2,YG Entertainment,Gars,Groupe,This love,2009,Non,Non,4.0,5.0,4.5
 413,19,17,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Boy comics,2024,Non,Non,8.5,7.5,8.0
-414,19,18,Exid,2,Banana Culture Entertainment,Fille,Groupe,I love you,2018,Non,Non,3.0,10.0,6.5
+414,19,18,Exid,2,Banana Culture Entertainment,Fille,Groupe,I love you,2018,Non,Non,4.25,10.0,7.13
 415,19,19,Enhypen,4,Belift Lab,Gars,Groupe,No doubt,2024,Non,Non,5.75,8.0,6.88
-416,19,20,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Lion,2019,Non,Non,5.5,10.0,7.75
-417,19,21,Lucy,4,Mystic Story,Gars,Groupe,Villain,2024,Non,Non,8.0,8.75,8.38
-418,19,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Top,2020,Non,Non,9.25,7.75,8.5
-419,20,1,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Happy death day,2021,Non,Non,8.0,6.5,7.25
-420,20,2,Sunmi,2,Makeus Entertainment,Fille,Solo,Siren,2018,Non,Non,3.75,8.25,6.0
-421,20,3,Bus,5,TADA Labels,Gars,Groupe,Liar,2024,Non,Non,6.5,6.5,6.5
-422,20,4,Uniq,3,YG Entertainment,Gars,Groupe,Eoeo,2015,Non,Non,2.0,10.0,6.0
+416,19,20,(G)I-dle,4,CUBE Entertainment,Fille,Groupe,Lion,2019,Non,Non,6.0,10.0,8.0
+417,19,21,Lucy,4,Mystic Story,Gars,Groupe,Villain,2024,Non,Non,8.25,8.75,8.5
+418,19,22,Stray Kids,4,JYP Entertainment,Gars,Groupe,Top,2020,Non,Non,9.75,7.75,8.75
+419,20,1,Xdinary Heroes,4,JYP Entertainment,Gars,Groupe,Happy death day,2021,Non,Non,8.25,6.5,7.38
+420,20,2,Sunmi,2,Makeus Entertainment,Fille,Solo,Siren,2018,Non,Non,4.75,8.25,6.5
+421,20,3,Bus,5,TADA Labels,Gars,Groupe,Liar,2024,Non,Non,7.5,6.5,7.0
+422,20,4,Uniq,3,YG Entertainment,Gars,Groupe,Eoeo,2015,Non,Non,2.5,10.0,6.25
 423,20,5,Dreamcatcher,3,Dreamcatcher Company,Fille,Groupe,OODT,2023,Non,Non,7.75,7.5,7.63
-424,20,6,AB6IX,4,Brand New Music,Gars,Groupe,Breathe,2019,Non,Non,4.0,10.0,7.0
-425,20,7,Weekly,4,Play M Entertainment,Fille,Groupe,After school,2021,Non,Non,5.0,6.0,5.5
-426,20,8,8Turn,5,MNH Entertainment,Gars,Groupe,Ru-pum pum,2023,Non,Non,4.5,7.0,5.75
-427,20,9,Cnblue,2,FNC Entertainment,Gars,Groupe,Love girl,2011,Non,Non,4.5,5.5,5.0
-428,20,10,Nmixx,4,JYP Entertainment,Fille,Groupe,Dice,2022,Non,Non,4.25,4.75,4.5
-429,20,11,X1,4,CJ ENM,Gars,Groupe,Flash,2019,Non,Non,5.75,10.0,7.88
-430,20,12,Brave Girls,3,Brave Entertainment,Fille,Groupe,Rollin',2017,Non,Non,3.25,10.0,6.63
-431,20,13,Cravity,4,Starship Entertainment,Gars,Groupe,Ready or not,2023,Non,Non,7.25,7.5,7.38
-432,20,14,Jackson Wang,3,Team Wang,Gars,Solo,Bullet to the heart,2019,Non,Non,5.0,9.0,7.0
-433,20,15,Loona,3,BlockBerryCreative,Fille,Groupe,Why not?,2020,Non,Non,4.25,7.75,6.0
+424,20,6,AB6IX,4,Brand New Music,Gars,Groupe,Breathe,2019,Non,Non,4.75,10.0,7.38
+425,20,7,Weekly,4,Play M Entertainment,Fille,Groupe,After school,2021,Non,Non,4.25,6.0,5.13
+426,20,8,8Turn,5,MNH Entertainment,Gars,Groupe,Ru-pum pum,2023,Non,Non,5.75,7.0,6.38
+427,20,9,Cnblue,2,FNC Entertainment,Gars,Groupe,Love girl,2011,Non,Non,5.25,5.5,5.38
+428,20,10,Nmixx,4,JYP Entertainment,Fille,Groupe,Dice,2022,Non,Non,4.0,4.75,4.38
+429,20,11,X1,4,CJ ENM,Gars,Groupe,Flash,2019,Non,Non,6.25,10.0,8.13
+430,20,12,Brave Girls,3,Brave Entertainment,Fille,Groupe,Rollin',2017,Non,Non,4.5,10.0,7.25
+431,20,13,Cravity,4,Starship Entertainment,Gars,Groupe,Ready or not,2023,Non,Non,8.25,7.5,7.88
+432,20,14,Jackson Wang,3,Team Wang,Gars,Solo,Bullet to the heart,2019,Non,Non,5.5,9.0,7.25
+433,20,15,Loona,3,BlockBerryCreative,Fille,Groupe,Why not?,2020,Non,Non,4.75,7.75,6.25
 434,20,16,NCT Dream,4,SM Entertainment,Gars,Groupe,When I'm with you,2022,Non,Non,5.25,5.0,5.13
-435,20,17,Stray Kids,4,JYP Entertainment,Gars,Groupe,Giant,2024,Non,Non,9.5,7.5,8.5
-436,20,18,Tzuyu,3,JYP Entertainment,Fille,Solo,Run away,2024,Non,Non,5.25,4.0,4.63
-437,20,19,Woodz,4,Play M Entertainment,Gars,Groupe,Drowning,2023,Non,Non,6.75,8.25,7.5
-438,20,20,Twice,3,JYP Entertainment,Fille,Groupe,More & more,2020,Non,Non,4.5,8.75,6.63
-439,20,21,Enhypen,4,Belift Lab,Gars,Groupe,Hey Tayo,2021,Non,Non,3.25,7.5,5.38
-440,20,22,Seventeen,3,Pledis Entertainment,Gars,Groupe,Hit,2019,Non,Non,7.5,10.0,8.75
+435,20,17,Stray Kids,4,JYP Entertainment,Gars,Groupe,Giant,2024,Non,Non,10.0,7.5,8.75
+436,20,18,Tzuyu,3,JYP Entertainment,Fille,Solo,Run away,2024,Non,Non,5.5,4.0,4.75
+437,20,19,Woodz,4,Play M Entertainment,Gars,Groupe,Drowning,2023,Non,Non,7.5,8.25,7.88
+438,20,20,Twice,3,JYP Entertainment,Fille,Groupe,More & more,2020,Non,Non,3.75,8.75,6.25
+439,20,21,Enhypen,4,Belift Lab,Gars,Groupe,Hey Tayo,2021,Non,Non,4.5,7.5,6.0
+440,20,22,Seventeen,3,Pledis Entertainment,Gars,Groupe,Hit,2019,Non,Non,7.75,10.0,8.88
