@@ -197,6 +197,7 @@ const columnNameReplacements = {
     'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
+    'Moyenne': 'Moyenne /10';
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
@@ -322,8 +323,8 @@ async function updateDisplay() {
     chartsContainer.innerHTML = '';
     tableContainer.innerHTML = '';
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
-    const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
-    const averages = filteredData.map(row => parseFloat(row.Moyenne_Totale));
+    const counts = filteredData.map(row => parseInt(row.Nombre_de_notes));
+    const averages = filteredData.map(row => parseFloat(row.Moyenne));
     const notes = filteredData.map(row => parseFloat(row.Note));
     let chartColors;
     if (dataset === "Sexes") {
