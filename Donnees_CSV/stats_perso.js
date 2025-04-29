@@ -1,26 +1,36 @@
-// Fonction pour charger un fichier CSV et le transformer en tableau d'objets
+// Fonction pour charger un fichier CSV et le transformer en tableau d'objets, en excluant certaines colonnes
 async function loadCSV(file) {
     const response = await fetch(file);
     const text = await response.text();
     let rows = text.split('\n').map(row => row.split(','));
+
     // Supprimer la dernière ligne si elle est vide
     if (rows.length > 1 && rows[rows.length - 1].every(cell => cell.trim() === '')) {
         rows.pop();
     }
-    const headers = rows[0];
+
+    const headers = rows[0].map(h => h.trim());
+    const excludedColumns = ["Mediane", "Note_la_plus_frequente"];
+    
+    // Indices des colonnes à inclure
+    const includedIndices = headers
+        .map((header, index) => ({ header, index }))
+        .filter(h => !excludedColumns.includes(h.header))
+        .map(h => h.index);
+
     return rows.slice(1).map(row => {
         let obj = {};
-        row.forEach((cell, index) => {
-            obj[headers[index].trim()] = cell.trim();
+        includedIndices.forEach(index => {
+            obj[headers[index]] = row[index] ? row[index].trim() : "";
         });
         return obj;
     });
 }
 
-// Fonction pour exclure les occurrences peu fréquentes (Nombre_de_titres <= 4)
+// Fonction pour exclure les occurrences peu fréquentes (Nombre_de_notes <= 4)
 function filterFrequentOccurrences(data, excludeRare) {
     if (excludeRare) {
-        return data.filter(row => parseInt(row.Nombre_de_titres) > 4);
+        return data.filter(row => parseInt(row.Nombre_de_notes) > 4);
     }
     return data;
 }
@@ -184,6 +194,7 @@ function darkenColor(color) {
 // Object de remplacement pour les noms de colonnes
 const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
+    'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
     'Annee': 'Année',
