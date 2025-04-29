@@ -288,10 +288,11 @@ async function updateDisplay() {
     const username = usernameDisplay.textContent;
     */
     const username = "Laurana";
+    let data;
     if (username === "Laurana") {
-        const data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
+        data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
-        const data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
+        data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
     }
     const filteredData = filterFrequentOccurrences(data, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
