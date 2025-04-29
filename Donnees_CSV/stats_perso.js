@@ -339,7 +339,7 @@ async function updateDisplay() {
     const counts = filteredData.map(row => parseInt(row.Nombre_de_notes));
     const averages = filteredData.map(row => parseFloat(row.Moyenne));
     const notes = filteredData.map(row => parseFloat(row.Note));
-    const global_data = filteredData.map(row => parseFloat(row.Note));
+    const global_data = filteredDataGlobal.map(row => parseFloat(row.Moyenne_Totale));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
