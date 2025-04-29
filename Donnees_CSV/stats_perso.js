@@ -197,7 +197,7 @@ const columnNameReplacements = {
     'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
-    'Moyenne': 'Moyenne /10';
+    'Moyenne': 'Moyenne /10',
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
