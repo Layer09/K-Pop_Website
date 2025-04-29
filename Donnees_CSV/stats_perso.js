@@ -336,6 +336,7 @@ async function updateDisplay() {
     const counts = filteredData.map(row => parseInt(row.Nombre_de_notes));
     const averages = filteredData.map(row => parseFloat(row.Moyenne));
     const notes = filteredData.map(row => parseFloat(row.Note));
+    const global_data = filteredData.map(row => parseFloat(row.Note));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
@@ -360,7 +361,7 @@ async function updateDisplay() {
             pieChart.title = "Répartition du nombre de titres par compagnie";
         }
         chartsContainer.appendChild(pieChart);
-        const barChart = createBarChart(averages, data_global, dataset, chartColors);
+        const barChart = createBarChart(averages, global_data, dataset, chartColors);
         if (dataset === "Sexes") {
             barChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
@@ -373,7 +374,7 @@ async function updateDisplay() {
             barChart.title = "Moyenne des notes par compagnie";
         }
         chartsContainer.appendChild(barChart);
-        const lineChart = createLineChart(notes, data_global, labels, dataset);
+        const lineChart = createLineChart(notes, global_data, labels, dataset);
         if (dataset === "Sexes") {
             lineChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
