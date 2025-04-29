@@ -133,7 +133,7 @@ function createBarChart(data, labels, dataset, colors) {
 }
 
 // Fonction pour créer un LineChart
-function createLineChart(notes, labels, dataset) {
+function createLineChart(notes, global_note, labels, dataset) {
     Couleur = ["#00c5d5"];
     // Extraire les moyennes pour chaque groupe de fans
     const canvas = document.createElement('canvas');
@@ -145,8 +145,16 @@ function createLineChart(notes, labels, dataset) {
                 {
                     label: 'Note',
                     data: notes,
-                    backgroundColor: Couleur[0],
-                    borderColor: Couleur[0],
+                    backgroundColor: Couleurs[0],
+                    borderColor: Couleurs[0],
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: 'Moyenne globale',
+                    data: global_note,
+                    backgroundColor: Couleurs[1],
+                    borderColor: Couleurs[1],
                     fill: false,
                     tension: 0.3
                 }
@@ -301,12 +309,14 @@ async function updateDisplay() {
     */
     const username = "Laurana";
     let data;
+    const data_global = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     if (username === "Laurana") {
         data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
         data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
     }
     const filteredData = filterFrequentOccurrences(data, exclude);
+    const filteredDataGlobal = filterFrequentOccurrences(data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
     if (dataset === "Titres") {
         if (checkbox.checked) {
@@ -363,7 +373,7 @@ async function updateDisplay() {
             barChart.title = "Moyenne des notes par compagnie";
         }
         chartsContainer.appendChild(barChart);
-        const lineChart = createLineChart(notes, labels, dataset);
+        const lineChart = createLineChart(notes, global_note, labels, dataset);
         if (dataset === "Sexes") {
             lineChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
