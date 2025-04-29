@@ -364,7 +364,7 @@ async function updateDisplay() {
             pieChart.title = "Répartition du nombre de titres par compagnie";
         }
         chartsContainer.appendChild(pieChart);
-        const barChart = createBarChart(averages, global_data, dataset, chartColors);
+        const barChart = createBarChart(averages, labels, dataset, chartColors);
         if (dataset === "Sexes") {
             barChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
