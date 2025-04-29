@@ -134,7 +134,10 @@ function createBarChart(data, labels, dataset, colors) {
 
 // Fonction pour créer un LineChart
 function createLineChart(notes, global_note, labels, dataset) {
-    Couleur = ["#00c5d5"];
+    const Couleurs = [
+        "#00c5d5", // Nouveaux fans
+        "#8a6ace"  // Anciens fans
+    ];
     // Extraire les moyennes pour chaque groupe de fans
     const canvas = document.createElement('canvas');
     const config = {
