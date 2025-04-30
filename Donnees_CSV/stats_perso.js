@@ -377,7 +377,7 @@ async function updateDisplay() {
             barChart.title = "Moyenne des notes par compagnie";
         }
         chartsContainer.appendChild(barChart);
-        const lineChart = createLineChart(notes, global_data, labels, dataset);
+        const lineChart = createLineChart(averages, global_data, labels, dataset);
         if (dataset === "Sexes") {
             lineChart.title = "Moyenne des notes par sexe";
         } else if (dataset === "Annees") {
@@ -392,7 +392,7 @@ async function updateDisplay() {
         chartsContainer.appendChild(lineChart);
     } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
-        const lineChart = createLineChart(notes, data_global, labels, dataset);
+        const lineChart = createLineChart(averages, data_global, labels, dataset);
         if (dataset === "Episodes") {
             barChart.title = "Moyenne des notes par épisode";
             lineChart.title = "Moyenne des notes par épisode";
