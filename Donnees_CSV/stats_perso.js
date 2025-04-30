@@ -1,3 +1,13 @@
+let username = localStorage.getItem("loggedInUser");
+window.addEventListener("DOMContentLoaded", () => {
+    if (username) {
+        const usernameDisplay = document.getElementById("username-display");
+        if (usernameDisplay) {
+            usernameDisplay.textContent = username;
+        }
+    }
+});
+
 // Fonction pour charger un fichier CSV et le transformer en tableau d'objets, en excluant certaines colonnes
 async function loadCSV(file) {
     const response = await fetch(file);
@@ -241,7 +251,7 @@ function createTable(data, data_global, youtube, dataset) {
 
     // En-tête "Moyenne Totale"
     const moyenneTotaleTh = document.createElement('th');
-    moyenneTotaleTh.textContent = "Moyenne Totale";
+    moyenneTotaleTh.textContent = "Moyenne Globale /10";
     headerRow.appendChild(moyenneTotaleTh);
 
     // En-tête "Vidéo YouTube" (si dataset = Episode)
@@ -346,18 +356,14 @@ const tableContainer = document.getElementById('table-container');
 async function updateDisplay() {
     const dataset = select.value;
     const exclude = checkbox.checked;
-    /*
-    const usernameDisplay = document.getElementById("username-display");
-    const username = usernameDisplay.textContent;
-    */
-    const username = "Laurana";
     let data;
     const data_global = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const youtube = await loadCSV(`./Donnees_CSV/Youtube.csv`);
+    console.log("Username :", username);
     if (username === "Laurana") {
         data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
-        data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
+        data = await loadCSV(`./Donnees_CSV/${username}/_${username}_Stats_${dataset}.csv`);
     }
     const [filteredData, filteredDataGlobal] = filterFrequentOccurrences(data, data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
