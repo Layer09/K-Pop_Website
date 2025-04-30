@@ -65,8 +65,22 @@
             let formattedName = loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1);
         
             usernameDisplay.textContent = formattedName;
-            loginLink.classList.add("hidden");       // Cache le lien "Se connecter"
-            userInfo.classList.remove("hidden");     // Affiche le menu utilisateur
+            loginLink.classList.add("hidden");        // Cache le lien "Se connecter"
+            userInfo.classList.remove("hidden");      // Affiche le menu utilisateur
+        
+            // Toggle du menu déroulant au clic sur l'élément utilisateur
+            userInfo.addEventListener("click", function (e) {
+                e.stopPropagation(); // Empêche la fermeture immédiate par le document
+                dropdownMenu.classList.toggle("hidden");
+            });
+        
+            // Ferme le menu si on clique ailleurs
+            document.addEventListener("click", function (e) {
+                if (!userInfo.contains(e.target)) {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
+        
         } else {
             userInfo.classList.add("hidden");        // Cache le menu utilisateur
             loginLink.classList.remove("hidden");    // Affiche le lien "Se connecter"
