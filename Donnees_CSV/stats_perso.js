@@ -285,10 +285,9 @@ function createTable(data, data_global, youtube, dataset) {
     
             tbody.appendChild(tr);
         });
-    
+    }
         table.appendChild(tbody);
         return table;
-    }
 }
 
 
