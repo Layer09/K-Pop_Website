@@ -208,7 +208,7 @@ const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
     'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
-    'Moyenne_Totale': 'Moyenne totale /10',
+    'Moyenne_Totale': 'Moyenne globale /10',
     'Video_Youtube': 'Vidéo Youtube',
     'Moyenne': 'Moyenne /10',
     'Minimum': 'Minimum /10',
