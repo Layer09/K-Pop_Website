@@ -194,9 +194,10 @@ hr {
 }
 
 /* Classes dynamiques */
-.hidden {
+/* .hidden {
     display: none !important;
 }
+*/
 
 /* CSS pour désactiver les boutons */
 .disabled {
