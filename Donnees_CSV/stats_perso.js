@@ -227,7 +227,7 @@ function getColumnName(originalColumnName) {
 }
 
 // Fonction pour créer un tableau HTML
-function createTable(data, data_global, youtube) {
+function createTable(data, data_global, youtube, dataset) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
@@ -244,49 +244,51 @@ function createTable(data, data_global, youtube) {
     moyenneTotaleTh.textContent = "Moyenne Totale";
     headerRow.appendChild(moyenneTotaleTh);
 
-    // Ajouter la colonne "Video_Youtube" de "youtube"
-    const videoYoutubeTh = document.createElement('th');
-    videoYoutubeTh.textContent = "Vidéo YouTube";
-    headerRow.appendChild(videoYoutubeTh);
-
-    table.appendChild(headerRow);
-
-    const tbody = document.createElement('tbody');
-    data.forEach((row, index) => {
-        const tr = document.createElement('tr');
-
-        // Ajouter la colonne "Moyenne_totale" de "data_global"
-        const tdMoyenneTotale = document.createElement('td');
-        tdMoyenneTotale.textContent = data_global[index].Moyenne_totale;
-        tr.appendChild(tdMoyenneTotale);
-
+    if (dataset === "Episode") {
         // Ajouter la colonne "Video_Youtube" de "youtube"
-        const tdVideoYoutube = document.createElement('td');
-        const youtubeVideoUrl = youtube[index] ? youtube[index].Video_Youtube : "";
-        if (youtubeVideoUrl.startsWith("http")) {
-            const a = document.createElement('a');
-            a.href = youtubeVideoUrl;
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            // Création de l'élément image avec le logo YouTube
-            const img = document.createElement('img');
-            img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
-            img.alt = "YouTube";
-            img.style.width = "21px"; // Taille du logo (ajustable)
-            img.style.height = "15px"; // Taille du logo (ajustable)
-            img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
-            a.appendChild(img); // Ajouter l'image au lien
-            tdVideoYoutube.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
-        } else {
-            tdVideoYoutube.textContent = "Aucun lien vidéo"; // Cas où il n'y a pas de vidéo
-        }
-        tr.appendChild(tdVideoYoutube);
-
-        tbody.appendChild(tr);
-    });
-
-    table.appendChild(tbody);
-    return table;
+        const videoYoutubeTh = document.createElement('th');
+        videoYoutubeTh.textContent = "Vidéo YouTube";
+        headerRow.appendChild(videoYoutubeTh);
+    
+        table.appendChild(headerRow);
+    
+        const tbody = document.createElement('tbody');
+        data.forEach((row, index) => {
+            const tr = document.createElement('tr');
+    
+            // Ajouter la colonne "Moyenne_totale" de "data_global"
+            const tdMoyenneTotale = document.createElement('td');
+            tdMoyenneTotale.textContent = data_global[index].Moyenne_totale;
+            tr.appendChild(tdMoyenneTotale);
+    
+            // Ajouter la colonne "Video_Youtube" de "youtube"
+            const tdVideoYoutube = document.createElement('td');
+            const youtubeVideoUrl = youtube[index] ? youtube[index].Video_Youtube : "";
+            if (youtubeVideoUrl.startsWith("http")) {
+                const a = document.createElement('a');
+                a.href = youtubeVideoUrl;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                // Création de l'élément image avec le logo YouTube
+                const img = document.createElement('img');
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
+                img.alt = "YouTube";
+                img.style.width = "21px"; // Taille du logo (ajustable)
+                img.style.height = "15px"; // Taille du logo (ajustable)
+                img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
+                a.appendChild(img); // Ajouter l'image au lien
+                tdVideoYoutube.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
+            } else {
+                tdVideoYoutube.textContent = "Aucun lien vidéo"; // Cas où il n'y a pas de vidéo
+            }
+            tr.appendChild(tdVideoYoutube);
+    
+            tbody.appendChild(tr);
+        });
+    
+        table.appendChild(tbody);
+        return table;
+    }
 }
 
 
@@ -439,7 +441,7 @@ async function updateDisplay() {
         heatmapImage.style.margin = '20px 0';
         chartsContainer.appendChild(heatmapImage);
     }
-    const table = createTable(filteredData);
+    const table = createTable(filteredData, filteredGlobal, youtube, dataset);
     tableContainer.appendChild(table);
 }
 select.addEventListener('change', updateDisplay);
