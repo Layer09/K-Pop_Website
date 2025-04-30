@@ -28,11 +28,13 @@ async function loadCSV(file) {
 }
 
 // Fonction pour exclure les occurrences peu fréquentes (Nombre_de_notes <= 4)
-function filterFrequentOccurrences(data, excludeRare) {
+function filterFrequentOccurrences(data, data_global, excludeRare) {
     if (excludeRare) {
-        return data.filter(row => parseInt(row.Nombre_de_notes) > 4);
+        const filteredData = data.filter(row => parseInt(row.Nombre_de_notes) > 4);
+        const filteredGlobal = data_global.filter(row => parseInt(row.Nombre_de_titres) > 4);
+        return [filteredData, filteredGlobal];
     }
-    return data;
+    return [data, data_global];
 }
 
 // Fonction pour définir les couleurs en fonction du nombre d'éléments nécessaires
@@ -48,7 +50,7 @@ function getChartColors(numColors) {
     const miniColors = [
         "#0000F1", "#8AFF87", "#FFFF09", "#F10700", "#AD00F1"
     ];
-    if (numColors < 3) {
+    if (numColors <= 3) {
         return ["#1BB8FF", "#FFFF09", "#F10700"]; // Moins de 3 couleurs
     } else if (numColors <= 5) {
         return miniColors.slice(0, numColors); // Moins de 5 mais plus que 3 couleurs
@@ -135,10 +137,9 @@ function createBarChart(data, labels, dataset, colors) {
 // Fonction pour créer un LineChart
 function createLineChart(notes, global_note, labels, dataset) {
     const Couleurs = [
-        "#00c5d5", // Nouveaux fans
-        "#8a6ace"  // Anciens fans
+        "#00c5d5", // Note
+        "#8a6ace"  // Moyenne globale
     ];
-    // Extraire les moyennes pour chaque groupe de fans
     const canvas = document.createElement('canvas');
     const config = {
         type: 'line',
@@ -168,7 +169,7 @@ function createLineChart(notes, global_note, labels, dataset) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Notes',
+                    text: 'Comparaison Perso VS Global',
                     font: {
                         size: 18
                     }
@@ -320,8 +321,7 @@ async function updateDisplay() {
     } else {
         data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
     }
-    const filteredData = filterFrequentOccurrences(data, exclude);
-    const filteredDataGlobal = filterFrequentOccurrences(data_global, exclude);
+    const filteredData, filteredDataGlobal = filterFrequentOccurrences(data, data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
     if (dataset === "Titres") {
         if (checkbox.checked) {
