@@ -231,7 +231,7 @@ function createTable(data, data_global, youtube, dataset) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
 
-    // Ajouter les colonnes de "data"
+    // En-têtes des colonnes issues de "data"
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = getColumnName(key);
@@ -239,58 +239,70 @@ function createTable(data, data_global, youtube, dataset) {
         headerRow.appendChild(th);
     });
 
-    // Ajouter la colonne "Moyenne_totale" de "data_global"
+    // En-tête "Moyenne Totale"
     const moyenneTotaleTh = document.createElement('th');
     moyenneTotaleTh.textContent = "Moyenne Totale";
     headerRow.appendChild(moyenneTotaleTh);
 
+    // En-tête "Vidéo YouTube" (si dataset = Episode)
     if (dataset === "Episode") {
-        // Ajouter la colonne "Video_Youtube" de "youtube"
         const videoYoutubeTh = document.createElement('th');
         videoYoutubeTh.textContent = "Vidéo YouTube";
         headerRow.appendChild(videoYoutubeTh);
-    
-        table.appendChild(headerRow);
-    
-        const tbody = document.createElement('tbody');
-        data.forEach((row, index) => {
-            const tr = document.createElement('tr');
-    
-            // Ajouter la colonne "Moyenne_totale" de "data_global"
-            const tdMoyenneTotale = document.createElement('td');
-            tdMoyenneTotale.textContent = data_global[index].Moyenne_totale;
-            tr.appendChild(tdMoyenneTotale);
-    
-            // Ajouter la colonne "Video_Youtube" de "youtube"
+    }
+
+    table.appendChild(headerRow);
+
+    const tbody = document.createElement('tbody');
+
+    data.forEach((row, index) => {
+        const tr = document.createElement('tr');
+
+        // Colonnes issues de "data"
+        Object.keys(row).forEach(key => {
+            const td = document.createElement('td');
+            td.textContent = row[key];
+            tr.appendChild(td);
+        });
+
+        // Cellule "Moyenne Totale"
+        const tdMoyenneTotale = document.createElement('td');
+        tdMoyenneTotale.textContent = data_global[index]?.Moyenne_Totale ?? "N/A";
+        tr.appendChild(tdMoyenneTotale);
+
+        // Cellule "Vidéo YouTube"
+        if (dataset === "Episode") {
             const tdVideoYoutube = document.createElement('td');
-            const youtubeVideoUrl = youtube[index] ? youtube[index].Video_Youtube : "";
+            const youtubeVideoUrl = youtube[index]?.Video_Youtube || "";
+
             if (youtubeVideoUrl.startsWith("http")) {
                 const a = document.createElement('a');
                 a.href = youtubeVideoUrl;
                 a.target = "_blank";
                 a.rel = "noopener noreferrer";
-                // Création de l'élément image avec le logo YouTube
+
                 const img = document.createElement('img');
-                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
+                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png";
                 img.alt = "YouTube";
-                img.style.width = "21px"; // Taille du logo (ajustable)
-                img.style.height = "15px"; // Taille du logo (ajustable)
-                img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
-                a.appendChild(img); // Ajouter l'image au lien
-                tdVideoYoutube.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
+                img.style.width = "21px";
+                img.style.height = "15px";
+                img.style.cursor = "pointer";
+
+                a.appendChild(img);
+                tdVideoYoutube.appendChild(a);
             } else {
-                tdVideoYoutube.textContent = "Aucun lien vidéo"; // Cas où il n'y a pas de vidéo
+                tdVideoYoutube.textContent = "Aucun lien vidéo";
             }
+
             tr.appendChild(tdVideoYoutube);
-    
-            tbody.appendChild(tr);
-        });
-        table.appendChild(tbody);
-    }
-        return table;
+        }
+
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    return table;
 }
-
-
 
 // Fonction pour trier un tableau HTML
 function sortTableByColumn(table, columnKey) {
