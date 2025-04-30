@@ -469,3 +469,4 @@ checkbox.addEventListener('change', updateDisplay);
 
 // Chargement initial
 updateDisplay();
+
