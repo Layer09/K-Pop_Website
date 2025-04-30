@@ -209,7 +209,7 @@ const columnNameReplacements = {
     'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
-    
+    'Video_Youtube': 'Vidéo Youtube',
     'Moyenne': 'Moyenne /10',
     'Minimum': 'Minimum /10',
     'Maximum': 'Maximum /10',
@@ -441,7 +441,7 @@ async function updateDisplay() {
         heatmapImage.style.margin = '20px 0';
         chartsContainer.appendChild(heatmapImage);
     }
-    const table = createTable(filteredData, filteredGlobal, youtube, dataset);
+    const table = createTable(filteredData, filteredDataGlobal, youtube, dataset);
     tableContainer.appendChild(table);
 }
 select.addEventListener('change', updateDisplay);
