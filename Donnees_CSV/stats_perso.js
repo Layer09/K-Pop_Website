@@ -321,7 +321,7 @@ async function updateDisplay() {
     } else {
         data = await loadCSV(`./Donnees_CSV/_${username}/${username}_Stats_${dataset}.csv`);
     }
-    const filteredData, filteredDataGlobal = filterFrequentOccurrences(data, data_global, exclude);
+    const [filteredData, filteredDataGlobal] = filterFrequentOccurrences(data, data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
     if (dataset === "Titres") {
         if (checkbox.checked) {
