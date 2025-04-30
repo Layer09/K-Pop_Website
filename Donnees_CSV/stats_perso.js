@@ -271,7 +271,7 @@ function createTable(data, data_global, youtube, dataset) {
         tr.appendChild(tdMoyenneTotale);
 
         // Cellule "Vidéo YouTube"
-        if (dataset === "Episode") {
+        if (dataset === "Episodes") {
             const tdVideoYoutube = document.createElement('td');
             const youtubeVideoUrl = youtube[index]?.Video_Youtube || "";
 
