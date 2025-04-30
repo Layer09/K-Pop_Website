@@ -209,6 +209,7 @@ const columnNameReplacements = {
     'Nombre_de_notes': 'Nombre de titres',
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
+    
     'Moyenne': 'Moyenne /10',
     'Minimum': 'Minimum /10',
     'Maximum': 'Maximum /10',
@@ -226,45 +227,68 @@ function getColumnName(originalColumnName) {
 }
 
 // Fonction pour créer un tableau HTML
-function createTable(data) {
+function createTable(data, data_global, youtube) {
     const table = document.createElement('table');
     const headerRow = document.createElement('tr');
+
+    // Ajouter les colonnes de "data"
     Object.keys(data[0]).forEach(key => {
         const th = document.createElement('th');
         th.textContent = getColumnName(key);
         th.onclick = () => sortTableByColumn(table, key);
         headerRow.appendChild(th);
     });
+
+    // Ajouter la colonne "Moyenne_totale" de "data_global"
+    const moyenneTotaleTh = document.createElement('th');
+    moyenneTotaleTh.textContent = "Moyenne Totale";
+    headerRow.appendChild(moyenneTotaleTh);
+
+    // Ajouter la colonne "Video_Youtube" de "youtube"
+    const videoYoutubeTh = document.createElement('th');
+    videoYoutubeTh.textContent = "Vidéo YouTube";
+    headerRow.appendChild(videoYoutubeTh);
+
     table.appendChild(headerRow);
+
     const tbody = document.createElement('tbody');
-    data.forEach(row => {
+    data.forEach((row, index) => {
         const tr = document.createElement('tr');
-        Object.entries(row).forEach(([key, value]) => {
-            const td = document.createElement('td');
-            if (key === "Vidéo Youtube" && value.startsWith("http")) {
-                const a = document.createElement('a');
-                a.href = value;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                // Création de l'élément image avec le logo YouTube
-                const img = document.createElement('img');
-                img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
-                img.alt = "YouTube";
-                img.style.width = "21px"; // Taille du logo (ajustable)
-                img.style.height = "15px"; // Taille du logo (ajustable)
-                img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
-                a.appendChild(img); // Ajouter l'image au lien
-                td.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
-            } else {
-                td.textContent = value;
-            }
-            tr.appendChild(td);
-        });
+
+        // Ajouter la colonne "Moyenne_totale" de "data_global"
+        const tdMoyenneTotale = document.createElement('td');
+        tdMoyenneTotale.textContent = data_global[index].Moyenne_totale;
+        tr.appendChild(tdMoyenneTotale);
+
+        // Ajouter la colonne "Video_Youtube" de "youtube"
+        const tdVideoYoutube = document.createElement('td');
+        const youtubeVideoUrl = youtube[index] ? youtube[index].Video_Youtube : "";
+        if (youtubeVideoUrl.startsWith("http")) {
+            const a = document.createElement('a');
+            a.href = youtubeVideoUrl;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            // Création de l'élément image avec le logo YouTube
+            const img = document.createElement('img');
+            img.src = "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"; // URL du logo YouTube
+            img.alt = "YouTube";
+            img.style.width = "21px"; // Taille du logo (ajustable)
+            img.style.height = "15px"; // Taille du logo (ajustable)
+            img.style.cursor = "pointer"; // Changer le curseur pour une meilleure expérience utilisateur
+            a.appendChild(img); // Ajouter l'image au lien
+            tdVideoYoutube.appendChild(a); // Ajouter le lien (contenant l'image) à la cellule
+        } else {
+            tdVideoYoutube.textContent = "Aucun lien vidéo"; // Cas où il n'y a pas de vidéo
+        }
+        tr.appendChild(tdVideoYoutube);
+
         tbody.appendChild(tr);
     });
+
     table.appendChild(tbody);
     return table;
 }
+
 
 
 // Fonction pour trier un tableau HTML
@@ -316,6 +340,7 @@ async function updateDisplay() {
     const username = "Laurana";
     let data;
     const data_global = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
+    const youtube = await loadCSV(`./Donnees_CSV/Youtube.csv`);
     if (username === "Laurana") {
         data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
