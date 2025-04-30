@@ -75,6 +75,9 @@
             if (loginLink) {
                 loginLink.addEventListener("click", (event) => {
                     localStorage.setItem("lastVisitedPage", window.location.href);
+                    if (window.location.pathname !== "/Login.html") {
+                        localStorage.setItem("lastVisitedPage", window.location.pathname);
+                    }
                 });
             }
         }
