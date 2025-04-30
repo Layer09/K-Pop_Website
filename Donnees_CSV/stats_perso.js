@@ -452,9 +452,7 @@ async function updateDisplay() {
         heatmapImage.style.margin = '20px 0';
         chartsContainer.appendChild(heatmapImage);
     }
-    console.log("data :", filteredData);
-    console.log("data_global :", filteredDataGlobal);
-    console.log("youtube :", youtube);
+    console.log("dataset :", dataset);
     const table = createTable(filteredData, filteredDataGlobal, youtube, dataset);
     tableContainer.appendChild(table);
 }
