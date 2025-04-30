@@ -363,11 +363,9 @@ async function updateDisplay() {
     if (!username) {
         alert('Connecte-toi d\'abord !');
         window.location.href = "Login.html";
-    } else if (username === "laurana") {
-        data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
         let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
-        data = await loadCSV(`./Donnees_CSV/${usernameMAJ}/_${usernameMAJ}_Stats_${dataset}.csv`);
+        data = await loadCSV(`./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_${dataset}.csv`);
     }
     const [filteredData, filteredDataGlobal] = filterFrequentOccurrences(data, data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
