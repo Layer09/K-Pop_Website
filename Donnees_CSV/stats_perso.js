@@ -363,7 +363,7 @@ async function updateDisplay() {
     if (!username) {
         alert('Connecte-toi d\'abord !');
         window.location.href = "Login.html";
-    if (username === "laurana") {
+    } else if (username === "laurana") {
         data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
         let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
