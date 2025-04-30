@@ -209,6 +209,8 @@ const columnNameReplacements = {
     'Note': 'Note /10',
     'Moyenne_Totale': 'Moyenne totale /10',
     'Moyenne': 'Moyenne /10',
+    'Minimum': 'Minimum /10',
+    'Maximum': 'Maximum /10',
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
@@ -392,7 +394,7 @@ async function updateDisplay() {
         chartsContainer.appendChild(lineChart);
     } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
-        const lineChart = createLineChart(averages, data_global, labels, dataset);
+        const lineChart = createLineChart(averages, global_data, labels, dataset);
         if (dataset === "Episodes") {
             barChart.title = "Moyenne des notes par épisode";
             lineChart.title = "Moyenne des notes par épisode";
