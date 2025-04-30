@@ -360,10 +360,14 @@ async function updateDisplay() {
     const data_global = await loadCSV(`./Donnees_CSV/${dataset}.csv`);
     const youtube = await loadCSV(`./Donnees_CSV/Youtube.csv`);
     console.log("Username :", username);
-    if (username === "Laurana") {
+    if (!username) {
+        alert('Connecte-toi d\'abord !');
+        window.location.href = "Login.html";
+    if (username === "laurana") {
         data = await loadCSV(`./Donnees_CSV/Laurana/Laurana_Stats_${dataset}.csv`);
     } else {
-        data = await loadCSV(`./Donnees_CSV/${username}/_${username}_Stats_${dataset}.csv`);
+        let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
+        data = await loadCSV(`./Donnees_CSV/${usernameMAJ}/_${usernameMAJ}_Stats_${dataset}.csv`);
     }
     const [filteredData, filteredDataGlobal] = filterFrequentOccurrences(data, data_global, exclude);
     // Désactive ou active la checkbox en fonction du dataset sélectionné
