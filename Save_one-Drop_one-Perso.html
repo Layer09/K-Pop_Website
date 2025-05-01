@@ -273,7 +273,6 @@
         <span id="volumeValue"></span>
     </div>
 <section id="challenge-section">
-    <input type="file" id="csvFileInput" accept=".csv">
     <!-- Mode vidéo 1 -->
     <div id="single-video" class="single-video">
         <video width="1440" height="810" id="videoA" controls></video>
@@ -371,13 +370,6 @@
             }
         }
     });
-    
-    // Ajout d'un champ pour charger le fichier CSV
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '.csv';
-    fileInput.id = 'csvFileInput';
-    document.body.insertBefore(fileInput, document.body.firstChild);
     
     // Initialisation des sous-listes
     const notes = [];
@@ -902,13 +894,47 @@ function tirerDeuxTitres() {
     return { videoA, videoB };
 }
 
-// Écouteur pour le chargement du fichier CSV
-fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        readCSVFile(file);
-    }
-});
+const username = localStorage.getItem("loggedInUser");
+
+if (username) {
+    const csvPath = `./Donnees_CSV/${username}/${username}_Stats_Titres.csv`;
+
+    fetch(csvPath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Impossible de charger le fichier CSV.");
+            }
+            return response.text();
+        })
+        .then(csvText => {
+            const lines = csvText.split("\n").filter(line => line.trim() !== "");
+            const headers = lines[0].split(",");
+            const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
+            const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
+
+            if (idIndex === -1 || noteIndex === -1) {
+                throw new Error("Colonnes 'ID' ou 'Note' non trouvées.");
+            }
+
+            const idToNote = {};
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(",");
+                let rawId = values[idIndex].trim();
+                let id = rawId.padStart(3, "0");  // Ex: "1" -> "001"
+                const note = parseFloat(values[noteIndex].trim().replace(",", "."));
+                if (!isNaN(note)) {
+                    idToNote[id] = note;
+                }
+            }
+
+            // ➕ Appelle la fonction de classement des vidéos ici
+            organizeVideos(idToNote);
+        })
+        .catch(error => {
+            console.error("Erreur lors du chargement automatique du CSV :", error);
+        });
+}
+
 
 // Reste du script original (non modifié)
 let firstVideo = ''; 
