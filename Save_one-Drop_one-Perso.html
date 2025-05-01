@@ -912,7 +912,8 @@ function tirerDeuxTitres() {
 }
 
 if (username) {
-    const csvPath = `./Donnees_CSV/${username}/${username}_Stats_Titres.csv`;
+    let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
+    const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
 
     fetch(csvPath)
         .then(response => {
