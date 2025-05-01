@@ -424,8 +424,9 @@
                     let rawId = values[idIndex].trim();
                     let id = rawId.padStart(3, "0");  // "1" => "001", "12" => "012"
                     const videoPath = videoSources.find(path => path.includes(id));
-                    console.log("note avant =", note);
-                    const note = parseFloat(values[noteIndex].trim().replace(",", "_"));
+                    const rawNote = values[noteIndex].trim();        // ex : "0,5"
+                    console.log("note avant =", rawNote);
+                    const note = rawNote.replace(".", "_");          // ex : "0_5"
                     console.log("note après =", note);
                     if (!isNaN(note)) {
                         console.log("titres_restants[note] =", titres_restants[note]);
