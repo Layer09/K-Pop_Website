@@ -456,7 +456,7 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include)
-            let available = titres_restant[include].filter(v => v !== exclude);
+            let available = titres_restants[include].filter(v => v !== exclude);
             console.log("available", available);
             return [include, available[Math.floor(Math.random() * available.length)]];   
         }
