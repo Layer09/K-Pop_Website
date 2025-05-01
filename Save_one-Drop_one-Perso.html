@@ -416,6 +416,8 @@
                 const headers = lines[0].split(",");
                 const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
                 const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
+                console.log("idIndex =", idIndex);
+                console.log("noteIndex =", noteIndex);
                 const idToNote = {};
                 for (let i = 1; i < lines.length; i++) {
                     const values = lines[i].split(",");
