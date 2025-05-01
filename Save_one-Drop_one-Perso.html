@@ -374,6 +374,7 @@
             return include;
         } else {
             const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
+            console.log("keys =", keys);
             const randomKey = keys[Math.floor(Math.random() * keys.length)];
             console.log("randomKey =", randomKey);
             return randomKey;
