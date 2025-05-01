@@ -425,12 +425,12 @@
                     let id = rawId.padStart(3, "0");  // "1" => "001", "12" => "012"
                     const videoPath = videoSources.find(path => path.includes(id));
                     const rawNote = values[noteIndex].trim();        // ex : "0,5"
-                    console.log("note avant =", rawNote);
+                    //console.log("note avant =", rawNote);
                     const note = rawNote.replace(".", "_");          // ex : "0_5"
-                    console.log("note après =", note);
-                    if (!isNaN(note)) {
-                        console.log("titres_restants[note] =", titres_restants[note]);
-                        titres_restants[note].push(id);
+                    //console.log("note après =", note);
+                    console.log("titres_restants[note] =", titres_restants[note]);
+                    titres_restants[note].push(id);
+                    console.log("titres_restants[note] =", titres_restants[note]);
                     }
                 }
             })
