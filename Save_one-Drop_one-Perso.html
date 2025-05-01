@@ -867,7 +867,7 @@
                     if (!videoPath) continue;
                     const note = parseFloat(values[noteIndex].trim().replace(",", "_"));
                     if (!isNaN(note)) {
-                        titres_restants[note].push(id);
+                        obj[note].push(id);
                     }
                 }
             })
