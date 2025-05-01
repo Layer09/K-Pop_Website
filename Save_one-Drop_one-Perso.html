@@ -374,10 +374,6 @@
             return include;
         } else {
             const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
-            if (keys.length === 0) {
-                console.error("Aucune vidéo disponible dans titres_restants");
-                return null;  // Ce `null` peut être la cause du problème dans getRandomVideo
-            }
             const randomKey = keys[Math.floor(Math.random() * keys.length)];
             console.log("randomKey =", randomKey);
             return randomKey;
