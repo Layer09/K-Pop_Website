@@ -361,6 +361,32 @@
 
     <script src="./JS_commun.js"></script>
     <script>
+    let username = localStorage.getItem("loggedInUser");
+    window.addEventListener("DOMContentLoaded", () => {
+        if (username) {
+            const usernameDisplay = document.getElementById("username-display");
+            if (usernameDisplay) {
+                usernameDisplay.textContent = username;
+            }
+        }
+    });
+    
+    // Ajout d'un champ pour charger le fichier CSV
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.csv';
+    fileInput.id = 'csvFileInput';
+    document.body.insertBefore(fileInput, document.body.firstChild);
+    
+    // Initialisation des sous-listes
+    const notes = [];
+    for (let i = 0; i <= 10; i++) {
+        notes.push(`${i}_0`);
+        if (i !== 10) notes.push(`${i}_5`);
+    }
+    const titres_restants = {};
+    notes.forEach(n => titres_restants[n] = []);
+        
     const videoSources = [
         './videos/001-BTS-War_of_hormones-Ep01-01.mp4',
         './videos/002-Stray_Kids-Hellevator-Ep01-02.mp4',
@@ -804,247 +830,227 @@
         './videos/440-Seventeen-Hit-Ep20-22.mp4'
     ];
 
-    let firstVideo = ''; 
-    let secondVideo = '';
-    let titresRestants = [...videoSources];  // Initialise titresRestants avec une copie de videoSources
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        const titres_restants = {};
-        const noteSteps = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
-    
-        noteSteps.forEach(note => {
-          const key = note.toString().replace('.', '_');
-          titres_restants[key] = [];
-        });
-    
-        document.getElementById("csvFile").addEventListener("change", function (e) {
-          const file = e.target.files[0];
-          if (!file) return;
-    
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const csvText = event.target.result;
-            processCSV(csvText);
-            ensureEvenDistribution();
-          };
-          reader.readAsText(file);
-        });
-    
-        function processCSV(csvText) {
-          const rows = csvText.split("\n").map(r => r.trim()).filter(r => r.length > 0);
-          const header = rows[0].split(",");
-          const idIndex = header.findIndex(col => col.toLowerCase() === "id");
-          const noteIndex = header.findIndex(col => col.toLowerCase() === "note");
+// Fonction pour formater l'ID
+function formatID(id) {
+    id = id.trim();
+    if (id.length === 1) return `00${id}`;
+    if (id.length === 2) return `0${id}`;
+    return id;
+}
 
-          /*
-          if (idIndex === -1 || noteIndex === -1) {
-            console.error("Les colonnes ID et Note sont obligatoires.");
-            return;
-          }
-          */
-          
-          for (let i = 1; i < rows.length; i++) {
-            const cols = rows[i].split(",");
-            let id = cols[idIndex].trim();
-            let note = parseFloat(cols[noteIndex].trim());
-            if (isNaN(note)) continue;
-    
-            if (id.length === 1) id = "00" + id;
-            else if (id.length === 2) id = "0" + id;
-    
-            const videoPath = videoPaths.find(path => path.includes(id));
-            if (!videoPath) continue;
-    
-            const key = note.toString().replace('.', '_');
-            if (titres_restants[key]) {
-              titres_restants[key].push(videoPath);
-            }
-          }
-        }
-    
-        function ensureEvenDistribution() {
-          // Traiter de 10.0 à 0.0 (on ne touche pas à 0.0)
-          for (let i = noteSteps.length - 1; i > 0; i--) {
-            const currentKey = noteSteps[i].toString().replace('.', '_');
-            const lowerKey = noteSteps[i - 1].toString().replace('.', '_');
-    
-            const currentList = titres_restants[currentKey];
-            const lowerList = titres_restants[lowerKey];
-    
-            if (currentList.length % 2 !== 0 && lowerList.length > 0) {
-              // On déplace un élément aléatoire de la liste inférieure
-              const randomIndex = Math.floor(Math.random() * lowerList.length);
-              const movedItem = lowerList.splice(randomIndex, 1)[0];
-              currentList.push(movedItem);
-            }
-          }
-        }
-    
-        function getRandomVideo(exclude = null) {
-            // Si titresRestants est vide, réinitialiser à partir de videoSources
-            if (titresRestants.length === 0) {
-                alert('Bravo ! Tu as fait un tour des musiques !');
-                location.reload(true);
+// Fonction pour lire et traiter le fichier CSV
+function readCSVFile(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.trim().split('\n');
+        const headers = lines[0].split(',');
+        const idIndex = headers.findIndex(h => h.trim().toLowerCase() === 'id');
+        const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === 'note');
 
+        for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].split(',');
+            const id = formatID(cols[idIndex]);
+            let note = cols[noteIndex].replace(',', '.').trim();
+            note = parseFloat(note);
+            const key = `${Math.floor(note)}_${note % 1 === 0.5 ? '5' : '0'}`;
+            const video = videoSources.find(p => p.includes(`/${id}-`));
+            if (video) {
+                titres_restants[key].push(video);
             }
-    
-            let available = titresRestants.filter(v => v !== exclude);
-            const randomIndex = Math.floor(Math.random() * available.length);
-            const video = available[randomIndex];
-    
-            // Retirer la vidéo sélectionnée de titresRestants
-            titresRestants = titresRestants.filter(v => v !== video);
-    
-            return video;
         }
-    
-        function startChallenge() {
-            // Supprimer les anciennes vidéos avant de commencer une nouvelle
-            cleanupVideos();
-    
-            // Créer et ajouter le conteneur pour la première vidéo
-            firstVideo = getRandomVideo();
-            const singleContainer = document.createElement('div');
-            singleContainer.id = 'single-video';
-            singleContainer.classList.add('single-video');
-            singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
-            document.body.appendChild(singleContainer);
-    
-            let videoA = document.getElementById('videoA');
-            videoA.src = firstVideo;
-            /* videoA.volume = 0.1; */
-            videoA.play();
-    
-            videoA.onended = () => {
-                // Supprimer complètement le conteneur vidéo A
-                videoA.pause();
-                singleContainer.remove();  // Retirer le conteneur et la vidéo
-    
-                // Créer et ajouter le conteneur pour la deuxième vidéo
-                secondVideo = getRandomVideo(firstVideo);
-                const secondContainer = document.createElement('div');
-                secondContainer.id = 'second-video';
-                secondContainer.classList.add('single-video');
-                secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
-                document.body.appendChild(secondContainer);
-    
-                let videoB = document.getElementById('videoB');
-                videoB.src = secondVideo;
-                /* videoB.volume = 0.1; */
-                videoB.play();
-    
-                videoB.onended = () => {
-                    // Supprimer complètement le conteneur vidéo B
-                    videoB.pause();
-                    secondContainer.remove();  // Retirer le conteneur et la vidéo
-    
-                    // Montrer les petites vidéos
-                    document.getElementById('dual-videos').classList.remove('hidden');
-                    choiceA.src = firstVideo;
-                    choiceB.src = secondVideo;
-                    choiceA.play();
-                    choiceB.play();
-                };
-            };
-        }
-    
-        function cleanupVideos() {
-            // Vérifie si un conteneur vidéo existe déjà et le supprime
-            let oldSingleVideo = document.getElementById('single-video');
-            let oldSecondVideo = document.getElementById('second-video');
-    
-            if (oldSingleVideo) oldSingleVideo.remove();
-            if (oldSecondVideo) oldSecondVideo.remove();
-    
-            // Supprime aussi les vidéos petites (si elles existent déjà)
-            let choiceA = document.getElementById('choiceA');
-            let choiceB = document.getElementById('choiceB');
-    
-            if (choiceA) {
-                choiceA.pause();
-                choiceA.setAttribute('disableRemotePlayback', true);
-                choiceA.src = '';
-            }
-            if (choiceB) {
-                choiceB.pause();
-                choiceB.setAttribute('disableRemotePlayback', true);
-                choiceB.src = '';
-            }
-    
-            // Masquer la section de choix des petites vidéos
-            document.getElementById('dual-videos').classList.add('hidden');
-        }
-    
-        choiceA.onclick = () => {
-            /* alert('Tu as choisi la première vidéo !'); */
-            cleanupChoices();
-        };
-    
-        choiceB.onclick = () => {
-            /* alert('Tu as choisi la deuxième vidéo !'); */
-            cleanupChoices();
-        };
-    
-        function cleanupChoices() {
-            // Arrêter les petites vidéos quand l'utilisateur fait un choix
-            cleanupVideos();
-    
-            // Démarrer un nouveau challenge (vider les éléments et recharger)
-            startChallenge();
-        }
-    
-        let hoverTimeoutA;
-        let hoverTimeoutB;
-    
-        choiceA.addEventListener('mouseenter', () => {
-            hoverTimeoutA = setTimeout(() => {
-                choiceA.muted = false;
-                /* choiceA.volume = 0.1; */
-            }, 1000);
-        });
-    
-        choiceA.addEventListener('mouseleave', () => {
-            clearTimeout(hoverTimeoutA);
-            choiceA.muted = true;
-        });
-    
-        choiceB.addEventListener('mouseenter', () => {
-            hoverTimeoutB = setTimeout(() => {
-                choiceB.muted = false;
-                /* choiceB.volume = 0.1; */
-            }, 1000);
-        });
-    
-        choiceB.addEventListener('mouseleave', () => {
-            clearTimeout(hoverTimeoutB);
-            choiceB.muted = true;
-        });
-    
-        window.onload = startChallenge;
-    });
 
-    function showVersion(version) {
-        document.querySelectorAll('.version-content').forEach(div => {
-            div.style.display = 'none';
-        });
-    
-        let selectedVersion = document.getElementById('version' + version);
-        if (selectedVersion) {
-            selectedVersion.style.display = 'block';
-        } else {
-            console.error("Version introuvable : version" + version);
-        }
-    
-        // Changer la couleur du bouton actif
-        document.querySelectorAll('.tab').forEach(button => {
-            button.style.backgroundColor = ""; // Réinitialise tous les boutons
-        });
-        if (version < 5) {
-            document.querySelector(`.tab:nth-child(${version})`).style.backgroundColor = "#333333";
-        } else {
-            document.querySelector(`.tab:nth-child(${version + 1})`).style.backgroundColor = "#333333";
+        equilibrerTitres();
+    };
+    reader.readAsText(file);
+}
+
+// Fonction pour équilibrer les sous-listes
+function equilibrerTitres() {
+    for (let i = notes.length - 1; i >= 1; i--) {
+        const key = notes[i];
+        if (titres_restants[key].length % 2 !== 0) {
+            let j = i - 1;
+            while (j >= 0 && titres_restants[notes[j]].length === 0) j--;
+            if (j >= 0) {
+                const index = Math.floor(Math.random() * titres_restants[notes[j]].length);
+                const chemin = titres_restants[notes[j]].splice(index, 1)[0];
+                titres_restants[key].push(chemin);
+            }
         }
     }
+}
+
+// Fonction pour tirer deux vidéos aléatoires
+function tirerDeuxTitres() {
+    const nonVides = Object.entries(titres_restants).filter(([_, liste]) => liste.length >= 2);
+    if (nonVides.length === 0) {
+        alert("Plus aucun titre disponible.");
+        return null;
+    }
+    const [key, liste] = nonVides[Math.floor(Math.random() * nonVides.length)];
+    const indices = [];
+    while (indices.length < 2) {
+        const r = Math.floor(Math.random() * liste.length);
+        if (!indices.includes(r)) indices.push(r);
+    }
+    const [videoA, videoB] = [liste[indices[0]], liste[indices[1]]];
+    // Supprimer les vidéos
+    titres_restants[key].splice(indices[0], 1);
+    titres_restants[key].splice(indices[1] > indices[0] ? indices[1] - 1 : indices[1], 1);
+    return { videoA, videoB };
+}
+
+// Écouteur pour le chargement du fichier CSV
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        readCSVFile(file);
+    }
+});
+
+// Reste du script original (non modifié)
+let firstVideo = ''; 
+let secondVideo = '';
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    function startChallenge() {
+        // Supprimer les anciennes vidéos avant de commencer une nouvelle
+        cleanupVideos();
+
+        const tirage = tirerDeuxTitres();
+        if (!tirage) return;
+
+        firstVideo = tirage.videoA;
+        secondVideo = tirage.videoB;
+
+        // Créer et ajouter le conteneur pour la première vidéo
+        const singleContainer = document.createElement('div');
+        singleContainer.id = 'single-video';
+        singleContainer.classList.add('single-video');
+        singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
+        document.body.appendChild(singleContainer);
+
+        let videoA = document.getElementById('videoA');
+        videoA.src = firstVideo;
+        videoA.play();
+
+        videoA.onended = () => {
+            videoA.pause();
+            singleContainer.remove();
+
+            // Créer et ajouter le conteneur pour la deuxième vidéo
+            const secondContainer = document.createElement('div');
+            secondContainer.id = 'second-video';
+            secondContainer.classList.add('single-video');
+            secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
+            document.body.appendChild(secondContainer);
+
+            let videoB = document.getElementById('videoB');
+            videoB.src = secondVideo;
+            videoB.play();
+
+            videoB.onended = () => {
+                videoB.pause();
+                secondContainer.remove();
+
+                document.getElementById('dual-videos').classList.remove('hidden');
+                choiceA.src = firstVideo;
+                choiceB.src = secondVideo;
+                choiceA.play();
+                choiceB.play();
+            };
+        };
+    }
+
+    function cleanupVideos() {
+        let oldSingleVideo = document.getElementById('single-video');
+        let oldSecondVideo = document.getElementById('second-video');
+
+        if (oldSingleVideo) oldSingleVideo.remove();
+        if (oldSecondVideo) oldSecondVideo.remove();
+
+        let choiceA = document.getElementById('choiceA');
+        let choiceB = document.getElementById('choiceB');
+
+        if (choiceA) {
+            choiceA.pause();
+            choiceA.setAttribute('disableRemotePlayback', true);
+            choiceA.src = '';
+        }
+        if (choiceB) {
+            choiceB.pause();
+            choiceB.setAttribute('disableRemotePlayback', true);
+            choiceB.src = '';
+        }
+
+        document.getElementById('dual-videos').classList.add('hidden');
+    }
+
+    choiceA.onclick = () => {
+        cleanupChoices();
+    };
+
+    choiceB.onclick = () => {
+        cleanupChoices();
+    };
+
+    function cleanupChoices() {
+        cleanupVideos();
+        startChallenge();
+    }
+
+    let hoverTimeoutA;
+    let hoverTimeoutB;
+
+    choiceA.addEventListener('mouseenter', () => {
+        hoverTimeoutA = setTimeout(() => {
+            choiceA.muted = false;
+        }, 1000);
+    });
+
+    choiceA.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeoutA);
+        choiceA.muted = true;
+    });
+
+    choiceB.addEventListener('mouseenter', () => {
+        hoverTimeoutB = setTimeout(() => {
+            choiceB.muted = false;
+        }, 1000);
+    });
+
+    choiceB.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeoutB);
+        choiceB.muted = true;
+    });
+
+    window.onload = startChallenge;
+});
+
+function showVersion(version) {
+    document.querySelectorAll('.version-content').forEach(div => {
+        div.style.display = 'none';
+    });
+
+    let selectedVersion = document.getElementById('version' + version);
+    if (selectedVersion) {
+        selectedVersion.style.display = 'block';
+    } else {
+        console.error("Version introuvable : version" + version);
+    }
+
+    document.querySelectorAll('.tab').forEach(button => {
+        button.style.backgroundColor = "";
+    });
+    if (version < 5) {
+        document.querySelector(`.tab:nth-child(${version})`).style.backgroundColor = "#333333";
+    } else {
+        document.querySelector(`.tab:nth-child(${version + 1})`).style.backgroundColor = "#333333";
+    }
+}
+
 </script>
 </body>
 </html>
