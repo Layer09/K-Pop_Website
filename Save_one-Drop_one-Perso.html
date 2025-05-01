@@ -369,30 +369,42 @@
 
     document.addEventListener("DOMContentLoaded", () => {
         
-        function getStandNote(include = null) {
-            if (include != null) {
-                return include;
-            } else {
-                const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
-                if (keys.length === 0) {
-                    console.error("Aucune vidéo disponible dans titres_restants");
-                    return null;
-                }
-                const randomKey = keys[Math.floor(Math.random() * keys.length)];
-                console.log("randomKey =", randomKey);
-                return randomKey;
+    function getStandNote(include = null) {
+        if (include != null) {
+            return include;
+        } else {
+            const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
+            if (keys.length === 0) {
+                console.error("Aucune vidéo disponible dans titres_restants");
+                return null;  // Ce `null` peut être la cause du problème dans getRandomVideo
             }
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            console.log("randomKey =", randomKey);
+            return randomKey;
         }
-
-        
-        function getRandomVideo(include = null, exclude = null) {
-            include = getStandNote(include)
-            console.log("include =", include);
-            let available = titres_restants[include].filter(v => v !== exclude);
-            console.log("available", available);
-            return [include, available[Math.floor(Math.random() * available.length)]];   
+    }
+    
+    function getRandomVideo(include = null, exclude = null) {
+        include = getStandNote(include);  // Assurer que include a une valeur valide
+        console.log("include =", include);
+    
+        // Ajouter une validation avant d'accéder à titres_restants[include]
+        if (include === null || !titres_restants[include]) {
+            console.error("Aucune vidéo disponible pour la note incluse");
+            return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
         }
     
+        let available = titres_restants[include].filter(v => v !== exclude);
+        console.log("available", available);
+    
+        // Si il y a des vidéos disponibles, on en retourne une au hasard
+        if (available.length > 0) {
+            return [include, available[Math.floor(Math.random() * available.length)]];
+        } else {
+            console.error("Aucune vidéo disponible après filtrage");
+            return [include, null];
+        }
+    }
         function startChallenge() {
             // Supprimer les anciennes vidéos avant de commencer une nouvelle
             cleanupVideos();
