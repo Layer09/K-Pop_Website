@@ -370,7 +370,7 @@
     document.addEventListener("DOMContentLoaded", () => {
         
         function getStandNote(include = null) {
-            if (include) {
+            if (include != null) {
                 return include;
             } else {
                 const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
