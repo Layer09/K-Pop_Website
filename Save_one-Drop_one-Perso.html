@@ -429,7 +429,7 @@
                     const note = rawNote.replace(".", "_");          // ex : "0_5"
                     //console.log("note après =", note);
                     titres_restants[note].push(videoPath);
-                    console.log("titres_restants[note] =", titres_restants[note]);
+                    //console.log("titres_restants[note] =", titres_restants[note]);
                     }
                 })
             }
@@ -456,7 +456,8 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include)
-            let available = videoSources.filter(v => v !== exclude);
+            let available = titres_restant[include].filter(v => v !== exclude);
+            console.log("available", available);
             return [include, available[Math.floor(Math.random() * available.length)]];   
         }
     
