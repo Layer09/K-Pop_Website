@@ -416,18 +416,18 @@
                 const headers = lines[0].split(",");
                 const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
                 const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
-                console.log("idIndex =", idIndex);
-                console.log("noteIndex =", noteIndex);
+                // console.log("idIndex =", idIndex);
+                // console.log("noteIndex =", noteIndex);
                 const idToNote = {};
                 for (let i = 1; i < lines.length; i++) {
                     const values = lines[i].split(",");
                     let rawId = values[idIndex].trim();
                     let id = rawId.padStart(3, "0");  // "1" => "001", "12" => "012"
                     const videoPath = videoSources.find(path => path.includes(id));
-                    if (!videoPath) continue;
+                    console.log("note avant =", note);
                     const note = parseFloat(values[noteIndex].trim().replace(",", "_"));
+                    console.log("note après =", note);
                     if (!isNaN(note)) {
-                        console.log("note =", note);
                         console.log("titres_restants[note] =", titres_restants[note]);
                         titres_restants[note].push(id);
                     }
