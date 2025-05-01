@@ -449,6 +449,7 @@
                     return null;
                 }
                 const randomKey = keys[Math.floor(Math.random() * keys.length)];
+                console.log("randomKey =", randomKey);
                 return randomKey;
             }
         }
@@ -456,6 +457,7 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include)
+            console.log("include =", include);
             let available = titres_restants[include].filter(v => v !== exclude);
             console.log("available", available);
             return [include, available[Math.floor(Math.random() * available.length)]];   
