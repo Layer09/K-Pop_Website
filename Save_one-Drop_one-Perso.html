@@ -370,15 +370,6 @@
             }
         }
     });
-    
-    // Initialisation des sous-listes
-    const notes = [];
-    for (let i = 0; i <= 10; i++) {
-        notes.push(`${i}_0`);
-        if (i !== 10) notes.push(`${i}_5`);
-    }
-    const titres_restants = {};
-    notes.forEach(n => titres_restants[n] = []);
         
     const videoSources = [
         './videos/001-BTS-War_of_hormones-Ep01-01.mp4',
