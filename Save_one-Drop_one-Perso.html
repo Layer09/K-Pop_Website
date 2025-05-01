@@ -428,8 +428,7 @@
                     //console.log("note avant =", rawNote);
                     const note = rawNote.replace(".", "_");          // ex : "0_5"
                     //console.log("note après =", note);
-                    console.log("titres_restants[note] =", titres_restants[note]);
-                    titres_restants[note].push(id);
+                    titres_restants[note].push(videoPath);
                     console.log("titres_restants[note] =", titres_restants[note]);
                     }
                 })
