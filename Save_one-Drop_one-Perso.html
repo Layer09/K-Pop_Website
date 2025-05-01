@@ -10,7 +10,7 @@
 <body>
     <header>
         <h1><span class="color1">K-Pop</span> <span class="color2">Website</span></h1><br>
-        <h2 class="subtitle">Save one Drop one <style color="#FF0000">IMPOSSIBLE</style></h2>
+        <h2 class="subtitle">Save one Drop one <span style="color:#FF0000;">IMPOSSIBLE</span></h2>
 
         <div id="user-menu">
             <div id="user-container">
@@ -872,6 +872,23 @@ function equilibrerTitres() {
             }
         }
     }
+}
+function getRandomVideo(exclude = null) {
+    // Si titresRestants est vide, réinitialiser à partir de videoSources
+    if (titresRestants.length === 0) {
+        // Ne réinitialiser que lorsque toutes les vidéos ont été utilisées
+        alert('Bravo ! Tu as fait un tour des musiques !');
+        titresRestants = [...videoSources];  // Réinitialisation de titresRestants
+    }
+
+    let available = titresRestants.filter(v => v !== exclude);
+    const randomIndex = Math.floor(Math.random() * available.length);
+    const video = available[randomIndex];
+
+    // Retirer la vidéo sélectionnée de titresRestants
+    titresRestants = titresRestants.filter(v => v !== video);
+
+    return video;
 }
 
 // Fonction pour tirer deux vidéos aléatoires
