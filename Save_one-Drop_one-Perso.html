@@ -392,47 +392,47 @@
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
             let includeS = null;
-            if (include === 0) {
+            if (include === 0 || '0_5') {
                 includeS = "0_0";
-            } else if (include === 5) {
+            } else if (include === 5 || '0_5') {
                 includeS = "0_5";
-            } else if (include === 10) {
+            } else if (include === 10 || 1_0') {
                 includeS = "1_0";
-            } else if (include === 15) {
+            } else if (include === 15 || '1_5') {
                 includeS = "1_5";
-            } else if (include === 20) {
+            } else if (include === 20 || '2_0') {
                 includeS = "2_0";
-            } else if (include === 25) {
+            } else if (include === 25 || '2_5') {
                 includeS = "2_5";
-            } else if (include === 30) {
+            } else if (include === 30 || '3_0') {
                 includeS = "3_0";
-            } else if (include === 35) {
+            } else if (include === 35 || '3_5') {
                 includeS = "3_5";
-            } else if (include === 40) {
+            } else if (include === 40 || '4_0') {
                 includeS = "4_0";
-            } else if (include === 45) {
+            } else if (include === 45 || '4_5') {
                 includeS = "4_5";
-            } else if (include === 50) {
+            } else if (include === 50 || '5_0') {
                 includeS = "5_0";
-            } else if (include === 55) {
+            } else if (include === 55 || '5_5') {
                 includeS = "5_5";
-            } else if (include === 60) {
+            } else if (include === 60 || '6_0') {
                 includeS = "6_0";
-            } else if (include === 65) {
+            } else if (include === 65 || '6_5') {
                 includeS = "6_5";
-            } else if (include === 70) {
+            } else if (include === 70 || '7_0') {
                 includeS = "7_0";
-            } else if (include === 75) {
+            } else if (include === 75 || '7_5') {
                 includeS = "7_5";
-            } else if (include === 80) {
+            } else if (include === 80 || '8_0') {
                 includeS = "8_0";
-            } else if (include === 85) {
+            } else if (include === 85 || '8_5') {
                 includeS = "8_5";
-            } else if (include === 90) {
+            } else if (include === 90 || '9_0') {
                 includeS = "9_0";
-            } else if (include === 95) {
+            } else if (include === 95 || '9_5') {
                 includeS = "9_5";
-            } else if (include === 100) {
+            } else if (include === 100 || '10_0') {
                 includeS = "10_0";
             } else {
                 console.warn("Valeur de include inattendue :", include);
