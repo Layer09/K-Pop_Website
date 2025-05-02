@@ -356,6 +356,7 @@
                             const note = rawNote * 10;
                             if (titres_restants.hasOwnProperty(note) && videoPath) {
                                 titres_restants[note].push(videoPath);
+                                console.log("titres_restants[note] =", titres_restants[note]);
                             }
                         }
                         console.log("titres_restants =", titres_restants);
