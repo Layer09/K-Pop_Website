@@ -397,7 +397,8 @@
                 include = getStandNote(include);  // Assurer que include a une valeur valide
                 //console.log("Include :", include);
                 console.log("titres_restants[include] :", titres_restants[include]);
-                const liste = Object.keys(titres_restants[include]);
+                console.log("titres_restants[include].length :", titres_restants[include].length);
+                const liste = ath.floor(Math.random() * titres_restants[include].length);
                 //const liste = Object.keys(titres_restants[include]);
                 //const liste = titres_restants[include];
                 //console.log("Type exact :", typeof liste);
