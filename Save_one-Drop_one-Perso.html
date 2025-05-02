@@ -382,7 +382,7 @@
             // Vérifier s'il y a au moins une liste non vide
             if (clesNonVides.length > 0) {
               // Choisir une clé aléatoire parmi celles non vides
-              const catego = titres_restants[clesNonVides[Math.floor(Math.random() * titres_restants[clesNonVides].length)]];+
+              const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];+
               console.log("catego =", catego);
             }
             const randomKey = catego[Math.floor(Math.random() * catego.length)];
