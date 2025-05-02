@@ -359,7 +359,7 @@
                                 console.log("titres_restants[note] =", titres_restants[note]);
                             }
                         }
-                        console.log("titres_restants =", titres_restants);
+                        //console.log("titres_restants =", titres_restants);
                     })
                     .catch(error => {
                         console.error("Erreur lors du traitement du CSV :", error);
@@ -437,7 +437,7 @@
                 
                 function startChallenge() {
                     if (debut === 1) {
-                        debut, titres_restants = initialisation();
+                        [debut, titres_restants] = initialisation();
                     }
                     // Supprimer les anciennes vidéos avant de commencer une nouvelle
                     cleanupVideos();
