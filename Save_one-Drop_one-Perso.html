@@ -391,12 +391,13 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            console.log("Include après getStandNote:", include);
-            console.log("Clés de titres_restants:", Object.keys(titres_restants));
-            console.log("titres_restants[include] existe-t-il ?", titres_restants.hasOwnProperty(include));
+            //console.log("Include après getStandNote:", include);
+            //console.log("Clés de titres_restants:", Object.keys(titres_restants));
+            //console.log("titres_restants[include] existe-t-il ?", titres_restants.hasOwnProperty(include));
             console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
+            console.log("liste =", liste);
             const index = Math.floor(Math.random() * liste.length);
             const video = liste[index];
             console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
