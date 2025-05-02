@@ -398,7 +398,7 @@
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
             console.log("liste =", liste);
-            const vraiTableau = Array.from(liste);
+            const vraiTableau = Object.values(liste);
             console.log("vraiTableau =", vraiTableau);
             const index = Math.floor(Math.random() * vraiTableau.length);
             console.log("index =", index);
