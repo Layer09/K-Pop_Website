@@ -328,7 +328,7 @@
         '95' : [],
         '100' : []
     };
-
+        
     if (username) {
         let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
         const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
@@ -345,25 +345,26 @@
                 const headers = lines[0].split(",");
                 const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
                 const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
-                // console.log("idIndex =", idIndex);
-                // console.log("noteIndex =", noteIndex);
-                const idToNote = {};
+    
                 for (let i = 1; i < lines.length; i++) {
                     const values = lines[i].split(",");
                     let rawId = values[idIndex].trim();
-                    let id = rawId.padStart(3, "0");  // "1" => "001", "12" => "012"
+                    let id = rawId.padStart(3, "0");
                     const videoPath = videoSources.find(path => path.includes(id));
-                    const rawNote = values[noteIndex].trim();        // ex : "0,5"
-                    //console.log("note avant =", rawNote);
-                    //const note = rawNote.replace(".", "_");          // ex : "0_5"
-                    const note = rawNote*10;
-                    //console.log("note =", note);
-                    titres_restants[note].push(videoPath);
-                    //console.log("titres_restants[note] =", titres_restants[note]);
+                    const rawNote = values[noteIndex].trim();
+                    const note = rawNote * 10;
+    
+                    if (titres_restants.hasOwnProperty(note) && videoPath) {
+                        titres_restants[note].push(videoPath);
                     }
-                })
-            }
-
+                }
+                // Appel de ta fonction après chargement et remplissage
+                startChallenge();
+            })
+            .catch(error => {
+                console.error("Erreur lors du traitement du CSV :", error);
+            });
+    }
     let firstVideo = '';
     let secondVideo = '';
 
@@ -397,20 +398,17 @@
             //console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
-            for (let i = 0; i < 10; i++) {
-                console.log(`[${i}]`, liste[i]);
-            }
             //console.log("Type exact :", typeof liste);
             //console.log("liste.length :", liste.length);
             //console.log("Object.keys :", Object.keys(liste));
             //console.log("Prototype réel :", Object.prototype.toString.call(liste));
             //console.log("Descripteurs :", Object.getOwnPropertyDescriptors(liste));
             //console.log("Contenu brut JSON :", JSON.stringify(liste));
-            //console.log("liste =", liste);
-            const vraiTableau = Object.values(liste);
-            console.log("vraiTableau =", vraiTableau);
-            const index = Math.floor(Math.random() * vraiTableau.length);
-            const video = vraiTableau[index];
+            console.log("liste =", liste);
+            const index = Math.floor(Math.random() * liste.length);
+            console.log("index =", index);
+            const video = liste[index];
+            console.log("index =", index);
 
 
             /*
