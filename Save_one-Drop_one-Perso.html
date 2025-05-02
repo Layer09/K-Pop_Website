@@ -397,12 +397,15 @@
             //console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
-            console.log("Type exact :", typeof liste);
-            console.log("liste.length :", liste.length);
-            console.log("Object.keys :", Object.keys(liste));
-            console.log("Prototype réel :", Object.prototype.toString.call(liste));
-            console.log("Descripteurs :", Object.getOwnPropertyDescriptors(liste));
-            console.log("Contenu brut JSON :", JSON.stringify(liste));
+            for (let i = 0; i < 10; i++) {
+                console.log(`[${i}]`, liste[i]);
+            }
+            //console.log("Type exact :", typeof liste);
+            //console.log("liste.length :", liste.length);
+            //console.log("Object.keys :", Object.keys(liste));
+            //console.log("Prototype réel :", Object.prototype.toString.call(liste));
+            //console.log("Descripteurs :", Object.getOwnPropertyDescriptors(liste));
+            //console.log("Contenu brut JSON :", JSON.stringify(liste));
             //console.log("liste =", liste);
             const vraiTableau = Object.values(liste);
             console.log("vraiTableau =", vraiTableau);
