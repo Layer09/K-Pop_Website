@@ -397,21 +397,19 @@
             //console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
+            console.log("Type exact :", typeof liste);
+            console.log("liste.length :", liste.length);
+            console.log("Object.keys :", Object.keys(liste));
+            console.log("Prototype réel :", Object.prototype.toString.call(liste));
+            console.log("Descripteurs :", Object.getOwnPropertyDescriptors(liste));
+            console.log("Contenu brut JSON :", JSON.stringify(liste));
             //console.log("liste =", liste);
             const vraiTableau = Object.values(liste);
             console.log("vraiTableau =", vraiTableau);
             const index = Math.floor(Math.random() * vraiTableau.length);
-            console.log("index =", index);
             const video = vraiTableau[index];
-            console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
-            console.log("Liste[0] existe ?", liste && liste[0]);
-            console.log("Liste entries :", liste ? Object.entries(liste) : "liste invalide");
-            console.log("Liste length :", liste.length);      // toujours 0 ?
-            console.log("Liste[0] existe ?", liste[0]);       // que contient l’index 0 ?
-            console.log("Liste entries :", Object.entries(liste)); // vide ?
-            console.log("Vrai tableau :", vraiTableau);
-            console.log("Longueur réelle :", vraiTableau.length);
-            console.log("Vidéo choisie :", video);
+
+
             /*
             console.log("Object.keys(titres_restants['0_0'] =", Object.keys(titres_restants['0_0']));
             // Ajouter une validation avant d'accéder à titres_restants[include]
