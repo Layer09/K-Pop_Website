@@ -357,7 +357,7 @@
                     //console.log("note avant =", rawNote);
                     //const note = rawNote.replace(".", "_");          // ex : "0_5"
                     const note = rawNote*10;
-                    console.log("note =", note);
+                    //console.log("note =", note);
                     titres_restants[note].push(videoPath);
                     //console.log("titres_restants[note] =", titres_restants[note]);
                     }
@@ -395,7 +395,7 @@
             console.log("Clés de titres_restants:", Object.keys(titres_restants));
             console.log("titres_restants[include] existe-t-il ?", titres_restants.hasOwnProperty(include));
             console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
-            const liste = titres_restants[include];
+            const liste = Object.keys(titres_restants[include]);
             console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
             //console.log("Liste[0] existe ?", liste && liste[0]);
             //console.log("Liste entries :", liste ? Object.entries(liste) : "liste invalide");
