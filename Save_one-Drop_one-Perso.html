@@ -393,12 +393,16 @@
             //console.log("include =", include);
             const liste = titres_restants[include];
             //console.log("liste =", liste);
-            console.log("liste.length =", liste.length);
+            //console.log("liste.length =", liste.length);
             //console.log("titres_restants['0_0'] =", titres_restants['0_0']);
+            console.log("Est-ce un tableau ?", Array.isArray(liste)); // true ou false
+            console.log("Type réel de liste :", typeof liste);         // object
+            console.log("Contenu brut de liste :", liste);
+            console.log("Toutes les clés de liste :", Object.keys(liste));
             const index = Math.floor(Math.random() * liste.length);
-            console.log("index =", index);
+            //console.log("index =", index);
             const video = liste[index];
-            console.log("video =", video);
+            //console.log("video =", video);
             /*
             console.log("Object.keys(titres_restants['0_0'] =", Object.keys(titres_restants['0_0']));
             // Ajouter une validation avant d'accéder à titres_restants[include]
