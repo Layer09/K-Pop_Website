@@ -390,9 +390,10 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            console.log("include =", include);
+            //console.log("include =", include);
             const liste = titres_restants[include];
-            console.log("liste =", liste);
+            //console.log("liste =", liste);
+            console.log("liste.length =", liste.length);
             //console.log("titres_restants['0_0'] =", titres_restants['0_0']);
             const index = Math.floor(Math.random() * liste.length);
             console.log("index =", index);
