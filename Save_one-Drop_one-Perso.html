@@ -398,9 +398,10 @@
             //const liste = Object.keys(titres_restants[include]);
             const liste = titres_restants[include];
             console.log("liste =", liste);
-            const index = Math.floor(Math.random() * liste.length);
-            const video = liste[index];
-            console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
+            const vraiTableau = Array.from(liste);
+            const index = Math.floor(Math.random() * vraiTableau.length);
+            const video = vraiTableau[index];
+            //console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
             //console.log("Liste[0] existe ?", liste && liste[0]);
             //console.log("Liste entries :", liste ? Object.entries(liste) : "liste invalide");
             //console.log("Liste length :", liste.length);      // toujours 0 ?
