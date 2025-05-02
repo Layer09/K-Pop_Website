@@ -395,13 +395,16 @@
             //console.log("liste =", liste);
             //console.log("liste.length =", liste.length);
             //console.log("titres_restants['0_0'] =", titres_restants['0_0']);
-            console.log("Est-ce un tableau ?", Array.isArray(liste)); // true ou false
-            console.log("Type réel de liste :", typeof liste);         // object
-            console.log("Contenu brut de liste :", liste);
-            console.log("Toutes les clés de liste :", Object.keys(liste));
-            const index = Math.floor(Math.random() * liste.length);
+            console.log("Liste length :", liste.length);      // toujours 0 ?
+            console.log("Liste[0] existe ?", liste[0]);       // que contient l’index 0 ?
+            console.log("Liste entries :", Object.entries(liste)); // vide ?
+            const vraiTableau = Array.from(liste); // reconstruit un tableau propre
+            console.log("Vrai tableau :", vraiTableau);
+            console.log("Longueur réelle :", vraiTableau.length);
+            const index = Math.floor(Math.random() * vraiTableau.length);
             //console.log("index =", index);
-            const video = liste[index];
+            const video = vraiTableau[index];
+            console.log("Vidéo choisie :", video);
             //console.log("video =", video);
             /*
             console.log("Object.keys(titres_restants['0_0'] =", Object.keys(titres_restants['0_0']));
