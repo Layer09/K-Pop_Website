@@ -391,15 +391,16 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            console.log("include =", include);
+            //console.log("include =", include);
         
             // Ajouter une validation avant d'accéder à titres_restants[include]
             if (include === null || !titres_restants[include]) {
                 console.error("Aucune vidéo disponible pour la note incluse");
                 return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
             }
-        
-            let available = titres_restants[include].filter(v => v !== exclude);
+            const cles = Object.keys(titres_restants[include]);
+            console.log("cles =", cles);
+            let available = clesNonVides[Math.floor(Math.random() * clesNonVides.length)].filter(v => v !== exclude);
             console.log("available", available);
         
             // Si il y a des vidéos disponibles, on en retourne une au hasard
