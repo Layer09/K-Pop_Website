@@ -391,7 +391,52 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            includeS = String(include);
+            let includeS = null;
+            if (include === 0) {
+                includeS = "0_0";
+            } else if (include === 5) {
+                includeS = "0_5";
+            } else if (include === 10) {
+                includeS = "1_0";
+            } else if (include === 15) {
+                includeS = "1_5";
+            } else if (include === 20) {
+                includeS = "2_0";
+            } else if (include === 25) {
+                includeS = "2_5";
+            } else if (include === 30) {
+                includeS = "3_0";
+            } else if (include === 35) {
+                includeS = "3_5";
+            } else if (include === 40) {
+                includeS = "4_0";
+            } else if (include === 45) {
+                includeS = "4_5";
+            } else if (include === 50) {
+                includeS = "5_0";
+            } else if (include === 55) {
+                includeS = "5_5";
+            } else if (include === 60) {
+                includeS = "6_0";
+            } else if (include === 65) {
+                includeS = "6_5";
+            } else if (include === 70) {
+                includeS = "7_0";
+            } else if (include === 75) {
+                includeS = "7_5";
+            } else if (include === 80) {
+                includeS = "8_0";
+            } else if (include === 85) {
+                includeS = "8_5";
+            } else if (include === 90) {
+                includeS = "9_0";
+            } else if (include === 95) {
+                includeS = "9_5";
+            } else if (include === 100) {
+                includeS = "10_0";
+            } else {
+                console.warn("Valeur de include inattendue :", include);
+            }
             console.log("includeS =", includeS);
             console.log(Object.keys(titres_restants[includeS]));
             // Ajouter une validation avant d'accéder à titres_restants[include]
