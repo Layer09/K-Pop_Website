@@ -373,7 +373,7 @@
         if (include != null) {
             return include;
         } else {
-            console.log("titres_restants =", titres_restants);
+            //console.log("titres_restants =", titres_restants);
             let catego = null;
             const cles = Object.keys(titres_restants);
             //console.log("cles =", cles);
@@ -383,11 +383,9 @@
             if (clesNonVides.length > 0) {
               // Choisir une clé aléatoire parmi celles non vides
               const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];+
-              console.log("catego =", catego);
+              //console.log("catego =", catego);
             }
-            const randomKey = catego[Math.floor(Math.random() * catego.length)];
-            //console.log("randomKey =", randomKey);
-            return randomKey;
+            return catego;
         }
     }
     
