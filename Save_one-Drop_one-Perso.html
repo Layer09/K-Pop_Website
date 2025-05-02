@@ -378,9 +378,9 @@
             const cles = Object.keys(titres_restants);
             const clesNonVides = cles.filter(cle => titres_restants[cle].length > 0);
             // Vérifier s'il y a au moins une liste non vide
-            if (clesNonVides.length > 0) {
+            if (titres_restants[clesNonVides].length > 0) {
               // Choisir une clé aléatoire parmi celles non vides
-              const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];+
+              const catego = titres_restants[clesNonVides[Math.floor(Math.random() * clesNonVides.length)]];+
               console.log("catego =", catego);
             }
             const randomKey = catego[Math.floor(Math.random() * catego.length)];
