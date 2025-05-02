@@ -376,11 +376,11 @@
             console.log("titres_restants =", titres_restants);
             let catego = null;
             const cles = Object.keys(titres_restants);
-            console.log("cles =", cles);
+            //console.log("cles =", cles);
             const clesNonVides = cles.filter(cle => cles.length > 0);
-            console.log("clesNonVides =", clesNonVides);
+            //console.log("clesNonVides =", clesNonVides);
             // Vérifier s'il y a au moins une liste non vide
-            if (titres_restants[clesNonVides].length > 0) {
+            if (clesNonVides.length > 0) {
               // Choisir une clé aléatoire parmi celles non vides
               const catego = titres_restants[clesNonVides[Math.floor(Math.random() * titres_restants[clesNonVides].length)]];+
               console.log("catego =", catego);
