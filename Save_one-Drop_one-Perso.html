@@ -356,7 +356,7 @@
                             const note = rawNote * 10;
                             if (titres_restants.hasOwnProperty(note) && videoPath) {
                                 titres_restants[note].push(videoPath);
-                                console.log("titres_restants[note] =", titres_restants[note]);
+                                //console.log("titres_restants[note] =", titres_restants[note]);
                             }
                         }
                         //console.log("titres_restants =", titres_restants);
@@ -400,7 +400,7 @@
                 //console.log("titres_restants[include] existe-t-il ?", titres_restants.hasOwnProperty(include));
                 //console.log("Contenu brut de titres_restants[include]:", titres_restants[include]);
                 //const liste = Object.keys(titres_restants[include]);
-                const liste = titres_restants[1];
+                const liste = titres_restants[include];
                 //console.log("Type exact :", typeof liste);
                 console.log("liste.length :", liste.length);
                 //console.log("Object.keys :", Object.keys(liste));
@@ -438,6 +438,7 @@
                 function startChallenge() {
                     if (debut === 1) {
                         [debut, titres_restants] = initialisation();
+                        console.log("titres_restants =", titres_restants);
                     }
                     // Supprimer les anciennes vidéos avant de commencer une nouvelle
                     cleanupVideos();
