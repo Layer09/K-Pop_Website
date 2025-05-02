@@ -391,7 +391,7 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            includeS = string(include);
+            includeS = String(include);
             console.log("includeS =", includeS);
             console.log(Object.keys(titres_restants[includeS]));
             // Ajouter une validation avant d'accéder à titres_restants[include]
