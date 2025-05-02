@@ -371,7 +371,7 @@
         
         function getStandNote(include = null) {
             if (include != null) {
-                return include;
+                return String(include);
             } else {
                 //console.log("titres_restants =", titres_restants);
                 let catego = null;
@@ -384,7 +384,7 @@
                   // Choisir une clé aléatoire parmi celles non vides
                   const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];
                   //console.log("catego =", catego);
-                  return catego;
+                  return String(catego);
                 }
           }
         }
