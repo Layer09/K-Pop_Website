@@ -374,10 +374,16 @@
             return include;
         } else {
             console.log("titres_restants =", titres_restants);
-            const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
-            console.log("keys =", keys);
-            const randomKey = keys[Math.floor(Math.random() * keys.length)];
-            console.log("randomKey =", randomKey);
+            let catego = null;
+            const cles = Object.keys(titres_restants);
+            const clesNonVides = cles.filter(cle => titres_restants[cle].length > 0);
+            // Vérifier s'il y a au moins une liste non vide
+            if (clesNonVides.length > 0) {
+              // Choisir une clé aléatoire parmi celles non vides
+              const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];+
+              console.log("catego =", catego);
+            const randomKey = catego[Math.floor(Math.random() * catego.length)];
+            //console.log("randomKey =", randomKey);
             return randomKey;
         }
     }
