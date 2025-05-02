@@ -362,7 +362,6 @@
                     //console.log("titres_restants[note] =", titres_restants[note]);
                     }
                 })
-                console.log("titres_restants =", titres_restants);
             }
 
     let firstVideo = '';
@@ -374,6 +373,7 @@
         if (include != null) {
             return include;
         } else {
+            console.log("titres_restants =", titres_restants);
             const keys = Object.keys(titres_restants).filter(k => titres_restants[k].length > 0);
             console.log("keys =", keys);
             const randomKey = keys[Math.floor(Math.random() * keys.length)];
