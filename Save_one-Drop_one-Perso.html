@@ -391,56 +391,10 @@
         
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
-            let includeS = null;
-            if (include === 0 || '0_5') {
-                includeS = "0_0";
-            } else if (include === 5 || '0_5') {
-                includeS = "0_5";
-            } else if (include === 10 || '1_0') {
-                includeS = "1_0";
-            } else if (include === 15 || '1_5') {
-                includeS = "1_5";
-            } else if (include === 20 || '2_0') {
-                includeS = "2_0";
-            } else if (include === 25 || '2_5') {
-                includeS = "2_5";
-            } else if (include === 30 || '3_0') {
-                includeS = "3_0";
-            } else if (include === 35 || '3_5') {
-                includeS = "3_5";
-            } else if (include === 40 || '4_0') {
-                includeS = "4_0";
-            } else if (include === 45 || '4_5') {
-                includeS = "4_5";
-            } else if (include === 50 || '5_0') {
-                includeS = "5_0";
-            } else if (include === 55 || '5_5') {
-                includeS = "5_5";
-            } else if (include === 60 || '6_0') {
-                includeS = "6_0";
-            } else if (include === 65 || '6_5') {
-                includeS = "6_5";
-            } else if (include === 70 || '7_0') {
-                includeS = "7_0";
-            } else if (include === 75 || '7_5') {
-                includeS = "7_5";
-            } else if (include === 80 || '8_0') {
-                includeS = "8_0";
-            } else if (include === 85 || '8_5') {
-                includeS = "8_5";
-            } else if (include === 90 || '9_0') {
-                includeS = "9_0";
-            } else if (include === 95 || '9_5') {
-                includeS = "9_5";
-            } else if (include === 100 || '10_0') {
-                includeS = "10_0";
-            } else {
-                console.warn("Valeur de include inattendue :", include);
-            }
-            console.log("includeS =", includeS);
-            console.log(Object.keys(titres_restants[includeS]));
+            console.log("include =", include);
+            console.log(Object.keys(titres_restants[include[]]));
             // Ajouter une validation avant d'accéder à titres_restants[include]
-            if (includeS === null || !titres_restants[includeS]) {
+            if (include === null || !titres_restants[include]) {
                 console.error("Aucune vidéo disponible pour la note incluse");
                 return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
             }
