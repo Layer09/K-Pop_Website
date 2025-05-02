@@ -399,7 +399,9 @@
             const liste = titres_restants[include];
             console.log("liste =", liste);
             const vraiTableau = Array.from(liste);
+            console.log("vraiTableau =", vraiTableau);
             const index = Math.floor(Math.random() * vraiTableau.length);
+            console.log("index =", index);
             const video = vraiTableau[index];
             //console.log("Liste length :", liste ? liste.length : "liste est undefined ou null");
             //console.log("Liste[0] existe ?", liste && liste[0]);
@@ -409,7 +411,7 @@
             //console.log("Liste entries :", Object.entries(liste)); // vide ?
             //console.log("Vrai tableau :", vraiTableau);
             //console.log("Longueur réelle :", vraiTableau.length);
-            //console.log("Vidéo choisie :", video);
+            console.log("Vidéo choisie :", video);
             /*
             console.log("Object.keys(titres_restants['0_0'] =", Object.keys(titres_restants['0_0']));
             // Ajouter une validation avant d'accéder à titres_restants[include]
