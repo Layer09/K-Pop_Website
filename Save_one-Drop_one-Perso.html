@@ -391,7 +391,14 @@
         function getRandomVideo(include = null, exclude = null) {
             include = getStandNote(include);  // Assurer que include a une valeur valide
             console.log("include =", include);
-            console.log("titres_restants['0_0'] =", titres_restants['0_0']);
+            const liste = titres_restants[include];
+            console.log("liste =", liste);
+            //console.log("titres_restants['0_0'] =", titres_restants['0_0']);
+            const index = Math.floor(Math.random() * liste.length);
+            console.log("index =", index);
+            const video = liste[index];
+            console.log("video =", video);
+            /*
             console.log("Object.keys(titres_restants['0_0'] =", Object.keys(titres_restants['0_0']));
             // Ajouter une validation avant d'accéder à titres_restants[include]
             if (include === null || !titres_restants[include]) {
@@ -411,6 +418,9 @@
                 return [include, null];
             }
         }
+        */
+            return [include, video];
+            
             function startChallenge() {
                 // Supprimer les anciennes vidéos avant de commencer une nouvelle
                 cleanupVideos();
