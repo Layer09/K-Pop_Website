@@ -369,6 +369,7 @@
                      //console.error("titres_restants[2] :", titres_restants[2]);
                      //console.error("titres_restants[5] :", titres_restants[5]);
                      //console.error("titres_restants['5'] :", titres_restants['5']);
+                     localStorage.setItem('liste5', JSON.stringify(titres_restants[5]));
                      return [0, titres_restants, titres_restants[0], titres_restants[5], titres_restants[10], titres_restants[15], titres_restants[20], titres_restants[25], titres_restants[30], titres_restants[35], titres_restants[40], titres_restants[45], titres_restants[50], titres_restants[55], titres_restants[60], titres_restants[65], titres_restants[70], titres_restants[75], titres_restants[80], titres_restants[85], titres_restants[90], titres_restants[95], titres_restants[100]];
              }
      
@@ -399,20 +400,21 @@
                      include = getStandNote(titres_restants, include);  // Assurer que include a une valeur valide
                      include = 5;
                      let liste = [];
+                     let listeLocale = JSON.parse(localStorage.getItem('liste5'));
                      console.log("Include :", include);
                      if (include == 0) {
                          console.log("liste0.length =", liste0.length);
                          liste = liste10;
                          console.log("liste0 =", liste0);
                      } else if (include == 5) {
-                         console.log("liste5.length =", liste5.length);
+                         console.log("listeLocale =", listeLocale);
+                         console.log("listeLocale.length =", listeLocale.length);
                          //liste = liste5;
                          //let liste = [...liste5];
                          //let liste = liste5.slice();
                          //let liste = Array.from(liste5);
                          //let liste = JSON.parse(JSON.stringify(liste5));
-                         let liste = liste5.map(obj => ({...obj}));
-                         console.log("liste5 =", liste5);
+                         let liste = listeLocale.map(obj => ({...obj}));
                      } else if (include == 10) {
                          console.log("liste10.length =", liste10.length);
                          liste = liste10;
