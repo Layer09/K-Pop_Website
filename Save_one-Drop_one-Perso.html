@@ -395,6 +395,7 @@
             
             function getRandomVideo(titres_restants, include = null, exclude = null) {
                 include = getStandNote(titres_restants, include);  // Assurer que include a une valeur valide
+                let liste = [];
                 //console.log("Include :", include);
                 if (include === 0) {
                     liste = liste0;
