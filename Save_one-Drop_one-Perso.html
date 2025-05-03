@@ -398,6 +398,7 @@
             
             function getRandomVideo(titres_restants, liste0, liste5, liste10, liste15, liste20, liste25, liste30, liste35, liste40, liste45, liste50, liste55, liste60, liste65, liste70, liste75, liste85, liste90, liste95, liste100, include = null, exclude = null) {
                 include = getStandNote(titres_restants, include);  // Assurer que include a une valeur valide
+                include = 5;
                 let liste = [];
                 console.log("Include :", include);
                 if (include == 0) {
@@ -405,6 +406,9 @@
                     liste = liste0;
                     console.log("liste0 =", liste0);
                 } else if (include == 5) {
+                    console.log(liste5[0])
+                    console.log(liste5[1])
+                    console.log(liste5[2])
                     console.log("liste5.length =", liste5.length);
                     liste = liste5;
                     console.log("liste5 =", liste5);
