@@ -55,12 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (titres_restants.hasOwnProperty(note) && videoPath) {
                         titres_restants[note].push(videoPath);
                     }
+                    return titres_restants;
                 }
             } catch (error) {
                 console.error("Erreur lors du traitement du CSV :", error);
             }
-        }
-        chargerCSV(csvPath);
+        } 
+        titres_restants = chargerCSV(csvPath);
         console.log("titres_restants :", titres_restants);
         console.log("titres_restants.length :", titres_restants.length);
     } else {
