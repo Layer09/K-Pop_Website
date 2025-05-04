@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         console.log("titres_restants :", titres_restants);
+        console.log("titres_restants.length :", titres_restants.length);
         chargerCSV(csvPath);
     } else {
         alert('Connecte-toi d\'abord !');
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
     function getRandomVideo(exclude = null) {
         // Si titresRestants est vide, réinitialiser à partir de videoSources
-        if (titresRestants.length === 0) {
+        if (titres_restants.length === 0) {
             alert('Bravo ! Tu as fait un tour des musiques !');
             titresRestants = [...videoSources];
         }
