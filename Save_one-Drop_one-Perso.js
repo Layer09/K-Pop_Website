@@ -32,24 +32,33 @@ document.addEventListener("DOMContentLoaded", () => {
              usernameDisplay.textContent = username;
          }
          let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
-         const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
-         const lines = csvText.split("\n").filter(line => line.trim() !== "");
-         const headers = lines[0].split(",");
-         const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
-         const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
-
-         for (let i = 1; i < lines.length; i++) {
-             const values = lines[i].split(",");
-             let rawId = values[idIndex].trim();
-             let id = rawId.padStart(3, "0");
-             const videoPath = videoSources.find(path => path.includes(id));
-             const rawNote = values[noteIndex].trim();
-             const note = rawNote * 10;
-             if (titres_restants.hasOwnProperty(note) && videoPath) {
-                 titres_restants[note].push(videoPath);
+         try {
+             const response = await fetch(csvPath);
+             if (!response.ok) {
+                throw new Error("Impossible de charger le fichier CSV.");
              }
-             console.error("titres_restants :", titres_restants);
-         }
+             const csvText = await response.text();
+             const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
+             const lines = csvText.split("\n").filter(line => line.trim() !== "");
+             const headers = lines[0].split(",");
+             const idIndex = headers.findIndex(h => h.trim().toLowerCase() === "id");
+             const noteIndex = headers.findIndex(h => h.trim().toLowerCase() === "note");
+    
+             for (let i = 1; i < lines.length; i++) {
+                 const values = lines[i].split(",");
+                 let rawId = values[idIndex].trim();
+                 let id = rawId.padStart(3, "0");
+                 const videoPath = videoSources.find(path => path.includes(id));
+                 const rawNote = values[noteIndex].trim();
+                 const note = rawNote * 10;
+                 if (titres_restants.hasOwnProperty(note) && videoPath) {
+                     titres_restants[note].push(videoPath);
+                 }
+                 console.error("titres_restants :", titres_restants);
+             }
+         } catch (error) {
+        console.error("Erreur lors du traitement du CSV :", error);
+    }
     } else {
         alert('Connecte-toi d\'abord !');
         window.location.href = "Login.html";
