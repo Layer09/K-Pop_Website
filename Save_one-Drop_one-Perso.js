@@ -33,11 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
          }
          let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
          try {
-             const response = await fetch(csvPath);
-             if (!response.ok) {
-                throw new Error("Impossible de charger le fichier CSV.");
-             }
-             const csvText = await response.text();
+             const response = fetch(csvPath);
+             const csvText = response.text();
              const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
              const lines = csvText.split("\n").filter(line => line.trim() !== "");
              const headers = lines[0].split(",");
