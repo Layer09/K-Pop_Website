@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
              return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
          }
          const cles = Object.keys(titres_restants[include]);
-         //console.log("cles =", cles);
+         console.log("cles =", cles);
          let available = cles[Math.floor(Math.random() * cles.length)].filter(v => v !== exclude);
          //console.log("available", available);
 
