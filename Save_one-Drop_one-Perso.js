@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function getStandNote(include = null) {
              if (include != null) {
-                 return String(include);
+                 return include;
              } else {
                  //console.log("titres_restants =", titres_restants);
                  let catego = null;
@@ -110,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
              console.error("Aucune vidéo disponible pour la note incluse");
              return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
          }
+         console.log("titres_restants :", titres_restants);
+         console.log("include :", include);
          const cles = Object.keys(titres_restants[include]);
          console.log("cles =", cles);
          let available = cles[Math.floor(Math.random() * cles.length)].filter(v => v !== exclude);
