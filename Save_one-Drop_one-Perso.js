@@ -125,29 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
              return [include, null];
          }
      }
-        
-    function getRandomVideo(exclude = null) {
-        // Si titres_restants est vide, réinitialiser à partir de videoSources
-        if (titres_restants.length === 0) {
-            alert('Bravo ! Tu as fait un tour des musiques !');
-            titres_restants = [...videoSources];
-        }
-        let available = titres_restants.filter(v => v !== exclude);
-        const randomIndex = Math.floor(Math.random() * available.length);
-        const video = available[randomIndex];
-
-        // Retirer la vidéo sélectionnée de titres_restants
-        titres_restants = titres_restants.filter(v => v !== video);
-
-        return video;
-    }
 
     function startChallenge() {
         // Supprimer les anciennes vidéos avant de commencer une nouvelle
         cleanupVideos();
 
         // Créer et ajouter le conteneur pour la première vidéo
-        firstVideo = getRandomVideo();
+        [include, firstVideo] = getRandomVideo();
         const singleContainer = document.createElement('div');
         singleContainer.id = 'single-video';
         singleContainer.classList.add('single-video');
@@ -165,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             singleContainer.remove();  // Retirer le conteneur et la vidéo
 
             // Créer et ajouter le conteneur pour la deuxième vidéo
-            secondVideo = getRandomVideo(firstVideo);
+            [includeBonus, secondVideo] = getRandomVideo(include, firstVideo);
             const secondContainer = document.createElement('div');
             secondContainer.id = 'second-video';
             secondContainer.classList.add('single-video');
