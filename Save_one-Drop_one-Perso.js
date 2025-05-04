@@ -196,7 +196,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.onload = startChallenge;
 });
-    } else {
-        document.querySelector(`.tab:nth-child(${version + 1})`).style.backgroundColor = "#333333";
-    }
-}
