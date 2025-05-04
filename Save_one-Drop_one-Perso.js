@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  titres_restants[note].push(videoPath);
              }
              console.error("titres_restants :", titres_restants);
+         }
     } else {
         alert('Connecte-toi d\'abord !');
         window.location.href = "Login.html";
