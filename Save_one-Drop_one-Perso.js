@@ -84,10 +84,47 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Connecte-toi d'abord !");
         window.location.href = "Login.html";
     }
-    function test(){
-        console.log("titres_restants :", titres_restants);
-        console.log("titres_restants.length :", Object.keys(titres_restants).length);
-    }
+    function getStandNote(include = null) {
+             if (include != null) {
+                 return String(include);
+             } else {
+                 //console.log("titres_restants =", titres_restants);
+                 let catego = null;
+                 const cles = Object.keys(titres_restants);
+                 //console.log("cles =", cles);
+                 const clesNonVides = cles.filter(cle => cles.length > 0);
+                 //console.log("clesNonVides =", clesNonVides);
+                 // Vérifier s'il y a au moins une liste non vide
+                 if (clesNonVides.length > 0) {
+                   // Choisir une clé aléatoire parmi celles non vides
+                   const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];
+                   return catego;
+                 }
+           }
+     }
+ 
+     function getRandomVideo(include = null, exclude = null) {
+         include = getStandNote(include);  // Assurer que include a une valeur valide
+         // Ajouter une validation avant d'accéder à titres_restants[include]
+         if (include === null || !titres_restants[include]) {
+             console.error("Aucune vidéo disponible pour la note incluse");
+             return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
+         }
+         const cles = Object.keys(titres_restants[include]);
+         //console.log("cles =", cles);
+         let available = cles[Math.floor(Math.random() * cles.length)].filter(v => v !== exclude);
+         //console.log("available", available);
+
+         // Si il y a des vidéos disponibles, on en retourne une au hasard
+         if (available.length > 0) {
+             video = available[Math.floor(Math.random() * available.length)];
+             console.log("video :", video);
+             return [include, video];
+         } else {
+             console.error("Aucune vidéo disponible après filtrage");
+             return [include, null];
+         }
+     }
         
     function getRandomVideo(exclude = null) {
         // Si titres_restants est vide, réinitialiser à partir de videoSources
@@ -95,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Bravo ! Tu as fait un tour des musiques !');
             titres_restants = [...videoSources];
         }
-        test()
         let available = titres_restants.filter(v => v !== exclude);
         const randomIndex = Math.floor(Math.random() * available.length);
         const video = available[randomIndex];
