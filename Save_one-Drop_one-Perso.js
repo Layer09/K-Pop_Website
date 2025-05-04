@@ -58,11 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const videoPath = videoSources.find(path => path.includes(id));
                     const rawNote = values[noteIndex].trim();
                     const note = rawNote * 10;
-    
                     if (!titres_restants.hasOwnProperty(note)) {
                         titres_restants[note] = [];
                     }
-    
                     if (videoPath) {
                         titres_restants[note].push(videoPath);
                     }
@@ -78,13 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Appel asynchrone
         (async () => {
             const titres_restants = await chargerCSV(csvPath);
-            console.log("titres_restants :", titres_restants);
-            console.log("titres_restants.length :", Object.keys(titres_restants).length);
+            //console.log("titres_restants :", titres_restants);
+            //console.log("titres_restants.length :", Object.keys(titres_restants).length);
         })();
     
     } else {
         alert("Connecte-toi d'abord !");
         window.location.href = "Login.html";
+    }
+    function test(){
+        console.log("titres_restants :", titres_restants);
+        console.log("titres_restants.length :", Object.keys(titres_restants).length);
     }
         
     function getRandomVideo(exclude = null) {
@@ -93,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Bravo ! Tu as fait un tour des musiques !');
             titres_restants = [...videoSources];
         }
-
+        test()
         let available = titres_restants.filter(v => v !== exclude);
         const randomIndex = Math.floor(Math.random() * available.length);
         const video = available[randomIndex];
