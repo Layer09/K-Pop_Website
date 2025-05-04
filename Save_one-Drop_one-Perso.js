@@ -60,27 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Erreur lors du traitement du CSV :", error);
             }
         }
+        chargerCSV(csvPath);
         console.log("titres_restants :", titres_restants);
         console.log("titres_restants.length :", titres_restants.length);
-        chargerCSV(csvPath);
     } else {
         alert('Connecte-toi d\'abord !');
         window.location.href = "Login.html";
     }
         
     function getRandomVideo(exclude = null) {
-        // Si titresRestants est vide, réinitialiser à partir de videoSources
+        // Si titres_restants est vide, réinitialiser à partir de videoSources
         if (titres_restants.length === 0) {
             alert('Bravo ! Tu as fait un tour des musiques !');
-            titresRestants = [...videoSources];
+            titres_restants = [...videoSources];
         }
 
-        let available = titresRestants.filter(v => v !== exclude);
+        let available = titres_restants.filter(v => v !== exclude);
         const randomIndex = Math.floor(Math.random() * available.length);
         const video = available[randomIndex];
 
-        // Retirer la vidéo sélectionnée de titresRestants
-        titresRestants = titresRestants.filter(v => v !== video);
+        // Retirer la vidéo sélectionnée de titres_restants
+        titres_restants = titres_restants.filter(v => v !== video);
 
         return video;
     }
