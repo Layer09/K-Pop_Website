@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
              console.log("liste :", liste);
              const cles = Object.keys(liste);
              console.log("cles :", cles);
-             let available = cles[Math.floor(Math.random() * cles.length)].filter(v => v !== exclude);
+             let available = cles[Math.floor(Math.random() * cles.length)]//.filter(v => v !== exclude);
              //console.log("available", available);
     
              // Si il y a des vidéos disponibles, on en retourne une au hasard
@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
          }
     
         function startChallenge(titres_restants) {
+            if (titres_restants === []) {
+                const titres_restants = await chargerCSV(csvPath);
+            }
             // Supprimer les anciennes vidéos avant de commencer une nouvelle
             cleanupVideos();
     
