@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
            }
      }
  
-     function getRandomVideo(include = null, exclude = null) {
+     function getRandomVideo(titres_restants, include = null, exclude = null) {
          include = getStandNote(include);  // Assurer que include a une valeur valide
          // Ajouter une validation avant d'accéder à titres_restants[include]
          if (include === null || !titres_restants[include]) {
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cleanupVideos();
 
         // Créer et ajouter le conteneur pour la première vidéo
-        [include, firstVideo] = getRandomVideo();
+        [include, firstVideo] = getRandomVideo(titres_restants);
         const singleContainer = document.createElement('div');
         singleContainer.id = 'single-video';
         singleContainer.classList.add('single-video');
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
             singleContainer.remove();  // Retirer le conteneur et la vidéo
 
             // Créer et ajouter le conteneur pour la deuxième vidéo
-            [includeBonus, secondVideo] = getRandomVideo(include, firstVideo);
+            [includeBonus, secondVideo] = getRandomVideo(titres_restants, include, firstVideo);
             const secondContainer = document.createElement('div');
             secondContainer.id = 'second-video';
             secondContainer.classList.add('single-video');
