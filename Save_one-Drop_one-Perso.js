@@ -125,8 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
         function startChallenge(titres_restants) {
             if (titres_restants === []) {
+            (async () => {
                 const titres_restants = await chargerCSV(csvPath);
+                //console.log("titres_restants :", titres_restants);
+                //console.log("titres_restants.length :", Object.keys(titres_restants).length);
+            })();
             }
+            
             // Supprimer les anciennes vidéos avant de commencer une nouvelle
             cleanupVideos();
     
