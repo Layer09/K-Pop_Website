@@ -112,8 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
          }
          console.log("titres_restants :", titres_restants);
          console.log("include :", include);
-         const cles = Object.keys(titres_restants[include]);
-         console.log("cles =", cles);
+         const liste = titres_restants[include];
+         console.log("liste :", liste);
+         const cles = Object.keys(liste);
+         console.log("cles :", cles);
          let available = cles[Math.floor(Math.random() * cles.length)].filter(v => v !== exclude);
          //console.log("available", available);
 
