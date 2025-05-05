@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
          }
      }
 
-    function startChallenge() {
+    function startChallenge(titres_restants) {
         // Supprimer les anciennes vidéos avant de commencer une nouvelle
         cleanupVideos();
 
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cleanupVideos();
 
         // Démarrer un nouveau challenge (vider les éléments et recharger)
-        startChallenge();
+        startChallenge(titres_restants);
     }
 
     let hoverTimeoutA;
@@ -249,5 +249,5 @@ document.addEventListener("DOMContentLoaded", () => {
         choiceB.muted = true;
     });
 
-    window.onload = startChallenge;
+    window.onload = startChallenge(titres_restants);
 });
