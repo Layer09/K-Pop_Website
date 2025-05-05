@@ -106,10 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
      function getRandomVideo(titres_restants, include = null, exclude = null) {
          include = getStandNote(include);  // Assurer que include a une valeur valide
          // Ajouter une validation avant d'accéder à titres_restants[include]
-         if (include === null || !titres_restants[include]) {
-             console.error("Aucune vidéo disponible pour la note incluse");
-             return [null, null];  // Retourne null si il n'y a pas de vidéo disponible
-         }
          console.log("titres_restants :", titres_restants);
          console.log("include :", include);
          const liste = titres_restants[include];
@@ -135,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cleanupVideos();
 
         // Créer et ajouter le conteneur pour la première vidéo
+        console.log("titres_restants =", titres_restants);
         [include, firstVideo] = getRandomVideo(titres_restants);
         const singleContainer = document.createElement('div');
         singleContainer.id = 'single-video';
