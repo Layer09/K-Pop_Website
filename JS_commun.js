@@ -66,8 +66,13 @@
             usernameDisplay.textContent = formattedName;
     
             // Affiche le bloc utilisateur et cache "Me connecter"
-            loginLink.classList.add("hidden");
-            userInfo.classList.remove("hidden");
+            if (userIsLoggedIn) {
+                document.querySelector('.guest').classList.add('hidden');
+                document.querySelector('.logged').classList.remove('hidden');
+            } else {
+                document.querySelector('.guest').classList.remove('hidden');
+                document.querySelector('.logged').classList.add('hidden');
+            }
     
             // Affiche ou masque le menu au clic sur la zone utilisateur
             userInfo.addEventListener("click", (event) => {
