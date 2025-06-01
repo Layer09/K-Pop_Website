@@ -398,7 +398,7 @@
             document.body.appendChild(singleContainer);
     
             let videoA = document.getElementById('videoA');
-            videoA.src = firstVideo;
+            videoA.src = './videos/' + firstVideo;
             /* videoA.volume = 0.1; */
             videoA.play();
     
@@ -416,7 +416,7 @@
                 document.body.appendChild(secondContainer);
     
                 let videoB = document.getElementById('videoB');
-                videoB.src = secondVideo;
+                videoB.src = './videos/' + secondVideo;
                 /* videoB.volume = 0.1; */
                 videoB.play();
     
