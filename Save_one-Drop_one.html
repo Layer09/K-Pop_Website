@@ -427,8 +427,8 @@
     
                     // Montrer les petites vidéos
                     document.getElementById('dual-videos').classList.remove('hidden');
-                    choiceA.src = firstVideo;
-                    choiceB.src = secondVideo;
+                    choiceA.src = './videos/' + firstVideo;
+                    choiceB.src = './videos/' + secondVideo;
                     choiceA.play();
                     choiceB.play();
                 };
