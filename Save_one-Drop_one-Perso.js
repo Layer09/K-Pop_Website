@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  } else {
                      //console.log("titres_restants =", titres_restants);
                      let catego = null;
-                     const cles = Object.keys(titres_restants);
+                     const cles = Object.keys(liste_liste);
                      //console.log("cles =", cles);
                      const clesNonVides = cles.filter(cle => cles.length > 0);
                      //console.log("clesNonVides =", clesNonVides);
@@ -146,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
             cleanupVideos();
     
             // Créer et ajouter le conteneur pour la première vidéo
-            console.log("titres_restants =", titres_restants);
+            //console.log("titres_restants =", titres_restants);
             liste = getRandomList(liste_liste);
-            [include, firstVideo] = getRandomVideo(titres_restants);
+            [include, firstVideo] = getRandomVideo(liste_liste);
             const singleContainer = document.createElement('div');
             singleContainer.id = 'single-video';
             singleContainer.classList.add('single-video');
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 singleContainer.remove();  // Retirer le conteneur et la vidéo
     
                 // Créer et ajouter le conteneur pour la deuxième vidéo
-                [includeBonus, secondVideo] = getRandomVideo(titres_restants, include, firstVideo);
+                [includeBonus, secondVideo] = getRandomVideo(liste_liste, include, firstVideo);
                 const secondContainer = document.createElement('div');
                 secondContainer.id = 'second-video';
                 secondContainer.classList.add('single-video');
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cleanupVideos();
     
             // Démarrer un nouveau challenge (vider les éléments et recharger)
-            startChallenge(titres_restants);
+            startChallenge(liste_liste);
         }
     
         let hoverTimeoutA;
