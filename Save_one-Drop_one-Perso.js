@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             usernameDisplay.textContent = username;
         }
         let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
-        const csvPath = './Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv';
+        const csvPath = `./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv`;
     
         async function chargerCSV(csvPath) {
             try {
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const singleContainer = document.createElement('div');
             singleContainer.id = 'single-video';
             singleContainer.classList.add('single-video');
-            singleContainer.innerHTML = <video width="720" height="405" id="videoA" controls></video>;
+            singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
             document.body.appendChild(singleContainer);
     
             let videoA = document.getElementById('videoA');
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const secondContainer = document.createElement('div');
                 secondContainer.id = 'second-video';
                 secondContainer.classList.add('single-video');
-                secondContainer.innerHTML = <video width="720" height="405" id="videoB" controls></video>;
+                secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
                 document.body.appendChild(secondContainer);
     
                 let videoB = document.getElementById('videoB');
