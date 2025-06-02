@@ -55,15 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const videoPath = videoList.find(path => path.includes(id));
                     const rawNote = values[noteIndex].trim();
                     const note = rawNote * 10;
-                    if (!titres_restants.hasOwnProperty(note)) {
-                        titres_restants[note] = [];
-                    }
+                    var nomListe = 'liste' + note;
                     if (videoPath) {
-                        titres_restants[note].push(videoPath);
+                        nomListe.push(videoPath);
                     }
                 }
-    
-                return titres_restants;
             } catch (error) {
                 console.error("Erreur lors du traitement du CSV :", error);
                 return {};
@@ -81,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Filtrer toutes les listes non vides
             var listesNonVides = liste_liste.filter(function(suffixe) {
                 var nomListe = 'liste' + suffixe;
-                console.log("nomListe :", nomListe);
+                //console.log("nomListe :", nomListe);
                 var liste = window[nomListe];
                 return Array.isArray(liste) && liste.length > 0;
             });
