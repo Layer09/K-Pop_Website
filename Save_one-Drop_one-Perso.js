@@ -82,7 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Tu as fait le tour des musiques ! Tu n'as pas trop soufert ?");
             }
             while (liste_liste != []) {
-                const catego = clesNonVides[Math.floor(Math.random() * clesNonVides.length)];
+                const cles = Object.keys(liste_liste);
+                const catego = cles[Math.floor(Math.random() * cles.length)];
                 console.log("catego :", catego);
                 liste = 'liste' + catego;
                 console.log("liste :", liste);
