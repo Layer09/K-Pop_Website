@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let username = localStorage.getItem("loggedInUser");
     let firstVideo = ''; 
     let secondVideo = '';
-    var liste_liste = ['0','5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100'];
+    //var liste_liste = ['0','5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100'];
     var liste0 = [];
     var liste5 = [];
     var liste10 = [];
@@ -77,20 +77,27 @@ document.addEventListener("DOMContentLoaded", () => {
             //console.log("titres_restants.length :", Object.keys(titres_restants).length);
         })();
         
-        function getRandomList(liste_liste) {
-            if (liste_liste == []) {
-                alert("Tu as fait le tour des musiques ! Tu n'as pas trop soufert ?");
+        function getRandomList() {
+            // Filtrer toutes les listes non vides
+            var listesNonVides = liste_liste.filter(function(suffixe) {
+                var nomListe = 'liste' + suffixe;
+                console.log("nomListe :", nomListe);
+                var liste = window[nomListe];
+                return Array.isArray(liste) && liste.length > 0;
+            });
+        
+            // Si aucune liste non vide, afficher un message et retourner null
+            if (listesNonVides.length === 0) {
+                alert("Tu as finis le challenge ! Tu n'as pas trop soufert ?");
+                return null;
             }
-            while (liste_liste != []) {
-                const cles = Object.keys(liste_liste);
-                const catego = cles[Math.floor(Math.random() * cles.length)];
-                console.log("catego :", catego);
-                liste = 'liste' + catego;
-                console.log("liste :", liste);
-                if (liste != []) {
-                    return liste
-                }
-            }
+        
+            // Choisir aléatoirement une liste non vide
+            var suffixe = listesNonVides[Math.floor(Math.random() * listesNonVides.length)];
+            var nomListe = 'liste' + suffixe;
+            var listeSelectionnee = window[nomListe];
+        
+            return [...listeSelectionnee]; // Retourner une copie
         }
         
         function getStandNote(include = null) {
