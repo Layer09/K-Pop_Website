@@ -29,9 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (usernameDisplay) {
             usernameDisplay.textContent = username;
         }
-    
         let usernameMAJ = username.charAt(0).toUpperCase() + username.slice(1);
-        const csvPath = ./Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv;
+        const csvPath = './Donnees_CSV/${usernameMAJ}/${usernameMAJ}_Stats_Titres.csv';
     
         async function chargerCSV(csvPath) {
             try {
