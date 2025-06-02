@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    //let username = localStorage.getItem("loggedInUser");
-    let username = "laurana";
+    let username = localStorage.getItem("loggedInUser");
     let firstVideo = ''; 
     let secondVideo = '';
     var liste_liste = ['0','5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100'];
