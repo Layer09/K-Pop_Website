@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
             choiceB.muted = true;
         });
     
-        window.onload = startChallenge(titres_restants);
+        window.onload = startChallenge(liste_liste);
         } else {
         alert("Connecte-toi d'abord !");
         window.location.href = "Login.html";
