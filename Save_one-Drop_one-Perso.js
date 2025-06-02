@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const note = rawNote * 10;
                     var nomListe = 'liste' + note;
                     if (videoPath) {
-                        nomListe.push(videoPath);
+                        window[nomListe].push(videoPath);
                     }
                 }
             } catch (error) {
