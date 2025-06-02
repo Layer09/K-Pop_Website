@@ -52,61 +52,39 @@
         
       //CONNEXION UTILISATEUR
         // Gestion de la connexion utilisateur
+        const loginContainer = document.getElementById("login-container");
         const loginLink = document.getElementById("login-link");
         const userInfo = document.getElementById("user-info");
         const usernameDisplay = document.getElementById("username-display");
         const dropdownMenu = document.getElementById("dropdown-menu");
-        const logoutButton = document.getElementById("logout");
+        const logoutBtn = document.getElementById("logout");
     
-        const loggedInUser = localStorage.getItem("loggedInUser");
-    
-        if (loggedInUser) {
-            // Utilisateur connecté
-            const formattedName = loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1);
-            usernameDisplay.textContent = formattedName;
-    
-            // Affiche le bloc utilisateur et cache "Me connecter"
-            if (userIsLoggedIn) {
-                document.querySelector('.guest').classList.add('hidden');
-                document.querySelector('.logged').classList.remove('hidden');
-            } else {
-                document.querySelector('.guest').classList.remove('hidden');
-                document.querySelector('.logged').classList.add('hidden');
-            }
-    
-            // Affiche ou masque le menu au clic sur la zone utilisateur
-            userInfo.addEventListener("click", (event) => {
-                event.stopPropagation();
-                dropdownMenu.classList.toggle("hidden");
-            });
-    
-            // Ferme le menu si on clique ailleurs
-            document.addEventListener("click", (event) => {
-                if (!userInfo.contains(event.target)) {
-                    dropdownMenu.classList.add("hidden");
-                }
-            });
-    
+        // Affiche l'état connecté ou non
+        const user = localStorage.getItem("user");
+        if (user) {
+            loginContainer.classList.add("hidden");
+            userInfo.classList.remove("hidden");
+            usernameDisplay.textContent = user;
         } else {
-            // Utilisateur non connecté
+            loginContainer.classList.remove("hidden");
             userInfo.classList.add("hidden");
-            loginLink.classList.remove("hidden");
-    
-            // Enregistre la page actuelle avant redirection
-            if (loginLink) {
-                loginLink.addEventListener("click", () => {
-                    const currentPath = window.location.pathname;
-                    const currentURL = window.location.href;
-                    localStorage.setItem("lastVisitedPage", currentPath !== "/Login.html" ? currentPath : currentURL);
-                });
-            }
         }
+    
+        // Redirection vers login avec paramètre de retour
+        loginLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            const currentPage = window.location.href;
+            window.location.href = `Login.html?redirect=${encodeURIComponent(currentPage)}`;
+        });
+    
+        // Menu déroulant utilisateur
+        userInfo.addEventListener("click", function () {
+            dropdownMenu.classList.toggle("show");
+        });
     
         // Déconnexion
-        if (logoutButton) {
-            logoutButton.addEventListener("click", () => {
-                localStorage.removeItem("loggedInUser");
-                window.location.reload();
-            });
-        }
+        logoutBtn.addEventListener("click", function () {
+            localStorage.removeItem("user");
+            window.location.reload();
+        });
     });
