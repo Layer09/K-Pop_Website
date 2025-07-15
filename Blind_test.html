@@ -102,6 +102,9 @@
         <video id="mainVideo" controls></video>
         <video id="chronoVideo" src="./images/Chrono.mp4"></video>
     </div>
+    <div style="color: white;">
+      Vidéos visionnées : <span id="videoCounter">0</span>
+    </div>
 
     <script src="./JS_commun.js"></script>
     <script src="./videos/liste_video.js"></script>
@@ -160,6 +163,7 @@
       mainVideo.addEventListener('ended', () => {
         compteur++; // Incrémentation du compteur
         console.log("Nombre de musique écoutées :", compteur); // Affichage console
+        counterDisplay.textContent = compteur; // Mise à jour de l'affichage
         loadNewVideo();
       });
     
