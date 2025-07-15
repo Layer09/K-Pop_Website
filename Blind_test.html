@@ -131,6 +131,9 @@
       }
     
       function loadNewVideo() {
+        compteur++; // Incrémentation du compteur
+        console.log("Nombre de musique écoutées :", compteur); // Affichage console
+        counterDisplay.textContent = compteur; // Mise à jour de l'affichage
         const newVideoSrc = pickRandomVideo();
     
         mainVideo.src = newVideoSrc;
@@ -161,9 +164,6 @@
       });
     
       mainVideo.addEventListener('ended', () => {
-        compteur++; // Incrémentation du compteur
-        console.log("Nombre de musique écoutées :", compteur); // Affichage console
-        counterDisplay.textContent = compteur; // Mise à jour de l'affichage
         loadNewVideo();
       });
     
