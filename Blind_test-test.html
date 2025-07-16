@@ -25,13 +25,14 @@
           pointer-events: none;
           z-index: 10;
         }
-      #compteur-container {
-          color: white;
-          font-size: 1.2em;
-          margin-top: 10px;
-          text-align: center;
-          font-weight: bold;
-      }
+        #compteur-container {
+            color: white;
+            font-size: 5em;
+            margin-top: 15px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+        }
     </style>
 </head>
 <body>
@@ -110,7 +111,7 @@
         <video id="chronoVideo" src="./images/Chrono.mp4"></video>
     </div>
     <div id="compteur-container">
-        Vidéo jouée : <span id="video-counter">0</span>
+        <span id="video-counter">0000</span>
     </div>
 
     <script src="./JS_commun.js"></script>
@@ -129,7 +130,7 @@
             alert('Bravo ! Tu as fait un tour des musiques !');
             titresRestants = [...videoList];
             compteur = 0;
-            videoCounter.textContent = compteur;
+            videoCounter.textContent = formatCompteur(compteur);
           }
       
           const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
@@ -148,33 +149,38 @@
           chronoVideo.load();
       
           compteur++;
-          videoCounter.textContent = compteur;
+          videoCounter.textContent = formatCompteur(compteur);
       
           applyGlobalVolume();
         }
-      
+        
+        function formatCompteur(num) {
+          return num.toString().padStart(4, '0');
+        }
+
+        // Jouer les vidéos dès qu’elles sont prêtes
         mainVideo.addEventListener('loadeddata', () => {
-          mainVideo.play();
+            mainVideo.play();
         });
-      
+        
         chronoVideo.addEventListener('loadeddata', () => {
-          chronoVideo.play();
+            chronoVideo.play();
         });
-      
+        
         mainVideo.addEventListener('play', () => {
-          if (chronoVideo.paused) chronoVideo.play();
+            if (chronoVideo.paused) chronoVideo.play();
         });
-      
+        
         mainVideo.addEventListener('pause', () => {
-          chronoVideo.pause();
+            chronoVideo.pause();
         });
-      
+        
         mainVideo.addEventListener('ended', () => {
-          loadNewVideo();
+            loadNewVideo();
         });
-      
+        
         chronoVideo.addEventListener('ended', () => {
-          chronoVideo.style.display = 'none';
+            chronoVideo.style.display = 'none';
         });
       
         loadNewVideo();
