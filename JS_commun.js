@@ -87,4 +87,23 @@
             localStorage.removeItem("user");
             window.location.reload();
         });
+
+        //NOUVEAU CODE
+        // Variable globale pour stocker le profil sélectionné
+        let selectedProfile = "";
+    
+        // Écoute du changement de profil
+        document.getElementById("profile-select").addEventListener("change", function () {
+            selectedProfile = this.value;
+            console.log("Profil sélectionné :", selectedProfile);
+            // Tu peux utiliser selectedProfile ailleurs dans ton app
+        });
+    
+        // Fonction de navigation
+        function navigateToPage(selectElement) {
+            const url = selectElement.value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
     });
