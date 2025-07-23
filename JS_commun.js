@@ -1,4 +1,17 @@
     document.addEventListener("DOMContentLoaded", () => {
+        //NAV DYNAMIQUE
+      const container = document.getElementById("nav-container");
+          if (container) {
+            fetch("nav.html")
+              .then(response => response.text())
+              .then(data => {
+                container.innerHTML = data;
+              })
+              .catch(error => {
+                console.error("Erreur lors du chargement du nav :", error);
+              });
+        }
+        
       // VOLUME
         // Gestion du volume global
         const globalVolumeInput = document.getElementById('globalVolume');
