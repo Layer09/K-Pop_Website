@@ -35,6 +35,10 @@ h1 {
     font-size: 4em;
 }
 
+#nav-container {
+    width: 100%;
+}
+
  /* Conteneur principal de l'utilisateur / connexion */
 #user-menu {
     position: absolute;
