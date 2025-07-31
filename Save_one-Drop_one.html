@@ -38,175 +38,175 @@
     </header>
     
     <style>
-        #youtube-section h3 {
-             color : white;
-             margin-bottom: 20px;
-             font-size: x-large;
-        }
+/* Navigation */
+#nav-container {
+    position: relative; /* Ou sticky/fixed selon ton besoin */
+    z-index: 10;
+}
 
-        #texte {
-            justify-content: center;  
-            align-items: center;
-            display: flex;
-        }
+/* Volume + texte */
+#youtube-section h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: x-large;
+}
 
-        #version-video {
-            justify-content: center;  
-            align-items: center;
-            display: flex;
-            height: 100%;
-            width: 100%;
-        }
+#texte {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 
-        #challenge-section {
-            height: 700px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+/* Conteneur principal des vidéos */
+#challenge-section {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    position: relative;
+    z-index: 1; /* En dessous du nav */
+    padding-top: 40px; /* Espace sous le nav */
+}
 
-        .single-video {
-            position: absolute;
-            top: 880px;
-            left: 55%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            width: 100%
-        }
-        
-        .single-video video {
-            width: 90%;
-            height: auto; /* Maintient le ratio 16:9 automatiquement */
-            max-width: 90vw; /* Pour éviter de dépasser l'écran en cas de petits écrans */
-            max-height: 90vh; /* Pour que la vidéo ne sorte pas verticalement */
-            border-radius: 8px;
-        }
+/* Vidéo simple (mode 1 ou 2) */
+.single-video {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
 
-        #dual-videos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-        }
-        
-        #dual-videos video {
-            width: 30%;
-            height: auto;
-            cursor: pointer;
-        }
+.single-video video {
+    width: 90%;
+    height: auto; /* Maintient le ratio 16:9 automatiquement */
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+}
 
+/* Mode 2 vidéos */
+#dual-videos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+    margin-top: 40px;
+}
 
-        #dual-videos.hidden {
-            display: none;
-        }
+#dual-videos video {
+    width: 30%;
+    height: auto;
+    cursor: pointer;
+}
 
+#dual-videos.hidden {
+    display: none;
+}
 
-        #video-container-YT {
-            height: 100%;
-            width: 100%;
-        }
+/* Conteneur YouTube */
+#video-container-YT {
+    height: 100%;
+    width: 100%;
+}
 
-        #version1 {
-            display: block;
-        }
-        
-        .version-content {
-            display: none; /* Par défaut caché */
-            margin-top: 20px;
-            width: 90%;
-            height: 90%;
-        }
+#version1 {
+    display: block;
+}
 
-        iframe {
-            height: 100%;
-            width: 100%;
-        }
-        
-        .version-content.active {
-            display: block; /* Affiche la version active */
-            width: 90%;
-        }
+/* Vidéos YouTube et contenu par onglet */
+.version-content {
+    display: none;
+    margin-top: 20px;
+    width: 90%;
+    height: 90%;
+}
 
-        /* Onglets */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-        
-        .tab {
-            background-color: #666;
-            color: white;
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        
-        .tab:hover {
-            background-color: #888;
-        }
-      
-        /* Séparateur bouton */
-        .tab-separateur {
-            background-color: #fff;
-            margin: 5px;
-            padding: 1px;
-            border-radius: 5px;
-            border-color: #fff;
-        }
+.version-content.active {
+    display: block;
+    width: 90%;
+}
 
-        /* Son par défaut des vidéos */
-        video::-webkit-media-controls-volume-slider {
-            display: none;
-        }
-        
-        video::-webkit-media-controls-mute-button {
-            display: none;
-        }
+iframe {
+    height: 100%;
+    width: 100%;
+}
 
-        /* Cast des petites vidéos */
-        video::-internal-media-controls-overlay-cast-button {
-            display: none;
-        }
-        
-        video::-webkit-media-controls-enclosure {
-            overflow: hidden;
-        }
-        
-      /* Responsive mobile */
-        @media (max-width: 1100px) {
-            .challenge-section {
-                height: auto;
-                padding: 20px 0;
-            }
+/* Onglets */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
 
-            .single-video video {
-                width: 95%;
-            }
+.tab {
+    background-color: #666;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
-            #dual-videos video {
-                width: 45%;
-            }
+.tab:hover {
+    background-color: #888;
+}
 
-            .youtube-section {
-                height: auto;
-                padding-bottom: 20px;
-            }
+.tab-separateur {
+    background-color: #fff;
+    margin: 5px;
+    padding: 1px;
+    border-radius: 5px;
+    border-color: #fff;
+}
 
-            .youtube-section iframe {
-                width: 95%;
-            }
-        }
+/* Masquer les contrôles superflus */
+video::-webkit-media-controls-volume-slider {
+    display: none;
+}
+
+video::-webkit-media-controls-mute-button {
+    display: none;
+}
+
+video::-internal-media-controls-overlay-cast-button {
+    display: none;
+}
+
+video::-webkit-media-controls-enclosure {
+    overflow: hidden;
+}
+
+/* Responsive mobile */
+@media (max-width: 1100px) {
+    #challenge-section {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .single-video video {
+        width: 95%;
+    }
+
+    #dual-videos video {
+        width: 45%;
+    }
+
+    .youtube-section {
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .youtube-section iframe {
+        width: 95%;
+    }
+}
+
     </style>
     <section>
     <div id="nav-container"></div>
