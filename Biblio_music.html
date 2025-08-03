@@ -153,21 +153,21 @@
        
            function displayVideos(data) {
                videoGrid.innerHTML = "";
-               data.forEach(video => {
-                   const filename = video.Nombre.padStart(3, '0') + '-' + video.Artiste.replace(/\s+/g, '_') + '-' + video.Titre.replace(/\s+/g, '_') + `-Ep${video.Episode}-` + video.Nombre.padStart(2, '0') + `.mp4`;
-       
+               data.forEach((video, i) => {
+                   const filename = videoList[i]; // 🔥 UTILISE LE NOM EXACT DE LA LISTE
+           
                    const card = document.createElement('div');
                    card.className = 'video-card';
-       
+           
                    const videoElement = document.createElement('video');
                    videoElement.src = videoFolder + filename;
                    videoElement.controls = false;
                    videoElement.muted = true;
                    videoElement.loop = true;
                    videoElement.autoplay = true;
-       
+           
                    videoElement.addEventListener('click', () => openModal(videoFolder + filename));
-       
+           
                    const info = document.createElement('div');
                    info.className = 'video-info';
                    Object.entries(video).forEach(([key, value]) => {
@@ -175,12 +175,13 @@
                        p.innerHTML = `<strong>${key}</strong> : ${value}`;
                        info.appendChild(p);
                    });
-       
+           
                    card.appendChild(videoElement);
                    card.appendChild(info);
                    videoGrid.appendChild(card);
                });
            }
+
        
            function filterVideos() {
                const filters = Array.from(filtersContainer.querySelectorAll('select'));
