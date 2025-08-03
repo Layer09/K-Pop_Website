@@ -220,6 +220,7 @@
                  const select = document.createElement('select');
                  select.id = `filter-${col}`;
                  select.multiple = true; // ✅ Sélection multiple
+                 select.size = 5;
      
                  const label = document.createElement('label');
                  label.textContent = col + " : ";
