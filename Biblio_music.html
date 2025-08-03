@@ -73,6 +73,32 @@
           color: white;
           cursor: pointer;
       }
+      
+      #pagination {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin: 20px 0;
+          flex-wrap: wrap;
+      }
+      
+      #pagination button {
+          padding: 6px 10px;
+          background-color: #eee;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      
+      #pagination button:disabled {
+          background-color: #ccc;
+          cursor: default;
+      }
+      
+      #pagination span {
+          padding: 6px 10px;
+          color: #777;
+      }
 
      </style>
  </head>
@@ -102,6 +128,10 @@
              <video id="modal-video" controls autoplay></video>
          </div>
      </div>
+  
+     <!-- Pagination (sera rempli dynamiquement) -->
+     <div id="pagination"></div>
+
 
      <script src="./Donnees_CSV/stats.js"></script>
      <script src="./JS_commun.js"></script>
@@ -109,112 +139,173 @@
 
      <script>
       document.addEventListener('DOMContentLoaded', () => {
-           const csvPath = './Donnees_CSV/Infos.csv';
-           const videoFolder = './videos/';
-           const videoGrid = document.getElementById('video-grid');
-           const filtersContainer = document.getElementById('filters');
-       
-           let allData = [];
-       
-           // Chargement CSV
-           Papa.parse(csvPath, {
-               download: true,
-               header: true,
-               complete: function(results) {
-                   allData = results.data;
-                   createFilters(allData);
-                   displayVideos(allData);
-               }
-           });
-       
-           function createFilters(data) {
-               const columns = Object.keys(data[0]);
-               columns.forEach(col => {
-                   const values = [...new Set(data.map(row => row[col]).filter(Boolean))].sort();
-                   const select = document.createElement('select');
-                   select.id = `filter-${col}`;
-                   const label = document.createElement('label');
-                   label.textContent = col + " : ";
-                   select.innerHTML = `<option value="">-- Tous --</option>`;
-                   values.forEach(val => {
-                       const option = document.createElement('option');
-                       option.value = val;
-                       option.textContent = val;
-                       select.appendChild(option);
-                   });
-                   select.addEventListener('change', () => filterVideos());
-                   const wrapper = document.createElement('div');
-                   wrapper.className = "filter";
-                   wrapper.appendChild(label);
-                   wrapper.appendChild(select);
-                   filtersContainer.appendChild(wrapper);
-               });
-           }
-       
-           function displayVideos(data) {
-               videoGrid.innerHTML = "";
-               data.forEach((video, i) => {
-                   const filename = videoList[i]; // 🔥 UTILISE LE NOM EXACT DE LA LISTE
-           
-                   const card = document.createElement('div');
-                   card.className = 'video-card';
-           
-                   const videoElement = document.createElement('video');
-                   videoElement.src = videoFolder + filename;
-                   videoElement.controls = false;
-                   videoElement.muted = true;
-                   videoElement.loop = true;
-                   videoElement.autoplay = true;
-           
-                   videoElement.addEventListener('click', () => openModal(videoFolder + filename));
-           
-                   const info = document.createElement('div');
-                   info.className = 'video-info';
-                   Object.entries(video).forEach(([key, value]) => {
-                       const p = document.createElement('p');
-                       p.innerHTML = `<strong>${key}</strong> : ${value}`;
-                       info.appendChild(p);
-                   });
-           
-                   card.appendChild(videoElement);
-                   card.appendChild(info);
-                   videoGrid.appendChild(card);
-               });
-           }
-
-       
-           function filterVideos() {
-               const filters = Array.from(filtersContainer.querySelectorAll('select'));
-               let filtered = allData;
-       
-               filters.forEach(select => {
-                   const col = select.id.replace('filter-', '');
-                   const val = select.value;
-                   if (val) {
-                       filtered = filtered.filter(row => row[col] === val);
-                   }
-               });
-       
-               displayVideos(filtered);
-           }
-       
-           // Modale
-           const modal = document.getElementById('video-modal');
-           const modalVideo = document.getElementById('modal-video');
-           const closeModalBtn = document.getElementById('close-modal');
-       
-           function openModal(src) {
-               modal.classList.remove('hidden');
-               modalVideo.src = src;
-               modalVideo.play();
-           }
-       
-           closeModalBtn.addEventListener('click', () => {
-               modal.classList.add('hidden');
-               modalVideo.pause();
-               modalVideo.src = "";
-           });
-       });
+         const csvPath = './Donnees_CSV/Infos.csv';
+         const videoFolder = './videos/';
+         const videoGrid = document.getElementById('video-grid');
+         const filtersContainer = document.getElementById('filters');
+     
+         const MAX_PER_PAGE = 50;
+         let currentPage = 1;
+         let allData = [];
+         let filteredData = [];
+     
+         // Chargement CSV
+         Papa.parse(csvPath, {
+             download: true,
+             header: true,
+             complete: function(results) {
+                 allData = results.data.filter(row => row.Nombre); // ignore les lignes vides
+                 filteredData = allData;
+                 createFilters(allData);
+                 displayVideos(allData, 1);
+             }
+         });
+     
+         function createFilters(data) {
+             const columns = Object.keys(data[0]);
+             columns.forEach(col => {
+                 const values = [...new Set(data.map(row => row[col]).filter(Boolean))].sort();
+                 const select = document.createElement('select');
+                 select.id = `filter-${col}`;
+                 const label = document.createElement('label');
+                 label.textContent = col + " : ";
+                 select.innerHTML = `<option value="">-- Tous --</option>`;
+                 values.forEach(val => {
+                     const option = document.createElement('option');
+                     option.value = val;
+                     option.textContent = val;
+                     select.appendChild(option);
+                 });
+                 select.addEventListener('change', () => filterVideos());
+                 const wrapper = document.createElement('div');
+                 wrapper.className = "filter";
+                 wrapper.appendChild(label);
+                 wrapper.appendChild(select);
+                 filtersContainer.appendChild(wrapper);
+             });
+         }
+     
+         function displayVideos(data, page = 1) {
+             videoGrid.innerHTML = "";
+             currentPage = page;
+     
+             filteredData = data;
+             const totalPages = Math.ceil(data.length / MAX_PER_PAGE);
+             const start = (page - 1) * MAX_PER_PAGE;
+             const end = start + MAX_PER_PAGE;
+             const videosToShow = data.slice(start, end);
+     
+             videosToShow.forEach((video, i) => {
+                 const index = parseInt(video.Nombre, 10) - 1;
+                 const filename = videoList[index];
+                 if (!filename) return; // Sécurité
+     
+                 const card = document.createElement('div');
+                 card.className = 'video-card';
+     
+                 const videoElement = document.createElement('video');
+                 videoElement.src = videoFolder + filename;
+                 videoElement.controls = false;
+                 videoElement.muted = true;
+                 videoElement.loop = true;
+                 videoElement.autoplay = true;
+     
+                 videoElement.addEventListener('click', () => openModal(videoFolder + filename));
+     
+                 const info = document.createElement('div');
+                 info.className = 'video-info';
+                 Object.entries(video).forEach(([key, value]) => {
+                     const p = document.createElement('p');
+                     p.innerHTML = `<strong>${key}</strong> : ${value}`;
+                     info.appendChild(p);
+                 });
+     
+                 card.appendChild(videoElement);
+                 card.appendChild(info);
+                 videoGrid.appendChild(card);
+             });
+     
+             renderPaginationControls(totalPages);
+         }
+     
+         function renderPaginationControls(totalPages) {
+             const existing = document.getElementById('pagination');
+             if (existing) existing.remove();
+     
+             const pagination = document.createElement('div');
+             pagination.id = 'pagination';
+     
+             if (currentPage > 1) {
+                 const prevBtn = document.createElement('button');
+                 prevBtn.textContent = '← Précédent';
+                 prevBtn.onclick = () => displayVideos(filteredData, currentPage - 1);
+                 pagination.appendChild(prevBtn);
+             }
+     
+             for (let i = 1; i <= totalPages; i++) {
+                 if (
+                     i === currentPage ||
+                     i === 1 ||
+                     i === totalPages ||
+                     Math.abs(i - currentPage) <= 2
+                 ) {
+                     const pageBtn = document.createElement('button');
+                     pageBtn.textContent = i;
+                     pageBtn.disabled = i === currentPage;
+                     pageBtn.onclick = () => displayVideos(filteredData, i);
+                     pagination.appendChild(pageBtn);
+                 } else if (
+                     (i === currentPage - 3 || i === currentPage + 3) &&
+                     totalPages > 5
+                 ) {
+                     const dots = document.createElement('span');
+                     dots.textContent = '...';
+                     pagination.appendChild(dots);
+                 }
+             }
+     
+             if (currentPage < totalPages) {
+                 const nextBtn = document.createElement('button');
+                 nextBtn.textContent = 'Suivant →';
+                 nextBtn.onclick = () => displayVideos(filteredData, currentPage + 1);
+                 pagination.appendChild(nextBtn);
+             }
+     
+             videoGrid.parentNode.appendChild(pagination);
+         }
+     
+         function filterVideos() {
+             const filters = Array.from(filtersContainer.querySelectorAll('select'));
+             let filtered = allData;
+     
+             filters.forEach(select => {
+                 const col = select.id.replace('filter-', '');
+                 const val = select.value;
+                 if (val) {
+                     filtered = filtered.filter(row => row[col] === val);
+                 }
+             });
+     
+             displayVideos(filtered, 1); // Repartir de la première page
+         }
+     
+         // Modale
+         const modal = document.getElementById('video-modal');
+         const modalVideo = document.getElementById('modal-video');
+         const closeModalBtn = document.getElementById('close-modal');
+     
+         function openModal(src) {
+             modal.classList.remove('hidden');
+             modalVideo.src = src;
+             modalVideo.play();
+         }
+     
+         closeModalBtn.addEventListener('click', () => {
+             modal.classList.add('hidden');
+             modalVideo.pause();
+             modalVideo.src = "";
+         });
+     });
 
      </script>
  </body>
