@@ -615,7 +615,6 @@ const videoList = [
     '614-Twice-Signal-Ep28-20.mp4',
     '615-Golden_child-Wannabe-Ep28-21.mp4',
     '616-BTOB-Ill_be_your_man-Ep28-22.mp4',
-    '616-BTOB-Ill_be_your_man-Ep28-22.mp4',
     '617-Twice-Strategy-Ep29-01.mp4',
     '618-Taemin-Advice-Ep29-02.mp4',
     '619-T-Ara-Roly_poly-Ep29-03.mp4',
