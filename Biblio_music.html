@@ -100,6 +100,33 @@
           color: #777;
       }
 
+      /* Labels des filtres */
+      #filters label {
+          color: white;
+      }
+      
+      /* Modale vidéo : taille réduite */
+      .modal-content {
+          max-width: 80%;
+          max-height: 80%;
+      }
+      
+      /* Nouveau bouton "Fermer" */
+      #close-btn {
+          margin-top: 10px;
+          padding: 6px 12px;
+          background-color: #333;
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-size: 1em;
+          border-radius: 4px;
+      }
+      
+      #close-btn:hover {
+          background-color: #555;
+      }
+
      </style>
  </head>
  <body>
@@ -126,8 +153,10 @@
          <div class="modal-content">
              <span id="close-modal">&times;</span>
              <video id="modal-video" controls autoplay></video>
+             <button id="close-btn">Fermer</button>
          </div>
      </div>
+
   
      <!-- Pagination (sera rempli dynamiquement) -->
      <div id="pagination"></div>
@@ -138,7 +167,7 @@
      <script src="./videos/liste_video.js"></script>
 
      <script>
-      document.addEventListener('DOMContentLoaded', () => {
+     document.addEventListener('DOMContentLoaded', () => {
          const csvPath = './Donnees_CSV/Infos.csv';
          const videoFolder = './videos/';
          const videoGrid = document.getElementById('video-grid');
@@ -154,7 +183,7 @@
              download: true,
              header: true,
              complete: function(results) {
-                 allData = results.data.filter(row => row.Nombre); // ignore les lignes vides
+                 allData = results.data.filter(row => row.Nombre); // ignore lignes vides
                  filteredData = allData;
                  createFilters(allData);
                  displayVideos(allData, 1);
@@ -164,19 +193,32 @@
          function createFilters(data) {
              const columns = Object.keys(data[0]);
              columns.forEach(col => {
-                 const values = [...new Set(data.map(row => row[col]).filter(Boolean))].sort();
+                 let values = [...new Set(data.map(row => row[col]).filter(Boolean))];
+     
+                 // Tri spécial pour "Nombre" : tri numérique
+                 if (col === 'Nombre') {
+                     values = values.map(Number).sort((a, b) => a - b).map(String);
+                 } else {
+                     values.sort();
+                 }
+     
                  const select = document.createElement('select');
                  select.id = `filter-${col}`;
+                 select.multiple = true; // ✅ Sélection multiple
+     
                  const label = document.createElement('label');
                  label.textContent = col + " : ";
-                 select.innerHTML = `<option value="">-- Tous --</option>`;
+                 label.setAttribute('for', select.id);
+     
                  values.forEach(val => {
                      const option = document.createElement('option');
                      option.value = val;
                      option.textContent = val;
                      select.appendChild(option);
                  });
+     
                  select.addEventListener('change', () => filterVideos());
+     
                  const wrapper = document.createElement('div');
                  wrapper.className = "filter";
                  wrapper.appendChild(label);
@@ -198,7 +240,7 @@
              videosToShow.forEach((video, i) => {
                  const index = parseInt(video.Nombre, 10) - 1;
                  const filename = videoList[index];
-                 if (!filename) return; // Sécurité
+                 if (!filename) return;
      
                  const card = document.createElement('div');
                  card.className = 'video-card';
@@ -280,19 +322,20 @@
      
              filters.forEach(select => {
                  const col = select.id.replace('filter-', '');
-                 const val = select.value;
-                 if (val) {
-                     filtered = filtered.filter(row => row[col] === val);
+                 const selectedOptions = Array.from(select.selectedOptions).map(opt => opt.value);
+                 if (selectedOptions.length > 0) {
+                     filtered = filtered.filter(row => selectedOptions.includes(row[col]));
                  }
              });
      
-             displayVideos(filtered, 1); // Repartir de la première page
+             displayVideos(filtered, 1);
          }
      
          // Modale
          const modal = document.getElementById('video-modal');
          const modalVideo = document.getElementById('modal-video');
          const closeModalBtn = document.getElementById('close-modal');
+         const closeBtn = document.getElementById('close-btn');
      
          function openModal(src) {
              modal.classList.remove('hidden');
@@ -300,10 +343,20 @@
              modalVideo.play();
          }
      
-         closeModalBtn.addEventListener('click', () => {
+         function closeModal() {
              modal.classList.add('hidden');
              modalVideo.pause();
              modalVideo.src = "";
+         }
+     
+         closeModalBtn.addEventListener('click', closeModal);
+         closeBtn.addEventListener('click', closeModal);
+     
+         // 🔥 Fermer avec la touche Échap
+         document.addEventListener('keydown', (e) => {
+             if (e.key === 'Escape') {
+                 closeModal();
+             }
          });
      });
 
