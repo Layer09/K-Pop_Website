@@ -203,20 +203,14 @@
              const columns = Object.keys(data[0]);
              columns.forEach(col => {
                  let values = [...new Set(data.map(row => row[col]).filter(Boolean))];
-     
-                 // Tri spécial pour "Nombre" : tri numérique
-                 if (col === 'Nombre') {
+
+                 //Tri des listes déroulantes Nombre et Episode
+                 if (col === 'Nombre' || col === 'Episode') {
                      values = values.map(Number).sort((a, b) => a - b).map(String);
                  } else {
                      values.sort();
                  }
-                 // Tri spécial pour "Episode" : tri numérique
-                 if (col === 'Episode') {
-                     values = values.map(Number).sort((a, b) => a - b).map(String);
-                 } else {
-                     values.sort();
-                 }
-     
+
                  const select = document.createElement('select');
                  select.id = `filter-${col}`;
      
