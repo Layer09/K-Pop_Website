@@ -354,15 +354,18 @@
          function filterVideos() {
              const filters = Array.from(filtersContainer.querySelectorAll('select'));
              let filtered = allData;
-     
+         
              filters.forEach(select => {
                  const col = select.id.replace('filter-', '');
                  const selectedOptions = Array.from(select.selectedOptions).map(opt => opt.value);
-                 if (selectedOptions.length > 0) {
-                     filtered = filtered.filter(row => selectedOptions.includes(row[col]));
+                 const selected = selectedOptions.filter(val => val !== "__ALL__");
+         
+                 if (selected.length > 0) {
+                     filtered = filtered.filter(row => selected.includes(row[col]));
                  }
+                 // Si aucun filtre (== seulement "-- Tout --"), on ne touche pas à `filtered`
              });
-     
+         
              displayVideos(filtered, 1);
          }
      
