@@ -224,6 +224,14 @@
                  label.textContent = col + " : ";
                  label.setAttribute('for', select.id);
      
+                 // Option "-- Tout --"
+                 const allOption = document.createElement('option');
+                 allOption.value = "__ALL__";
+                 allOption.textContent = "-- Tout --";
+                 allOption.selected = true;
+                 select.appendChild(allOption);
+                 
+                 // Autres options
                  values.forEach(val => {
                      const option = document.createElement('option');
                      option.value = val;
