@@ -19,7 +19,18 @@
           flex-direction: column;
           padding: 10px;
           border-radius: 6px;
+          background-color: #111;
+          border: 1px solid #333;
       }
+
+      .filter select {
+        background-color: #000;
+        color: #FFF;
+        border: 1px solid #8A6ACE;
+        padding: 5px;
+        border-radius: 4px;
+      }
+      
       .video-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -36,6 +47,9 @@
           width: 100%;
           border-radius: 4px;
           cursor: pointer;
+          border: 1px solid #444;
+          background: #111;
+          color: #ccc;
       }
       .video-info {
           font-size: 0.9em;
@@ -60,8 +74,8 @@
       }
       
       .modal-content {
-          max-width: 60%;
-          max-height: 60%;
+          max-width: 70%;
+          max-height: 70%;
           background-color: black;
           border-radius: 8px;
           box-shadow: 0 0 10px #000;
@@ -114,12 +128,6 @@
           color: white;
       }
       
-      /* Modale vidéo : taille réduite */
-      .modal-content {
-          max-width: 80%;
-          max-height: 80%;
-      }
-      
       /* Nouveau bouton "Fermer" */
       #close-btn {
           margin-top: 10px;
@@ -135,6 +143,20 @@
       #close-btn:hover {
           background-color: #555;
       }
+
+      .video-info .highlight {
+        color: #FFFFFF;
+        font-weight: bold;
+      }
+
+      .video-info .nombre {
+         text-align: center;
+         margin-top: 10px;
+         font-size: 1.2em;
+         color: #00C5D5;
+       }
+
+
 
      </style>
  </head>
@@ -177,219 +199,225 @@
 
      <script>
      document.addEventListener('DOMContentLoaded', () => {
-         const csvPath = './Donnees_CSV/Infos.csv';
-         const videoFolder = './videos/';
-         const videoGrid = document.getElementById('video-grid');
-         const filtersContainer = document.getElementById('filters');
+       const csvPath = './Donnees_CSV/Infos.csv';
+       const videoFolder = './videos/';
+       const videoGrid = document.getElementById('video-grid');
+       const filtersContainer = document.getElementById('filters');
      
-         const MAX_PER_PAGE = 50;
-         let currentPage = 1;
-         let allData = [];
-         let filteredData = [];
+       const MAX_PER_PAGE = 50;
+       let currentPage = 1;
+       let allData = [];
+       let filteredData = [];
      
-         // Chargement CSV
-         Papa.parse(csvPath, {
-             download: true,
-             header: true,
-             complete: function(results) {
-                 allData = results.data.filter(row => row.Nombre); // ignore lignes vides
-                 filteredData = allData;
-                 createFilters(allData);
-                 displayVideos(allData, 1);
+       Papa.parse(csvPath, {
+         download: true,
+         header: true,
+         complete: function(results) {
+           allData = results.data.filter(row => row.Nombre);
+           filteredData = allData;
+           createFilters(allData);
+           displayVideos(allData, 1);
+         }
+       });
+     
+       function createFilters(data) {
+         const columns = Object.keys(data[0]);
+         columns.forEach(col => {
+           let values = [...new Set(data.map(row => row[col]).filter(Boolean))];
+     
+           if (col === 'Nombre' || col === 'Episode') {
+             values = values.map(Number).sort((a, b) => a - b).map(String);
+           } else {
+             values.sort();
+           }
+     
+           const select = document.createElement('select');
+           select.id = `filter-${col}`;
+     
+           const label = document.createElement('label');
+           const colLabel = col
+             .replace('Annee', 'Année')
+             .replace('Episode', 'Épisode')
+             .replace('Generation', 'Génération');
+     
+           label.textContent = colLabel + ' : ';
+           label.setAttribute('for', select.id);
+     
+           const allOption = document.createElement('option');
+           allOption.value = '__ALL__';
+           allOption.textContent = '-- Tout --';
+           allOption.selected = true;
+           select.appendChild(allOption);
+     
+           values.forEach(val => {
+             const option = document.createElement('option');
+             option.value = val;
+             option.textContent = val;
+             select.appendChild(option);
+           });
+     
+           select.addEventListener('change', () => filterVideos());
+     
+           const wrapper = document.createElement('div');
+           wrapper.className = 'filter';
+           wrapper.appendChild(label);
+           wrapper.appendChild(select);
+           filtersContainer.appendChild(wrapper);
+         });
+       }
+     
+       function displayVideos(data, page = 1) {
+         videoGrid.innerHTML = '';
+         currentPage = page;
+     
+         filteredData = data;
+         const totalPages = Math.ceil(data.length / MAX_PER_PAGE);
+         const start = (page - 1) * MAX_PER_PAGE;
+         const end = start + MAX_PER_PAGE;
+         const videosToShow = data.slice(start, end);
+     
+         videosToShow.forEach(video => {
+           const index = parseInt(video.Nombre, 10) - 1;
+           const filename = videoList[index];
+           if (!filename) return;
+     
+           const card = document.createElement('div');
+           card.className = 'video-card';
+     
+           const videoElement = document.createElement('video');
+           videoElement.src = videoFolder + filename;
+           videoElement.controls = false;
+           videoElement.muted = true;
+           videoElement.loop = true;
+           videoElement.autoplay = true;
+     
+           let hoverTimeout;
+           videoElement.addEventListener('mouseenter', () => {
+             hoverTimeout = setTimeout(() => {
+               videoElement.muted = false;
+             }, 1000);
+           });
+     
+           videoElement.addEventListener('mouseleave', () => {
+             clearTimeout(hoverTimeout);
+             videoElement.muted = true;
+           });
+     
+           videoElement.addEventListener('click', () => openModal(videoFolder + filename));
+     
+           const info = document.createElement('div');
+           info.className = 'video-info';
+     
+           const highlightFields = ['Titre', 'Artiste'];
+           Object.entries(video).forEach(([key, value]) => {
+             if (key === 'Groupe') return; // skip "Groupe"
+     
+             if (key === 'Nombre') return; // handle separately
+     
+             const label = key
+               .replace('Annee', 'Année')
+               .replace('Episode', 'Épisode')
+               .replace('Generation', 'Génération');
+     
+             const p = document.createElement('p');
+             p.innerHTML = `<strong>${label}</strong> : ${value}`;
+             if (highlightFields.includes(key)) {
+               p.classList.add('highlight');
              }
+             info.appendChild(p);
+           });
+     
+           const numberP = document.createElement('p');
+           numberP.className = 'nombre';
+           numberP.textContent = video.Nombre;
+           info.appendChild(numberP);
+     
+           card.appendChild(videoElement);
+           card.appendChild(info);
+           videoGrid.appendChild(card);
          });
      
-         function createFilters(data) {
-             const columns = Object.keys(data[0]);
-             columns.forEach(col => {
-                 let values = [...new Set(data.map(row => row[col]).filter(Boolean))];
-
-                 //Tri des listes déroulantes Nombre et Episode
-                 if (col === 'Nombre' || col === 'Episode') {
-                     values = values.map(Number).sort((a, b) => a - b).map(String);
-                 } else {
-                     values.sort();
-                 }
-
-                 const select = document.createElement('select');
-                 select.id = `filter-${col}`;
+         renderPaginationControls(totalPages);
+       }
      
-                 const label = document.createElement('label');
-                 label.textContent = col + " : ";
-                 label.setAttribute('for', select.id);
+       function renderPaginationControls(totalPages) {
+         const existing = document.getElementById('pagination');
+         if (existing) existing.remove();
      
-                 // Option "-- Tout --"
-                 const allOption = document.createElement('option');
-                 allOption.value = "__ALL__";
-                 allOption.textContent = "-- Tout --";
-                 allOption.selected = true;
-                 select.appendChild(allOption);
-                 
-                 // Autres options
-                 values.forEach(val => {
-                     const option = document.createElement('option');
-                     option.value = val;
-                     option.textContent = val;
-                     select.appendChild(option);
-                 });
+         const pagination = document.createElement('div');
+         pagination.id = 'pagination';
      
-                 select.addEventListener('change', () => filterVideos());
-     
-                 const wrapper = document.createElement('div');
-                 wrapper.className = "filter";
-                 wrapper.appendChild(label);
-                 wrapper.appendChild(select);
-                 filtersContainer.appendChild(wrapper);
-             });
+         if (currentPage > 1) {
+           const prevBtn = document.createElement('button');
+           prevBtn.textContent = '← Précédent';
+           prevBtn.onclick = () => displayVideos(filteredData, currentPage - 1);
+           pagination.appendChild(prevBtn);
          }
      
-         function displayVideos(data, page = 1) {
-             videoGrid.innerHTML = "";
-             currentPage = page;
-     
-             filteredData = data;
-             const totalPages = Math.ceil(data.length / MAX_PER_PAGE);
-             const start = (page - 1) * MAX_PER_PAGE;
-             const end = start + MAX_PER_PAGE;
-             const videosToShow = data.slice(start, end);
-     
-             videosToShow.forEach((video, i) => {
-                 const index = parseInt(video.Nombre, 10) - 1;
-                 const filename = videoList[index];
-                 if (!filename) return;
-     
-                 const card = document.createElement('div');
-                 card.className = 'video-card';
-     
-                 const videoElement = document.createElement('video');
-                 videoElement.src = videoFolder + filename;
-                 videoElement.controls = false;
-                 videoElement.muted = true;
-                 videoElement.loop = true;
-                 videoElement.autoplay = true;
-
-                 let hoverTimeout;
-   
-                 videoElement.addEventListener('mouseenter', () => {
-                     hoverTimeout = setTimeout(() => {
-                         videoElement.muted = false;
-                     }, 1000); // 1 seconde
-                 });
-                 
-                 videoElement.addEventListener('mouseleave', () => {
-                     clearTimeout(hoverTimeout);
-                     videoElement.muted = true;
-                 });
-              +
-                 videoElement.addEventListener('click', () => openModal(videoFolder + filename));
-     
-                 const info = document.createElement('div');
-                 info.className = 'video-info';
-                 Object.entries(video).forEach(([key, value]) => {
-                     const p = document.createElement('p');
-                     p.innerHTML = `<strong>${key}</strong> : ${value}`;
-                     info.appendChild(p);
-                 });
-     
-                 card.appendChild(videoElement);
-                 card.appendChild(info);
-                 videoGrid.appendChild(card);
-             });
-     
-             renderPaginationControls(totalPages);
+         for (let i = 1; i <= totalPages; i++) {
+           if (i === currentPage || i === 1 || i === totalPages || Math.abs(i - currentPage) <= 2) {
+             const pageBtn = document.createElement('button');
+             pageBtn.textContent = i;
+             pageBtn.disabled = i === currentPage;
+             pageBtn.onclick = () => displayVideos(filteredData, i);
+             pagination.appendChild(pageBtn);
+           } else if ((i === currentPage - 3 || i === currentPage + 3) && totalPages > 5) {
+             const dots = document.createElement('span');
+             dots.textContent = '...';
+             pagination.appendChild(dots);
+           }
          }
      
-         function renderPaginationControls(totalPages) {
-             const existing = document.getElementById('pagination');
-             if (existing) existing.remove();
-     
-             const pagination = document.createElement('div');
-             pagination.id = 'pagination';
-     
-             if (currentPage > 1) {
-                 const prevBtn = document.createElement('button');
-                 prevBtn.textContent = '← Précédent';
-                 prevBtn.onclick = () => displayVideos(filteredData, currentPage - 1);
-                 pagination.appendChild(prevBtn);
-             }
-     
-             for (let i = 1; i <= totalPages; i++) {
-                 if (
-                     i === currentPage ||
-                     i === 1 ||
-                     i === totalPages ||
-                     Math.abs(i - currentPage) <= 2
-                 ) {
-                     const pageBtn = document.createElement('button');
-                     pageBtn.textContent = i;
-                     pageBtn.disabled = i === currentPage;
-                     pageBtn.onclick = () => displayVideos(filteredData, i);
-                     pagination.appendChild(pageBtn);
-                 } else if (
-                     (i === currentPage - 3 || i === currentPage + 3) &&
-                     totalPages > 5
-                 ) {
-                     const dots = document.createElement('span');
-                     dots.textContent = '...';
-                     pagination.appendChild(dots);
-                 }
-             }
-     
-             if (currentPage < totalPages) {
-                 const nextBtn = document.createElement('button');
-                 nextBtn.textContent = 'Suivant →';
-                 nextBtn.onclick = () => displayVideos(filteredData, currentPage + 1);
-                 pagination.appendChild(nextBtn);
-             }
-     
-             videoGrid.parentNode.appendChild(pagination);
+         if (currentPage < totalPages) {
+           const nextBtn = document.createElement('button');
+           nextBtn.textContent = 'Suivant →';
+           nextBtn.onclick = () => displayVideos(filteredData, currentPage + 1);
+           pagination.appendChild(nextBtn);
          }
      
-         function filterVideos() {
-             const filters = Array.from(filtersContainer.querySelectorAll('select'));
-             let filtered = allData;
-         
-             filters.forEach(select => {
-                 const col = select.id.replace('filter-', '');
-                 const selectedOptions = Array.from(select.selectedOptions).map(opt => opt.value);
-                 const selected = selectedOptions.filter(val => val !== "__ALL__");
-         
-                 if (selected.length > 0) {
-                     filtered = filtered.filter(row => selected.includes(row[col]));
-                 }
-                 // Si aucun filtre (== seulement "-- Tout --"), on ne touche pas à `filtered`
-             });
-         
-             displayVideos(filtered, 1);
-         }
+         videoGrid.parentNode.appendChild(pagination);
+       }
      
-         // Modale
-         const modal = document.getElementById('video-modal');
-         const modalVideo = document.getElementById('modal-video');
-         const closeModalBtn = document.getElementById('close-modal');
-         const closeBtn = document.getElementById('close-btn');
+       function filterVideos() {
+         const filters = Array.from(filtersContainer.querySelectorAll('select'));
+         let filtered = allData;
      
-         function openModal(src) {
-             modal.classList.remove('hidden');
-             modalVideo.src = src;
-             modalVideo.play();
-         }
+         filters.forEach(select => {
+           const col = select.id.replace('filter-', '');
+           const selected = Array.from(select.selectedOptions)
+             .map(opt => opt.value)
+             .filter(val => val !== '__ALL__');
      
-         function closeModal() {
-             modal.classList.add('hidden');
-             modalVideo.pause();
-             modalVideo.src = "";
-         }
-     
-         closeModalBtn.addEventListener('click', closeModal);
-         closeBtn.addEventListener('click', closeModal);
-     
-         // 🔥 Fermer avec la touche Échap
-         document.addEventListener('keydown', (e) => {
-             if (e.key === 'Escape') {
-                 closeModal();
-             }
+           if (selected.length > 0) {
+             filtered = filtered.filter(row => selected.includes(row[col]));
+           }
          });
+     
+         displayVideos(filtered, 1);
+       }
+     
+       const modal = document.getElementById('video-modal');
+       const modalVideo = document.getElementById('modal-video');
+       const closeModalBtn = document.getElementById('close-modal');
+       const closeBtn = document.getElementById('close-btn');
+     
+       function openModal(src) {
+         modal.classList.remove('hidden');
+         modalVideo.src = src;
+         modalVideo.play();
+       }
+     
+       function closeModal() {
+         modal.classList.add('hidden');
+         modalVideo.pause();
+         modalVideo.src = '';
+       }
+     
+       closeModalBtn.addEventListener('click', closeModal);
+       closeBtn.addEventListener('click', closeModal);
+       document.addEventListener('keydown', e => {
+         if (e.key === 'Escape') closeModal();
+       });
      });
 
      </script>
