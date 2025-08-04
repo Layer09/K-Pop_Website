@@ -139,6 +139,26 @@
           font-size: 1em;
           border-radius: 4px;
       }
+
+      #modal-controls {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px;
+      }
+      
+      #modal-controls button {
+          padding: 8px 14px;
+          background-color: #222;
+          color: white;
+          border: 1px solid #555;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 1em;
+      }
+      
+      #modal-controls button:hover {
+          background-color: #444;
+      }
       
       #close-btn:hover {
           background-color: #555;
@@ -183,6 +203,11 @@
      
      <!-- Modale de lecture vidéo en grand -->
      <div id="video-modal" class="modal hidden">
+      <div id="modal-controls">
+          <button id="prev-video">⟵</button>
+          <button id="next-video">⟶</button>
+      </div>
+
          <div class="modal-content">
              <span id="close-modal">&times;</span>
              <video id="modal-video" controls autoplay></video>
@@ -310,11 +335,11 @@
             const info = document.createElement('div');
             info.className = 'video-info';
       
-            // Afficher d'abord Titre et Artiste
+            // Afficher d'abord Titre et Artiste avec étiquette
             ['Titre', 'Artiste'].forEach(key => {
               if (video[key]) {
                 const p = document.createElement('p');
-                p.textContent = video[key];
+                p.innerHTML = `<strong>${key}</strong> : ${video[key]}`;
                 p.classList.add('highlight');
                 info.appendChild(p);
               }
@@ -410,6 +435,18 @@
         const modalVideo = document.getElementById('modal-video');
         const closeModalBtn = document.getElementById('close-modal');
         const closeBtn = document.getElementById('close-btn');
+
+        let currentIndexInFiltered = -1;
+
+        function openModal(src) {
+          modal.classList.remove('hidden');
+          modalVideo.src = src;
+          modalVideo.play();
+          
+          currentIndexInFiltered = filteredData.findIndex(
+            video => videoList[parseInt(video.Nombre, 10) - 1] === src.replace(videoFolder, '')
+          );
+        }
       
         function openModal(src) {
           modal.classList.remove('hidden');
@@ -428,6 +465,20 @@
         document.addEventListener('keydown', e => {
           if (e.key === 'Escape') closeModal();
         });
+        document.getElementById('prev-video').addEventListener('click', () => {
+          if (currentIndexInFiltered > 0) {
+            const prevVideo = filteredData[currentIndexInFiltered - 1];
+            openModal(videoFolder + videoList[parseInt(prevVideo.Nombre, 10) - 1]);
+          }
+        });
+        
+        document.getElementById('next-video').addEventListener('click', () => {
+          if (currentIndexInFiltered < filteredData.length - 1) {
+            const nextVideo = filteredData[currentIndexInFiltered + 1];
+            openModal(videoFolder + videoList[parseInt(nextVideo.Nombre, 10) - 1]);
+          }
+        });
+
       });
 
      </script>
