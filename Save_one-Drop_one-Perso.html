@@ -94,6 +94,10 @@
     width: 90%;
 }
 
+video {
+    margin-bottom: 5%;
+}
+
 iframe {
     height: 100%;
     width: 100%;
@@ -150,6 +154,13 @@ video::-webkit-media-controls-enclosure {
     margin-top: 60px;  /* grande marge au début */
     margin-bottom: 60px;
     transition: margin 0.3s ease;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 10px;
+    border-radius: 6px;
+    background-color: #111;
+    border: 1px solid #333;
 }
 
 #profil-selection label {
@@ -160,11 +171,12 @@ video::-webkit-media-controls-enclosure {
 }
 
 #profil-selection select {
+    background-color: #000;
+    color: #FFF;
+    border: 1px solid #00C5D5;
+    border-radius: 4px;
     font-size: 1.5em;
     padding: 10px 15px;
-    background-color: #ccc;
-    border: 3px solid #00c5d5;
-    border-radius: 5px;
     transition: all 0.3s ease;
 }
 
