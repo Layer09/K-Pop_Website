@@ -14,7 +14,160 @@
 </header>
 
 <style>
-/* ... style conservé inchangé ... */
+/* Volume + texte */
+#texte {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+/* Conteneur principal des vidéos */
+#challenge-section {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    position: relative;
+    z-index: 1; /* En dessous du nav */
+    padding-top: 40px; /* Espace sous le nav */
+}
+
+/* Vidéo simple (mode 1 ou 2) */
+.single-video {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.single-video video {
+    width: 90%;
+    height: auto; /* Maintient le ratio 16:9 automatiquement */
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+}
+
+/* Mode 2 vidéos */
+#dual-videos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+    margin-top: 40px;
+}
+
+#dual-videos video {
+    width: 30%;
+    height: auto;
+    cursor: pointer;
+}
+
+#dual-videos.hidden {
+    display: none;
+}
+
+/* Conteneur YouTube */
+#video-container-YT {
+    height: 100%;
+    width: 100%;
+}
+
+#version1 {
+    display: block;
+}
+
+/* Vidéos YouTube et contenu par onglet */
+.version-content {
+    display: none;
+    margin-top: 20px;
+    width: 90%;
+    height: 90%;
+}
+
+.version-content.active {
+    display: block;
+    width: 90%;
+}
+
+iframe {
+    height: 100%;
+    width: 100%;
+}
+
+/* Onglets */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.tab {
+    background-color: #666;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tab:hover {
+    background-color: #888;
+}
+
+.tab-separateur {
+    background-color: #fff;
+    margin: 5px;
+    padding: 1px;
+    border-radius: 5px;
+    border-color: #fff;
+}
+
+/* Masquer les contrôles superflus */
+video::-webkit-media-controls-volume-slider {
+    display: none;
+}
+
+video::-webkit-media-controls-mute-button {
+    display: none;
+}
+
+video::-internal-media-controls-overlay-cast-button {
+    display: none;
+}
+
+video::-webkit-media-controls-enclosure {
+    overflow: hidden;
+}
+    
+#profil-selection {
+    margin-top: 60px;  /* grande marge au début */
+    margin-bottom: 60px;
+    transition: margin 0.3s ease;
+}
+
+#profil-selection label {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#profil-selection select {
+    font-size: 1.5em;
+    padding: 10px 15px;
+    background-color: #ccc;
+    border: 3px solid #00c5d5;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
 </style>
 
 <section style="width: 100%;">
