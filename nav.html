@@ -2,105 +2,132 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        nav {
+            width: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 9px 0;
+            gap: 10px;
+        }
+
+        nav ul {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            width: 90%; /* pour un meilleur centrage */
+        }
+
+        nav ul li {
+            text-align: center;
+            position: relative;
+        }
+
+        nav ul li a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        nav ul li a img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        nav ul li a img:hover {
+            transform: scale(1.1);
+        }
+
+        nav ul li a span {
+            display: none;
+            color: black;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        nav hr {
+            width: 80%;
+            border: 1px solid #ccc;
+        }
+
+        /* Lien désactivé */
+        .disabled-link {
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .disabled-link img {
+            filter: grayscale(100%);
+            opacity: 0.4;
+        }
+
+        .disabled-link:hover img {
+            transform: none;
+        }
+
+        .disabled-link::before {
+            content: "✖";
+            position: absolute;
+            color: red;
+            font-size: 2em;
+            top: 5px;
+            right: 10px;
+            font-weight: bold;
+        }
+
+        /* Responsive layout for smaller screens */
+        @media (max-width: 1350px) {
+            nav ul {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul li a img {
+                display: none;
+            }
+
+            nav ul li a span {
+                display: block;
+                font-size: 1.2em;
+            }
+
+            nav hr {
+                display: none;
+            }
+        }
+    </style>
 </head>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-}
 
-nav {
-    width: 100%;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 9px 0;
-    gap: 10px;
-}
-
-nav ul {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    width: 90%; /* pour un meilleur centrage */
-}
-
-nav ul li {
-    text-align: center;
-}
-
-nav ul li a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    font-size: 1.2em;
-}
-
-nav ul li a img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
-}
-
-nav ul li a img:hover {
-    transform: scale(1.1);
-}
-
-nav ul li a span {
-    display: none;
-    color: black;
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-nav hr {
-    width: 80%;
-    border: 1px solid #ccc;
-}
-
-/* Responsive layout for smaller screens */
-@media (max-width: 1350px) {
-    nav ul {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        grid-template-columns: 1fr;
-    }
-
-    nav ul li a img {
-        display: none;
-    }
-
-    nav ul li a span {
-        display: block;
-        font-size: 1.2em;
-    }
-    
-    nav hr {
-        display: none;
-    }
-}
-</style>
-
+<body>
 <nav>
     <ul>
         <li>
@@ -110,19 +137,19 @@ nav hr {
             </a>
         </li>
         <li>
-            <a href="Guess_choreo.html">
+            <a href="Guess_choreo.html" class="disabled-link">
                 <img src="./images/Choreo.png" alt="Guess by the Choreo">
                 <span>Guess by the Choreo</span>
             </a>
         </li>
         <li>
-            <a href="Guess_MV.html">
+            <a href="Guess_MV.html" class="disabled-link">
                 <img src="./images/Temporaire.png" alt="Guess by the MV">
                 <span>Guess by the MV</span>
             </a>
         </li>
         <li>
-            <a href="Guess_lyrics.html">
+            <a href="Guess_lyrics.html" class="disabled-link">
                 <img src="./images/Temporaire.png" alt="Guess by the Lyrics">
                 <span>Guess by the Lyrics</span>
             </a>
@@ -149,7 +176,7 @@ nav hr {
             </a>
         </li>
         <li>
-            <a href="Finish_lyrics.html">
+            <a href="Finish_lyrics.html" class="disabled-link">
                 <img src="./images/Temporaire.png" alt="Finish the Lyrics">
                 <span>Finish the Lyrics</span>
             </a>
@@ -180,4 +207,5 @@ nav hr {
         </li>
     </ul>
 </nav>
+</body>
 </html>
