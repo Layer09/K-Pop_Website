@@ -20,7 +20,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 19,2019,1,Miroh,Stray Kids,Gars,4,Groupe,JYP Entertainment,Main Track,
 20,2023,1,One spark,Twice,Fille,3,Groupe,JYP Entertainment,Single,
 21,2021,1,Rock with you,Seventeen,Gars,3,Groupe,Pledis Entertainment,Main Track,
-22,2022,1,That that,Psy & Suga,Gars,2,Duo,/Null/,Single,Psy
+22,2022,1,That that,Psy & Suga,Gars,2,Duo,Sans compagnie,Single,Psy
 23,2012,2,Fantastic baby,BigBang,Gars,2,Groupe,YG Entertainment,Main Track,
 24,2023,2,Drama,Aespa,Fille,4,Groupe,SM Entertainment,Main Track,
 25,2023,2,Super,Seventeen,Gars,3,Groupe,Pledis Entertainment,Main Track,
@@ -69,7 +69,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 68,2021,4,Butter,BTS,Gars,3,Groupe,BigHit Entertainment,Single,
 69,2023,4,3D,Jung Kook,Gars,3,Solo,BigHit Entertainment,Single,BTS
 70,2019,4,Kill this love,BlackPink,Fille,3,Groupe,YG Entertainment,Main Track,
-71,2023,4,Social path,Stray Kids & LiSA,Mixte,4,Groupe,/Null/,Main Track,Stray Kids
+71,2023,4,Social path,Stray Kids & LiSA,Mixte,4,Groupe,Sans compagnie,Main Track,Stray Kids
 72,2023,4,Rover,Kai,Gars,3,Solo,SM Entertainment,Single,EXO
 73,2024,4,Magnetic,Illit,Fille,4,Groupe,BELIFT LAB,Debut,
 74,2015,4,Bang bang bang,BigBang,Gars,2,Groupe,YG Entertainment,Main Track,
@@ -103,7 +103,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 102,2014,5,Danger,BTS,Gars,3,Groupe,BigHit Entertainment,Main Track,
 103,2023,5,ISTJ,NCT Dream,Gars,4,Groupe,SM Entertainment,Main Track,NCT
 104,2019,5,Psycho,Red Velvet,Fille,3,Groupe,SM Entertainment,Main Track,
-105,2021,5,0X1=Lovesong,TXT & Seori,Mixte,4,Groupe,/Null/,Main Track,TXT
+105,2021,5,0X1=Lovesong,TXT & Seori,Mixte,4,Groupe,Sans compagnie,Main Track,TXT
 106,2021,5,Deja vu,Ateez,Gars,4,Groupe,KQ Entertainment,Main Track,
 107,2023,5,Sheesh,BabyMonster,Fille,5,Groupe,YG Entertainment,Main Track,
 108,2021,5,Permission to dance,BTS,Gars,3,Groupe,BigHit Entertainment,Single,
@@ -151,7 +151,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 150,2022,7,Darari,Treasure,Gars,4,Groupe,YG Entertainment,B-side,
 151,2023,7,S-Class,Stray Kids,Gars,4,Groupe,JYP Entertainment,Main Track,
 152,2012,7,Electric shock,f(x),Fille,2,Groupe,SM Entertainment,Main Track,
-153,2019,7,Boy with luv,BTS & Halsey,Mixte,3,Groupe,/Null/,Main Track,BTS
+153,2019,7,Boy with luv,BTS & Halsey,Mixte,3,Groupe,Sans compagnie,Main Track,BTS
 154,2020,7,La di da,Everglow,Fille,4,Groupe,Yuehua Entertainment,Main Track,
 155,2012,8,Gangnam style,Psy,Gars,2,Solo,YG Entertainment,Main Track,
 156,2021,8,Christmas EveL,Stray Kids,Gars,4,Groupe,JYP Entertainment,Single,
@@ -170,7 +170,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 169,2018,8,Boss,NCT U,Gars,4,Groupe,SM Entertainment,Main Track,NCT
 170,2014,8,Mamacita,Super Junior,Gars,2,Groupe,SM Entertainment,Main Track,
 171,2020,8,Panorama,Iz*one,Fille,4,Groupe,Off The Record Entertainment,Main Track,
-172,2021,8,My universe,BTS & Coldplay,Gars,3,Groupe,/Null/,Main Track,BTS
+172,2021,8,My universe,BTS & Coldplay,Gars,3,Groupe,Sans compagnie,Main Track,BTS
 173,2023,8,God of music,Seventeen,Gars,3,Groupe,Pledis Entertainment,Main Track,
 174,2022,8,Hype boy,NewJeans,Fille,4,Groupe,ADOR,Main Track,
 175,2022,8,Case 143,Stray Kids,Gars,4,Groupe,JYP Entertainment,Main Track,
@@ -283,7 +283,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 282,2020,13,Come back home,Oneus,Gars,4,Groupe,RBW,Single,
 283,2018,13,La vie en rose,Iz*one,Fille,4,Groupe,Off The Record Entertainment,Debut,
 284,2023,13,In bloom,Zerobaseone,Gars,5,Groupe,WAKEONE,Debut,
-285,2023,13,Hate Rodrigo,Yena & Yuqi,Fille,4,Duo,/Null/,Single,
+285,2023,13,Hate Rodrigo,Yena & Yuqi,Fille,4,Duo,Sans compagnie,Single,
 286,2019,13,Astronaut,Stray Kids,Gars,4,Groupe,JYP Entertainment,B-side,
 287,2024,14,Wish you hell,Wendy,Fille,3,Solo,SM Entertainment,Single,Red Velvet
 288,2019,14,Jopping,SuperM,Gars,4,Groupe,SM Entertainment,Main Track,
@@ -303,7 +303,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 302,2016,14,Stay,BlackPink,Fille,3,Groupe,YG Entertainment,B-side,
 303,2017,14,The eve,Exo,Gars,3,Groupe,SM Entertainment,B-side,
 304,2022,14,Darl+ing,Seventeen,Gars,3,Groupe,Pledis Entertainment,B-side,
-305,2024,14,New women,Lisa & Rosalía,Fille,3,Duo,/Null/,Single,BlackPink
+305,2024,14,New women,Lisa & Rosalía,Fille,3,Duo,Sans compagnie,Single,BlackPink
 306,2014,14,Just one day,BTS,Gars,3,Groupe,BigHit Entertainment,B-side,
 307,2024,14,Not okay,Ateez,Gars,4,Groupe,KQ Entertainment,Single,
 308,2024,14,Justice,Dreamcatcher,Fille,3,Groupe,Dreamcatcher Company,Main Track,
@@ -385,7 +385,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 384,2023,18,Crush,Zerobaseone,Gars,5,Groupe,WAKEONE,Main Track,
 385,2018,18,Bad boy,Red Velvet,Fille,3,Groupe,SM Entertainment,Main Track,
 386,2024,18,Little things,Xdinary Heroes,Gars,4,Groupe,JYP Entertainment,Main Track,
-387,2024,18,APT,Rosé & Bruno Mars,Mixte,3,Duo,/Null/,Single,
+387,2024,18,APT,Rosé & Bruno Mars,Mixte,3,Duo,Sans compagnie,Single,
 388,2017,18,Ko ko bop,Exo,Gars,3,Groupe,SM Entertainment,Main Track,
 389,2023,18,Erase me,Oneus,Gars,4,Groupe,RBW,Main Track,
 390,2020,18,Secret story of the swan,Iz*one,Fille,4,Groupe,Off The Record Entertainment,Main Track,
@@ -444,7 +444,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 443,2020,21,Mmm,Treasure,Gars,4,Groupe,YG Entertainment,B-side,
 444,2019,21,Middle of the night,Monsta X,Gars,3,Groupe,Starship Entertainment,B-side,
 445,2017,21,Knock knock,Twice,Fille,3,Groupe,JYP Entertainment,Main Track,
-446,2023,21,Spot!,Zico & Jennie,Mixte,3,Duo,/Null/,Single,Block B
+446,2023,21,Spot!,Zico & Jennie,Mixte,3,Duo,Sans compagnie,Single,Block B
 447,2024,21,Railway,Bang Chan,Gars,4,Solo,JYP Entertainment,B-side,Stray Kids
 448,2021,21,Don’t call me,SHINee,Gars,2,Groupe,SM Entertainment,Main Track,
 449,2019,21,Fun!,Fromis_9,Fille,4,Groupe,ASND,Main Track,
@@ -466,7 +466,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 465,2023,22,Feel the pop,Zerobaseone,Gars,5,Groupe,WAKEONE,Main Track,
 466,2018,22,Airplane mode,Noir,Gars,3,Groupe,LUK Factory,Main Track,
 467,2024,22,Whiplash,Aespa,Fille,4,Groupe,SM Entertainment,Main Track,
-468,2020,22,Pretty please,Jackson Wang & Galantis,Gars,3,Duo,/Null/,Single,Got7
+468,2020,22,Pretty please,Jackson Wang & Galantis,Gars,3,Duo,Sans compagnie,Single,Got7
 469,2011,22,Hot summer,f(x),Fille,2,Groupe,SM Entertainment,Main Track,
 470,2023,22,Shadow,Seventeen,Gars,3,Groupe,Pledis Entertainment,B-side,
 471,2017,22,Don't recall,KARD,Mixte,3,Groupe,DSP Media,B-side,
@@ -557,7 +557,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 556,2024,26,BBB,Purple Kiss,Fille,4,Groupe,RBW,Main Track,
 557,2021,26,The real,Ateez,Gars,4,Groupe,KQ Entertainment,B-side,
 558,2023,26,Untie,Viviz,Fille,4,Groupe,BPM Entertainment,B-side,
-559,2014,26,Some,SoYou & JunggiGo,Mixte,2,Duo,/Null/,Single,
+559,2014,26,Some,SoYou & JunggiGo,Mixte,2,Duo,Sans compagnie,Single,
 560,2022,26,Echo,The Boyz,Gars,4,Groupe,Cre.ker Entertainment,OST/Opening/Ending,
 561,2025,26,Stress,Chung Ha,Fille,3,Solo,MNH Entertainment,Main Track,
 562,2020,26,Ice age,MCND,Gars,4,Groupe,TOP Media,Main Track,
@@ -620,7 +620,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 619,2011,29,Roly poly,T-Ara,Fille,2,Groupe,MBK Entertainment,Main Track,
 620,2025,29,Beatiful life,Xdinary Heroes,Gars,4,Groupe,JYP Entertainment,Main Track,
 621,2018,29,Pirate king,Ateez,Gars,4,Groupe,KQ Entertainment,Main Track,
-622,2017,29,Palette,IU & G-Dragon,Mixte,2,Duo,/Null/,Main Track,IU
+622,2017,29,Palette,IU & G-Dragon,Mixte,2,Duo,Sans compagnie,Main Track,IU
 623,2016,29,The 7th sense,NCT U,Gars,4,Groupe,SM Entertainment,Debut,NCT
 624,2024,29,Shhh,Viviz,Fille,4,Groupe,BPM Entertainment,Main Track,
 625,2025,29,If I say I love you,BoyNextDoor,Gars,5,Groupe,KOZ Entertainment,Single,
@@ -647,7 +647,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 646,2011,30,Bubble pop!,Hyuna,Fille,2,Solo,P Nation,Single,
 647,2017,30,Bling bling,iKon,Gars,2,Groupe,YG Entertainment,Single,
 648,2020,30,Red moon,KARD,Mixte,3,Groupe,DSP Media,Main Track,
-649,2025,30,Born again,Lisa ft. Doja cat & Raye,Fille,3,Duo,/Null/,Single,BlackPink
+649,2025,30,Born again,Lisa ft. Doja cat & Raye,Fille,3,Duo,Sans compagnie,Single,BlackPink
 650,2021,30,Movin',MCND,Gars,4,Groupe,TOP Media,Main Track,
 651,2025,30,Know about me,Nmixx,Fille,4,Groupe,JYP Entertainment,Single,
 652,2021,30,Luna,Oneus,Gars,4,Groupe,RBW,Main Track,
@@ -702,7 +702,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 701,2019,32,Bomb bomb,KARD,Mixte,3,Groupe,DSP Media,Main Track,
 702,2021,32,Fireworks (I'm the one),Ateez,Gars,4,Groupe,KQ Entertainment,Main Track,
 703,2025,32,Good things,I-dle,Fille,4,Groupe,CUBE Entertainment,Main Track,
-704,2023,32,Vibe,Taeyang & Jimin,Gars,2,Duo,/Null/,Main Track,BigBang
+704,2023,32,Vibe,Taeyang & Jimin,Gars,2,Duo,Sans compagnie,Main Track,BigBang
 705,2033,33,Umm great,KickFlip,Gars,5,Groupe,JYP Entertainment,Main Track,
 706,2033,33,Izna,Izna,Fille,5,Groupe,WakeOne,Main Track,
 707,2033,33,Shangri-la,Vixx,Gars,2,Groupe,Jellyfish Entertainment,Single,
@@ -713,7 +713,7 @@ Nombre,Annee,Episode,Titre,Artiste,Sexe,Generation,Taille,Compagnie,Type,Groupe
 712,2033,33,Bad desire (With or without you),Enhypen,Gars,4,Groupe,Belift Lab,Main Track,
 713,2033,33,Love in my heart,BabyMonster,Fille,5,Groupe,YG Entertainment,B-side,
 714,2033,33,Fxxk it,BigBang,Gars,2,Groupe,YG Entertainment,Single,
-715,2033,33,Say yes,Punch & Loco,Mixte,3,Duo,/Null/,Single,
+715,2033,33,Say yes,Punch & Loco,Mixte,3,Duo,Sans compagnie,Single,
 716,2033,33,Shoot out,Monsta X,Gars,3,Groupe,Starship Entertainment,Main Track,
 717,2033,33,La la love me,Viviz,Fille,4,Groupe,BPM Entertainment,Main Track,
 718,2033,33,Just another girl,Kim Jae-Joong,Gars,2,Solo,C-JeS Entertainment,Main Track,
