@@ -681,7 +681,6 @@
     "085-BTS-On-Ep04-19.mp4",
     "088-Stray_Kids-Lalalala-Ep04-22.mp4",
     "093-Stray_Kids-Gods_menu-Ep05-05.mp4",
-    "099-Stray_Kids-Lose_my_breath-Ep05-11.mp4",
     "105-TXT-0X1=Lovesong-Ep05-17.mp4",
     "114-Stray_Kids-Jjam-Ep06-04.mp4",
     "119-TXT-Sugar_rush_ride-Ep06-09.mp4",
@@ -739,7 +738,6 @@
     "480-Xdinary_Heroes-Test_me-Ep22-18.mp4",
     "484-Lee_Know-Youth-Ep22-22.mp4",
     "486-Changbin-Ultra-Ep23-2.mp4",
-    "487-Xdinary_Heroes-Good_enough-Ep23-3.mp4",
     "489-Stray_Kids-Escape-Ep23-5.mp4",
     "505-Dreamcatcher-Reason-Ep23-21.mp4",
     "511-Stray_Kids-Burnin_tires-Ep24-5.mp4",
@@ -766,5 +764,10 @@
     "699-Dreamcatcher-Beacause-Ep32-17.mp4",
     "712-Enhypen-Bad_desire_With_or_without_you-Ep33-8.mp4",
     "717-Viviz-La_la_love_me-Ep33-13.mp4"
+  ],
+  "liste_105": [
+    "099-Stray_Kids-Lose_my_breath-Ep05-11.mp4",
+    "487-Xdinary_Heroes-Good_enough-Ep23-3.mp4"
   ]
+
 }
