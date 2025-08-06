@@ -151,17 +151,19 @@ video::-webkit-media-controls-enclosure {
 }
     
 #profil-selection {
-    margin-top: 60px;  /* grande marge au début */
-    margin-bottom: 60px;
-    transition: margin 0.3s ease;
+    margin: 60px auto; /* marge verticale + centrage horizontal */
+    padding: 30px; /* marges intérieures pour que les éléments respirent */
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
-    gap: 10px;
+    justify-content: center; /* centrer horizontalement le contenu */
+    gap: 20px;
+    width: fit-content; /* taille automatique selon le contenu */
     border-radius: 6px;
     background-color: #111;
     border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* optionnel, pour un effet visuel */
 }
+
 
 #profil-selection label {
     color: white;
@@ -233,7 +235,8 @@ const allLists = {
     liste_0, liste_5, liste_10, liste_15, liste_20,
     liste_25, liste_30, liste_35, liste_40, liste_45,
     liste_50, liste_55, liste_60, liste_65, liste_70,
-    liste_75, liste_80, liste_85, liste_90, liste_95, liste_100
+    liste_75, liste_80, liste_85, liste_90, liste_95,
+    liste_100, liste_105
 };
 
 let firstVideo = '';
@@ -249,7 +252,7 @@ document.getElementById('profil').addEventListener('change', async function () {
         const data = await response.json();
 
         // Charger toutes les listes dans les variables
-        for (let i = 0; i <= 100; i += 5) {
+        for (let i = 0; i <= 105; i += 5) {
             let key = `liste_${i}`;
             if (data[key]) {
                 allLists[key] = [...data[key]]; // copier la liste
