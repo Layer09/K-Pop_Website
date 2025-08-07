@@ -187,38 +187,41 @@
 
             loadNewVideo();
 
-            document.addEventListener('keydown', (event) => {
-            const key = event.key.toLowerCase();
-        
-            if (key === 'p') {
-                if (mainVideo.paused) {
-                    mainVideo.play();
-                } else {
-                    mainVideo.pause();
+           document.addEventListener('keydown', (event) => {
+                const activeTag = document.activeElement.tagName.toLowerCase();
+                if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+                    return; // ne rien faire si un champ est actif
                 }
-            }
-        
-            if (key === 'a') {
-                chronoVideo.style.display = 'none';
-            }
-        
-            if (key === 's') {
-                loadNewVideo();
-            }
-
-            if (key === 'r') {
-                // Redémarrer la vidéo principale
-                mainVideo.currentTime = 0;
-                mainVideo.play();
             
-                if (chronoVideo.style.display !== 'none') {
-                    // Redémarrer le chrono si encore visible
-                    chronoVideo.currentTime = 0;
-                    chronoVideo.play();
+                const key = event.key.toLowerCase();
+            
+                if (key === 'p') {
+                    if (mainVideo.paused) {
+                        mainVideo.play();
+                    } else {
+                        mainVideo.pause();
+                    }
                 }
-            }
+            
+                if (key === 'a') {
+                    chronoVideo.style.display = 'none';
+                }
+            
+                if (key === 's') {
+                    loadNewVideo();
+                }
+            
+                if (key === 'r') {
+                    mainVideo.currentTime = 0;
+                    mainVideo.play();
+            
+                    if (chronoVideo.style.display !== 'none') {
+                        chronoVideo.currentTime = 0;
+                        chronoVideo.play();
+                    }
+                }
+            });
 
-        });
 
         });
     </script>
