@@ -200,9 +200,80 @@ video::-webkit-media-controls-enclosure {
         width: 95%;
     }
 }
+    /* Conteneur du toggle */
+#mode-rapide-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* Texte du mode */
+.mode-label {
+    color: #FFFFFF;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Toggle switch style */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider ON/OFF */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #8A6ACE;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00C5D5;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
     </style>
     <section style="width: 100%;">
     <div id="nav-container"></div>
+        
+    <!-- Bouton Mode rapide -->
+    <div id="mode-rapide-container">
+        <span class="mode-label">Mode normal</span>
+        <label class="switch">
+            <input type="checkbox" id="toggleModeRapide">
+            <span class="slider"></span>
+        </label>
+        <span class="mode-label">Mode rapide</span>
+    </div>
+        
     <!-- Barre latérale -->
     <div id="sidebar">
         <h3>Volume Global</h3>
@@ -253,47 +324,58 @@ video::-webkit-media-controls-enclosure {
             return video;
         }
     
+        let modeRapide = false; // État du bouton
+
+        document.getElementById('toggleModeRapide').addEventListener('change', function () {
+            modeRapide = this.checked;
+        });
+        
         function startChallenge() {
-            // Supprimer les anciennes vidéos avant de commencer une nouvelle
             cleanupVideos();
-    
-            // Créer et ajouter le conteneur pour la première vidéo
+        
+            // Sélection aléatoire des deux vidéos
             firstVideo = getRandomVideo();
+            secondVideo = getRandomVideo(firstVideo);
+        
+            // MODE RAPIDE ACTIVÉ : passer directement aux petites vidéos
+            if (modeRapide) {
+                document.getElementById('dual-videos').classList.remove('hidden');
+                choiceA.src = './videos/' + firstVideo;
+                choiceB.src = './videos/' + secondVideo;
+                choiceA.play();
+                choiceB.play();
+                return;
+            }
+        
+            // MODE NORMAL : lecture des deux grandes vidéos
             const singleContainer = document.createElement('div');
             singleContainer.id = 'single-video';
             singleContainer.classList.add('single-video');
             singleContainer.innerHTML = `<video width="720" height="405" id="videoA" controls></video>`;
             document.body.appendChild(singleContainer);
-    
+        
             let videoA = document.getElementById('videoA');
             videoA.src = './videos/' + firstVideo;
-            /* videoA.volume = 0.1; */
             videoA.play();
-    
+        
             videoA.onended = () => {
-                // Supprimer complètement le conteneur vidéo A
                 videoA.pause();
-                singleContainer.remove();  // Retirer le conteneur et la vidéo
-    
-                // Créer et ajouter le conteneur pour la deuxième vidéo
-                secondVideo = getRandomVideo(firstVideo);
+                singleContainer.remove();
+        
                 const secondContainer = document.createElement('div');
                 secondContainer.id = 'second-video';
                 secondContainer.classList.add('single-video');
                 secondContainer.innerHTML = `<video width="720" height="405" id="videoB" controls></video>`;
                 document.body.appendChild(secondContainer);
-    
+        
                 let videoB = document.getElementById('videoB');
                 videoB.src = './videos/' + secondVideo;
-                /* videoB.volume = 0.1; */
                 videoB.play();
-    
+        
                 videoB.onended = () => {
-                    // Supprimer complètement le conteneur vidéo B
                     videoB.pause();
-                    secondContainer.remove();  // Retirer le conteneur et la vidéo
-    
-                    // Montrer les petites vidéos
+                    secondContainer.remove();
+        
                     document.getElementById('dual-videos').classList.remove('hidden');
                     choiceA.src = './videos/' + firstVideo;
                     choiceB.src = './videos/' + secondVideo;
@@ -302,7 +384,7 @@ video::-webkit-media-controls-enclosure {
                 };
             };
         }
-    
+
         function cleanupVideos() {
             // Vérifie si un conteneur vidéo existe déjà et le supprime
             let oldSingleVideo = document.getElementById('single-video');
