@@ -182,6 +182,69 @@ video::-webkit-media-controls-enclosure {
     transition: all 0.3s ease;
 }
 
+
+/* Conteneur du toggle */
+#mode-rapide-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* Texte du mode */
+.mode-label {
+    color: #FFFFFF;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Toggle switch style */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider ON/OFF */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #8A6ACE;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00C5D5;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+
 </style>
 
 <section style="width: 100%;">
@@ -200,6 +263,16 @@ video::-webkit-media-controls-enclosure {
             <option value="Testeur">Testeur</option>
         </select>
     </div>
+
+    <!-- Bouton Mode rapide -->
+    <div id="mode-rapide-container">
+        <label class="switch">
+            <input type="checkbox" id="toggleModeRapide">
+            <span class="slider"></span>
+        </label>
+        <span class="mode-label">Mode rapide</span>
+    </div>
+
 
     <!-- Barre latérale -->
     <div id="sidebar">
@@ -278,7 +351,13 @@ function getRandomNonEmptyList() {
     const [key, liste] = nonEmptyLists[Math.floor(Math.random() * nonEmptyLists.length)];
     return { key, liste };
 }
+    
+let modeRapide = false; // état du bouton
 
+document.getElementById('toggleModeRapide').addEventListener('change', function () {
+    modeRapide = this.checked;
+});
+    
 function startChallenge() {
     cleanupVideos();
 
@@ -303,6 +382,17 @@ function startChallenge() {
     // Supprimer les vidéos de la liste
     allLists[key] = liste.filter((_, idx) => !indices.includes(idx));
 
+    // MODE RAPIDE ACTIVÉ : passer directement aux petites vidéos
+    if (modeRapide) {
+        document.getElementById('dual-videos').classList.remove('hidden');
+        choiceA.src = './videos/' + firstVideo;
+        choiceB.src = './videos/' + secondVideo;
+        choiceA.play();
+        choiceB.play();
+        return;
+    }
+
+    // Mode normal
     const singleContainer = document.getElementById('single-video');
     const videoA = document.getElementById('videoA');
     singleContainer.classList.remove('hidden');
