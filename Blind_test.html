@@ -189,6 +189,7 @@
 
            document.addEventListener('keydown', (event) => {
                 const activeTag = document.activeElement.tagName.toLowerCase();
+                console.log(`Touche pressée : ${event.key}`);
                 if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
                     return; // ne rien faire si un champ est actif
                 }
