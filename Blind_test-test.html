@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let mainLoaded = false;
     let chronoLoaded = false;
     let loadingTimeout;
-    let currentMode = "10s";
+    let currentMode = "10";
     let shortDuration = null;
     let repeatCount = 0;
     let shortStartTime = 0;
@@ -186,10 +186,12 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('click', () => {
             const newMode = btn.dataset.mode;
             if (newMode !== currentMode) {
+                // mise à jour bouton actif
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
                 currentMode = newMode;
-                compteur--; // éviter double comptage
-                if (compteur < 0) compteur = 0;
-                loadNewVideo(true);
+                loadNewVideo(false); // on repart proprement et on compte
             }
         });
     });
@@ -203,10 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
         applyGlobalVolume();
         volumeValue.textContent = volumeSlider.value + "%";
     });
-
-    volumeSlider.value = 100;
-    applyGlobalVolume();
-    volumeValue.textContent = volumeSlider.value + "%";
 
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
@@ -250,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
             shortDuration = 1;
             shortStartTime = getRandomStart();
         }
-
 
         chronoVideo.currentTime = 0;
         chronoVideo.style.display = 'block';
@@ -300,9 +297,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     mainVideo.pause();
                 }, shortDuration * 1000);
             } else {
+                // jouer la vidéo entière PUIS enchaîner
                 chronoVideo.style.display = 'none';
                 mainVideo.currentTime = 0;
                 mainVideo.play();
+                mainVideo.onended = () => {
+                    loadNewVideo();
+                };
             }
         } else {
             chronoVideo.style.display = 'none';
@@ -329,7 +330,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     mainVideo.addEventListener('ended', () => {
-        loadNewVideo();
+        // pour le mode 10s ou quand on regarde toute la vidéo directement
+        if (!shortDuration) {
+            loadNewVideo();
+        }
     });
 
     answerBtn.addEventListener('click', () => {
