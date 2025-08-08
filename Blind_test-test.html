@@ -181,24 +181,36 @@ document.addEventListener("DOMContentLoaded", () => {
     let repeatCount = 0;
     let shortStartTime = 0;
 
-    // === Sélection mode ===
-    document.querySelectorAll('.mode-btn').forEach(btn => {
+    // --- Gestion des boutons mode ---
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    modeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const newMode = btn.dataset.mode;
             if (newMode !== currentMode) {
-                // mise à jour bouton actif
-                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
                 currentMode = newMode;
-                loadNewVideo(false); // on repart proprement et on compte
+                compteur--; // éviter double comptage
+                if (compteur < 0) compteur = 0;
+                updateModeButtons();
+                loadNewVideo(true);
             }
         });
     });
 
+    function updateModeButtons() {
+        modeButtons.forEach(btn => {
+            if (btn.dataset.mode === currentMode) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    // --- Volume ---
     function applyGlobalVolume() {
         const vol = volumeSlider.value / 100;
         mainVideo.volume = vol;
+        chronoVideo.volume = vol;
     }
 
     volumeSlider.addEventListener('input', () => {
@@ -206,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeValue.textContent = volumeSlider.value + "%";
     });
 
+    // --- Sélection vidéo aléatoire ---
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
             alert('Bravo ! Tu as fait un tour des musiques !');
@@ -222,12 +235,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return num.toString().padStart(4, '0');
     }
 
+    // --- Chargement nouvelle vidéo ---
     function loadNewVideo(force = false) {
         mainLoaded = false;
         chronoLoaded = false;
         repeatCount = 0;
 
         clearTimeout(loadingTimeout);
+        loadingMessage.style.display = 'none'; // au cas où
+
         loadingTimeout = setTimeout(() => {
             loadingMessage.style.display = 'block';
         }, 1000);
@@ -236,9 +252,11 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.src = newVideoSrc;
         mainVideo.load();
 
+        // Choix chrono selon mode
         if (currentMode === "10") {
             chronoVideo.src = "./images/Chrono.mp4?v=" + Date.now();
             shortDuration = null;
+            shortStartTime = 0;
         } else if (currentMode === "3") {
             chronoVideo.src = "./images/3s.mp4?v=" + Date.now();
             shortDuration = 3;
@@ -265,52 +283,66 @@ document.addEventListener("DOMContentLoaded", () => {
         return 5 + Math.random() * 10; // entre 5 et 15 secondes
     }
 
+    // --- Contrôle précision coupe extrait ---
+    function onTimeUpdate() {
+        if (shortDuration && mainVideo.currentTime >= shortStartTime + shortDuration) {
+            mainVideo.pause();
+            mainVideo.removeEventListener('timeupdate', onTimeUpdate);
+        }
+    }
+
+    // --- Démarrage lecture synchronisée ---
     function tryStartVideos() {
         if (mainLoaded && chronoLoaded) {
             clearTimeout(loadingTimeout);
             loadingMessage.style.display = 'none';
 
             if (shortDuration) {
+                repeatCount = 0;
                 mainVideo.currentTime = shortStartTime;
+
+                // Ajout écouteur timeupdate pour coupe précise
+                mainVideo.addEventListener('timeupdate', onTimeUpdate);
+
+                chronoVideo.currentTime = 0;
+                chronoVideo.style.display = 'block';
+
                 mainVideo.play();
                 chronoVideo.play();
-                setTimeout(() => {
-                    mainVideo.pause();
-                }, shortDuration * 1000);
             } else {
+                // Mode 10s ou aucun extrait court
+                mainVideo.currentTime = 0;
+                chronoVideo.style.display = 'none';
                 mainVideo.play();
-                chronoVideo.play();
             }
         }
     }
 
-    // === Gestion répétitions pour 1s et 3s ===
+    // --- Gestion répétitions pour 1s et 3s ---
     chronoVideo.addEventListener('ended', () => {
         if (shortDuration) {
             repeatCount++;
             if (repeatCount < 2) {
+                // 2ème répétition extrait + chrono
                 mainVideo.currentTime = shortStartTime;
+                mainVideo.addEventListener('timeupdate', onTimeUpdate);
                 chronoVideo.currentTime = 0;
-                chronoVideo.play();
+                chronoVideo.style.display = 'block';
                 mainVideo.play();
-                setTimeout(() => {
-                    mainVideo.pause();
-                }, shortDuration * 1000);
+                chronoVideo.play();
             } else {
-                // jouer la vidéo entière PUIS enchaîner
+                // Après 2 répétitions, on masque chrono et lance la vidéo entière
                 chronoVideo.style.display = 'none';
+                mainVideo.removeEventListener('timeupdate', onTimeUpdate);
                 mainVideo.currentTime = 0;
                 mainVideo.play();
-                mainVideo.onended = () => {
-                    loadNewVideo();
-                };
             }
         } else {
             chronoVideo.style.display = 'none';
         }
     });
 
-    // === Événements vidéo ===
+    // --- Événements vidéo ---
     mainVideo.addEventListener('loadeddata', () => {
         mainLoaded = true;
         tryStartVideos();
@@ -330,12 +362,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     mainVideo.addEventListener('ended', () => {
-        // pour le mode 10s ou quand on regarde toute la vidéo directement
-        if (!shortDuration) {
-            loadNewVideo();
-        }
+        loadNewVideo();
     });
 
+    // --- Boutons réponse & passage ---
     answerBtn.addEventListener('click', () => {
         chronoVideo.style.display = 'none';
     });
@@ -344,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadNewVideo(true);
     });
 
+    // --- Raccourcis clavier ---
     document.addEventListener('keydown', (event) => {
         const activeTag = document.activeElement.tagName.toLowerCase();
         if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
@@ -366,13 +397,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (shortDuration) {
                 repeatCount = 0;
                 mainVideo.currentTime = shortStartTime;
+                mainVideo.addEventListener('timeupdate', onTimeUpdate);
                 chronoVideo.currentTime = 0;
                 chronoVideo.style.display = 'block';
                 chronoVideo.play();
                 mainVideo.play();
-                setTimeout(() => {
-                    mainVideo.pause();
-                }, shortDuration * 1000);
             } else {
                 mainVideo.currentTime = 0;
                 mainVideo.play();
@@ -384,6 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    updateModeButtons();
     loadNewVideo();
 });
 
