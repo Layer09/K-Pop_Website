@@ -7,77 +7,116 @@
     <link rel="icon" type="image/png" href="images/icone.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        #video-container {
-            position: relative;
-            width: 80%;
-            margin: 20px auto;
-        }
+#video-container {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+}
 
-        #mainVideo {
-            width: 100%;
-        }
+#mainVideo {
+    width: 100%;
+}
 
-        #chronoVideo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
+#chronoVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
 
-        #controls-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
+#controls-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
 
-        #controls-container img {
-            width: 100px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+#controls-container img {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
 
-        #controls-container img:hover {
-            transform: scale(1.1);
-        }
+#controls-container img:hover {
+    transform: scale(1.1);
+}
 
-        #compteur-container {
-            color: white;
-            font-size: 5em;
-            margin-top: 15px;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-        }
+#compteur-container {
+    color: white;
+    font-size: 5em;
+    margin-top: 15px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+}
 
-        #loading-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 2em;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px 40px;
-            border-radius: 10px;
-            display: none;
-            z-index: 20;
-        }
+#loading-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2em;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+    display: none;
+    z-index: 20;
+}
 
-        #progress-mode-container {
-            width: 80%;
-            margin: 6px auto 18px auto;
-            background: rgba(255,255,255,0.03);
-            padding: 10px 14px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-        }
+/* --- Ajout minimal pour l'échelle 10s / 3s / 1s (seulement) --- */
+#progress-mode-container {
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+#mode-options {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* boutons de durée - même taille, couleurs limitées */
+.mode-btn {
+    width: 100px;
+    height: 44px;
+    background: #000; /* noir */
+    color: #fff;      /* blanc (texte) */
+    border: 2px solid #0000FF; /* bleu */
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.12s, background 0.12s, border-color 0.12s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.mode-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* état actif */
+.mode-btn.active {
+    background: #8A2BE2; /* violet */
+    border-color: #0000FF; /* bleu */
+    color: #fff;
+}
+
+/* sécurité : aucun texte noir sur bouton */
+.mode-btn, #controls-container img {
+    color: #fff;
+}
     </style>
 </head>
 <body>
@@ -86,43 +125,40 @@
         <h2 class="subtitle">Blind test</h2>
     </header>
 
-        <div id="nav-container"></div>
+<div id="nav-container"></div>
 
-    <!-- NOUVEAU : ÉCHELLE DE PROGRESSION (sous le nav) -->
-    <div id="progress-mode-container">
-        <label class="mode-label">Durée du challenge :</label>
-        <div id="mode-options" role="radiogroup" aria-label="Modes de durée">
-            <button class="mode-btn active" data-mode="10">10s</button>
-            <button class="mode-btn" data-mode="3">3s</button>
-            <button class="mode-btn" data-mode="1">1s</button>
-        </div>
-        <div id="mode-help">Par défaut : <strong>10s</strong>. Les modes <em>3s</em> et <em>1s</em> jouent un extrait aléatoire (extrait de 3s ou 1s) deux fois avec une superposition.</div>
+<!-- Sélection durée challenge -->
+<div id="progress-mode-container">
+    <div id="mode-options">
+        <button class="mode-btn active" data-mode="10">10s</button>
+        <button class="mode-btn" data-mode="3">3s</button>
+        <button class="mode-btn" data-mode="1">1s</button>
     </div>
+</div>
 
-    <div id="sidebar">
-        <h3>Volume Global</h3>
-        <input type="range" id="globalVolume" min="0" max="100" step="1" />
-        <span id="volumeValue"></span>
-    </div>
+<div id="sidebar">
+    <h3>Volume Global</h3>
+    <input type="range" id="globalVolume" min="0" max="100" step="1" />
+    <span id="volumeValue"></span>
+</div>
 
-    <div id="video-container">
-        <div id="loading-message">Chargement en cours...</div>
-        <video id="mainVideo" controls crossorigin="anonymous"></video>
-        <video id="chronoVideo" src="./images/Chrono.mp4" crossorigin="anonymous"></video>
-    </div>
+<div id="video-container">
+    <div id="loading-message">Chargement en cours...</div>
+    <video id="mainVideo" controls crossorigin="anonymous"></video>
+    <video id="chronoVideo" crossorigin="anonymous"></video>
+</div>
 
-    <div id="controls-container">
-        <img id="answer-btn" src="./images/Answer.png" alt="Répondre" />
-        <img id="skip-btn" src="./images/Skip.png" alt="Passer" />
-    </div>
+<div id="controls-container">
+    <img id="answer-btn" src="./images/Answer.png" alt="Répondre" />
+    <img id="skip-btn" src="./images/Skip.png" alt="Passer" />
+</div>
 
-    <div id="compteur-container">
-        <span id="video-counter">0000</span>
-    </div>
+<div id="compteur-container">
+    <span id="video-counter">0000</span>
+</div>
 
-    <!-- fichiers communs / liste de vidéos -->
-    <script src="./JS_commun.js"></script>
-    <script src="./videos/liste_video.js"></script>
+<script src="./JS_commun.js"></script>
+<script src="./videos/liste_video.js"></script>
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     const mainVideo = document.getElementById('mainVideo');
@@ -133,374 +169,183 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadingMessage = document.getElementById('loading-message');
     const globalVolume = document.getElementById('globalVolume');
     const volumeValue = document.getElementById('volumeValue');
-
     const modeButtons = document.querySelectorAll('.mode-btn');
 
-    // Variables générales
-    let titresRestants = Array.isArray(window.videoList) ? [...videoList] : [];
+    let titresRestants = [...videoList];
     let compteur = 0;
-    let mainLoaded = false, chronoLoaded = false;
-    let loadingTimeout = null;
-
-    // Mode: '10' (default), '3', '1'
     let currentMode = '10';
+    let segmentPlayCount = 0;
+    let segmentStart = 0;
+    let segmentLength = 10;
+    let overlaySrc = './images/Chrono.mp4';
+    let playlistStarted = false;
 
-    // Variables pour mode 3s/1s
-    let currentSegmentStart = 0;
-    let currentSegmentLength = 10; // default 10
-    let currentOverlaySrc = './images/Chrono.mp4';
-    let segmentPlayCount = 0; // how many times excerpt has been played (0,1,2)
-    let awaitingOverlayEnd = false;
-
-    // Clean up handlers (helpful on reloads)
-    function resetEventListeners() {
-        // remove timeupdate and ended handlers by cloning nodes
-        const newMain = mainVideo.cloneNode(true);
-        mainVideo.parentNode.replaceChild(newMain, mainVideo);
-        // reassign references - but since we captured earlier refs, just keep using document.getElementById again
-    }
-
-    // Format compteur
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
     }
 
-    // Apply global volume to videos
     function applyGlobalVolume() {
-        const vol = (globalVolume.value || 100) / 100;
-        const elems = document.querySelectorAll('video');
-        elems.forEach(v => { try { v.volume = vol; } catch(e){} });
-        if (volumeValue) volumeValue.textContent = Math.round(vol * 100) + '%';
+        const vol = globalVolume.value / 100;
+        document.querySelectorAll('video').forEach(v => v.volume = vol);
+        volumeValue.textContent = Math.round(vol * 100) + '%';
     }
 
-    // Pick a random file and remove it from remaining list
     function pickRandomVideo() {
-        if (titresRestants.length === 0) {
+        if (titresRestants.length === 0 && playlistStarted) {
             alert('Bravo ! Tu as fait un tour des musiques !');
             titresRestants = [...videoList];
             compteur = 0;
             videoCounter.textContent = formatCompteur(compteur);
         }
-        const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
-        titresRestants = titresRestants.filter(v => v !== randomFile);
-        // Return relative path
-        return `./videos/${randomFile}`;
+        playlistStarted = true;
+        const file = titresRestants[Math.floor(Math.random() * titresRestants.length)];
+        titresRestants = titresRestants.filter(v => v !== file);
+        return `./videos/${file}`;
     }
 
-    // Clear any timeouts and overlay state
-    function clearChallengeState() {
-        clearTimeout(loadingTimeout);
-        loadingMessage.style.display = 'none';
+    function stopAll() {
+        mainVideo.pause();
+        chronoVideo.pause();
         chronoVideo.style.display = 'none';
-        // Reset counts
-        segmentPlayCount = 0;
-        awaitingOverlayEnd = false;
     }
 
-    // Load a new video (entry point)
     function loadNewVideo() {
-        clearChallengeState();
+        stopAll();
+        segmentPlayCount = 0;
 
-        mainLoaded = false;
-        chronoLoaded = false;
-
-        // show loading message if >1s
-        clearTimeout(loadingTimeout);
-        loadingTimeout = setTimeout(() => {
+        clearTimeout(window.loadingTimeout);
+        window.loadingTimeout = setTimeout(() => {
             loadingMessage.style.display = 'block';
         }, 1000);
 
-        // pick file and set src
-        const newVideoSrc = pickRandomVideo();
-        mainVideo.src = newVideoSrc;
+        const src = pickRandomVideo();
+        mainVideo.src = src;
         mainVideo.load();
 
-        // default overlay = Chrono.mp4 for 10s mode
         if (currentMode === '10') {
-            currentOverlaySrc = './images/Chrono.mp4';
-            currentSegmentLength = 10;
+            segmentLength = 10;
+            overlaySrc = './images/Chrono.mp4';
         } else if (currentMode === '3') {
-            currentOverlaySrc = './images/3s.mp4';
-            currentSegmentLength = 3;
-        } else if (currentMode === '1') {
-            currentOverlaySrc = './images/1s.mp4';
-            currentSegmentLength = 1;
+            segmentLength = 3;
+            overlaySrc = './images/3s.mp4';
+        } else {
+            segmentLength = 1;
+            overlaySrc = './images/1s.mp4';
         }
-
-        // prepare chronoVideo src but don't display yet - will be used differently depending on mode
-        chronoVideo.src = currentOverlaySrc;
+        chronoVideo.src = overlaySrc;
         chronoVideo.load();
 
-        // increment counter
         compteur++;
         videoCounter.textContent = formatCompteur(compteur);
-
-        applyGlobalVolume();
-
-        // Re-bind handlers for this new video element (in case replaced)
-        bindVideoHandlers();
     }
 
-    // Try to start videos when both loaded (used for 10s default)
-    function tryStartVideos_default() {
-        clearTimeout(loadingTimeout);
-        loadingMessage.style.display = 'none';
-        // For default 10s mode: start both main and chrono simultaneously
-        chronoVideo.currentTime = 0;
+    function startDefaultMode() {
         chronoVideo.style.display = 'block';
-        Promise.all([mainVideo.play().catch(()=>{}), chronoVideo.play().catch(()=>{})]);
+        mainVideo.play();
+        chronoVideo.play();
     }
 
-    // Start challenge for segment modes (3s/1s)
-    function startSegmentChallenge() {
-        // We'll have: choose a random start time between 5s and 15s (or limited by duration)
-        segmentPlayCount = 0;
-        awaitingOverlayEnd = false;
-
-        // Ensure we have metadata to compute duration
-        if (isNaN(mainVideo.duration) || !isFinite(mainVideo.duration)) {
-            // wait for loadedmetadata
-            const onMeta = () => {
-                mainVideo.removeEventListener('loadedmetadata', onMeta);
-                computeAndPlaySegment();
-            };
-            mainVideo.addEventListener('loadedmetadata', onMeta);
-        } else {
-            computeAndPlaySegment();
-        }
-    }
-
-    function computeAndPlaySegment() {
-        const dur = mainVideo.duration || 0;
-
-        // Compute start: random between 5s and 15s (real numbers), but ensure that start + segmentLength <= dur - 0.1
+    function startSegmentMode() {
+        const dur = mainVideo.duration;
         const minStart = 5;
-        const preferredMaxStart = 15;
-        const maxStartAllowed = Math.max(minStart, Math.floor(Math.max(minStart, dur - currentSegmentLength - 0.2)));
-        const upper = Math.min(preferredMaxStart, maxStartAllowed);
-        let start;
-        if (upper <= minStart) {
-            // fallback: 0 or small
-            start = Math.max(0, Math.min(Math.max(0, dur - currentSegmentLength - 0.1), minStart));
-        } else {
-            start = (Math.random() * (upper - minStart)) + minStart;
-        }
-        // ensure start + segmentLength <= dur
-        if (start + currentSegmentLength > dur - 0.05) {
-            start = Math.max(0, dur - currentSegmentLength - 0.05);
-        }
-        currentSegmentStart = start;
+        const maxStart = Math.min(15, dur - segmentLength - 0.1);
+        segmentStart = Math.random() * (maxStart - minStart) + minStart;
+        segmentStart = Math.max(0, Math.min(segmentStart, dur - segmentLength - 0.1));
 
-        // Set mainVideo to segment start
-        mainVideo.currentTime = currentSegmentStart;
+        playSegment();
+    }
 
-        // Prepare overlay
+    function playSegment() {
         chronoVideo.currentTime = 0;
         chronoVideo.style.display = 'block';
+        mainVideo.currentTime = segmentStart;
+        mainVideo.play();
+        chronoVideo.play();
 
-        // Play main video and overlay simultaneously
-        Promise.resolve()
-            .then(() => mainVideo.play().catch(()=>{}))
-            .then(() => chronoVideo.play().catch(()=>{}));
-
-        // We'll pause mainVideo when we reach the end of the short excerpt
-        // Set flag and listeners
-        awaitingOverlayEnd = true;
-        // Add listener to pause mainVideo at segment end
-        const onTimeUpdate = function () {
-            if (!awaitingOverlayEnd) return;
-            if (mainVideo.currentTime >= currentSegmentStart + currentSegmentLength - 0.04) {
-                // Pause at end of excerpt
-                try { mainVideo.pause(); } catch(e) {}
-                // remove the timeupdate listener for now
-                mainVideo.removeEventListener('timeupdate', onTimeUpdate);
-                // Now wait for overlay to finish; overlay 'ended' will handle replay logic
+        const pauseAt = segmentStart + segmentLength;
+        mainVideo.ontimeupdate = () => {
+            if (mainVideo.currentTime >= pauseAt) {
+                mainVideo.pause();
             }
         };
-        mainVideo.addEventListener('timeupdate', onTimeUpdate);
 
-        // Overlay ended handling
-        // We'll attach a one-time handler; overlay 'ended' fires when chronoVideo finishes its duration.
-        const onOverlayEnded = function () {
-            // overlay ended once
+        chronoVideo.onended = () => {
             segmentPlayCount++;
             if (segmentPlayCount < 2) {
-                // replay the excerpt: restart overlay and restart the excerpt
-                // restart overlay
-                chronoVideo.currentTime = 0;
-                // restart excerpt
-                mainVideo.currentTime = currentSegmentStart;
-                // show overlay and play both
-                chronoVideo.style.display = 'block';
-                Promise.all([mainVideo.play().catch(()=>{}), chronoVideo.play().catch(()=>{})]);
-                // Reattach timeupdate listener to pause again at end of excerpt
-                const onTimeUpdate2 = function () {
-                    if (mainVideo.currentTime >= currentSegmentStart + currentSegmentLength - 0.04) {
-                        try { mainVideo.pause(); } catch(e) {}
-                        mainVideo.removeEventListener('timeupdate', onTimeUpdate2);
-                        // Wait for overlay end again (this handler will catch it as well)
-                    }
-                };
-                mainVideo.addEventListener('timeupdate', onTimeUpdate2);
+                playSegment();
             } else {
-                // segment played 2 times and overlay ended -> play full base clip without overlay
                 chronoVideo.style.display = 'none';
-                // play entire mainVideo from beginning (or could continue from where)
+                mainVideo.ontimeupdate = null;
                 mainVideo.currentTime = 0;
-                Promise.resolve(mainVideo.play().catch(()=>{}));
-                awaitingOverlayEnd = false;
-                // cleanup: remove this handler
+                mainVideo.play();
             }
         };
-
-        // make sure to remove previous ended listeners to avoid duplicates
-        chronoVideo.removeEventListener('ended', chronoVideo._segmentEndedHandler || (()=>{}));
-        chronoVideo._segmentEndedHandler = onOverlayEnded;
-        chronoVideo.addEventListener('ended', onOverlayEnded);
     }
 
-    // Bind handlers for events (mainVideo and chronoVideo)
-    function bindVideoHandlers() {
-        // Re-get elements (they may have been replaced)
-        const mv = document.getElementById('mainVideo');
-        const cv = document.getElementById('chronoVideo');
-
-        // loadeddata for default behavior (10s)
-        mv.addEventListener('loadeddata', () => {
-            mainLoaded = true;
-            if (currentMode === '10') {
-                // Wait until chrono loaded too
-                // but chronoLoaded updated by chrono loadeddata event
-                if (chronoLoaded) tryStartVideos_default();
-            } else {
-                // for 3s/1s we'll start when metadata loaded
-                // We use startSegmentChallenge which will wait for loadedmetadata if needed
-                startSegmentChallenge();
-                // hide loading message
-                clearTimeout(loadingTimeout);
-                loadingMessage.style.display = 'none';
-            }
-        });
-
-        cv.addEventListener('loadeddata', () => {
-            chronoLoaded = true;
-            // For 10s mode, if main loaded, start them
-            if (currentMode === '10' && mainLoaded) {
-                tryStartVideos_default();
-            }
-        });
-
-        // Keep existing behavior: when main is paused/played, control chrono
-        mv.addEventListener('pause', () => {
-            // If we are in segment mode and we intentionally paused at segment end, don't pause overlay.
-            if (currentMode === '10') {
-                try { cv.pause(); } catch(e) {}
-            } else {
-                // in segment modes, overlay should continue until it ends (it's independent)
-            }
-        });
-
-        mv.addEventListener('play', () => {
-            if (currentMode === '10') {
-                if (cv.paused) cv.play().catch(()=>{});
-            } else {
-                // if we are within a segment repetition and overlay hidden, ensure overlay plays when appropriate
-                // mainly handled elsewhere
-            }
-        });
-
-        // When main ended (full clip finished in any mode) -> load next video automatically
-        mv.addEventListener('ended', () => {
-            // if we're in the middle of segment challenge and we haven't finished both plays, just load new video
-            loadNewVideo();
-        });
-
-        // Chrono ended default behavior: hide overlay for 10s mode
-        cv.addEventListener('ended', () => {
-            if (currentMode === '10') {
-                cv.style.display = 'none';
-            } else {
-                // segment mode overlay handling is attached in computeAndPlaySegment via ended handler
-                // nothing to do here additional
-            }
-        });
-    }
-
-    // Attach UI interactions
-    // mode buttons
-    modeButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            modeButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentMode = btn.dataset.mode;
-            // if 10: ensure chrono uses Chrono.mp4
-            if (currentMode === '10') {
-                chronoVideo.src = './images/Chrono.mp4';
-                chronoVideo.load();
-            } else if (currentMode === '3') {
-                chronoVideo.src = './images/3s.mp4';
-                chronoVideo.load();
-            } else if (currentMode === '1') {
-                chronoVideo.src = './images/1s.mp4';
-                chronoVideo.load();
-            }
-            // When switching mode, we won't auto-load new video; user can skip or next will use the new mode
-        });
+    // Événements vidéo
+    mainVideo.addEventListener('loadeddata', () => {
+        clearTimeout(window.loadingTimeout);
+        loadingMessage.style.display = 'none';
+        applyGlobalVolume();
+        if (currentMode === '10') {
+            startDefaultMode();
+        } else {
+            startSegmentMode();
+        }
     });
 
-    // answer button hides overlay (existing)
-    answerBtn.addEventListener('click', () => {
-        chronoVideo.style.display = 'none';
+    mainVideo.addEventListener('pause', () => {
+        if (!mainVideo.ended) chronoVideo.pause();
     });
 
-    // skip button loads next video
-    skipBtn.addEventListener('click', () => {
+    mainVideo.addEventListener('play', () => {
+        if (chronoVideo.style.display !== 'none') chronoVideo.play();
+    });
+
+    mainVideo.addEventListener('ended', () => {
         loadNewVideo();
     });
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (event) => {
-        const activeTag = document.activeElement.tagName.toLowerCase();
-        if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
+    // Boutons
+    answerBtn.addEventListener('click', () => chronoVideo.style.display = 'none');
+    skipBtn.addEventListener('click', () => loadNewVideo());
 
-        const key = event.key.toLowerCase();
-        if (key === 'p') {
-            if (mainVideo.paused) {
-                mainVideo.play().catch(()=>{});
-            } else {
-                mainVideo.pause();
-            }
-        }
-        if (key === 'a') {
-            chronoVideo.style.display = 'none';
-        }
-        if (key === 's') {
+    modeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentMode = btn.dataset.mode;
             loadNewVideo();
+        });
+    });
+
+    // Clavier
+    document.addEventListener('keydown', e => {
+        if (['input', 'textarea', 'select'].includes(document.activeElement.tagName.toLowerCase())) return;
+        const k = e.key.toLowerCase();
+        if (k === 'p') {
+            mainVideo.paused ? mainVideo.play() : mainVideo.pause();
         }
-        if (key === 'r') {
+        if (k === 'a') chronoVideo.style.display = 'none';
+        if (k === 's') loadNewVideo();
+        if (k === 'r') {
             mainVideo.currentTime = 0;
-            mainVideo.play().catch(()=>{});
+            mainVideo.play();
             if (chronoVideo.style.display !== 'none') {
                 chronoVideo.currentTime = 0;
-                chronoVideo.play().catch(()=>{});
+                chronoVideo.play();
             }
         }
     });
 
-    // volume slider
     globalVolume.addEventListener('input', applyGlobalVolume);
 
-    // Initial setup defaults
-    if (globalVolume) {
-        if (!globalVolume.value) globalVolume.value = 100;
-        applyGlobalVolume();
-    }
-
-    // Prepare initial handlers and start first video
-    bindVideoHandlers();
-    // Start first video
+    // Init
+    globalVolume.value = 100;
+    applyGlobalVolume();
     loadNewVideo();
 });
+
     </script>
 </body>
 </html>
