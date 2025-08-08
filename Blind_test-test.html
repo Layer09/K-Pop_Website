@@ -238,18 +238,19 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.src = newVideoSrc;
         mainVideo.load();
 
-        if (currentMode === "10s") {
+        if (currentMode === "10") {
             chronoVideo.src = "./images/Chrono.mp4?v=" + Date.now();
             shortDuration = null;
-        } else if (currentMode === "3s") {
+        } else if (currentMode === "3") {
             chronoVideo.src = "./images/3s.mp4?v=" + Date.now();
             shortDuration = 3;
             shortStartTime = getRandomStart();
-        } else if (currentMode === "1s") {
+        } else if (currentMode === "1") {
             chronoVideo.src = "./images/1s.mp4?v=" + Date.now();
             shortDuration = 1;
             shortStartTime = getRandomStart();
         }
+
 
         chronoVideo.currentTime = 0;
         chronoVideo.style.display = 'block';
