@@ -52,6 +52,20 @@
             font-family: 'Courier New', monospace;
             letter-spacing: 3px;
         }
+
+        #loading-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2em;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: none;
+            z-index: 20;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +106,7 @@
     </div>
 
     <div id="video-container">
+        <div id="loading-message">Chargement en cours...</div>
         <video id="mainVideo" controls></video>
         <video id="chronoVideo" src="./images/Chrono.mp4"></video>
     </div>
@@ -108,123 +123,136 @@
     <script src="./JS_commun.js"></script>
     <script src="./videos/liste_video.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const mainVideo = document.getElementById('mainVideo');
-            const chronoVideo = document.getElementById('chronoVideo');
-            const videoCounter = document.getElementById('video-counter');
-            const answerBtn = document.getElementById('answer-btn');
-            const skipBtn = document.getElementById('skip-btn');
+document.addEventListener("DOMContentLoaded", () => {
+    const mainVideo = document.getElementById('mainVideo');
+    const chronoVideo = document.getElementById('chronoVideo');
+    const videoCounter = document.getElementById('video-counter');
+    const answerBtn = document.getElementById('answer-btn');
+    const skipBtn = document.getElementById('skip-btn');
+    const loadingMessage = document.getElementById('loading-message');
 
-            let titresRestants = [...videoList];
-            let compteur = 0;
+    let titresRestants = [...videoList];
+    let compteur = 0;
 
-            function pickRandomVideo() {
-                if (titresRestants.length === 0) {
-                    alert('Bravo ! Tu as fait un tour des musiques !');
-                    titresRestants = [...videoList];
-                    compteur = 0;
-                    videoCounter.textContent = formatCompteur(compteur);
-                }
+    let mainLoaded = false;
+    let chronoLoaded = false;
+    let loadingTimeout;
 
-                const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
-                titresRestants = titresRestants.filter(v => v !== randomFile);
-                return `./videos/${randomFile}`;
-            }
+    function pickRandomVideo() {
+        if (titresRestants.length === 0) {
+            alert('Bravo ! Tu as fait un tour des musiques !');
+            titresRestants = [...videoList];
+            compteur = 0;
+            videoCounter.textContent = formatCompteur(compteur);
+        }
 
-            function loadNewVideo() {
-                const newVideoSrc = pickRandomVideo();
+        const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
+        titresRestants = titresRestants.filter(v => v !== randomFile);
+        return `./videos/${randomFile}`;
+    }
 
-                mainVideo.src = newVideoSrc;
-                mainVideo.load();
+    function formatCompteur(num) {
+        return num.toString().padStart(4, '0');
+    }
 
-                chronoVideo.currentTime = 0;
-                chronoVideo.style.display = 'block';
-                chronoVideo.load();
+    function loadNewVideo() {
+        mainLoaded = false;
+        chronoLoaded = false;
 
-                compteur++;
-                videoCounter.textContent = formatCompteur(compteur);
+        // Lancer un timer pour afficher "Chargement..." si > 1s
+        clearTimeout(loadingTimeout);
+        loadingTimeout = setTimeout(() => {
+            loadingMessage.style.display = 'block';
+        }, 1000);
 
-                applyGlobalVolume();
-            }
+        const newVideoSrc = pickRandomVideo();
+        mainVideo.src = newVideoSrc;
+        mainVideo.load();
 
-            function formatCompteur(num) {
-                return num.toString().padStart(4, '0');
-            }
+        chronoVideo.currentTime = 0;
+        chronoVideo.style.display = 'block';
+        chronoVideo.load();
 
-            // Événements pour synchroniser les vidéos
-            mainVideo.addEventListener('loadeddata', () => {
+        compteur++;
+        videoCounter.textContent = formatCompteur(compteur);
+
+        applyGlobalVolume();
+    }
+
+    function tryStartVideos() {
+        if (mainLoaded && chronoLoaded) {
+            clearTimeout(loadingTimeout);
+            loadingMessage.style.display = 'none';
+            mainVideo.play();
+            chronoVideo.play();
+        }
+    }
+
+    // Quand les vidéos sont prêtes
+    mainVideo.addEventListener('loadeddata', () => {
+        mainLoaded = true;
+        tryStartVideos();
+    });
+
+    chronoVideo.addEventListener('loadeddata', () => {
+        chronoLoaded = true;
+        tryStartVideos();
+    });
+
+    mainVideo.addEventListener('pause', () => {
+        chronoVideo.pause();
+    });
+
+    mainVideo.addEventListener('play', () => {
+        if (chronoVideo.paused) chronoVideo.play();
+    });
+
+    mainVideo.addEventListener('ended', () => {
+        loadNewVideo();
+    });
+
+    chronoVideo.addEventListener('ended', () => {
+        chronoVideo.style.display = 'none';
+    });
+
+    answerBtn.addEventListener('click', () => {
+        chronoVideo.style.display = 'none';
+    });
+
+    skipBtn.addEventListener('click', () => {
+        loadNewVideo();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        const activeTag = document.activeElement.tagName.toLowerCase();
+        if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
+
+        const key = event.key.toLowerCase();
+        if (key === 'p') {
+            if (mainVideo.paused) {
                 mainVideo.play();
-            });
-
-            chronoVideo.addEventListener('loadeddata', () => {
-                chronoVideo.play();
-            });
-
-            mainVideo.addEventListener('play', () => {
-                if (chronoVideo.paused) chronoVideo.play();
-            });
-
-            mainVideo.addEventListener('pause', () => {
-                chronoVideo.pause();
-            });
-
-            mainVideo.addEventListener('ended', () => {
-                loadNewVideo();
-            });
-
-            chronoVideo.addEventListener('ended', () => {
-                chronoVideo.style.display = 'none';
-            });
-
-            // Boutons personnalisés
-            answerBtn.addEventListener('click', () => {
-                chronoVideo.style.display = 'none';
-            });
-
-            skipBtn.addEventListener('click', () => {
-                loadNewVideo();
-            });
-
+            } else {
+                mainVideo.pause();
+            }
+        }
+        if (key === 'a') {
+            chronoVideo.style.display = 'none';
+        }
+        if (key === 's') {
             loadNewVideo();
+        }
+        if (key === 'r') {
+            mainVideo.currentTime = 0;
+            mainVideo.play();
+            if (chronoVideo.style.display !== 'none') {
+                chronoVideo.currentTime = 0;
+                chronoVideo.play();
+            }
+        }
+    });
 
-           document.addEventListener('keydown', (event) => {
-                const activeTag = document.activeElement.tagName.toLowerCase();
-                console.log(`Touche pressée : ${event.key}`);
-                if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
-                    return; // ne rien faire si un champ est actif
-                }
-            
-                const key = event.key.toLowerCase();
-            
-                if (key === 'p') {
-                    if (mainVideo.paused) {
-                        mainVideo.play();
-                    } else {
-                        mainVideo.pause();
-                    }
-                }
-            
-                if (key === 'a') {
-                    chronoVideo.style.display = 'none';
-                }
-            
-                if (key === 's') {
-                    loadNewVideo();
-                }
-            
-                if (key === 'r') {
-                    mainVideo.currentTime = 0;
-                    mainVideo.play();
-            
-                    if (chronoVideo.style.display !== 'none') {
-                        chronoVideo.currentTime = 0;
-                        chronoVideo.play();
-                    }
-                }
-            });
-
-
-        });
+    loadNewVideo();
+});
     </script>
 </body>
 </html>
