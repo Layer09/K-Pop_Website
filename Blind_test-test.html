@@ -221,14 +221,15 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.load();
 
         if (currentMode === "10s") {
-            chronoVideo.src = "./images/Chrono.mp4";
+            chronoVideo.src = "./images/Chrono.mp4?v=" + Date.now();
         } else if (currentMode === "3s") {
-            chronoVideo.src = "./images/3s.mp4";
+            chronoVideo.src = "./images/3s.mp4?v=" + Date.now();
             shortDuration = 3;
         } else if (currentMode === "1s") {
-            chronoVideo.src = "./images/1s.mp4";
+            chronoVideo.src = "./images/1s.mp4?v=" + Date.now();
             shortDuration = 1;
         }
+
 
         chronoVideo.currentTime = 0;
         chronoVideo.style.display = 'block';
