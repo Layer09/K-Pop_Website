@@ -203,23 +203,36 @@ document.addEventListener("DOMContentLoaded", () => {
         return num.toString().padStart(4, '0');
     }
 
-    // Même comportement que la touche "p" quand on clique sur une vidéo
-    document.querySelectorAll('video').forEach(videoEl => {
-        videoEl.addEventListener('click', () => {
-            if (mainVideo.paused) {
-                mainVideo.play();
-                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none' && chronoVideo.paused) {
-                    chronoVideo.play();
-                }
-            } else {
-                mainVideo.pause();
-                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none') {
-                    chronoVideo.pause();
-                }
+    let _lastToggleAt = 0;
+    function togglePlayPause() {
+        const now = Date.now();
+        if (now - _lastToggleAt < 200) return; // protection anti double-trigger (200ms)
+        _lastToggleAt = now;
+    
+        if (mainVideo.paused) {
+            mainVideo.play();
+            // si le chrono est visible, on l'active aussi
+            if (chronoVideo.style.display !== 'none' && chronoVideo.paused) {
+                chronoVideo.play();
             }
-        });
+        } else {
+            mainVideo.pause();
+            if (chronoVideo.style.display !== 'none' && !chronoVideo.paused) {
+                chronoVideo.pause();
+            }
+        }
+    }
+    
+    // Intercepter l'interaction utilisateur AVANT le comportement natif (pointerdown)
+    // et empêcher l'action par défaut pour éviter le double-toggle.
+    document.querySelectorAll('video').forEach(videoEl => {
+        videoEl.addEventListener('pointerdown', (e) => {
+            // nécessaire pour pouvoir preventDefault sur pointer events
+            e.preventDefault();
+            togglePlayPause();
+        }, { passive: false });
     });
-
+    
 
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
@@ -403,13 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const key = event.key.toLowerCase();
 
         if (key === 'p') {
-            if (mainVideo.paused) {
-                mainVideo.play();
-                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none' && chronoVideo.paused) chronoVideo.play();
-            } else {
-                mainVideo.pause();
-                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none') chronoVideo.pause();
-            }
+            togglePlayPause();
         }
 
         if (key === 'a') {
