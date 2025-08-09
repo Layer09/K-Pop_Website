@@ -203,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return num.toString().padStart(4, '0');
     }
 
+    // Fonction pause/lecture avec anti double-trigger
     let _lastToggleAt = 0;
     function togglePlayPause() {
         const now = Date.now();
