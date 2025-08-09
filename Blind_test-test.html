@@ -87,7 +87,7 @@
     height: 44px;
     background: #000; /* noir */
     color: #fff;      /* blanc (texte) */
-    border: 2px solid #0000FF; /* bleu */
+    border: 2px solid #8a6ace; /* violet */
     border-radius: 6px;
     cursor: pointer;
     font-family: inherit;
@@ -108,9 +108,9 @@
 
 /* état actif */
 .mode-btn.active {
-    background: #8A2BE2; /* violet */
-    border-color: #0000FF; /* bleu */
-    color: #fff;
+    background: #00c5d5; /* bleu */
+    border-color: #8a6ace; /* violet */
+    color: #000;
 }
 
 /* sécurité : aucun texte noir sur bouton */
@@ -172,11 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let compteur = 0;
     let currentMode = 10; // mode par défaut
     let extraitStart = 0;
-    let extraitDuration = 0;
     let extraitRepeatCount = 0;
     let extraitSrc = "";
     let sequenceStep = "normal"; // "extrait" | "reponse" | "normal"
-    let extraitTimeout;
+    let extraitStopTimer;
 
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
@@ -189,14 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
             compteur = 0;
             videoCounter.textContent = formatCompteur(compteur);
         }
-
         const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
         titresRestants = titresRestants.filter(v => v !== randomFile);
         return `./videos/${randomFile}`;
     }
 
     function stopCurrentChallenge() {
-        clearTimeout(extraitTimeout);
+        clearTimeout(extraitStopTimer);
         mainVideo.pause();
         chronoVideo.pause();
         mainVideo.src = "";
@@ -209,20 +207,33 @@ document.addEventListener("DOMContentLoaded", () => {
         videoCounter.textContent = formatCompteur(compteur);
 
         if (currentMode === 10) {
-            // Mode classique 10s
+            // MODE 10s → comportement initial inchangé
             extraitSrc = pickRandomVideo();
             sequenceStep = "normal";
             mainVideo.src = extraitSrc;
             chronoVideo.src = "./videos/Minuteur_cadre-10s.mp4";
             chronoVideo.style.display = 'block';
+
             mainVideo.load();
             chronoVideo.load();
+
+            mainVideo.addEventListener('loadeddata', () => {
+                mainVideo.play();
+            }, { once: true });
+
+            chronoVideo.addEventListener('loadeddata', () => {
+                chronoVideo.play();
+            }, { once: true });
+
+            mainVideo.onended = () => {
+                loadNewVideo();
+            };
+
             applyGlobalVolume();
         } else {
-            // Mode 3s ou 1s
+            // Modes 3s / 1s
             extraitSrc = pickRandomVideo();
             extraitStart = 5 + Math.random() * 10; // entre 5s et 15s
-            extraitDuration = currentMode; // 3 ou 1
             extraitRepeatCount = 0;
             playExtrait();
         }
@@ -230,15 +241,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function playExtrait() {
         sequenceStep = "extrait";
+        clearTimeout(extraitStopTimer);
+
         mainVideo.src = extraitSrc;
-        mainVideo.currentTime = extraitStart;
         chronoVideo.src = `./images/${currentMode}s.mp4`;
         chronoVideo.style.display = 'block';
+
         mainVideo.load();
         chronoVideo.load();
 
         mainVideo.addEventListener('loadeddata', () => {
+            mainVideo.currentTime = extraitStart;
             mainVideo.play();
+            // Pause automatique après currentMode secondes
+            extraitStopTimer = setTimeout(() => {
+                mainVideo.pause();
+            }, currentMode * 1000);
         }, { once: true });
 
         chronoVideo.addEventListener('loadeddata', () => {
@@ -257,10 +275,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function playReponse() {
         sequenceStep = "reponse";
+        clearTimeout(extraitStopTimer);
+
         mainVideo.src = extraitSrc;
         chronoVideo.style.display = 'none';
         mainVideo.load();
+
         mainVideo.addEventListener('loadeddata', () => {
+            mainVideo.currentTime = 0;
             mainVideo.play();
         }, { once: true });
 
@@ -269,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // Boutons de changement de mode
+    // Changement de mode
     modeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             if (parseInt(btn.dataset.mode) !== currentMode) {
@@ -281,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Boutons personnalisés
+    // Boutons
     answerBtn.addEventListener('click', () => {
         chronoVideo.style.display = 'none';
     });
@@ -290,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadNewVideo();
     });
 
-    // Gestion touches clavier
+    // Clavier
     document.addEventListener('keydown', (event) => {
         const activeTag = document.activeElement.tagName.toLowerCase();
         if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
@@ -323,6 +345,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     chronoVideo.currentTime = 0;
                     chronoVideo.play();
                 }
+                clearTimeout(extraitStopTimer);
+                extraitStopTimer = setTimeout(() => {
+                    mainVideo.pause();
+                }, currentMode * 1000);
             } else {
                 mainVideo.currentTime = 0;
                 mainVideo.play();
