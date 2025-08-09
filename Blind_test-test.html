@@ -196,23 +196,21 @@ document.addEventListener("DOMContentLoaded", () => {
     let extraitStopTimer;
     let loadingTimeout;
 
-    // Pour gérer le highlight lors de l'extrait
     let highlightTriggered = false;
 
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
     }
 
-    // Fonction pause/lecture avec anti double-trigger
+    // Anti double-trigger toggle play/pause
     let _lastToggleAt = 0;
     function togglePlayPause() {
         const now = Date.now();
-        if (now - _lastToggleAt < 200) return; // protection anti double-trigger (200ms)
+        if (now - _lastToggleAt < 200) return;
         _lastToggleAt = now;
-    
+
         if (mainVideo.paused) {
             mainVideo.play();
-            // si le chrono est visible, on l'active aussi
             if (chronoVideo.style.display !== 'none' && chronoVideo.paused) {
                 chronoVideo.play();
             }
@@ -224,19 +222,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // **AJOUT : gestion clic sur chronoVideo pour pause/reprise synchronisée**
-    chronoVideo.addEventListener('pointerdown', (e) => {
+    // Clic sur chronoVideo : toggle play/pause
+    chronoVideo.addEventListener('click', (e) => {
         e.preventDefault();
         togglePlayPause();
-    }, { passive: false });
+    });
 
-    // Intercepter l'interaction utilisateur AVANT le comportement natif (pointerdown)
-    // et empêcher l'action par défaut pour éviter le double-toggle.
-    document.querySelectorAll('video').forEach(videoEl => {
-        videoEl.addEventListener('pointerdown', (e) => {
-            e.preventDefault();
-            togglePlayPause();
-        }, { passive: false });
+    // Clic sur mainVideo : toggle play/pause
+    mainVideo.addEventListener('click', (e) => {
+        e.preventDefault();
+        togglePlayPause();
     });
 
     function pickRandomVideo() {
@@ -259,8 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.src = "";
         chronoVideo.src = "";
         loadingMessage.style.display = 'none';
-
-        // Retirer le highlight (classe et variable)
         mainVideo.classList.remove('aurora-border');
         highlightTriggered = false;
     }
@@ -279,7 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
         videoCounter.textContent = formatCompteur(compteur);
 
         if (currentMode === 10) {
-            // MODE 10s → comportement initial
             extraitSrc = pickRandomVideo();
             sequenceStep = "normal";
             mainVideo.src = extraitSrc;
@@ -301,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             applyGlobalVolume();
         } else {
-            // Modes 3s / 1s
             extraitSrc = pickRandomVideo();
             extraitStart = 5 + Math.random() * 10; // entre 5s et 15s
             extraitRepeatCount = 0;
@@ -325,12 +316,12 @@ document.addEventListener("DOMContentLoaded", () => {
             mainVideo.currentTime = extraitStart;
             mainVideo.play();
             chronoVideo.play();
-            // Pause après currentMode secondes
+
             extraitStopTimer = setTimeout(() => {
                 mainVideo.pause();
             }, currentMode * 1000);
 
-            highlightTriggered = false; // reset highlight pour ce nouvel extrait
+            highlightTriggered = false;
         }, { once: true });
 
         mainVideo.load();
@@ -345,15 +336,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // Gérer le highlight au moment de extraitStart (±0.1s)
         mainVideo.ontimeupdate = () => {
             if (sequenceStep === "extrait" && !highlightTriggered) {
                 if (mainVideo.currentTime >= extraitStart && mainVideo.currentTime <= extraitStart + 0.1) {
                     highlightTriggered = true;
                     mainVideo.style.setProperty('--aurora-duration', `${currentMode}s`);
                     mainVideo.classList.add('aurora-border');
-
-                    // Retirer la classe après la durée du timer
                     setTimeout(() => {
                         mainVideo.classList.remove('aurora-border');
                     }, currentMode * 1000);
@@ -376,13 +364,11 @@ document.addEventListener("DOMContentLoaded", () => {
             hideLoading();
             mainVideo.currentTime = 0;
 
-            // Appliquer l'effet lumineux pendant la réponse
             mainVideo.style.setProperty('--aurora-duration', `${Math.floor(mainVideo.duration)}s`);
             mainVideo.classList.add('aurora-border');
 
             mainVideo.play();
 
-            // Retirer l'effet à la fin de la vidéo
             mainVideo.onended = () => {
                 mainVideo.classList.remove('aurora-border');
                 loadNewVideo();
