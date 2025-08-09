@@ -223,17 +223,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-    
+
+    // **AJOUT : gestion clic sur chronoVideo pour pause/reprise synchronisée**
+    chronoVideo.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        togglePlayPause();
+    }, { passive: false });
+
     // Intercepter l'interaction utilisateur AVANT le comportement natif (pointerdown)
     // et empêcher l'action par défaut pour éviter le double-toggle.
     document.querySelectorAll('video').forEach(videoEl => {
         videoEl.addEventListener('pointerdown', (e) => {
-            // nécessaire pour pouvoir preventDefault sur pointer events
             e.preventDefault();
             togglePlayPause();
         }, { passive: false });
     });
-    
 
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
