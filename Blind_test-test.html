@@ -301,82 +301,95 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function playExtrait() {
-        sequenceStep = "extrait";
-        clearTimeout(extraitStopTimer);
+    sequenceStep = "extrait";
+    clearTimeout(extraitStopTimer);
 
-        mainVideo.src = extraitSrc;
-        chronoVideo.src = `./images/${currentMode}s.mp4`;
-        chronoVideo.style.display = 'block';
+    mainVideo.src = extraitSrc;
+    chronoVideo.src = `./images/${currentMode}s.mp4`;
+    chronoVideo.style.display = 'block';
 
-        loadingTimeout = setTimeout(showLoading, 1000);
+    loadingTimeout = setTimeout(showLoading, 1000);
 
-        mainVideo.addEventListener('canplaythrough', () => {
-            clearTimeout(loadingTimeout);
-            hideLoading();
-            mainVideo.currentTime = extraitStart;
-            mainVideo.play();
-            chronoVideo.play();
+    mainVideo.addEventListener('canplaythrough', () => {
+        clearTimeout(loadingTimeout);
+        hideLoading();
+        mainVideo.currentTime = extraitStart;
+        mainVideo.play();
+        chronoVideo.play();
 
-            extraitStopTimer = setTimeout(() => {
-                mainVideo.pause();
-            }, currentMode * 1000);
+        // Pause après currentMode secondes
+        extraitStopTimer = setTimeout(() => {
+            mainVideo.pause();
+        }, currentMode * 1000);
 
-            highlightTriggered = false;
-        }, { once: true });
+        highlightTriggered = false; // reset highlight pour ce nouvel extrait
+    }, { once: true });
 
-        mainVideo.load();
-        chronoVideo.load();
+    mainVideo.load();
+    chronoVideo.load();
 
-        chronoVideo.onended = () => {
-            extraitRepeatCount++;
-            if (extraitRepeatCount < 2) {
-                playExtrait();
-            } else {
-                playReponse();
-            }
-        };
+    chronoVideo.onended = () => {
+        extraitRepeatCount++;
+        if (extraitRepeatCount < 2) {
+            playExtrait();
+        } else {
+            playReponse();
+        }
+    };
 
-        mainVideo.ontimeupdate = () => {
-            if (sequenceStep === "extrait" && !highlightTriggered) {
-                if (mainVideo.currentTime >= extraitStart && mainVideo.currentTime <= extraitStart + 0.1) {
+    // Gérer le highlight uniquement quand on est dans l'intervalle de l'extrait
+    mainVideo.ontimeupdate = () => {
+        if (sequenceStep === "extrait") {
+            if (mainVideo.currentTime >= extraitStart && mainVideo.currentTime <= extraitStart + currentMode) {
+                if (!highlightTriggered) {
                     highlightTriggered = true;
                     mainVideo.style.setProperty('--aurora-duration', `${currentMode}s`);
                     mainVideo.classList.add('aurora-border');
-                    setTimeout(() => {
-                        mainVideo.classList.remove('aurora-border');
-                    }, currentMode * 1000);
+                }
+            } else {
+                if (highlightTriggered) {
+                    highlightTriggered = false;
+                    mainVideo.classList.remove('aurora-border');
                 }
             }
-        };
-    }
-
-    function playReponse() {
-        sequenceStep = "reponse";
-        clearTimeout(extraitStopTimer);
-
-        mainVideo.src = extraitSrc;
-        chronoVideo.style.display = 'none';
-
-        loadingTimeout = setTimeout(showLoading, 1000);
-
-        mainVideo.addEventListener('canplaythrough', () => {
-            clearTimeout(loadingTimeout);
-            hideLoading();
-            mainVideo.currentTime = 0;
-
-            mainVideo.style.setProperty('--aurora-duration', `${Math.floor(mainVideo.duration)}s`);
-            mainVideo.classList.add('aurora-border');
-
-            mainVideo.play();
-
-            mainVideo.onended = () => {
+        } else {
+            // Pas d'effet en dehors de l'extrait
+            if (highlightTriggered) {
+                highlightTriggered = false;
                 mainVideo.classList.remove('aurora-border');
-                loadNewVideo();
-            };
-        }, { once: true });
+            }
+        }
+    };
+}
 
-        mainVideo.load();
-    }
+function playReponse() {
+    sequenceStep = "reponse";
+    clearTimeout(extraitStopTimer);
+
+    mainVideo.src = extraitSrc;
+    chronoVideo.style.display = 'none';
+
+    loadingTimeout = setTimeout(showLoading, 1000);
+
+    mainVideo.addEventListener('canplaythrough', () => {
+        clearTimeout(loadingTimeout);
+        hideLoading();
+        mainVideo.currentTime = 0;
+
+        // Ne PAS appliquer l'effet aurora ici
+        mainVideo.classList.remove('aurora-border');
+
+        mainVideo.play();
+
+        // Retirer l'effet à la fin de la vidéo (au cas où)
+        mainVideo.onended = () => {
+            mainVideo.classList.remove('aurora-border');
+            loadNewVideo();
+        };
+    }, { once: true });
+
+    mainVideo.load();
+}
 
     // Changement de mode
     modeButtons.forEach(btn => {
