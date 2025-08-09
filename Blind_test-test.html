@@ -166,59 +166,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoCounter = document.getElementById('video-counter');
     const answerBtn = document.getElementById('answer-btn');
     const skipBtn = document.getElementById('skip-btn');
-    const loadingMessage = document.getElementById('loading-message');
-    const volumeSlider = document.getElementById('globalVolume');
-    const volumeValue = document.getElementById('volumeValue');
+    const modeButtons = document.querySelectorAll('.mode-btn');
 
     let titresRestants = [...videoList];
     let compteur = 0;
+    let currentMode = 10; // mode par défaut
+    let extraitStart = 0;
+    let extraitDuration = 0;
+    let extraitRepeatCount = 0;
+    let extraitSrc = "";
+    let sequenceStep = "normal"; // "extrait" | "reponse" | "normal"
+    let extraitTimeout;
 
-    let mainLoaded = false;
-    let chronoLoaded = false;
-    let loadingTimeout;
-    let currentMode = "10";
-    let shortDuration = null;
-    let repeatCount = 0;
-    let shortStartTime = 0;
-
-    // --- Gestion des boutons mode ---
-    const modeButtons = document.querySelectorAll('.mode-btn');
-    modeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const newMode = btn.dataset.mode;
-            if (newMode !== currentMode) {
-                currentMode = newMode;
-                compteur--; // éviter double comptage
-                if (compteur < 0) compteur = 0;
-                updateModeButtons();
-                loadNewVideo(true);
-            }
-        });
-    });
-
-    function updateModeButtons() {
-        modeButtons.forEach(btn => {
-            if (btn.dataset.mode === currentMode) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
+    function formatCompteur(num) {
+        return num.toString().padStart(4, '0');
     }
 
-    // --- Volume ---
-    function applyGlobalVolume() {
-        const vol = volumeSlider.value / 100;
-        mainVideo.volume = vol;
-        chronoVideo.volume = vol;
-    }
-
-    volumeSlider.addEventListener('input', () => {
-        applyGlobalVolume();
-        volumeValue.textContent = volumeSlider.value + "%";
-    });
-
-    // --- Sélection vidéo aléatoire ---
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
             alert('Bravo ! Tu as fait un tour des musiques !');
@@ -226,194 +189,147 @@ document.addEventListener("DOMContentLoaded", () => {
             compteur = 0;
             videoCounter.textContent = formatCompteur(compteur);
         }
+
         const randomFile = titresRestants[Math.floor(Math.random() * titresRestants.length)];
         titresRestants = titresRestants.filter(v => v !== randomFile);
         return `./videos/${randomFile}`;
     }
 
-    function formatCompteur(num) {
-        return num.toString().padStart(4, '0');
+    function stopCurrentChallenge() {
+        clearTimeout(extraitTimeout);
+        mainVideo.pause();
+        chronoVideo.pause();
+        mainVideo.src = "";
+        chronoVideo.src = "";
     }
 
-    // --- Chargement nouvelle vidéo ---
-    function loadNewVideo(force = false) {
-        mainLoaded = false;
-        chronoLoaded = false;
-        repeatCount = 0;
-
-        clearTimeout(loadingTimeout);
-        loadingMessage.style.display = 'none'; // au cas où
-
-        loadingTimeout = setTimeout(() => {
-            loadingMessage.style.display = 'block';
-        }, 1000);
-
-        const newVideoSrc = pickRandomVideo();
-        mainVideo.src = newVideoSrc;
-        mainVideo.load();
-
-        // Choix chrono selon mode
-        if (currentMode === "10") {
-            chronoVideo.src = "./images/Chrono.mp4?v=" + Date.now();
-            shortDuration = null;
-            shortStartTime = 0;
-        } else if (currentMode === "3") {
-            chronoVideo.src = "./images/3s.mp4?v=" + Date.now();
-            shortDuration = 3;
-            shortStartTime = getRandomStart();
-        } else if (currentMode === "1") {
-            chronoVideo.src = "./images/1s.mp4?v=" + Date.now();
-            shortDuration = 1;
-            shortStartTime = getRandomStart();
-        }
-
-        chronoVideo.currentTime = 0;
-        chronoVideo.style.display = 'block';
-        chronoVideo.load();
-
-        if (!force) {
-            compteur++;
-        }
+    function loadNewVideo() {
+        stopCurrentChallenge();
+        compteur++;
         videoCounter.textContent = formatCompteur(compteur);
 
-        applyGlobalVolume();
-    }
-
-    function getRandomStart() {
-        return 5 + Math.random() * 10; // entre 5 et 15 secondes
-    }
-
-    // --- Contrôle précision coupe extrait ---
-    function onTimeUpdate() {
-        if (shortDuration && mainVideo.currentTime >= shortStartTime + shortDuration) {
-            mainVideo.pause();
-            mainVideo.removeEventListener('timeupdate', onTimeUpdate);
-        }
-    }
-
-    // --- Démarrage lecture synchronisée ---
-    function tryStartVideos() {
-        if (mainLoaded && chronoLoaded) {
-            clearTimeout(loadingTimeout);
-            loadingMessage.style.display = 'none';
-
-            if (shortDuration) {
-                repeatCount = 0;
-                mainVideo.currentTime = shortStartTime;
-
-                // Ajout écouteur timeupdate pour coupe précise
-                mainVideo.addEventListener('timeupdate', onTimeUpdate);
-
-                chronoVideo.currentTime = 0;
-                chronoVideo.style.display = 'block';
-
-                mainVideo.play();
-                chronoVideo.play();
-            } else {
-                // Mode 10s ou aucun extrait court
-                mainVideo.currentTime = 0;
-                chronoVideo.style.display = 'none';
-                mainVideo.play();
-            }
-        }
-    }
-
-    // --- Gestion répétitions pour 1s et 3s ---
-    chronoVideo.addEventListener('ended', () => {
-        if (shortDuration) {
-            repeatCount++;
-            if (repeatCount < 2) {
-                // 2ème répétition extrait + chrono
-                mainVideo.currentTime = shortStartTime;
-                mainVideo.addEventListener('timeupdate', onTimeUpdate);
-                chronoVideo.currentTime = 0;
-                chronoVideo.style.display = 'block';
-                mainVideo.play();
-                chronoVideo.play();
-            } else {
-                // Après 2 répétitions, on masque chrono et lance la vidéo entière
-                chronoVideo.style.display = 'none';
-                mainVideo.removeEventListener('timeupdate', onTimeUpdate);
-                mainVideo.currentTime = 0;
-                mainVideo.play();
-            }
+        if (currentMode === 10) {
+            // Mode classique 10s
+            extraitSrc = pickRandomVideo();
+            sequenceStep = "normal";
+            mainVideo.src = extraitSrc;
+            chronoVideo.src = "./videos/Minuteur_cadre-10s.mp4";
+            chronoVideo.style.display = 'block';
+            mainVideo.load();
+            chronoVideo.load();
+            applyGlobalVolume();
         } else {
-            chronoVideo.style.display = 'none';
+            // Mode 3s ou 1s
+            extraitSrc = pickRandomVideo();
+            extraitStart = 5 + Math.random() * 10; // entre 5s et 15s
+            extraitDuration = currentMode; // 3 ou 1
+            extraitRepeatCount = 0;
+            playExtrait();
         }
+    }
+
+    function playExtrait() {
+        sequenceStep = "extrait";
+        mainVideo.src = extraitSrc;
+        mainVideo.currentTime = extraitStart;
+        chronoVideo.src = `./images/${currentMode}s.mp4`;
+        chronoVideo.style.display = 'block';
+        mainVideo.load();
+        chronoVideo.load();
+
+        mainVideo.addEventListener('loadeddata', () => {
+            mainVideo.play();
+        }, { once: true });
+
+        chronoVideo.addEventListener('loadeddata', () => {
+            chronoVideo.play();
+        }, { once: true });
+
+        chronoVideo.onended = () => {
+            extraitRepeatCount++;
+            if (extraitRepeatCount < 2) {
+                playExtrait();
+            } else {
+                playReponse();
+            }
+        };
+    }
+
+    function playReponse() {
+        sequenceStep = "reponse";
+        mainVideo.src = extraitSrc;
+        chronoVideo.style.display = 'none';
+        mainVideo.load();
+        mainVideo.addEventListener('loadeddata', () => {
+            mainVideo.play();
+        }, { once: true });
+
+        mainVideo.onended = () => {
+            loadNewVideo();
+        };
+    }
+
+    // Boutons de changement de mode
+    modeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (parseInt(btn.dataset.mode) !== currentMode) {
+                modeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = parseInt(btn.dataset.mode);
+                loadNewVideo();
+            }
+        });
     });
 
-    // --- Événements vidéo ---
-    mainVideo.addEventListener('loadeddata', () => {
-        mainLoaded = true;
-        tryStartVideos();
-    });
-
-    chronoVideo.addEventListener('loadeddata', () => {
-        chronoLoaded = true;
-        tryStartVideos();
-    });
-
-    mainVideo.addEventListener('pause', () => {
-        if (!mainVideo.ended && !chronoVideo.ended) chronoVideo.pause();
-    });
-
-    mainVideo.addEventListener('play', () => {
-        if (!chronoVideo.ended) chronoVideo.play();
-    });
-
-    mainVideo.addEventListener('ended', () => {
-        loadNewVideo();
-    });
-
-    // --- Boutons réponse & passage ---
+    // Boutons personnalisés
     answerBtn.addEventListener('click', () => {
         chronoVideo.style.display = 'none';
     });
 
     skipBtn.addEventListener('click', () => {
-        loadNewVideo(true);
+        loadNewVideo();
     });
 
-    // --- Raccourcis clavier ---
+    // Gestion touches clavier
     document.addEventListener('keydown', (event) => {
         const activeTag = document.activeElement.tagName.toLowerCase();
         if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
 
         const key = event.key.toLowerCase();
+
         if (key === 'p') {
             if (mainVideo.paused) {
                 mainVideo.play();
+                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none' && chronoVideo.paused) chronoVideo.play();
             } else {
                 mainVideo.pause();
+                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none') chronoVideo.pause();
             }
         }
+
         if (key === 'a') {
             chronoVideo.style.display = 'none';
         }
+
         if (key === 's') {
-            loadNewVideo(true);
+            loadNewVideo();
         }
+
         if (key === 'r') {
-            if (shortDuration) {
-                repeatCount = 0;
-                mainVideo.currentTime = shortStartTime;
-                mainVideo.addEventListener('timeupdate', onTimeUpdate);
-                chronoVideo.currentTime = 0;
-                chronoVideo.style.display = 'block';
-                chronoVideo.play();
-                mainVideo.play();
-            } else {
-                mainVideo.currentTime = 0;
+            if (sequenceStep === "extrait") {
+                mainVideo.currentTime = extraitStart;
                 mainVideo.play();
                 if (chronoVideo.style.display !== 'none') {
                     chronoVideo.currentTime = 0;
                     chronoVideo.play();
                 }
+            } else {
+                mainVideo.currentTime = 0;
+                mainVideo.play();
             }
         }
     });
 
-    updateModeButtons();
     loadNewVideo();
 });
 
