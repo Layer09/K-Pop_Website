@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const answerBtn = document.getElementById('answer-btn');
     const skipBtn = document.getElementById('skip-btn');
     const modeButtons = document.querySelectorAll('.mode-btn');
+    const loadingMessage = document.getElementById('loading-message');
 
     let titresRestants = [...videoList];
     let compteur = 0;
@@ -176,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let extraitSrc = "";
     let sequenceStep = "normal"; // "extrait" | "reponse" | "normal"
     let extraitStopTimer;
+    let loadingTimeout;
 
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
@@ -195,10 +197,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function stopCurrentChallenge() {
         clearTimeout(extraitStopTimer);
+        clearTimeout(loadingTimeout);
         mainVideo.pause();
         chronoVideo.pause();
         mainVideo.src = "";
         chronoVideo.src = "";
+        loadingMessage.style.display = 'none';
+    }
+
+    function showLoading() {
+        loadingMessage.style.display = 'block';
+    }
+
+    function hideLoading() {
+        loadingMessage.style.display = 'none';
     }
 
     function loadNewVideo() {
@@ -207,23 +219,29 @@ document.addEventListener("DOMContentLoaded", () => {
         videoCounter.textContent = formatCompteur(compteur);
 
         if (currentMode === 10) {
-            // MODE 10s → comportement initial inchangé
+            // MODE 10s → comportement initial
             extraitSrc = pickRandomVideo();
             sequenceStep = "normal";
             mainVideo.src = extraitSrc;
-            chronoVideo.src = "./videos/Minuteur_cadre-10s.mp4";
+            chronoVideo.src = "./videos/Chrono.mp4";
             chronoVideo.style.display = 'block';
 
-            mainVideo.load();
-            chronoVideo.load();
+            // Affiche "chargement" si ça prend +1s
+            loadingTimeout = setTimeout(showLoading, 1000);
 
-            mainVideo.addEventListener('loadeddata', () => {
+            mainVideo.addEventListener('canplaythrough', () => {
+                clearTimeout(loadingTimeout);
+                hideLoading();
                 mainVideo.play();
+                chronoVideo.play();
             }, { once: true });
 
             chronoVideo.addEventListener('loadeddata', () => {
-                chronoVideo.play();
+                // On ne joue pas tout de suite, on attend la vidéo principale
             }, { once: true });
+
+            mainVideo.load();
+            chronoVideo.load();
 
             mainVideo.onended = () => {
                 loadNewVideo();
@@ -247,21 +265,27 @@ document.addEventListener("DOMContentLoaded", () => {
         chronoVideo.src = `./images/${currentMode}s.mp4`;
         chronoVideo.style.display = 'block';
 
-        mainVideo.load();
-        chronoVideo.load();
+        // Affiche "chargement" si ça prend +1s
+        loadingTimeout = setTimeout(showLoading, 1000);
 
-        mainVideo.addEventListener('loadeddata', () => {
+        mainVideo.addEventListener('canplaythrough', () => {
+            clearTimeout(loadingTimeout);
+            hideLoading();
             mainVideo.currentTime = extraitStart;
             mainVideo.play();
-            // Pause automatique après currentMode secondes
+            chronoVideo.play();
+            // Pause après currentMode secondes
             extraitStopTimer = setTimeout(() => {
                 mainVideo.pause();
             }, currentMode * 1000);
         }, { once: true });
 
         chronoVideo.addEventListener('loadeddata', () => {
-            chronoVideo.play();
+            // Attente que la vidéo principale soit prête
         }, { once: true });
+
+        mainVideo.load();
+        chronoVideo.load();
 
         chronoVideo.onended = () => {
             extraitRepeatCount++;
@@ -279,12 +303,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainVideo.src = extraitSrc;
         chronoVideo.style.display = 'none';
-        mainVideo.load();
 
-        mainVideo.addEventListener('loadeddata', () => {
+        // Affiche "chargement" si ça prend +1s
+        loadingTimeout = setTimeout(showLoading, 1000);
+
+        mainVideo.addEventListener('canplaythrough', () => {
+            clearTimeout(loadingTimeout);
+            hideLoading();
             mainVideo.currentTime = 0;
             mainVideo.play();
         }, { once: true });
+
+        mainVideo.load();
 
         mainVideo.onended = () => {
             loadNewVideo();
