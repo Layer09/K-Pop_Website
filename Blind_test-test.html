@@ -375,14 +375,29 @@ function playReponse() {
         clearTimeout(loadingTimeout);
         hideLoading();
         mainVideo.currentTime = 0;
-
-        // Ne PAS appliquer l'effet aurora ici
-        mainVideo.classList.remove('aurora-border');
-
         mainVideo.play();
 
-        // Retirer l'effet à la fin de la vidéo (au cas où)
+        // Pendant la grande vidéo, on check le temps pour activer/désactiver la bordure
+        mainVideo.ontimeupdate = () => {
+            if (
+                mainVideo.currentTime >= extraitStart &&
+                mainVideo.currentTime <= extraitStart + currentMode
+            ) {
+                // Activer effet brillant pendant l’extrait
+                if (!mainVideo.classList.contains('aurora-border')) {
+                    mainVideo.classList.add('aurora-border');
+                    mainVideo.style.setProperty('--aurora-duration', `${currentMode}s`);
+                }
+            } else {
+                // Désactiver effet en dehors de l’extrait
+                if (mainVideo.classList.contains('aurora-border')) {
+                    mainVideo.classList.remove('aurora-border');
+                }
+            }
+        };
+
         mainVideo.onended = () => {
+            mainVideo.ontimeupdate = null; // On enlève le listener à la fin
             mainVideo.classList.remove('aurora-border');
             loadNewVideo();
         };
