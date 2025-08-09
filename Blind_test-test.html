@@ -203,6 +203,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return num.toString().padStart(4, '0');
     }
 
+    // Même comportement que la touche "p" quand on clique sur une vidéo
+    document.querySelectorAll('video').forEach(videoEl => {
+        videoEl.addEventListener('click', () => {
+            if (mainVideo.paused) {
+                mainVideo.play();
+                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none' && chronoVideo.paused) {
+                    chronoVideo.play();
+                }
+            } else {
+                mainVideo.pause();
+                if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none') {
+                    chronoVideo.pause();
+                }
+            }
+        });
+    });
+
+
     function pickRandomVideo() {
         if (titresRestants.length === 0) {
             alert('Bravo ! Tu as fait un tour des musiques !');
