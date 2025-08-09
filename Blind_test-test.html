@@ -195,9 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let sequenceStep = "normal"; // "extrait" | "reponse" | "normal"
     let extraitStopTimer;
     let loadingTimeout;
-
-    // Pour gérer le highlight lors de l'extrait
-    let highlightTriggered = false;
+    let auroraTimeout;
 
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
@@ -218,15 +216,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function stopCurrentChallenge() {
         clearTimeout(extraitStopTimer);
         clearTimeout(loadingTimeout);
+        clearTimeout(auroraTimeout);
         mainVideo.pause();
         chronoVideo.pause();
         mainVideo.src = "";
         chronoVideo.src = "";
         loadingMessage.style.display = 'none';
-
-        // Retirer le highlight (classe et variable)
         mainVideo.classList.remove('aurora-border');
-        highlightTriggered = false;
     }
 
     function showLoading() {
@@ -235,6 +231,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hideLoading() {
         loadingMessage.style.display = 'none';
+    }
+
+    function applyAuroraEffect(duration) {
+        // Ajoute la classe aurora-border et la retire après la durée
+        mainVideo.style.setProperty('--aurora-duration', `${duration}s`);
+        mainVideo.classList.add('aurora-border');
+        // On enlève la classe après la durée de l'extrait
+        auroraTimeout = setTimeout(() => {
+            mainVideo.classList.remove('aurora-border');
+        }, duration * 1000);
     }
 
     function loadNewVideo() {
@@ -250,6 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             chronoVideo.src = "./images/Chrono.mp4";
             chronoVideo.style.display = 'block';
 
+            // Affiche "chargement" si ça prend +1s
             loadingTimeout = setTimeout(showLoading, 1000);
 
             mainVideo.addEventListener('canplaythrough', () => {
@@ -259,11 +266,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 chronoVideo.play();
             }, { once: true });
 
+            chronoVideo.addEventListener('loadeddata', () => {
+                // On ne joue pas tout de suite, on attend la vidéo principale
+            }, { once: true });
+
+            mainVideo.load();
+            chronoVideo.load();
+
             mainVideo.onended = () => {
                 loadNewVideo();
             };
 
             applyGlobalVolume();
+
         } else {
             // Modes 3s / 1s
             extraitSrc = pickRandomVideo();
@@ -276,11 +291,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function playExtrait() {
         sequenceStep = "extrait";
         clearTimeout(extraitStopTimer);
+        clearTimeout(auroraTimeout);
+        mainVideo.classList.remove('aurora-border');
 
         mainVideo.src = extraitSrc;
         chronoVideo.src = `./images/${currentMode}s.mp4`;
         chronoVideo.style.display = 'block';
 
+        // Affiche "chargement" si ça prend +1s
         loadingTimeout = setTimeout(showLoading, 1000);
 
         mainVideo.addEventListener('canplaythrough', () => {
@@ -289,12 +307,19 @@ document.addEventListener("DOMContentLoaded", () => {
             mainVideo.currentTime = extraitStart;
             mainVideo.play();
             chronoVideo.play();
+
+            // Ajout de l'effet aurora pendant l'extrait
+            applyAuroraEffect(currentMode);
+
             // Pause après currentMode secondes
             extraitStopTimer = setTimeout(() => {
                 mainVideo.pause();
+                mainVideo.classList.remove('aurora-border'); // on retire au cas où (sécurité)
             }, currentMode * 1000);
+        }, { once: true });
 
-            highlightTriggered = false; // reset highlight pour ce nouvel extrait
+        chronoVideo.addEventListener('loadeddata', () => {
+            // Attente que la vidéo principale soit prête
         }, { once: true });
 
         mainVideo.load();
@@ -308,52 +333,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 playReponse();
             }
         };
-
-        // Gérer le highlight au moment de extraitStart (±0.1s)
-        mainVideo.ontimeupdate = () => {
-            if (sequenceStep === "extrait" && !highlightTriggered) {
-                if (mainVideo.currentTime >= extraitStart && mainVideo.currentTime <= extraitStart + 0.1) {
-                    highlightTriggered = true;
-                    mainVideo.style.setProperty('--aurora-duration', `${currentMode}s`);
-                    mainVideo.classList.add('aurora-border');
-
-                    // Retirer la classe après la durée du timer
-                    setTimeout(() => {
-                        mainVideo.classList.remove('aurora-border');
-                    }, currentMode * 1000);
-                }
-            }
-        };
     }
 
     function playReponse() {
         sequenceStep = "reponse";
         clearTimeout(extraitStopTimer);
+        clearTimeout(auroraTimeout);
+        mainVideo.classList.remove('aurora-border');
 
         mainVideo.src = extraitSrc;
         chronoVideo.style.display = 'none';
 
+        // Affiche "chargement" si ça prend +1s
         loadingTimeout = setTimeout(showLoading, 1000);
 
         mainVideo.addEventListener('canplaythrough', () => {
             clearTimeout(loadingTimeout);
             hideLoading();
             mainVideo.currentTime = 0;
-
-            // Appliquer l'effet lumineux pendant la réponse
-            mainVideo.style.setProperty('--aurora-duration', `${Math.floor(mainVideo.duration)}s`);
-            mainVideo.classList.add('aurora-border');
-
             mainVideo.play();
-
-            // Retirer l'effet à la fin de la vidéo
-            mainVideo.onended = () => {
-                mainVideo.classList.remove('aurora-border');
-                loadNewVideo();
-            };
         }, { once: true });
 
         mainVideo.load();
+
+        mainVideo.onended = () => {
+            loadNewVideo();
+        };
     }
 
     // Changement de mode
@@ -377,7 +382,22 @@ document.addEventListener("DOMContentLoaded", () => {
         loadNewVideo();
     });
 
-    // Gestion du clavier
+    // Pause principale sur clic vidéo + pause chrono si en mode extrait
+    mainVideo.addEventListener('click', () => {
+        if (mainVideo.paused) {
+            mainVideo.play();
+            if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none' && chronoVideo.paused) {
+                chronoVideo.play();
+            }
+        } else {
+            mainVideo.pause();
+            if (sequenceStep === "extrait" && chronoVideo.style.display !== 'none') {
+                chronoVideo.pause();
+            }
+        }
+    });
+
+    // Clavier
     document.addEventListener('keydown', (event) => {
         const activeTag = document.activeElement.tagName.toLowerCase();
         if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
@@ -413,7 +433,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 clearTimeout(extraitStopTimer);
                 extraitStopTimer = setTimeout(() => {
                     mainVideo.pause();
+                    mainVideo.classList.remove('aurora-border');
                 }, currentMode * 1000);
+                // Remise de l'effet aurora au redémarrage du chrono
+                applyAuroraEffect(currentMode);
             } else {
                 mainVideo.currentTime = 0;
                 mainVideo.play();
@@ -422,22 +445,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loadNewVideo();
-
-    // Volume global
-    const globalVolumeSlider = document.getElementById('globalVolume');
-    const volumeValueSpan = document.getElementById('volumeValue');
-
-    function applyGlobalVolume() {
-        let vol = (globalVolumeSlider.value || 50) / 100;
-        mainVideo.volume = vol;
-        chronoVideo.volume = vol;
-        volumeValueSpan.textContent = Math.round(vol * 100) + '%';
-    }
-
-    globalVolumeSlider.value = 50;
-    applyGlobalVolume();
-
-    globalVolumeSlider.addEventListener('input', applyGlobalVolume);
 });
 
     </script>
