@@ -196,6 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let extraitStopTimer;
     let loadingTimeout;
 
+    // Pour gérer le highlight lors de l'extrait
+    let highlightTriggered = false;
+
     function formatCompteur(num) {
         return num.toString().padStart(4, '0');
     }
@@ -220,6 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.src = "";
         chronoVideo.src = "";
         loadingMessage.style.display = 'none';
+
+        // Retirer le highlight (classe et variable)
+        mainVideo.classList.remove('aurora-border');
+        highlightTriggered = false;
     }
 
     function showLoading() {
@@ -243,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
             chronoVideo.src = "./images/Chrono.mp4";
             chronoVideo.style.display = 'block';
 
-            // Affiche "chargement" si ça prend +1s
             loadingTimeout = setTimeout(showLoading, 1000);
 
             mainVideo.addEventListener('canplaythrough', () => {
@@ -252,13 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 mainVideo.play();
                 chronoVideo.play();
             }, { once: true });
-
-            chronoVideo.addEventListener('loadeddata', () => {
-                // On ne joue pas tout de suite, on attend la vidéo principale
-            }, { once: true });
-
-            mainVideo.load();
-            chronoVideo.load();
 
             mainVideo.onended = () => {
                 loadNewVideo();
@@ -282,7 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
         chronoVideo.src = `./images/${currentMode}s.mp4`;
         chronoVideo.style.display = 'block';
 
-        // Affiche "chargement" si ça prend +1s
         loadingTimeout = setTimeout(showLoading, 1000);
 
         mainVideo.addEventListener('canplaythrough', () => {
@@ -295,10 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
             extraitStopTimer = setTimeout(() => {
                 mainVideo.pause();
             }, currentMode * 1000);
-        }, { once: true });
 
-        chronoVideo.addEventListener('loadeddata', () => {
-            // Attente que la vidéo principale soit prête
+            highlightTriggered = false; // reset highlight pour ce nouvel extrait
         }, { once: true });
 
         mainVideo.load();
@@ -312,6 +308,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 playReponse();
             }
         };
+
+        // Gérer le highlight au moment de extraitStart (±0.1s)
+        mainVideo.ontimeupdate = () => {
+            if (sequenceStep === "extrait" && !highlightTriggered) {
+                if (mainVideo.currentTime >= extraitStart && mainVideo.currentTime <= extraitStart + 0.1) {
+                    highlightTriggered = true;
+                    mainVideo.style.setProperty('--aurora-duration', `${currentMode}s`);
+                    mainVideo.classList.add('aurora-border');
+
+                    // Retirer la classe après la durée du timer
+                    setTimeout(() => {
+                        mainVideo.classList.remove('aurora-border');
+                    }, currentMode * 1000);
+                }
+            }
+        };
     }
 
     function playReponse() {
@@ -321,21 +333,27 @@ document.addEventListener("DOMContentLoaded", () => {
         mainVideo.src = extraitSrc;
         chronoVideo.style.display = 'none';
 
-        // Affiche "chargement" si ça prend +1s
         loadingTimeout = setTimeout(showLoading, 1000);
 
         mainVideo.addEventListener('canplaythrough', () => {
             clearTimeout(loadingTimeout);
             hideLoading();
             mainVideo.currentTime = 0;
+
+            // Appliquer l'effet lumineux pendant la réponse
+            mainVideo.style.setProperty('--aurora-duration', `${Math.floor(mainVideo.duration)}s`);
+            mainVideo.classList.add('aurora-border');
+
             mainVideo.play();
+
+            // Retirer l'effet à la fin de la vidéo
+            mainVideo.onended = () => {
+                mainVideo.classList.remove('aurora-border');
+                loadNewVideo();
+            };
         }, { once: true });
 
         mainVideo.load();
-
-        mainVideo.onended = () => {
-            loadNewVideo();
-        };
     }
 
     // Changement de mode
@@ -359,30 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadNewVideo();
     });
 
-    function playFullAnswerWithHighlight(videoPath, startTime, duration) {
-    video.src = videoPath;
-    video.currentTime = 0;
-
-    video.onloadeddata = () => {
-        video.play();
-    };
-
-    let highlightTriggered = false;
-
-    video.addEventListener('timeupdate', () => {
-        if (!highlightTriggered && video.currentTime >= startTime && video.currentTime <= startTime + 0.05) {
-            highlightTriggered = true;
-            video.style.setProperty('--aurora-duration', `${duration}s`);
-            video.classList.add('aurora-border');
-            setTimeout(() => {
-                video.classList.remove('aurora-border');
-            }, duration * 1000);
-        }
-    });
-}
-
-
-    // Clavier
+    // Gestion du clavier
     document.addEventListener('keydown', (event) => {
         const activeTag = document.activeElement.tagName.toLowerCase();
         if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
@@ -427,6 +422,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loadNewVideo();
+
+    // Volume global
+    const globalVolumeSlider = document.getElementById('globalVolume');
+    const volumeValueSpan = document.getElementById('volumeValue');
+
+    function applyGlobalVolume() {
+        let vol = (globalVolumeSlider.value || 50) / 100;
+        mainVideo.volume = vol;
+        chronoVideo.volume = vol;
+        volumeValueSpan.textContent = Math.round(vol * 100) + '%';
+    }
+
+    globalVolumeSlider.value = 50;
+    applyGlobalVolume();
+
+    globalVolumeSlider.addEventListener('input', applyGlobalVolume);
 });
 
     </script>
