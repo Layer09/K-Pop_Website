@@ -117,6 +117,23 @@
 .mode-btn, #controls-container img {
     color: #fff;
 }
+
+.aurora-border {
+    animation: auroraGlow var(--aurora-duration) linear forwards;
+}
+
+@keyframes auroraGlow {
+    0% {
+        box-shadow: 0 0 0px #8a6ace, 0 0 0px #00c5d5;
+    }
+    50% {
+        box-shadow: 0 0 25px #8a6ace, 0 0 25px #00c5d5;
+    }
+    100% {
+        box-shadow: 0 0 0px #8a6ace, 0 0 0px #00c5d5;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -341,6 +358,29 @@ document.addEventListener("DOMContentLoaded", () => {
     skipBtn.addEventListener('click', () => {
         loadNewVideo();
     });
+
+    function playFullAnswerWithHighlight(videoPath, startTime, duration) {
+    video.src = videoPath;
+    video.currentTime = 0;
+
+    video.onloadeddata = () => {
+        video.play();
+    };
+
+    let highlightTriggered = false;
+
+    video.addEventListener('timeupdate', () => {
+        if (!highlightTriggered && video.currentTime >= startTime && video.currentTime <= startTime + 0.05) {
+            highlightTriggered = true;
+            video.style.setProperty('--aurora-duration', `${duration}s`);
+            video.classList.add('aurora-border');
+            setTimeout(() => {
+                video.classList.remove('aurora-border');
+            }, duration * 1000);
+        }
+    });
+}
+
 
     // Clavier
     document.addEventListener('keydown', (event) => {
