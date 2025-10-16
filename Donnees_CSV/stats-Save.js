@@ -122,6 +122,63 @@ function createBarChart(data, labels, dataset, colors) {
     return canvas;
 }
 
+// Fonction pour créer un LineChart
+function createLineChart(dataNouveaux, dataAnciens, labels, dataset) {
+    const Couleurs = [
+        "#00c5d5", // Nouveaux fans
+        "#8a6ace"  // Anciens fans
+    ];
+    // Extraire les moyennes pour chaque groupe de fans
+    const canvas = document.createElement('canvas');
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Moyenne - Nouveaux fans',
+                    data: dataNouveaux,
+                    backgroundColor: Couleurs[0],
+                    borderColor: Couleurs[0],
+                    fill: false,
+                    tension: 0.3
+                },
+                {
+                    label: 'Moyenne - Anciens fans',
+                    data: dataAnciens,
+                    backgroundColor: Couleurs[1],
+                    borderColor: Couleurs[1],
+                    fill: false,
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Moyenne des notes (Nouveaux vs Anciens fans)',
+                    font: {
+                        size: 18
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+    new Chart(canvas, config);
+    return canvas;
+}
+
 // Fonction pour assombrir une couleur (utile pour les bordures)
 function darkenColor(color) {
     let c = color.substring(1);
@@ -140,7 +197,7 @@ const columnNameReplacements = {
     'Nombre_de_titres': 'Nombre de titres',
     'Moyenne_Nouveaux_fans': 'Moyenne (Nouveaux fans) /10',
     'Moyenne_Anciens_fans': 'Moyenne (Anciens fans) /10',
-    'Moyenne_Totale': 'Moyenne /10',
+    'Moyenne_Totale': 'Moyenne totale /10',
     'Annee': 'Année',
     'Generation': 'Génération',
     'Episode': 'Épisode',
@@ -258,6 +315,8 @@ async function updateDisplay() {
     const labels = filteredData.map(row => row[dataset.slice(0, -1)]);
     const counts = filteredData.map(row => parseInt(row.Nombre_de_titres));
     const averages = filteredData.map(row => parseFloat(row.Moyenne_Totale));
+    const dataNouveaux = filteredData.map(row => parseFloat(row.Moyenne_Nouveaux_fans));
+    const dataAnciens = filteredData.map(row => parseFloat(row.Moyenne_Anciens_fans));
     let chartColors;
     if (dataset === "Sexes") {
         chartColors = ['#F100BF', '#1BB8FF'];
@@ -295,14 +354,31 @@ async function updateDisplay() {
             barChart.title = "Moyenne des notes par compagnie";
         }
         chartsContainer.appendChild(barChart);
+        const lineChart = createLineChart(dataNouveaux, dataAnciens, labels, dataset);
+        if (dataset === "Sexes") {
+            lineChart.title = "Moyenne générationnelle des notes par sexe";
+        } else if (dataset === "Annees") {
+            lineChart.title = "Moyenne générationnelle des notes par année";
+        } else if (dataset === "Generations") {
+            lineChart.title = "Moyenne générationnelle des notes par génération";
+        } else if (dataset === "Tailles") {
+            lineChart.title = "Moyenne générationnelle des notes par taille de groupe";
+        } else if (dataset === "Compagnies") {
+            lineChart.title = "Moyenne générationnelle des notes par compagnie";
+        }
+        chartsContainer.appendChild(lineChart);
     } else if (["Episodes", "Numeros"].includes(dataset)) {
         const barChart = createBarChart(averages, labels, dataset, chartColors);
+        const lineChart = createLineChart(dataNouveaux, dataAnciens, labels, dataset);
         if (dataset === "Episodes") {
-            barChart.title = "Moyenne des notes par épisode";
+            barChart.title = "Moyenne générationnelle des notes par épisode";
+            lineChart.title = "Moyenne des notes par épisode";
         } else if (dataset === "Numeros") {
             barChart.title = "Moyenne des notes par numéro";
+            lineChart.title = "Moyenne générationnelle des notes par numéro";
         }
         chartsContainer.appendChild(barChart);
+        chartsContainer.appendChild(lineChart);
     }
     // Ajouter l'image uniquement pour "Episodes"
     if (dataset === "Episodes") {
